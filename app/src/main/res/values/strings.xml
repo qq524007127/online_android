@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">挚合实体店</string>
+    <string name="action_settings">设置</string>
+    <string name="home">首页</string>
+    <string name="message">消息</string>
+    <string name="my">我的</string>
+    <string name="shopping_cart">购物车</string>
+    <string name="data_loading">数据加载中...</string>
+</resources>
