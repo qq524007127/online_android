@@ -18,10 +18,12 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/main_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
+        android:layout_height="68dp"
         android:layout_weight="0"
-        android:padding="2dp"
         app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="2dp"
+        app:tabPaddingTop="2dp"
         app:tabSelectedTextColor="@color/colorPrimary"
         app:tabTextColor="@color/tabText">
 

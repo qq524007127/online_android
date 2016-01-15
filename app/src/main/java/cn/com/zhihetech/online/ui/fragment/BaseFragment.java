@@ -12,7 +12,7 @@ import org.xutils.x;
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     private boolean injected = false;
 
     @Nullable
