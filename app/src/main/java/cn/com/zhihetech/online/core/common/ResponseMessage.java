@@ -6,12 +6,12 @@ import java.io.Serializable;
  * 服务器相应客户端信息类
  * Created by ShenYunjie on 2015/11/18.
  */
-public class ResponseMessage implements Serializable, Cloneable {
+public class ResponseMessage<T> implements Serializable, Cloneable {
 
     private int code;
     private boolean success;
     private String msg;
-    private Object data;
+    private T data;
 
     public ResponseMessage() {
         super();
@@ -52,11 +52,11 @@ public class ResponseMessage implements Serializable, Cloneable {
         this.msg = msg;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

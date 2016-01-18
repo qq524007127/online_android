@@ -10,8 +10,13 @@ import org.junit.Test;
 
 import java.util.List;
 
+import cn.com.zhihetech.online.bean.Activity;
 import cn.com.zhihetech.online.bean.Banner;
+import cn.com.zhihetech.online.core.common.PageData;
+import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
+import cn.com.zhihetech.online.core.http.PageDataCallback;
+import cn.com.zhihetech.online.model.ActivityModel;
 import cn.com.zhihetech.online.model.BannerModel;
 
 /**
@@ -34,5 +39,15 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
                 }
             }
         });
+    }
+
+    @Test
+    public void ActivityModelTest() {
+        new ActivityModel().getActivityPageData(new PageDataCallback<Activity>() {
+            @Override
+            public void onPageData(PageData<Activity> result, List<Activity> rows) {
+                Log.d("ApplicationTest", JSON.toJSONString(rows));
+            }
+        }, new Pager());
     }
 }

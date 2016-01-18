@@ -43,4 +43,12 @@ public class BaseActivity extends AppCompatActivity {
             Log.d(tag, msg);
         }
     }
+
+    protected void onHttpError(Throwable ex, boolean isOnCallback) {
+        if (Constant.DEBUG) {
+            if (ex != null && !isOnCallback) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }

@@ -67,12 +67,12 @@ public class Constant implements Serializable, Cloneable {
     /**
      * APP端viewTarget相关
      */
-    public final static String BANNER_VIEWTARGET_DAILY_NEW = "1";//每日上新
-    public final static String BANNER_VIEWTARGET_BIG_BRAND = "2";//大品牌
-    public final static String BANNER_VIEWTARGET_BUG_KUMING = "3";//买昆明
-    public final static String BANNER_VIEWTARGET_BUG_PREFECTURES = "4";//购地州
-    public final static String BANNER_VIEWTARGET_TYPE_CATEGOR = "5";//类别
-    public final static String BANNER_VIEWTARGET_TYPE_ACTIVITY_ZONE = "6";//活动专区
+    public final static String NAV_VIEWTARGET_DAILY_NEW = "1";//每日上新
+    public final static String NAV_VIEWTARGET_BIG_BRAND = "2";//大品牌
+    public final static String NAV_VIEWTARGET_BUG_KUMING = "3";//买昆明
+    public final static String NAV_VIEWTARGET_BUG_PREFECTURES = "4";//购地州
+    public final static String NAV_VIEWTARGET_TYPE_CATEGOR = "5";//类别
+    public final static String NAV_VIEWTARGET_TYPE_ACTIVITY_ZONE = "6";//活动专区
     /**
      * 验证码类型
      */
@@ -118,8 +118,11 @@ public class Constant implements Serializable, Cloneable {
     public static final int ORDER_STATE_ALREADY_CANCEL = 6;  //订单已取消
 
     /**
-     * 请求借口地址
+     * 请求接口地址
      */
     public static java.lang.String HOST = "http://192.168.0.11:8080/api/";
-    public static java.lang.String BANNERS_URL = HOST + "banners";
+    public static java.lang.String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
+    public static String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
+    public static String ACTIVITY_LIST_URL = HOST + "activity/list";    //获取正在开始或即将开始的活动
+    public static String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
 }

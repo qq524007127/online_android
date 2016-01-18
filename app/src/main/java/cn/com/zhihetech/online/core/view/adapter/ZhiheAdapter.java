@@ -1,7 +1,6 @@
-package cn.com.zhihetech.online.core.view;
+package cn.com.zhihetech.online.core.view.adapter;
 
 import android.content.Context;
-import android.support.annotation.CallSuper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,14 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.com.zhihetech.online.core.view.OnAdapterChangeHandle;
+
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
 public abstract class ZhiheAdapter<T, VH extends ZhiheAdapter.BaseViewHolder> extends BaseAdapter implements OnAdapterChangeHandle<T> {
     private List<T> mDatas = new ArrayList<>();
-    private Context mContext;
+    protected Context mContext;
     private int layoutId;
 
     public ZhiheAdapter(Context mContext, int layoutId) {

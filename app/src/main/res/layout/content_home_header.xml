@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <cn.com.zhihetech.online.core.view.FixedLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:aspect_ratio="0.4">
+
+        <cn.com.zhihetech.online.core.view.ZhiheBanner
+            android:id="@+id/home_banner_cb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </cn.com.zhihetech.online.core.view.ZhiheBanner>
+    </cn.com.zhihetech.online.core.view.FixedLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/home_navigation_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
+
+    <cn.com.zhihetech.online.core.view.FixedLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_separate"
+        app:aspect_ratio="0.08"></cn.com.zhihetech.online.core.view.FixedLayout>
+</LinearLayout>

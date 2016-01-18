@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -19,6 +20,9 @@ public class LoadMoreListView extends ListView implements AbsListView.OnScrollLi
     private View loadingView;
     private boolean isLoading = false;
     private boolean isLastItem = false;
+
+    private float dx;
+    private float dy;
 
     private OnLoadMoreListener onLoadMoreListener;
 

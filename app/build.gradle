@@ -29,4 +29,5 @@ dependencies {
     compile 'com.bigkoo:convenientbanner:2.0.4'
     compile 'com.alibaba:fastjson:1.2.7'
     androidTestCompile 'junit:junit:4.12'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
