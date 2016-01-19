@@ -1,8 +1,10 @@
 package cn.com.zhihetech.online.ui.widget;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import org.xutils.x;
 
@@ -28,8 +30,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected String getTag() {
-        return "test";
-        //return this.getClass().getName();
+        return this.getClass().getName();
     }
 
     protected void log(String msg) {
@@ -50,5 +51,13 @@ public class BaseActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
         }
+    }
+
+    protected void showMsg(View view, String msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    protected void showMsg(View view, int resId) {
+        Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show();
     }
 }

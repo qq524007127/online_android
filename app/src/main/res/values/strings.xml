@@ -8,4 +8,10 @@
     <string name="data_loading">数据加载中...</string>
     <string name="main_serch_hint">查找活动、商品、店铺</string>
     <string name="acitivty_date_msg">{0} ({1}) {2}-{3}</string>
+    <string name="add_friend">加为好友</string>
+    <string name="contact_merchanter">联系商家</string>
+    <string name="add_friend_success">添加好友成功</string>
+    <string name="goods_price">￥:{0}</string>
+    <string name="goods_volume">销量:{0}</string>
+    <string name="goods_carriage">邮费:{0}</string>
 </resources>

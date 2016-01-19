@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".ui.widget.MainActivity" />
         <activity android:name=".ui.widget.DailyNewActivity"></activity>
+        <activity android:name=".ui.widget.MerchantHomeActivity"></activity>
+        <activity android:name=".ui.widget.GoodsInfoActivity"></activity>
     </application>
 
 </manifest>

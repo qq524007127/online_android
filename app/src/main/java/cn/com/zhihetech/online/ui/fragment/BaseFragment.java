@@ -2,12 +2,16 @@ package cn.com.zhihetech.online.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.xutils.x;
+
+import cn.com.zhihetech.online.core.common.Constant;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -28,5 +32,37 @@ public abstract class BaseFragment extends Fragment {
         if (!injected) {
             x.view().inject(this, getView());
         }
+    }
+
+    protected String getLogTag() {
+        return this.getClass().getName();
+    }
+
+    protected void log(String msg) {
+        if (Constant.DEBUG) {
+            log(getLogTag(), msg);
+        }
+    }
+
+    protected void log(String tag, String msg) {
+        if (Constant.DEBUG) {
+            Log.d(tag, msg);
+        }
+    }
+
+    protected void onHttpError(Throwable ex, boolean isOnCallback) {
+        if (Constant.DEBUG) {
+            if (ex != null && !isOnCallback) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    protected void showMsg(View view, String msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    protected void showMsg(View view, int resId) {
+        Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show();
     }
 }

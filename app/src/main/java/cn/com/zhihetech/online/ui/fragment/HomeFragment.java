@@ -21,7 +21,6 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.view.adapter.ActivityAdapter;
 import cn.com.zhihetech.online.model.ActivityModel;
-import cn.com.zhihetech.online.ui.customview.HomeHeaderView;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -46,7 +45,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initViews() {
-        HomeHeaderView headerView = new HomeHeaderView(getContext());
+        OnLoadMoreListener.HomeHeaderView headerView = new OnLoadMoreListener.HomeHeaderView(getContext());
         activityLV.addHeaderView(headerView);
         adapter = new ActivityAdapter(getContext(), R.layout.content_activity_item);
         activityLV.setAdapter(adapter);
@@ -70,7 +69,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void loadMoreData() {
-        new ActivityModel().getActivityPageData(new PageDataCallback<Activity>() {
+        new ActivityModel().getActivities(new PageDataCallback<Activity>() {
             @Override
             public void onPageData(PageData<Activity> result, List<Activity> rows) {
                 pageData = result;
@@ -88,7 +87,7 @@ public class HomeFragment extends BaseFragment {
         if(!swipeRefreshLayout.isRefreshing()){
             swipeRefreshLayout.setRefreshing(true);
         }
-        new ActivityModel().getActivityPageData(new PageDataCallback<Activity>() {
+        new ActivityModel().getActivities(new PageDataCallback<Activity>() {
             @Override
             public void onPageData(PageData<Activity> result, List<Activity> rows) {
                 adapter.refreshData(rows);

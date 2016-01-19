@@ -12,6 +12,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 public class ZhiheApplication extends Application implements Thread.UncaughtExceptionHandler {
 
     private static ZhiheApplication instance;
+    private String userId = "647b184e-e45d-40c1-aa35-518cb118f479";
 
     @Override
     public void onCreate() {
@@ -23,6 +24,14 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
 
     public static ZhiheApplication getInstandce() {
         return instance;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

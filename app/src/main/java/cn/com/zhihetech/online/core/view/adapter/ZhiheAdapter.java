@@ -17,9 +17,9 @@ import cn.com.zhihetech.online.core.view.OnAdapterChangeHandle;
  * Created by ShenYunjie on 2016/1/15.
  */
 public abstract class ZhiheAdapter<T, VH extends ZhiheAdapter.BaseViewHolder> extends BaseAdapter implements OnAdapterChangeHandle<T> {
-    private List<T> mDatas = new ArrayList<>();
+    protected List<T> mDatas = new ArrayList<>();
     protected Context mContext;
-    private int layoutId;
+    protected int layoutId;
 
     public ZhiheAdapter(Context mContext, int layoutId) {
         this.mContext = mContext;

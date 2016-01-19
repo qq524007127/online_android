@@ -55,7 +55,9 @@ public class Goods extends BaseBean {
         this.merchant = merchant;
     }
 
-
+    public ImgInfo getCoverImg() {
+        return coverImg;
+    }
 
     public void setCoverImg(ImgInfo coverImg) {
         this.coverImg = coverImg;

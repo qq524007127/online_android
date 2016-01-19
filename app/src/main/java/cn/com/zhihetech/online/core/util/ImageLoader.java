@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ImgInfo;
 
 /**
@@ -26,7 +27,8 @@ public class ImageLoader {
 
     public static ImageOptions createImageOptions() {
         ImageOptions options = new ImageOptions.Builder()
-                .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP).build();
+                .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setFailureDrawableId(R.mipmap.ic_launcher).build();
         return options;
     }
 }

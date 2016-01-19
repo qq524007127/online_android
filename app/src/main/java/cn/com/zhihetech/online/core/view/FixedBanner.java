@@ -38,7 +38,7 @@ public class FixedBanner<T> extends ZhiheBanner<T> {
             throw new RuntimeException("FixedLayout width is not able UNSPECIFIED");
         }
         int heightSize = (int) ((float) widthSize * aspectRatio);
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.AT_MOST);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

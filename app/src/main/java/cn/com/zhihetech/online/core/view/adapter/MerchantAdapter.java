@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.core.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -15,6 +16,8 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
+import cn.com.zhihetech.online.ui.widget.GoodsInfoActivity;
+import cn.com.zhihetech.online.ui.widget.MerchantHomeActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -36,17 +39,25 @@ public class MerchantAdapter extends ZhiheAdapter<Merchant, MerchantAdapter.Merc
     }
 
     @Override
-    public void onBindViewHolder(MerchantHolder holder, Merchant data) {
+    public void onBindViewHolder(MerchantHolder holder, final Merchant data) {
         ImageLoader.disPlayImage(holder.merchHeader, data.getCoverImg());
         holder.merchantNameTv.setText(data.getMerchName());
         holder.merchGoodsCount.setText(data.getGoodsNum() + "");
         holder.activityFlag.setVisibility(data.getIsActivating() ? View.VISIBLE : View.GONE);
         data.getRecommendGoodses();
         initRecommendGoods(data.getRecommendGoodses(), holder);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MerchantHomeActivity.class);
+                intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, data.getMerchantId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void initRecommendGoods(List<Goods> recommendGoodses, MerchantHolder holder) {
-
+        holder.recommendGoodGrid.setAdapter(new RecommendGoodsAdapter(mContext, R.layout.content_recommend_goods_item, recommendGoodses));
     }
 
     public class MerchantHolder extends ZhiheAdapter.BaseViewHolder {

@@ -125,4 +125,9 @@ public class Constant implements Serializable, Cloneable {
     public static String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
     public static String ACTIVITY_LIST_URL = HOST + "activity/list";    //获取正在开始或即将开始的活动
     public static String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
+    public static String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息
+    public static String CHECK_MERCHANT_FUCOS_STATE_URL = HOST + "checkFocus";    //查询商家关注状态
+    public static String FOCUS_MERCHANT_URL = HOST + "focusMerchant/add";    //关注商家
+    public static String MERCHANT_ACTIVITIES_URL = HOST + "merchant/{0}/activities";    //获取指定商家的活动
+    public static String MERCHANT_GOODSES_URL = HOST + "goodses/{0}";   //获取指定商家的商品
 }

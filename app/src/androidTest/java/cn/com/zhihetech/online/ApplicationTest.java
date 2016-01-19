@@ -43,7 +43,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     @Test
     public void ActivityModelTest() {
-        new ActivityModel().getActivityPageData(new PageDataCallback<Activity>() {
+        new ActivityModel().getActivities(new PageDataCallback<Activity>() {
             @Override
             public void onPageData(PageData<Activity> result, List<Activity> rows) {
                 Log.d("ApplicationTest", JSON.toJSONString(rows));

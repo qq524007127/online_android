@@ -1,5 +1,7 @@
 package cn.com.zhihetech.online.core.common;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
@@ -56,6 +58,7 @@ public class ResponseMessage<T> implements Serializable, Cloneable {
         return data;
     }
 
+    @JSONField(name = "attribute")
     public void setData(T data) {
         this.data = data;
     }

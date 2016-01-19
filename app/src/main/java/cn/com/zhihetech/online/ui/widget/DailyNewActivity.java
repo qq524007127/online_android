@@ -24,7 +24,6 @@ import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.view.adapter.MerchantAdapter;
 import cn.com.zhihetech.online.model.BannerModel;
 import cn.com.zhihetech.online.model.MerchantModel;
-import cn.com.zhihetech.online.ui.customview.BannerHolder;
 
 @ContentView(R.layout.activity_daily_new)
 public class DailyNewActivity extends BaseActivity {
@@ -129,10 +128,10 @@ public class DailyNewActivity extends BaseActivity {
         new BannerModel().getBanners(new ArrayCallback<Banner>() {
             @Override
             public void onArray(List<Banner> datas) {
-                banner.setPages(new CBViewHolderCreator<BannerHolder>() {
+                banner.setPages(new CBViewHolderCreator<OnLoadMoreListener.BannerHolder>() {
                     @Override
-                    public BannerHolder createHolder() {
-                        return new BannerHolder();
+                    public OnLoadMoreListener.BannerHolder createHolder() {
+                        return new OnLoadMoreListener.BannerHolder();
                     }
                 }, datas);
             }
