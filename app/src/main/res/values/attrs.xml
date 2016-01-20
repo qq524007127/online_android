@@ -7,7 +7,7 @@
         <attr name="width_height_ratio" format="float" />
     </declare-styleable>
     <declare-styleable name="SortTabView">
-        <attr name="title" format="string" />
+        <attr name="sort_title" format="string" />
         <attr name="sort_property" format="string" />
     </declare-styleable>
 </resources>

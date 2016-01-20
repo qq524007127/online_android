@@ -31,6 +31,4 @@ public class ZhiheBanner<T> extends ConvenientBanner<T> {
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .startTurning(1000 * 3);
     }
-
-
 }

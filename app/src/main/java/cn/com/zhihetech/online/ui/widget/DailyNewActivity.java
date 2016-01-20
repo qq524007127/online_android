@@ -18,6 +18,7 @@ import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.view.FixedBanner;
+import cn.com.zhihetech.online.core.view.HomeHeaderView;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
@@ -128,10 +129,10 @@ public class DailyNewActivity extends BaseActivity {
         new BannerModel().getBanners(new ArrayCallback<Banner>() {
             @Override
             public void onArray(List<Banner> datas) {
-                banner.setPages(new CBViewHolderCreator<OnLoadMoreListener.BannerHolder>() {
+                banner.setPages(new CBViewHolderCreator<HomeHeaderView.BannerHolder>() {
                     @Override
-                    public OnLoadMoreListener.BannerHolder createHolder() {
-                        return new OnLoadMoreListener.BannerHolder();
+                    public HomeHeaderView.BannerHolder createHolder() {
+                        return new HomeHeaderView.BannerHolder();
                     }
                 }, datas);
             }

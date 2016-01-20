@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
+import org.xutils.common.util.DensityUtil;
+import org.xutils.x;
+
 import cn.com.zhihetech.online.R;
 
 /**
@@ -21,5 +24,6 @@ public class ZhiheSwipeRefreshLayout extends SwipeRefreshLayout {
 
     private void init() {
         setColorSchemeResources(R.color.colorPrimary, R.color.tabText, R.color.colorAccent);
+        setProgressViewOffset(false, 0, DensityUtil.dip2px(80));
     }
 }

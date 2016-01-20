@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <cn.com.zhihetech.online.core.view.SortTabLayout
+        android:id="@+id/merchant_goods_stl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="30dp">
@@ -13,18 +14,24 @@
         <cn.com.zhihetech.online.core.view.SortTabView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:sort_property="price"
+            app:sort_title="价格" />
 
         <cn.com.zhihetech.online.core.view.SortTabView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:sort_property="volume"
+            app:sort_title="销量" />
 
         <cn.com.zhihetech.online.core.view.SortTabView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:layout_weight="1"
+            app:sort_property="createDate"
+            app:sort_title="上新时间" />
+    </cn.com.zhihetech.online.core.view.SortTabLayout>
 
     <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
         android:id="@+id/merchant_goods_zsrl"

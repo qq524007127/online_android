@@ -18,9 +18,12 @@ import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.view.LoadMoreGridView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
+import cn.com.zhihetech.online.core.view.SortTabLayout;
+import cn.com.zhihetech.online.core.view.SortTabView;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.view.adapter.GoodsAdapter;
 import cn.com.zhihetech.online.model.GoodsModel;
+import cn.com.zhihetech.online.model.ModelParams;
 
 /**
  * Created by ShenYunjie on 2016/1/19.
@@ -31,10 +34,13 @@ public class MerchantGoodsFragment extends BaseFragment {
     private ZhiheSwipeRefreshLayout refreshLayout;
     @ViewInject(R.id.merchant_goods_lmgv)
     private LoadMoreGridView gridView;
+    @ViewInject(R.id.merchant_goods_stl)
+    private SortTabLayout sortTabLayout;
 
     private String merchantId;
     private PageData<Goods> pageData;
     private GoodsAdapter adapter;
+    private ModelParams params = new ModelParams();
 
     private PageDataCallback<Goods> refreshCallback = new PageDataCallback<Goods>() {
 
@@ -42,6 +48,7 @@ public class MerchantGoodsFragment extends BaseFragment {
         public void onPageData(PageData result, List rows) {
             pageData = result;
             adapter.refreshData(rows);
+            gridView.smoothScrollToPosition(0);
         }
 
         @Override
@@ -99,16 +106,23 @@ public class MerchantGoodsFragment extends BaseFragment {
                 refreshData();
             }
         });
+        sortTabLayout.setOnSortTabChangListener(new SortTabLayout.OnSortTabChangListener() {
+            @Override
+            public void onSortTabChange(SortTabView sortTabView, int position) {
+                params.addSort(sortTabView.getSortProperty(), sortTabView.getOrderType());
+                refreshData();
+            }
+        });
     }
 
     private void refreshData() {
         if (!refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(true);
         }
-        new GoodsModel().getGoodsesByMerchantId(refreshCallback, new Pager(), merchantId);
+        new GoodsModel().getGoodsesByMerchantId(refreshCallback, params.addPager(new Pager()), merchantId);
     }
 
     private void loadMoreData() {
-        new GoodsModel().getGoodsesByMerchantId(loadMoreCallback, pageData.getNextPage(), merchantId);
+        new GoodsModel().getGoodsesByMerchantId(loadMoreCallback, params.addPager(pageData.getNextPage()), merchantId);
     }
 }

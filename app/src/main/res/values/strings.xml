@@ -14,4 +14,16 @@
     <string name="goods_price">￥:{0}</string>
     <string name="goods_volume">销量:{0}</string>
     <string name="goods_carriage">邮费:{0}</string>
+    <string name="shop_address">店铺地址：{0}</string>
+    <string name="contact_num">联系电话：{0}</string>
+    <string name="merchant_desc">商家简介</string>
+    <string name="add_shopping_cart">加入购物车</string>
+    <string name="now_buy">立即购买</string>
+    <string name="custom_service">客服</string>
+    <string name="shop">店铺</string>
+    <string name="collection">收藏</string>
+    <string name="goods_evaluate">商品评价</string>
+    <string name="goods_desc">商品简介：{0}</string>
+    <string name="goods_stock">库存:({0})</string>
+    <string name="un_collection">取消收藏</string>
 </resources>

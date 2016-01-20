@@ -25,6 +25,7 @@ import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantGoodsFragment;
+import cn.com.zhihetech.online.ui.fragment.MerchantInfoFragment;
 
 /**
  * Created by ShenYunjie on 2016/1/19.
@@ -121,7 +122,7 @@ public class MerchantHomeActivity extends BaseActivity {
         viewPager.setOffscreenPageLimit(2);
         final BaseFragment[] fragments = {new MerchantActivityFragment().getInstance(merchantId),
                 new MerchantGoodsFragment().getInstance(merchantId),
-                new MerchantActivityFragment().getInstance(merchantId)};
+                new MerchantInfoFragment().getInstance(merchantId)};
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

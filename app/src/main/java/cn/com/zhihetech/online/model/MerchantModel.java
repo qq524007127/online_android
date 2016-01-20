@@ -10,7 +10,6 @@ import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
-import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
@@ -50,7 +49,7 @@ public class MerchantModel extends BaseModel<Merchant> {
      */
     public void checkFucosState(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
-        new FlexibleModel(ResponseMessage.class).getObject(Constant.CHECK_MERCHANT_FUCOS_STATE_URL, params, callback);
+        new SimpleModel(ResponseMessage.class).getObject(Constant.CHECK_MERCHANT_FUCOS_STATE_URL, params, callback);
     }
 
     /**
@@ -62,6 +61,6 @@ public class MerchantModel extends BaseModel<Merchant> {
      */
     public void focusMerchant(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
-        new FlexibleModel(ResponseMessage.class).postObject(Constant.FOCUS_MERCHANT_URL, params, callback);
+        new SimpleModel(ResponseMessage.class).postObject(Constant.FOCUS_MERCHANT_URL, params, callback);
     }
 }

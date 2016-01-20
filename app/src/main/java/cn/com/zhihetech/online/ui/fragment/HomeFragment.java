@@ -16,6 +16,7 @@ import cn.com.zhihetech.online.bean.Activity;
 import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
+import cn.com.zhihetech.online.core.view.HomeHeaderView;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
@@ -45,7 +46,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initViews() {
-        OnLoadMoreListener.HomeHeaderView headerView = new OnLoadMoreListener.HomeHeaderView(getContext());
+        HomeHeaderView headerView = new HomeHeaderView(getContext());
         activityLV.addHeaderView(headerView);
         adapter = new ActivityAdapter(getContext(), R.layout.content_activity_item);
         activityLV.setAdapter(adapter);
@@ -84,7 +85,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void refreshData() {
-        if(!swipeRefreshLayout.isRefreshing()){
+        if (!swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(true);
         }
         new ActivityModel().getActivities(new PageDataCallback<Activity>() {
