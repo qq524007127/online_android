@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONObject;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -22,12 +20,13 @@ import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.GoodsInfoHeaderView;
-import cn.com.zhihetech.online.core.view.ZhiheApplication;
-import cn.com.zhihetech.online.core.view.adapter.GoodsDetailAdapter;
+import cn.com.zhihetech.online.core.adapter.GoodsDetailAdapter;
 import cn.com.zhihetech.online.model.FocusGoodsModel;
 import cn.com.zhihetech.online.model.GoodsDetailModel;
 import cn.com.zhihetech.online.model.GoodsModel;
+import cn.com.zhihetech.online.model.ShoppingCartModel;
 
 /**
  * Created by ShenYunjie on 2016/1/19.
@@ -84,10 +83,10 @@ public class GoodsInfoActivity extends BaseActivity {
     private ObjectCallback<ResponseMessage> checkFocusGoodsCallback = new ObjectCallback<ResponseMessage>() {
         @Override
         public void onObject(ResponseMessage data) {
-            if(data.getCode() == ResponseStateCode.FOCUSED_GOODS){
+            if (data.getCode() == ResponseStateCode.FOCUSED_GOODS) {
                 settingFocusState(false);
             }
-            if(data.getCode() == ResponseStateCode.UN_FOCUS_GOODS){
+            if (data.getCode() == ResponseStateCode.UN_FOCUS_GOODS) {
                 settingFocusState(true);
             }
         }
@@ -128,6 +127,21 @@ public class GoodsInfoActivity extends BaseActivity {
         }
     };
 
+    private ObjectCallback<ResponseMessage> addShopCartCallback = new ObjectCallback<ResponseMessage>() {
+        @Override
+        public void onObject(ResponseMessage data) {
+            if (data.getCode() == ResponseStateCode.SUCCESS) {
+                showMsg(shoppingCartView, "添加成功");
+            }
+        }
+
+        @Override
+        public void onFinished() {
+            shoppingCartView.setClickable(true);
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +165,7 @@ public class GoodsInfoActivity extends BaseActivity {
      * 初始化收藏按钮
      */
     private void initCollectionView() {
-        new FocusGoodsModel().checkFocusSate(checkFocusGoodsCallback, goodsId, ZhiheApplication.getInstandce().getUserId());
+        new FocusGoodsModel().checkFocusSate(checkFocusGoodsCallback, goodsId, getUserId());
     }
 
     /**
@@ -192,14 +206,14 @@ public class GoodsInfoActivity extends BaseActivity {
      * 收藏商品
      */
     private void focusGoods() {
-        new FocusGoodsModel().focusGoods(focusCallback, goodsId, ZhiheApplication.getInstandce().getUserId());
+        new FocusGoodsModel().focusGoods(focusCallback, goodsId, getUserId());
     }
 
     /**
      * 取消收藏商品
      */
     private void unFocusGoods() {
-        new FocusGoodsModel().unFocusGoods(unFocusCallback, goodsId, ZhiheApplication.getInstandce().getUserId());
+        new FocusGoodsModel().unFocusGoods(unFocusCallback, goodsId, getUserId());
     }
 
     @Event({R.id.goods_info_shop_view, R.id.goods_info_shopping_cart_view})
@@ -213,8 +227,20 @@ public class GoodsInfoActivity extends BaseActivity {
                 }
                 break;
             case R.id.goods_info_shopping_cart_view:
-
+                if (StringUtils.isEmpty(goodsId)) {
+                    showMsg(view, "商品数据还未加载完成，请稍后再试");
+                    return;
+                }
+                view.setClickable(false);
+                addGoodsToShoppingCart();
                 break;
         }
+    }
+
+    /**
+     * 添加当前商品到购物车
+     */
+    private void addGoodsToShoppingCart() {
+        new ShoppingCartModel().addShoppingCart(addShopCartCallback, goodsId, getUserId(), 1);
     }
 }

@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar_layout" />
+
     <github.chenupt.dragtoplayout.DragTopLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -74,7 +76,7 @@
                 app:tabIndicatorColor="@color/colorPrimary"
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@color/tabText">
+                app:tabTextColor="@color/textColor">
 
             </android.support.design.widget.TabLayout>
 

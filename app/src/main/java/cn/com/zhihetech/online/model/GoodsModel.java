@@ -8,8 +8,6 @@ import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.core.common.Pager;
-import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 
@@ -18,15 +16,14 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
  */
 public class GoodsModel extends BaseModel<Goods> {
     /**
-     * 获取指定商家的商品
+     * 获取指定类别的商品
      *
      * @param callback
-     * @param pager
-     * @param merchantId 商家ID
+     * @param params
+     * @param categoryId 商品类别ID
      */
-    public Callback.Cancelable getGoodsesByMerchantId(PageDataCallback<Goods> callback, Pager pager, @NonNull String merchantId) {
-        String url = MessageFormat.format(Constant.MERCHANT_GOODSES_URL, merchantId);
-        ModelParams params = new ModelParams().addPager(pager);
+    public Callback.Cancelable getGoodsesByCategoryId(PageDataCallback<Goods> callback, ModelParams params, @NonNull String categoryId) {
+        String url = MessageFormat.format(Constant.CATEGORY_GOODSES_URL, categoryId);
         return getPageData(url, params, callback);
     }
 

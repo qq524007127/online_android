@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.view.adapter;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

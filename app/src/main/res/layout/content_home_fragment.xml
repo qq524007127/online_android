@@ -4,13 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:minHeight="50dp"
-        android:padding="5dp">
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <ImageView
             android:layout_width="40dp"
@@ -19,14 +21,11 @@
 
         <Button
             android:id="@+id/home_search_btn"
+            style="@style/HomeSearchStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/search_icon"
-            android:gravity="left|center_vertical"
-            android:hint="@string/main_serch_hint"
-            android:minHeight="50dp"
-            android:padding="10dp" />
-    </LinearLayout>
+            android:layout_height="40dp"
+            android:text="@string/main_serch_hint" />
+    </android.support.v7.widget.Toolbar>
 
     <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
         android:id="@+id/home_srl"
@@ -36,7 +35,8 @@
         <cn.com.zhihetech.online.core.view.LoadMoreListView
             android:id="@+id/home_activity_lv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/normalBackground">
 
         </cn.com.zhihetech.online.core.view.LoadMoreListView>
 

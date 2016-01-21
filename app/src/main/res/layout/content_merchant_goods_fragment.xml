@@ -43,6 +43,7 @@
             android:id="@+id/merchant_goods_lmgv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/normalBackground"
             android:numColumns="2">
 
         </cn.com.zhihetech.online.core.view.LoadMoreGridView>

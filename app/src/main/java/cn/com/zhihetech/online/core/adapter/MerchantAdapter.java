@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.view.adapter;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.ui.widget.GoodsInfoActivity;
 import cn.com.zhihetech.online.ui.widget.MerchantHomeActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 

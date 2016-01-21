@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.view.adapter;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar_layout" />
+
     <ListView
         android:id="@+id/goods_info_lv"
         android:layout_width="match_parent"
@@ -49,7 +51,8 @@
                     android:gravity="center"
                     android:padding="2dp"
                     android:text="@string/custom_service"
-                    android:textColor="@color/tabText" />
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,7 +74,8 @@
                     android:gravity="center"
                     android:padding="2dp"
                     android:text="@string/shop"
-                    android:textColor="@color/tabText" />
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,7 +98,8 @@
                     android:gravity="center"
                     android:padding="2dp"
                     android:text="@string/collection"
-                    android:textColor="@color/tabText" />
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 

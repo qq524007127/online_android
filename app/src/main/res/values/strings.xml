@@ -26,4 +26,9 @@
     <string name="goods_desc">商品简介：{0}</string>
     <string name="goods_stock">库存:({0})</string>
     <string name="un_collection">取消收藏</string>
+    <string name="category">分类</string>
+    <string name="daily_new">今日上新</string>
+    <string name="merchant_home">商家主页</string>
+    <string name="goods_detail">商品详情</string>
+    <string name="search">搜索</string>
 </resources>

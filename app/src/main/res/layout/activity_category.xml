@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="cn.com.zhihetech.online.ui.widget.DailyNewActivity">
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout" />
 
     <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
-        android:id="@+id/daily_new_srl"
+        android:id="@+id/category_zsrl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <cn.com.zhihetech.online.core.view.LoadMoreListView
-            android:id="@+id/merchant_list_lv"
+        <cn.com.zhihetech.online.core.view.LoadMoreGridView
+            android:id="@+id/category_lvgv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/normalBackground">
+            android:background="@color/normalBackground"
+            android:horizontalSpacing="5dp"
+            android:numColumns="2"
+            android:padding="3dp"
+            android:verticalSpacing="5dp">
 
-        </cn.com.zhihetech.online.core.view.LoadMoreListView>
+        </cn.com.zhihetech.online.core.view.LoadMoreGridView>
     </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
-
 </LinearLayout>

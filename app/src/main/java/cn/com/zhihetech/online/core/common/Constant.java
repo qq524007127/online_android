@@ -124,6 +124,7 @@ public class Constant implements Serializable, Cloneable {
     public static java.lang.String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
     public static String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
     public static String ACTIVITY_LIST_URL = HOST + "activity/list";    //获取正在开始或即将开始的活动
+    public static String CATEGORY_ACTIVITIES_URL = HOST + "goodsAttributeSet/{0}/activities";    //获取正在开始或即将开始的活动
     public static String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
     public static String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息
     public static String CHECK_MERCHANT_FUCOS_STATE_URL = HOST + "checkFocus";    //查询商家关注状态
@@ -133,7 +134,13 @@ public class Constant implements Serializable, Cloneable {
     public static String GOODS_BANNERS_URL = HOST + "goodsBanners/{0}";   //获取指定商品的轮播图
     public static String GOODS_DETAILS_URL = HOST + "goodsDetails/{0}";   //获取指定商品的详情图
     public static String GOODS_URL = HOST + "goods/{0}";   //根据ID获取商品
+    public static String CATEGORY_GOODSES_URL = HOST + "goodsAttributeSet/{0}/goodses"; //获取指定类别的商品
+
     public static String CHECK_FOCUS_GOODS_URL = HOST + "checkFocusGoods";  //检查用户对商品的收藏状态
     public static String FOCUS_GOODS_URL = HOST + "focusGoods/add";  //收藏商品
     public static String UN_FOCUS_GOODS_URL = HOST + "cancelFocusGoods";  //取消收藏商品
+    public static String ADD_SHOPPING_CART_URL = HOST + "shoppingCart/add";  //添加商品到购物车
+    public static String USER_SHOPPING_CARTS_URL = HOST + "user/{userId}/shoppingCarts";  //查询用户的购物车数据
+    public static String DELETE_SHOPPING_CART_URL = HOST + "shoppingCart/{shoppingCartId}/delete";  //删除指定购物车数据
+    public static String CATEGORIES_URL = HOST + "goodsAttributeSet/list";  //获取分类列表
 }

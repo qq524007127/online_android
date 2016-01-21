@@ -32,6 +32,7 @@ import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.BannerModel;
 import cn.com.zhihetech.online.model.NavigationModel;
+import cn.com.zhihetech.online.ui.widget.CategoryActivity;
 import cn.com.zhihetech.online.ui.widget.DailyNewActivity;
 
 /**
@@ -131,7 +132,8 @@ public class HomeHeaderView extends FrameLayout {
 
                 break;
             case Constant.NAV_VIEWTARGET_TYPE_CATEGOR:
-
+                Intent intent4 = new Intent(getContext(), CategoryActivity.class);
+                getContext().startActivity(intent4);
                 break;
             case Constant.NAV_VIEWTARGET_TYPE_ACTIVITY_ZONE:
 

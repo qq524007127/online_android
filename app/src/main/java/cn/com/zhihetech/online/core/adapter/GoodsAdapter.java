@@ -1,6 +1,7 @@
-package cn.com.zhihetech.online.core.view.adapter;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.view.FixedImageView;
+import cn.com.zhihetech.online.ui.widget.GoodsInfoActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/19.
@@ -33,7 +35,7 @@ public class GoodsAdapter extends ZhiheAdapter<Goods, GoodsAdapter.GoodsHolder> 
     }
 
     @Override
-    public void onBindViewHolder(GoodsHolder holder, Goods data) {
+    public void onBindViewHolder(GoodsHolder holder, final Goods data) {
         ImageLoader.disPlayImage(holder.coverImg, data.getCoverImg());
         holder.goodsNameTv.setText(data.getGoodsName());
         String text = MessageFormat.format(mContext.getString(R.string.goods_price), data.getPrice());
@@ -49,7 +51,9 @@ public class GoodsAdapter extends ZhiheAdapter<Goods, GoodsAdapter.GoodsHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                intent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, data.getGoodsId());
+                mContext.startActivity(intent);
             }
         });
     }

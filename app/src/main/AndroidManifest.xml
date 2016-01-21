@@ -13,19 +13,28 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.widget.StartActivity"
-            android:label="@string/app_name">
+        <activity android:name=".ui.widget.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.widget.MainActivity" />
-        <activity android:name=".ui.widget.DailyNewActivity"></activity>
-        <activity android:name=".ui.widget.MerchantHomeActivity"></activity>
-        <activity android:name=".ui.widget.GoodsInfoActivity"></activity>
+        <activity
+            android:name=".ui.widget.DailyNewActivity"
+            android:label="@string/daily_new"></activity>
+        <activity
+            android:name=".ui.widget.MerchantHomeActivity"
+            android:label="@string/merchant_home"></activity>
+        <activity
+            android:name=".ui.widget.GoodsInfoActivity"
+            android:label="@string/goods_detail"></activity>
+        <activity
+            android:name=".ui.widget.CategoryActivity"
+            android:label="@string/category"></activity>
+        <activity android:name=".ui.widget.CategoryDetailActivity" />
+        <activity
+            android:name=".ui.widget.SearchActivity"/>
     </application>
 
 </manifest>

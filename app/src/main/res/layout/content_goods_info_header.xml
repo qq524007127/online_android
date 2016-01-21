@@ -21,18 +21,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/normal_padding">
 
         <TextView
             android:id="@+id/goods_info_name_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/goods_info_price_tv"
@@ -54,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/goods_info_carriage_tv"
@@ -75,14 +77,14 @@
             android:id="@+id/goods_info_desc_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" />
+            android:padding="5dp" />
 
         <RelativeLayout
             android:id="@+id/goods_info_evaluate_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/normalBackground"
-            android:padding="10dp">
+            android:padding="5dp">
 
             <TextView
                 android:layout_width="wrap_content"

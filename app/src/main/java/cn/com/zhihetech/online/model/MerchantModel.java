@@ -2,6 +2,8 @@ package cn.com.zhihetech.online.model;
 
 import android.support.annotation.NonNull;
 
+import org.xutils.common.Callback;
+
 import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.bean.Merchant;
@@ -24,43 +26,54 @@ public class MerchantModel extends BaseModel<Merchant> {
      * @param callback
      * @param pager
      */
-    public void getDailyNewList(PageDataCallback<Merchant> callback, Pager pager) {
+    public Callback.Cancelable getDailyNewList(PageDataCallback<Merchant> callback, Pager pager) {
         ModelParams params = new ModelParams().addPager(pager);
-        getPageData(Constant.DAILY_NEW_URL, params, callback);
+        return getPageData(Constant.DAILY_NEW_URL, params, callback);
     }
 
     /**
      * 根据商家ID获取商家基本信息
      *
      * @param callback
-     * @param merchantId    商家ID
+     * @param merchantId 商家ID
      */
-    public void getMerchantById(ObjectCallback<Merchant> callback, @NonNull String merchantId) {
+    public Callback.Cancelable getMerchantById(ObjectCallback<Merchant> callback, @NonNull String merchantId) {
         String url = MessageFormat.format(Constant.MERCHANT_URL, merchantId);
-        getObject(url, null, callback);
+        return getObject(url, null, callback);
     }
 
     /**
      * 根据用户ID和商家ID检查是否用户是否已关注商家
      *
      * @param callback
-     * @param userId    用户id
-     * @param merchantId    商家ID
+     * @param userId     用户id
+     * @param merchantId 商家ID
      */
-    public void checkFucosState(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
+    public Callback.Cancelable checkFucosState(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
-        new SimpleModel(ResponseMessage.class).getObject(Constant.CHECK_MERCHANT_FUCOS_STATE_URL, params, callback);
+        return new SimpleModel(ResponseMessage.class).getObject(Constant.CHECK_MERCHANT_FUCOS_STATE_URL, params, callback);
     }
 
     /**
      * 用户关注商家
      *
      * @param callback
-     * @param userId    用户ID
-     * @param merchantId    商家ID
+     * @param userId     用户ID
+     * @param merchantId 商家ID
      */
-    public void focusMerchant(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
+    public Callback.Cancelable focusMerchant(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
-        new SimpleModel(ResponseMessage.class).postObject(Constant.FOCUS_MERCHANT_URL, params, callback);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.FOCUS_MERCHANT_URL, params, callback);
+    }
+
+    /**
+     * 根据商品类别获取商家
+     *
+     * @param callback
+     * @param categoryId 类别ID
+     */
+    public Callback.Cancelable getMerchantsByCategory(PageDataCallback<Merchant> callback, Pager pager, @NonNull String categoryId) {
+        ModelParams params = new ModelParams().addPager(pager);//.addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
+        return getPageData(Constant.FOCUS_MERCHANT_URL, params, callback);
     }
 }

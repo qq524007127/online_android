@@ -1,7 +1,6 @@
-package cn.com.zhihetech.online.core.view.adapter;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

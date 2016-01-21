@@ -1,11 +1,26 @@
 <resources>
 
+    <style name="AppTheme" parent="BaseTheme">
+
+    </style>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="HomeSearchStyle">
+        <item name="android:background">@drawable/home_search_bg</item>
+        <item name="android:drawableLeft">@drawable/search_icon</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

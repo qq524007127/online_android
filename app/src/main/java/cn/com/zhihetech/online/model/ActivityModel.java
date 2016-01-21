@@ -2,6 +2,8 @@ package cn.com.zhihetech.online.model;
 
 import android.support.annotation.NonNull;
 
+import org.xutils.common.Callback;
+
 import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.bean.Activity;
@@ -19,9 +21,9 @@ public class ActivityModel extends BaseModel<Activity> {
      * @param callback
      * @param pager
      */
-    public void getActivities(PageDataCallback<Activity> callback, Pager pager) {
+    public Callback.Cancelable getActivities(PageDataCallback<Activity> callback, Pager pager) {
         ModelParams params = new ModelParams().addPager(pager);
-        getPageData(Constant.ACTIVITY_LIST_URL, params, callback);
+        return getPageData(Constant.ACTIVITY_LIST_URL, params, callback);
     }
 
     /**
@@ -31,9 +33,22 @@ public class ActivityModel extends BaseModel<Activity> {
      * @param pager
      * @param merchantId
      */
-    public void getActivitiesByMerchantId(PageDataCallback<Activity> callback, Pager pager, @NonNull String merchantId) {
+    public Callback.Cancelable getActivitiesByMerchantId(PageDataCallback<Activity> callback, Pager pager, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addPager(pager);
         String url = MessageFormat.format(Constant.MERCHANT_ACTIVITIES_URL, merchantId);
-        getPageData(url, params, callback);
+        return getPageData(url, params, callback);
+    }
+
+    /**
+     * 根据商品类别查询活动
+     *
+     * @param callback
+     * @param pager
+     * @param categorieId
+     */
+    public Callback.Cancelable getActivitiesByCategorieId(PageDataCallback<Activity> callback, Pager pager, @NonNull String categorieId) {
+        ModelParams params = new ModelParams().addPager(pager);
+        String url = MessageFormat.format(Constant.CATEGORY_ACTIVITIES_URL, categorieId);
+        return getPageData(url, params, callback);
     }
 }

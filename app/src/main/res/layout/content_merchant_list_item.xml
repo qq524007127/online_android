@@ -2,80 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/cardview_margin">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:background="@color/white">
+        app:cardCornerRadius="@dimen/cardview_radius"
+        app:cardElevation="@dimen/cardview_elevation">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <LinearLayout
-                android:id="@+id/merchan_info_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/merch_header_iv"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="5dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/my_activity" />
+                <LinearLayout
+                    android:id="@+id/merchan_info_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/merch_header_iv"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/my_activity" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/merch_name_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:padding="5dp"
+                            android:text="XXX店铺" />
+
+                        <TextView
+                            android:id="@+id/merch_goods_count_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:padding="5dp"
+                            android:text="工xx件宝贝" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center_vertical"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/merch_name_tv"
+                    <GridView
+                        android:id="@+id/recommend_goods_gv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="left|center_vertical"
-                        android:padding="5dp"
-                        android:text="XXX店铺" />
+                        android:horizontalSpacing="3dp"
+                        android:numColumns="3"
+                        android:padding="3dp"
+                        android:verticalSpacing="3dp"></GridView>
 
-                    <TextView
-                        android:id="@+id/merch_goods_count_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left|center_vertical"
-                        android:padding="5dp"
-                        android:text="工xx件宝贝" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <GridView
-                    android:id="@+id/recommend_goods_gv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:horizontalSpacing="3dp"
-                    android:numColumns="3"
-                    android:padding="3dp"
-                    android:verticalSpacing="3dp"></GridView>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/merch_activity_flag_iv"
-            android:layout_width="47dp"
-            android:layout_height="59dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/activity_flag" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/merch_activity_flag_iv"
+                android:layout_width="47dp"
+                android:layout_height="59dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/activity_flag" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

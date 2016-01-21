@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
@@ -20,16 +22,15 @@ import cn.com.zhihetech.online.core.view.HomeHeaderView;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
-import cn.com.zhihetech.online.core.view.adapter.ActivityAdapter;
+import cn.com.zhihetech.online.core.adapter.ActivityAdapter;
 import cn.com.zhihetech.online.model.ActivityModel;
+import cn.com.zhihetech.online.ui.widget.SearchActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
 @ContentView(R.layout.content_home_fragment)
 public class HomeFragment extends BaseFragment {
-    @ViewInject(R.id.home_search_btn)
-    private Button searchBtn;
     @ViewInject(R.id.home_srl)
     private ZhiheSwipeRefreshLayout swipeRefreshLayout;
     @ViewInject(R.id.home_activity_lv)
@@ -100,5 +101,15 @@ public class HomeFragment extends BaseFragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, new Pager(5));
+    }
+
+    @Event({R.id.home_search_btn})
+    private void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.home_search_btn:
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                getContext().startActivity(intent);
+                break;
+        }
     }
 }
