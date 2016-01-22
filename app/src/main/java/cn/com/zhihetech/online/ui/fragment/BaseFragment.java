@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import org.xutils.x;
 
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.view.ZhiheApplication;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -32,6 +33,15 @@ public abstract class BaseFragment extends Fragment {
         if (!injected) {
             x.view().inject(this, getView());
         }
+    }
+
+    /**
+     * 获取当前登录用户的ID
+     *
+     * @return
+     */
+    protected String getUseId() {
+        return ZhiheApplication.getInstandce().getUserId();
     }
 
     protected String getLogTag() {

@@ -69,6 +69,12 @@ public class SortTabLayout extends LinearLayout implements View.OnClickListener 
         }
     }
 
+    public void reset() {
+        for (SortTabView tab : this.tabViews){
+            tab.resetState(true);
+        }
+    }
+
     public void setOnSortTabChangListener(OnSortTabChangListener onSortTabChangListener) {
         this.onSortTabChangListener = onSortTabChangListener;
     }

@@ -11,31 +11,18 @@
         app:aspect_ratio="0.4">
 
         <cn.com.zhihetech.online.core.view.ZhiheBanner
-            android:id="@+id/home_banner_cb"
+            android:id="@+id/merchant_list_header_banner"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </cn.com.zhihetech.online.core.view.ZhiheBanner>
     </cn.com.zhihetech.online.core.view.FixedLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:paddingBottom="12dp"
-        android:paddingTop="14dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/home_navigation_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-    </FrameLayout>
-
     <cn.com.zhihetech.online.core.view.FixedLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/activity_separate"
-        app:aspect_ratio="0.08"></cn.com.zhihetech.online.core.view.FixedLayout>
+        android:background="@drawable/merchant_separate"
+        app:aspect_ratio="0.106">
+
+    </cn.com.zhihetech.online.core.view.FixedLayout>
 </LinearLayout>

@@ -32,6 +32,16 @@ public class MerchantModel extends BaseModel<Merchant> {
     }
 
     /**
+     * 根据查询条件获取所用的商家
+     *
+     * @param callback
+     * @param params
+     */
+    public Callback.Cancelable getMerchantsByModelParams(PageDataCallback<Merchant> callback, ModelParams params) {
+        return getPageData(Constant.DAILY_NEW_URL, params, callback);
+    }
+
+    /**
      * 根据商家ID获取商家基本信息
      *
      * @param callback
@@ -73,7 +83,8 @@ public class MerchantModel extends BaseModel<Merchant> {
      * @param categoryId 类别ID
      */
     public Callback.Cancelable getMerchantsByCategory(PageDataCallback<Merchant> callback, Pager pager, @NonNull String categoryId) {
-        ModelParams params = new ModelParams().addPager(pager);//.addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
-        return getPageData(Constant.FOCUS_MERCHANT_URL, params, callback);
+        ModelParams params = new ModelParams().addPager(pager);
+        String url = MessageFormat.format(Constant.CATEGORY_MERCHANTS_URL,categoryId);
+        return getPageData(url, params, callback);
     }
 }

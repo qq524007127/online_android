@@ -39,12 +39,14 @@
                     android:textColor="@color/colorPrimary" />
 
                 <EditText
+                    android:id="@+id/search_input_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:padding="5dp"
                     android:singleLine="true"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <Button
@@ -62,4 +64,11 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/search_content_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 </LinearLayout>

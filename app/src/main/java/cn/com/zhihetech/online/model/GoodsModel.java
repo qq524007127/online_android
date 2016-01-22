@@ -8,6 +8,7 @@ import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 
@@ -49,5 +50,16 @@ public class GoodsModel extends BaseModel<Goods> {
     public Callback.Cancelable getGoodsByGoodsId(ResponseMessageCallback<Goods> callback, @NonNull String goodsId) {
         String url = MessageFormat.format(Constant.GOODS_URL, goodsId);
         return getResponseMessage(url, null, callback);
+    }
+
+    /**
+     * 根据查询条件获取所用商品
+     *
+     * @param callback
+     * @param params
+     * @return
+     */
+    public Callback.Cancelable getGoodsesByModelParams(PageDataCallback<Goods> callback, ModelParams params) {
+        return getPageData(Constant.GOODSES_URL, params, callback);
     }
 }

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:alpha="0.8"
+    android:background="@drawable/search_type_list_bg"
     android:orientation="vertical">
 
     <ListView
         android:id="@+id/searchtype_content_ls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@color/white"
-        android:dividerHeight="1dp"></ListView>
+        android:divider="@color/gray"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@android:color/transparent">
+
+    </ListView>
 </LinearLayout>

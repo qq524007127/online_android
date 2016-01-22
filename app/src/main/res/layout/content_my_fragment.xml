@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff5f3f4"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:minHeight="60.0dip"
+            android:padding="10.0dip">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/my_header_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/home"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_header_img"
+                android:padding="15.0dip"
+                android:text="xxxxxx"
+                android:textColor="@color/white"
+                android:textSize="20.0sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10.0dip">
+
+                <ImageView
+                    android:id="@+id/my_order_icon"
+                    android:layout_width="30.0dip"
+                    android:layout_height="30.0dip"
+                    android:src="@drawable/order_detail" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_toRightOf="@id/my_order_icon"
+                    android:text="@string/my_order"
+                    android:textSize="16.0sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/see_all_order"
+                        android:textSize="14.0sp" />
+
+                    <ImageView
+                        android:layout_width="15.0dip"
+                        android:layout_height="15.0dip"
+                        android:src="@drawable/array_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.20000005dip"
+                android:background="@color/normalBackground" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/waiting_pay" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="@string/waiting_pay"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/paied" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="@string/paied"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/waiting_evaluate" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="@string/waiting_evaluate"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/refunding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="@string/refunding"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/refunded" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="@string/refunded"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/volum" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/my_volum" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/red_money" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/my_red_money" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/my_friend" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/my_friends" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/my_baby" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/my_baby" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/self_info" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/self_info_change" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/chang_password" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/change_password" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/receiv_address" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/my_receiv_address" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:background="@drawable/exit_account_button"
+            android:text="@string/exit_account"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

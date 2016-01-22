@@ -27,6 +27,16 @@ public class ActivityModel extends BaseModel<Activity> {
     }
 
     /**
+     * 获取所有已开始和即将开始的活动
+     *
+     * @param callback
+     * @param params
+     */
+    public Callback.Cancelable getActivitiesByModelParams(PageDataCallback<Activity> callback, ModelParams params) {
+        return getPageData(Constant.ACTIVITY_LIST_URL, params, callback);
+    }
+
+    /**
      * 根据指定ID商家的已开始和即将开始的活动
      *
      * @param callback

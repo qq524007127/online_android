@@ -31,4 +31,23 @@
     <string name="merchant_home">商家主页</string>
     <string name="goods_detail">商品详情</string>
     <string name="search">搜索</string>
+    <string name="my_order">我的订单</string>
+    <string name="see_all_order">查看所有订单</string>
+    <string name="waiting_pay">待付款</string>
+    <string name="paied">待收货</string>
+    <string name="waiting_evaluate">待评价</string>
+    <string name="refunding">退款中</string>
+    <string name="refunded">已退款</string>
+    <string name="my_volum">我的优惠券</string>
+    <string name="my_red_money">我的红包</string>
+    <string name="my_friends">我的好友</string>
+    <string name="my_baby">我的宝贝</string>
+    <string name="self_info_change">个人信息修改</string>
+    <string name="change_password">密码修改</string>
+    <string name="my_receiv_address">我的收货地址</string>
+    <string name="exit_account">退出账号</string>
+    <string name="number">数量:</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="buy">购买</string>
 </resources>
