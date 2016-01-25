@@ -23,6 +23,11 @@
         <item name="android:layout_marginLeft">20dp</item>
     </style>
 
+    <style name="PopWindowStyle">
+        <item name="android:windowEnterAnimation">@anim/pop_window_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_window_exit_anim</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

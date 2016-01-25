@@ -142,7 +142,11 @@ public class Constant implements Serializable, Cloneable {
     public static String UN_FOCUS_GOODS_URL = HOST + "cancelFocusGoods";  //取消收藏商品
     public static String ADD_SHOPPING_CART_URL = HOST + "shoppingCart/add";  //添加商品到购物车
     public static String USER_SHOPPING_CARTS_URL = HOST + "user/{0}/shoppingCarts";  //查询用户的购物车数据
-    public static String DELETE_SHOPPING_CART_URL = HOST + "shoppingCart/{shoppingCartId}/delete";  //删除指定购物车数据
+    public static String DELETE_SHOPPING_CARTS_URL = HOST + "shoppingCarts/delete";  //批量删除指定购物车数据
+    public static String UPDATE_SHOPPING_CART_AMOUNT_URL = HOST + "shoppingCart/update";  //更新购物车商品数量
     public static String CATEGORIES_URL = HOST + "goodsAttributeSet/list";  //获取分类列表
     public static String CATEGORY_MERCHANTS_URL = HOST + "goodsAttributeSet/{0}/Merchants"; //根据商品类别获取商家
+    public static String USER_RECEIPT_ADDRESSES_URL = HOST + "user/{0}/receivedGoodsAddresses"; //获取指定用户的收货地址
+    public static String ADD_OR_UPDATE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/addOrUpdate"; //添加或更新收货地址信息
+    public static String DELETE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/{0}/delete"; //添加或更新收货地址信息
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -115,5 +116,16 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void showMsg(View view, int resId) {
         Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show();
+    }
+
+    /**
+     * 设置背景透明度
+     *
+     * @param bgAlpha
+     */
+    protected void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        getWindow().setAttributes(lp);
     }
 }

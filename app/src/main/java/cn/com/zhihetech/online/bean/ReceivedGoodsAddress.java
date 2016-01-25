@@ -6,18 +6,18 @@ package cn.com.zhihetech.online.bean;
 
 public class ReceivedGoodsAddress extends BaseBean {
 
-    private String receivedGoodsId;
+    private String addressId;
     private User user;
     private String receiverName;
     private String receiverPhone;
     private String detailAddress;
 
-    public String getReceivedGoodsId() {
-        return receivedGoodsId;
+    public String getAddressId() {
+        return addressId;
     }
 
-    public void setReceivedGoodsId(String receivedGoodsId) {
-        this.receivedGoodsId = receivedGoodsId;
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
     }
 
     public User getUser() {

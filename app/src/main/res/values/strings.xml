@@ -50,4 +50,14 @@
     <string name="delete">删除</string>
     <string name="edit">编辑</string>
     <string name="buy">购买</string>
+    <string name="cancel">取消</string>
+    <string name="data_executing">数据处理中...</string>
+    <string name="please_wait">请稍等...</string>
+    <string name="receipt_address">收货地址</string>
+    <string name="add">添加</string>
+    <string name="receipt_person">收货人</string>
+    <string name="add_receipt_address">添加收货地址</string>
+    <string name="ok">确定</string>
+    <string name="receiver_person_name">收货人：{0}</string>
+    <string name="detail_address">详细地址：{0}</string>
 </resources>

@@ -54,6 +54,7 @@ public class RecommendGoodsAdapter extends ZhiheAdapter<Goods, RecommendGoodsAda
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GoodsInfoActivity.class);
                 intent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, data.getGoodsId());
+                intent.putExtra(GoodsInfoActivity.GOODS_NAME_KEY, data.getGoodsName());
                 mContext.startActivity(intent);
             }
         });

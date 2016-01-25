@@ -349,10 +349,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_receiver_address_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -374,7 +375,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10.0dip"
-            android:background="@drawable/exit_account_button"
+            android:background="@drawable/orange_bg"
             android:text="@string/exit_account"
             android:textColor="@color/white"
             android:textSize="16.0sp" />

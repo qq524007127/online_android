@@ -1,4 +1,5 @@
 package cn.com.zhihetech.online.bean;
+
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ public class ShoppingCart extends BaseBean {
     private String shoppingCartId;
     private User user;
     private Goods goods;
-    private int count;
+    private int amount;
     private Date focusDate;
 
     public String getShoppingCartId() {
@@ -37,12 +38,12 @@ public class ShoppingCart extends BaseBean {
         this.goods = goods;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public Date getFocusDate() {

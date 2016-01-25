@@ -33,8 +33,13 @@
             android:name=".ui.widget.CategoryActivity"
             android:label="@string/category"></activity>
         <activity android:name=".ui.widget.CategoryDetailActivity" />
+        <activity android:name=".ui.widget.SearchActivity" />
         <activity
-            android:name=".ui.widget.SearchActivity"/>
+            android:name=".ui.widget.ReceiptAddressActivity"
+            android:label="@string/receipt_address" />
+        <activity
+            android:name=".ui.widget.AddOrEditReceiptActivity"
+            android:label="@string/add_receipt_address" />
     </application>
 
 </manifest>

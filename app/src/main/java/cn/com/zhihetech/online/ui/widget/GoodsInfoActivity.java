@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.widget;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.GoodsInfoHeaderView;
 import cn.com.zhihetech.online.core.adapter.GoodsDetailAdapter;
+import cn.com.zhihetech.online.core.view.GoodsCartOrBuySheetBottomView;
 import cn.com.zhihetech.online.model.FocusGoodsModel;
 import cn.com.zhihetech.online.model.GoodsDetailModel;
 import cn.com.zhihetech.online.model.GoodsModel;
@@ -34,7 +36,10 @@ import cn.com.zhihetech.online.model.ShoppingCartModel;
 @ContentView(R.layout.activity_goods_info)
 public class GoodsInfoActivity extends BaseActivity {
     public final static String GOODS_ID_KEY = "_goods_id";
+    public final static String GOODS_NAME_KEY = "_goods_name";
 
+    @ViewInject(R.id.goods_info_root_ll)
+    private View rootContent;
     @ViewInject(R.id.goods_info_lv)
     private ListView goodsInfoFrv;
     @ViewInject(R.id.goods_info_service_view)
@@ -50,9 +55,13 @@ public class GoodsInfoActivity extends BaseActivity {
     @ViewInject(R.id.goods_info_buy_view)
     private View buyView;
 
+    private GoodsCartOrBuySheetBottomView goodsSheetBottomView;
+    private ProgressDialog progressDialog;
+
     private String goodsId;
     private Goods goods;
     private GoodsInfoHeaderView headerView;
+
 
     /**
      * 获取商家详情图回调
@@ -137,7 +146,7 @@ public class GoodsInfoActivity extends BaseActivity {
 
         @Override
         public void onFinished() {
-            shoppingCartView.setClickable(true);
+            progressDialog.dismiss();
         }
     };
 
@@ -150,15 +159,32 @@ public class GoodsInfoActivity extends BaseActivity {
         initData();
     }
 
+    @Override
+    protected CharSequence getToolbarTile() {
+        String title = getIntent().getStringExtra(GOODS_NAME_KEY);
+        if (!StringUtils.isEmpty(title)) {
+            return title;
+        }
+        return super.getToolbarTile();
+    }
+
     private void initData() {
         new GoodsModel().getGoodsByGoodsId(goodsCallback, goodsId);
         new GoodsDetailModel().getGoodsDetailByGoodsId(detailCallback, goodsId);
     }
 
     private void initViews() {
+        initProgressDialog();
         headerView = new GoodsInfoHeaderView(this, goodsId);
         goodsInfoFrv.addHeaderView(headerView);
+        goodsSheetBottomView = new GoodsCartOrBuySheetBottomView(this);
         initCollectionView();
+    }
+
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(getString(R.string.please_wait));
     }
 
     /**
@@ -216,7 +242,7 @@ public class GoodsInfoActivity extends BaseActivity {
         new FocusGoodsModel().unFocusGoods(unFocusCallback, goodsId, getUserId());
     }
 
-    @Event({R.id.goods_info_shop_view, R.id.goods_info_shopping_cart_view})
+    @Event({R.id.goods_info_shop_view, R.id.goods_info_shopping_cart_view, R.id.goods_info_buy_view})
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.goods_info_shop_view:
@@ -227,12 +253,33 @@ public class GoodsInfoActivity extends BaseActivity {
                 }
                 break;
             case R.id.goods_info_shopping_cart_view:
-                if (StringUtils.isEmpty(goodsId)) {
+                if (goods == null) {
                     showMsg(view, "商品数据还未加载完成，请稍后再试");
                     return;
                 }
-                view.setClickable(false);
-                addGoodsToShoppingCart();
+                goodsSheetBottomView.setOkText("加入购物车");
+                goodsSheetBottomView.setOnOkListener(new GoodsCartOrBuySheetBottomView.OnOkListener() {
+                    @Override
+                    public void onOk(Goods goods, int amount) {
+                        goodsSheetBottomView.dismiss();
+                        addGoodsToShoppingCart(goods.getGoodsId(), amount);
+                    }
+                });
+                goodsSheetBottomView.showWhithGoods(rootContent, goods);
+                break;
+            case R.id.goods_info_buy_view:
+                if (goods == null) {
+                    showMsg(view, "商品数据还未加载完成，请稍后再试");
+                    return;
+                }
+                goodsSheetBottomView.setOkText("确认购买");
+                goodsSheetBottomView.setOnOkListener(new GoodsCartOrBuySheetBottomView.OnOkListener() {
+                    @Override
+                    public void onOk(Goods goods, int amount) {
+
+                    }
+                });
+                goodsSheetBottomView.showWhithGoods(rootContent, goods);
                 break;
         }
     }
@@ -240,7 +287,8 @@ public class GoodsInfoActivity extends BaseActivity {
     /**
      * 添加当前商品到购物车
      */
-    private void addGoodsToShoppingCart() {
-        new ShoppingCartModel().addShoppingCart(addShopCartCallback, goodsId, getUserId(), 1);
+    private void addGoodsToShoppingCart(String goodsId, int amount) {
+        progressDialog.show();
+        new ShoppingCartModel().addShoppingCart(addShopCartCallback, goodsId, getUserId(), amount);
     }
 }
