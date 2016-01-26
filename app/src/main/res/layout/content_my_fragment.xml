@@ -220,7 +220,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -242,7 +242,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -264,7 +264,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -286,7 +286,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -308,7 +308,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">
@@ -330,7 +330,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
-            android:background="@color/white"
+            android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10.0dip">

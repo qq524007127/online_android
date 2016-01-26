@@ -55,6 +55,18 @@ public class ReceiptAddressModel extends BaseModel<ReceivedGoodsAddress> {
     }
 
     /**
+     * 获取用户的默认收货地址
+     *
+     * @param callback
+     * @param userId
+     * @return
+     */
+    public Callback.Cancelable getDefaultReceiptAdress(ResponseMessageCallback<ReceivedGoodsAddress> callback, @NonNull String userId) {
+        String url = MessageFormat.format(Constant.USER_DEFAULT_RECEIPT_ADDRESS_URL, userId);
+        return getResponseMessage(url, null, callback);
+    }
+
+    /**
      * 根据收货地址创建参数
      *
      * @param address
@@ -63,7 +75,8 @@ public class ReceiptAddressModel extends BaseModel<ReceivedGoodsAddress> {
     private ModelParams createAddressParams(ReceivedGoodsAddress address) {
         ModelParams params = new ModelParams();
         params.addParam("receiverName", address.getReceiverName()).addParam("receiverPhone", address.getReceiverPhone())
-                .addParam("detailAddress", address.getDetailAddress()).addParam("user.userId", address.getUser().getUserId());
+                .addParam("detailAddress", address.getDetailAddress()).addParam("user.userId", address.getUser().getUserId())
+                .addParam("defaultAddress", String.valueOf(address.isDefaultAddress()));
         if (!StringUtils.isEmpty(address.getAddressId())) {
             params.addParam("addressId", address.getAddressId());
         }

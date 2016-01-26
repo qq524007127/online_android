@@ -101,6 +101,31 @@ public abstract class ZhiheAdapter<T, VH extends ZhiheAdapter.BaseViewHolder> ex
         notifyDataSetChanged();
     }
 
+    @Override
+    public void update(T data) {
+        for (int i = 0; i < mDatas.size(); i++) {
+            T t = mDatas.get(i);
+            if (t == data) {
+                mDatas.remove(i);
+                mDatas.add(i, t);
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void remove(T data) {
+        mDatas.remove(data);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void remove(int position) {
+        mDatas.remove(position);
+        notifyDataSetChanged();
+    }
+
     /**
      * 基础ViewHolder类
      */

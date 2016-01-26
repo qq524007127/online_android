@@ -11,13 +11,16 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.GoodsDetail;
+import cn.com.zhihetech.online.bean.OrderDetail;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.eventmessage.ShoppingCartMessageEvent;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -29,12 +32,14 @@ import cn.com.zhihetech.online.model.FocusGoodsModel;
 import cn.com.zhihetech.online.model.GoodsDetailModel;
 import cn.com.zhihetech.online.model.GoodsModel;
 import cn.com.zhihetech.online.model.ShoppingCartModel;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by ShenYunjie on 2016/1/19.
  */
 @ContentView(R.layout.activity_goods_info)
 public class GoodsInfoActivity extends BaseActivity {
+
     public final static String GOODS_ID_KEY = "_goods_id";
     public final static String GOODS_NAME_KEY = "_goods_name";
 
@@ -136,11 +141,15 @@ public class GoodsInfoActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 添加商品到购物车回调
+     */
     private ObjectCallback<ResponseMessage> addShopCartCallback = new ObjectCallback<ResponseMessage>() {
         @Override
         public void onObject(ResponseMessage data) {
             if (data.getCode() == ResponseStateCode.SUCCESS) {
                 showMsg(shoppingCartView, "添加成功");
+                EventBus.getDefault().post(new ShoppingCartMessageEvent());
             }
         }
 
@@ -254,7 +263,7 @@ public class GoodsInfoActivity extends BaseActivity {
                 break;
             case R.id.goods_info_shopping_cart_view:
                 if (goods == null) {
-                    showMsg(view, "商品数据还未加载完成，请稍后再试");
+                    //showMsg(view, "商品数据还未加载完成，请稍后再试");
                     return;
                 }
                 goodsSheetBottomView.setOkText("加入购物车");
@@ -269,20 +278,26 @@ public class GoodsInfoActivity extends BaseActivity {
                 break;
             case R.id.goods_info_buy_view:
                 if (goods == null) {
-                    showMsg(view, "商品数据还未加载完成，请稍后再试");
+                    //showMsg(view, "商品数据还未加载完成，请稍后再试");
                     return;
                 }
                 goodsSheetBottomView.setOkText("确认购买");
                 goodsSheetBottomView.setOnOkListener(new GoodsCartOrBuySheetBottomView.OnOkListener() {
                     @Override
                     public void onOk(Goods goods, int amount) {
-
+                        Intent intent = new Intent(getSelf(), OrderConfirmActivity.class);
+                        ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
+                        details.add(new OrderDetail(goods, amount));
+                        intent.putExtra(OrderConfirmActivity.ORDER_DETAILS_KEY, details);
+                        startActivity(intent);
+                        goodsSheetBottomView.dismiss();
                     }
                 });
                 goodsSheetBottomView.showWhithGoods(rootContent, goods);
                 break;
         }
     }
+
 
     /**
      * 添加当前商品到购物车

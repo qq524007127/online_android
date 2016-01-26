@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.widget;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +76,10 @@ public class BaseActivity extends AppCompatActivity {
      */
     protected void setToolbarHomeAsUp(boolean toolbarHomeAsUp) {
         this.toolbarHomeAsUp = toolbarHomeAsUp;
+    }
+
+    protected BaseActivity getSelf() {
+        return this;
     }
 
     /**

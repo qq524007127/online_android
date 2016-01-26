@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.xutils.view.annotation.ContentView;
@@ -38,6 +39,8 @@ public class AddOrEditReceiptActivity extends BaseActivity {
     private EditText tellNumEt;
     @ViewInject(R.id.receipt_detail_address_et)
     private EditText detailAddressEt;
+    @ViewInject(R.id.receipt_default_address_cb)
+    private CheckBox defaultCb;
     @ViewInject(R.id.receipt_info_submit_btn)
     private Button submitBtn;
 
@@ -84,6 +87,7 @@ public class AddOrEditReceiptActivity extends BaseActivity {
         personNameEt.setText(address.getReceiverName());
         tellNumEt.setText(address.getReceiverPhone());
         detailAddressEt.setText(address.getDetailAddress());
+        defaultCb.setChecked(address.isDefaultAddress());
     }
 
     @Event({R.id.receipt_info_submit_btn})
@@ -120,6 +124,7 @@ public class AddOrEditReceiptActivity extends BaseActivity {
         address.setDetailAddress(detail);
         address.setReceiverPhone(tellNum);
         address.setUser(user);
+        address.setDefaultAddress(defaultCb.isChecked());
         new ReceiptAddressModel().updateOrSaveReceiptAddress(callback, address);
     }
 }

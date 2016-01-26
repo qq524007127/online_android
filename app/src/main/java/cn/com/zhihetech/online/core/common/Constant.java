@@ -149,4 +149,8 @@ public class Constant implements Serializable, Cloneable {
     public static String USER_RECEIPT_ADDRESSES_URL = HOST + "user/{0}/receivedGoodsAddresses"; //获取指定用户的收货地址
     public static String ADD_OR_UPDATE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/addOrUpdate"; //添加或更新收货地址信息
     public static String DELETE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/{0}/delete"; //添加或更新收货地址信息
+    public static String USER_DEFAULT_RECEIPT_ADDRESS_URL = HOST + "user/{0}/defaultReceivedAddress"; //用户默认收货地址
+
+    public static String ORDER_ADD_URL = HOST + "order/add";    //提交订单
+    public static String CHARGE_URL = HOST + "charge/get";    //支付API-获取charge信息
 }

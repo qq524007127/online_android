@@ -11,6 +11,11 @@ public class OrderDetail extends BaseBean {
     private Goods goods;
     private int count;
 
+    public OrderDetail(Goods goods, int amount) {
+        this.goods = goods;
+        this.count = amount;
+    }
+
     public String getOrderDetailId() {
         return orderDetailId;
     }

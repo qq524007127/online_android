@@ -60,4 +60,7 @@
     <string name="ok">确定</string>
     <string name="receiver_person_name">收货人：{0}</string>
     <string name="detail_address">详细地址：{0}</string>
+    <string name="is_default_receipt_address">是否默认收货地址</string>
+    <string name="order_confirm">订单确认</string>
+    <string name="total">合计:</string>
 </resources>

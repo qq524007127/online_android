@@ -5,11 +5,6 @@
             <solid android:color="@color/gray" />
         </shape>
     </item>
-    <item android:state_hovered="true">
-        <shape>
-            <solid android:color="@color/gray" />
-        </shape>
-    </item>
     <item>
         <shape>
             <solid android:color="@color/white" />

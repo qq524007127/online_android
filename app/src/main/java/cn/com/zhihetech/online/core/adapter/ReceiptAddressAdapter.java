@@ -17,7 +17,7 @@ import cn.com.zhihetech.online.bean.ReceivedGoodsAddress;
  */
 public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, ReceiptAddressAdapter.ReceiptAddressHolder> {
 
-    private OnButtonCickListener onButtonCickListener;
+    private OnButtonClickListener onButtonClickListener;
 
     public ReceiptAddressAdapter(Context mContext, int layoutId) {
         super(mContext, layoutId);
@@ -33,24 +33,37 @@ public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, Re
         holder.receiverNameTv.setText(MessageFormat.format(mContext.getString(R.string.receiver_person_name), data.getReceiverName()));
         holder.receiverTellTv.setText(MessageFormat.format(mContext.getString(R.string.contact_num), data.getReceiverPhone()));
         holder.detailAddress.setText(MessageFormat.format(mContext.getString(R.string.detail_address), data.getDetailAddress()));
-        if (onButtonCickListener != null) {
+        if (onButtonClickListener != null) {
             holder.editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onButtonCickListener.onEditClick(data);
+                    onButtonClickListener.onEditClick(data);
                 }
             });
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onButtonCickListener.onDeleteClick(data);
+                    onButtonClickListener.onDeleteClick(data);
                 }
             });
         }
     }
 
-    public void setOnButtonCickListener(OnButtonCickListener onButtonCickListener) {
-        this.onButtonCickListener = onButtonCickListener;
+    @Override
+    public void update(ReceivedGoodsAddress data) {
+        for (int i = 0; i < mDatas.size(); i++) {
+            ReceivedGoodsAddress address = mDatas.get(i);
+            if (address.getAddressId().equals(data.getAddressId())) {
+                mDatas.remove(i);
+                mDatas.add(i, data);
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
+
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
     }
 
     public class ReceiptAddressHolder extends ZhiheAdapter.BaseViewHolder {
@@ -70,7 +83,7 @@ public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, Re
         }
     }
 
-    public interface OnButtonCickListener {
+    public interface OnButtonClickListener {
         void onEditClick(ReceivedGoodsAddress address);
 
         void onDeleteClick(ReceivedGoodsAddress address);

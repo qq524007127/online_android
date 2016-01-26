@@ -11,6 +11,7 @@ public class ReceivedGoodsAddress extends BaseBean {
     private String receiverName;
     private String receiverPhone;
     private String detailAddress;
+    private boolean defaultAddress = false;
 
     public String getAddressId() {
         return addressId;
@@ -50,5 +51,13 @@ public class ReceivedGoodsAddress extends BaseBean {
 
     public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
+    }
+
+    public boolean isDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(boolean defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 }

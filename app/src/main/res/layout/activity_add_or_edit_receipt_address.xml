@@ -22,7 +22,8 @@
             android:minHeight="40dp"
             android:padding="5dp"
             android:singleLine="true"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/receipt_tell_num_et"
@@ -35,7 +36,22 @@
             android:maxLength="11"
             android:minHeight="40dp"
             android:padding="5dp"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:padding="5dp">
+
+            <CheckBox
+                android:id="@+id/receipt_default_address_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/is_default_receipt_address" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,11 +77,13 @@
                 android:background="@drawable/home_search_bg"
                 android:gravity="top"
                 android:inputType="textMultiLine"
+                android:maxLines="6"
                 android:minHeight="40dp"
-                android:minLines="10"
+                android:minLines="6"
                 android:padding="5dp"
                 android:scrollbars="vertical"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <Button

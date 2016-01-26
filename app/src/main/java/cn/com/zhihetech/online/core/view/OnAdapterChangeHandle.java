@@ -15,4 +15,10 @@ public interface OnAdapterChangeHandle<T> {
     void insertData(int position, T data);
 
     void addData(T data);
+
+    void update(T data);
+
+    void remove(T data);
+
+    void remove(int position);
 }

@@ -69,7 +69,7 @@ public class ReceiptAddressActivity extends BaseActivity {
     private void initViewsAndData() {
         adapter = new ReceiptAddressAdapter(this, R.layout.content_receipt_address_item);
         listView.setAdapter(adapter);
-        adapter.setOnButtonCickListener(new ReceiptAddressAdapter.OnButtonCickListener() {
+        adapter.setOnButtonClickListener(new ReceiptAddressAdapter.OnButtonClickListener() {
             @Override
             public void onEditClick(ReceivedGoodsAddress address) {
                 Intent intent = new Intent(ReceiptAddressActivity.this, AddOrEditReceiptActivity.class);
@@ -116,7 +116,7 @@ public class ReceiptAddressActivity extends BaseActivity {
                 }
             }
         } else if (requestCode == EDIT_ADDRESS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            loadData();
+            adapter.update((ReceivedGoodsAddress) data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY));
         }
     }
 }

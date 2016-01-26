@@ -2,10 +2,14 @@ package cn.com.zhihetech.online.bean;
 
 public class ChargeInfo extends BaseBean {
 
+    public enum PayChannel {
+        ALIPAY, WXPAY
+    }
+
     private String chargeInfoId;
     private int amount;
-    private  String orderNo;
-    private int channel;
+    private String orderNo;
+    private String channel;
     private String currency = "cny";
     private String clientIp;
     private String subject;
@@ -35,11 +39,11 @@ public class ChargeInfo extends BaseBean {
         this.orderNo = orderNo;
     }
 
-    public int getChannel() {
+    public String getChannel() {
         return channel;
     }
 
-    public void setChannel(int channel) {
+    public void setChannel(String channel) {
         this.channel = channel;
     }
 

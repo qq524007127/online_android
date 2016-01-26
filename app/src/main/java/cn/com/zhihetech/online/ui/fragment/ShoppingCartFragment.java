@@ -20,6 +20,7 @@ import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.eventmessage.ShoppingCartMessageEvent;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -28,6 +29,7 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ShoppingCartAdapter;
 import cn.com.zhihetech.online.model.ShoppingCartModel;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -131,14 +133,22 @@ public class ShoppingCartFragment extends BaseFragment {
         }
     }
 
-    public ShoppingCartFragment() {
-    }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        EventBus.getDefault().register(this);
         refreshData();
+    }
+
+    public void onEvent(ShoppingCartMessageEvent msgEvent) {
+        refreshData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initViews() {

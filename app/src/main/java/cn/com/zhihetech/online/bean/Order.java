@@ -17,12 +17,20 @@ public class Order extends BaseBean {
     private int orderState;
     private Date createDate;
     private Date payDate;
-    private int payType;
+    private String payType;
     private String userMsg;
     private String receiverName;
     private String receiverPhone;
     private String receiverAdd;
+    private String orderDetailInfo;
     private List<OrderDetail> orderDetails;
+
+    public Order() {
+    }
+
+    public Order(Goods goods) {
+        this.orderName = goods.getGoodsName();
+    }
 
     public String getOrderId() {
         return orderId;
@@ -88,11 +96,11 @@ public class Order extends BaseBean {
         this.payDate = payDate;
     }
 
-    public int getPayType() {
+    public String getPayType() {
         return payType;
     }
 
-    public void setPayType(int payType) {
+    public void setPayType(String payType) {
         this.payType = payType;
     }
 
@@ -128,11 +136,60 @@ public class Order extends BaseBean {
         this.receiverAdd = receiverAdd;
     }
 
+    public String getOrderDetailInfo() {
+        return orderDetailInfo;
+    }
+
+    public void setOrderDetailInfo(String orderDetailInfo) {
+        this.orderDetailInfo = orderDetailInfo;
+    }
+
+    /**
+     * 根据商品id和数量生成订单详情组合
+     *
+     * @param goodsIds
+     * @param goodsCunts
+     */
+    public void createOrderDetailInfo(String[] goodsIds, int[] goodsCunts) {
+        StringBuffer sb = new StringBuffer("");
+        for (int i = 0; i < goodsIds.length; i++) {
+            sb.append(goodsIds[i]).append("*").append(String.valueOf(goodsCunts[i])).append("#");
+        }
+        this.orderDetailInfo = sb.substring(0, sb.length() - 1);
+    }
+
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    /**
+     * 设置收货地址
+     *
+     * @param address
+     */
+    public void setReceiptAdress(ReceivedGoodsAddress address) {
+        this.receiverAdd = address.getDetailAddress();
+        this.receiverName = address.getReceiverName();
+        this.receiverPhone = address.getReceiverPhone();
+    }
+
+    /**
+     * 设置支付渠道
+     *
+     * @param channel
+     */
+    public void setPayChannel(ChargeInfo.PayChannel channel) {
+        switch (channel) {
+            case ALIPAY:
+                this.payType = "alipay";
+                break;
+            case WXPAY:
+                this.payType = "wx";
+                break;
+        }
     }
 }
