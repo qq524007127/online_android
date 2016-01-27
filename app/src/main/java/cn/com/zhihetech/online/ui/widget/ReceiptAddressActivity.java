@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -22,6 +24,7 @@ import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.model.ReceiptAddressModel;
+import de.greenrobot.event.EventBus;
 
 /**
  * 收货地址维护
@@ -29,6 +32,8 @@ import cn.com.zhihetech.online.model.ReceiptAddressModel;
  */
 @ContentView(R.layout.activity_receipt_address)
 public class ReceiptAddressActivity extends BaseActivity {
+
+    public final static String REQUEST_RECEIPT_ADDRESS = "request_receipt_address";
 
     private final int ADD_ADDRESS_REQUEST_CODE = 0x1;
     private final int EDIT_ADDRESS_REQUEST_CODE = 0x2;
@@ -80,6 +85,14 @@ public class ReceiptAddressActivity extends BaseActivity {
             @Override
             public void onDeleteClick(ReceivedGoodsAddress address) {
                 new ReceiptAddressModel().deleteReceiptAddressBiId(deleteCallback, address.getAddressId());
+            }
+
+            @Override
+            public void onItemClick(ReceivedGoodsAddress address) {
+                if (getIntent().getStringExtra(REQUEST_RECEIPT_ADDRESS) != null) {
+                    EventBus.getDefault().post(address);
+                    finish();
+                }
             }
         });
         loadData();

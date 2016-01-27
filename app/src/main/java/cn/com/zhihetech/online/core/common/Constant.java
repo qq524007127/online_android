@@ -116,6 +116,9 @@ public class Constant implements Serializable, Cloneable {
     public static final int ORDER_STATE_ALREADY_DISPATCHER = 4;  //订单已发货，等待确认收货
     public static final int ORDER_STATE_ALREADY_DELIVER = 5;   //订单已经确认收货
     public static final int ORDER_STATE_ALREADY_CANCEL = 6;  //订单已取消
+    public static final int ORDER_STATE_WAIT_REFUND = 7;  //订单等待退款
+    public static final int ORDER_STATE_ALREADY_REFUND = 8; //订单退款成功
+
 
     /**
      * 请求接口地址
@@ -152,5 +155,6 @@ public class Constant implements Serializable, Cloneable {
     public static String USER_DEFAULT_RECEIPT_ADDRESS_URL = HOST + "user/{0}/defaultReceivedAddress"; //用户默认收货地址
 
     public static String ORDER_ADD_URL = HOST + "order/add";    //提交订单
+    public static String USER_ORDERS_URL = HOST + "order/list"; //用户订单
     public static String CHARGE_URL = HOST + "charge/get";    //支付API-获取charge信息
 }

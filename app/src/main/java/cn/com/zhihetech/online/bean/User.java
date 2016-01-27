@@ -25,6 +25,13 @@ public class User extends BaseBean {
     private Date createDate;
     private int userType = Constant.COMMON_USER;    //默认为普通用户
 
+    public User() {
+    }
+
+    public User(String userId) {
+        this.userId = userId;
+    }
+
     public String getUserId() {
         return userId;
     }

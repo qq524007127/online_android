@@ -46,6 +46,9 @@
         <activity
             android:name=".ui.widget.OrderConfirmActivity"
             android:label="@string/order_confirm" />
+        <activity
+            android:name=".ui.widget.OrderActivity"
+            android:label="@string/my_order" />
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

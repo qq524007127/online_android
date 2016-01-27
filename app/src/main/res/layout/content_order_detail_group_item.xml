@@ -8,7 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/order_detail_merchant_cover_civ"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
 
         <TextView
             android:id="@+id/order_confirm_item_merchant_name_tv"
@@ -20,12 +28,14 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/order_confirm_item_goods_lv"
+        android:id="@+id/order_detail_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/white"
-        android:dividerHeight="2dp"
-        android:visibility="gone">
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:divider="@color/gray"
+        android:dividerHeight="1dp"
+        android:padding="5dp">
 
     </ListView>
 
@@ -38,9 +48,11 @@
         android:padding="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/order_detail_group_carriage_tv"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="配送方式" />
+            android:gravity="center_vertical|right"
+            android:text="运费:" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,24 +60,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:background="@color/gray"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="6dp"
-            android:text="卖家留言" />
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/order_item_user_msg_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/home_search_bg"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/white"
             android:gravity="top"
-            android:maxLines="5"
-            android:minLines="5"
+            android:hint="@string/user_msg"
+            android:maxLines="3"
+            android:minLines="3"
+            android:padding="5dp"
+            android:textColor="@color/textColor"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -79,17 +88,17 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/order_detail_group_goods_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="共4件商品   合计：" />
+            android:text="@string/order_detail_group_goods_count" />
 
         <TextView
             android:id="@+id/order_item_total_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="￥25674"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 

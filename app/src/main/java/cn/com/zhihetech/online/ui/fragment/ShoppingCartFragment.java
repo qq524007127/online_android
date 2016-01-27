@@ -3,6 +3,7 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,9 +13,13 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.OrderDetail;
 import cn.com.zhihetech.online.bean.ShoppingCart;
 import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
@@ -29,6 +34,7 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ShoppingCartAdapter;
 import cn.com.zhihetech.online.model.ShoppingCartModel;
+import cn.com.zhihetech.online.ui.widget.OrderConfirmActivity;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -36,6 +42,8 @@ import de.greenrobot.event.EventBus;
  */
 @ContentView(R.layout.content_shopping_cart_fragment)
 public class ShoppingCartFragment extends BaseFragment {
+
+    public final static String SHOPPING_CART_IDS_KEY = "_shopping_cart_ids";
 
     @ViewInject(R.id.shopping_cart_zsrl)
     private ZhiheSwipeRefreshLayout refreshLayout;
@@ -145,6 +153,17 @@ public class ShoppingCartFragment extends BaseFragment {
         refreshData();
     }
 
+    public void onEvent(ArrayList<String> cartIds) {
+        String ids = "";
+        for (String cartId : cartIds) {
+            ids += cartId + "*";
+        }
+        if (!StringUtils.isEmpty(ids)) {
+            ids = ids.substring(0, ids.length() - 1);
+        }
+        new ShoppingCartModel().batchDeleteShoppingCarts(deleteCallback, ids);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -208,6 +227,16 @@ public class ShoppingCartFragment extends BaseFragment {
                     showMsg(view, "请选择需要购买的商品");
                     break;
                 }
+                Intent intent = new Intent(getContext(), OrderConfirmActivity.class);
+                ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
+                ArrayList<String> cartIds = new ArrayList<String>();
+                for (ShoppingCart cart : adapter.getCheckedCarts()) {
+                    details.add(new OrderDetail(cart.getGoods(), cart.getAmount()));
+                    cartIds.add(cart.getShoppingCartId());
+                }
+                intent.putExtra(OrderConfirmActivity.ORDER_DETAILS_KEY, details);
+                intent.putExtra(SHOPPING_CART_IDS_KEY, cartIds);
+                startActivity(intent);
                 break;
             case R.id.shopping_cart_delete_view:
                 if (isCheckedEmpty()) {

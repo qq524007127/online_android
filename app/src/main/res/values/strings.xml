@@ -63,4 +63,7 @@
     <string name="is_default_receipt_address">是否默认收货地址</string>
     <string name="order_confirm">订单确认</string>
     <string name="total">合计:</string>
+    <string name="user_msg">买家留言</string>
+    <string name="order_detail_group_goods_count">共{0}件商品   小计：</string>
+    <string name="tip">提示</string>
 </resources>

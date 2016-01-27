@@ -13,6 +13,7 @@ public class Order extends BaseBean {
     private String orderName;
     private User user;
     private String orderCode;
+    private float carriage; //运费
     private float orderTotal;
     private int orderState;
     private Date createDate;
@@ -62,6 +63,14 @@ public class Order extends BaseBean {
 
     public void setOrderCode(String orderCode) {
         this.orderCode = orderCode;
+    }
+
+    public float getCarriage() {
+        return carriage;
+    }
+
+    public void setCarriage(float carriage) {
+        this.carriage = carriage;
     }
 
     public float getOrderTotal() {
@@ -150,10 +159,11 @@ public class Order extends BaseBean {
      * @param goodsIds
      * @param goodsCunts
      */
-    public void createOrderDetailInfo(String[] goodsIds, int[] goodsCunts) {
+    public void createOrderDetailInfo(String[] goodsIds, int[] goodsCunts, float[] prices) {
         StringBuffer sb = new StringBuffer("");
         for (int i = 0; i < goodsIds.length; i++) {
-            sb.append(goodsIds[i]).append("*").append(String.valueOf(goodsCunts[i])).append("#");
+            sb.append(goodsIds[i]).append("*").append(String.valueOf(goodsCunts[i]))
+                    .append("#").append(prices[i]).append("&");
         }
         this.orderDetailInfo = sb.substring(0, sb.length() - 1);
     }

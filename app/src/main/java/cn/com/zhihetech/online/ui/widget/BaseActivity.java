@@ -116,11 +116,15 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void showMsg(View view, String msg) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.show();
     }
 
     protected void showMsg(View view, int resId) {
-        Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.show();
     }
 
     /**

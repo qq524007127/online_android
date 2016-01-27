@@ -58,16 +58,18 @@ public class LoadMoreListView extends ListView implements AbsListView.OnScrollLi
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (onLoadMoreListener == null) {
-            return;
-        }
-        if (isLoading || !isLastItem) {
-            return;
-        }
-        if (onLoadMoreListener.checkCanDoLoad()) {
-            loadingView.setVisibility(View.VISIBLE);
-            isLoading = true;
-            onLoadMoreListener.onStartLoad();
+        if (scrollState == SCROLL_STATE_IDLE) {
+            if (onLoadMoreListener == null) {
+                return;
+            }
+            if (isLoading || !isLastItem) {
+                return;
+            }
+            if (onLoadMoreListener.checkCanDoLoad()) {
+                loadingView.setVisibility(View.VISIBLE);
+                isLoading = true;
+                onLoadMoreListener.onStartLoad();
+            }
         }
     }
 
@@ -78,6 +80,8 @@ public class LoadMoreListView extends ListView implements AbsListView.OnScrollLi
         }
         if ((firstVisibleItem + visibleItemCount) >= totalItemCount) {
             isLastItem = true;
+        } else {
+            isLastItem = false;
         }
     }
 

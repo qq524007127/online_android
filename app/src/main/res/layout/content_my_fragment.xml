@@ -44,8 +44,10 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/my_all_order_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/my_item_bg"
                 android:padding="10.0dip">
 
                 <ImageView
@@ -86,7 +88,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="0.20000005dip"
+                android:layout_height="2dp"
                 android:background="@color/normalBackground" />
 
             <LinearLayout
@@ -95,9 +97,11 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="0.0dip"
+                    android:id="@+id/my_waiting_pay_view"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10.0dip"
@@ -112,16 +116,18 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10.0dip"
-                        android:paddingTop="10.0dip"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text="@string/waiting_pay"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/my_paied_view"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10.0dip"
@@ -136,16 +142,18 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10.0dip"
-                        android:paddingTop="10.0dip"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text="@string/paied"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/my_waiting_evalute_view"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10.0dip"
@@ -160,16 +168,18 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10.0dip"
-                        android:paddingTop="10.0dip"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text="@string/waiting_evaluate"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/my_refunding_view"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10.0dip"
@@ -184,16 +194,18 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10.0dip"
-                        android:paddingTop="10.0dip"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text="@string/refunding"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/refunded_view"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingBottom="10.0dip"
@@ -208,8 +220,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10.0dip"
-                        android:paddingTop="10.0dip"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
                         android:text="@string/refunded"
                         android:textSize="12.0sp" />
                 </LinearLayout>
@@ -217,6 +229,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_volum_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -239,6 +252,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_red_money_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -261,6 +275,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_friends_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -283,6 +298,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_baby_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -305,6 +321,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_info_change_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -327,6 +344,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_pwd_change_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -372,6 +390,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/exit_app_btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10.0dip"

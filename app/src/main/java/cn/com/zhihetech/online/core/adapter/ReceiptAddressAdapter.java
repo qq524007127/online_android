@@ -46,6 +46,12 @@ public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, Re
                     onButtonClickListener.onDeleteClick(data);
                 }
             });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onButtonClickListener.onItemClick(data);
+                }
+            });
         }
     }
 
@@ -87,5 +93,7 @@ public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, Re
         void onEditClick(ReceivedGoodsAddress address);
 
         void onDeleteClick(ReceivedGoodsAddress address);
+
+        void onItemClick(ReceivedGoodsAddress address);
     }
 }
