@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import org.xutils.view.annotation.ContentView;
@@ -45,6 +48,8 @@ public class ShoppingCartFragment extends BaseFragment {
 
     public final static String SHOPPING_CART_IDS_KEY = "_shopping_cart_ids";
 
+    /*@ViewInject(R.id.toolbar)
+    private Toolbar toolbar;*/
     @ViewInject(R.id.shopping_cart_zsrl)
     private ZhiheSwipeRefreshLayout refreshLayout;
     @ViewInject(R.id.shopping_cart_lmlv)
@@ -171,6 +176,7 @@ public class ShoppingCartFragment extends BaseFragment {
     }
 
     private void initViews() {
+        initToolbar();
         initProgress();
         initListViewAndAdapter();
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -179,6 +185,10 @@ public class ShoppingCartFragment extends BaseFragment {
                 refreshData();
             }
         });
+    }
+
+    private void initToolbar() {
+        //toolbar.setTitle("购物车");
     }
 
     private void initListViewAndAdapter() {
@@ -217,6 +227,11 @@ public class ShoppingCartFragment extends BaseFragment {
 
     private void loadMoreData() {
         new ShoppingCartModel().getShoppingCartsByUserId(loadMoreCallback, pageData.getNextPage(), getUseId());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_shopping_cart, menu);
     }
 
     @Event({R.id.shopping_cart_buy_view, R.id.shopping_cart_delete_view})

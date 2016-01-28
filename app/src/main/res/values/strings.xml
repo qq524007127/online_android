@@ -66,4 +66,8 @@
     <string name="user_msg">买家留言</string>
     <string name="order_detail_group_goods_count">共{0}件商品   小计：</string>
     <string name="tip">提示</string>
+    <string name="pay">支付</string>
+    <string name="aplay_refund">退款</string>
+    <string name="order_detail">订单详情</string>
+    <string name="received">签收</string>
 </resources>

@@ -7,6 +7,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.ui.widget.OrderActivity;
 import cn.com.zhihetech.online.ui.widget.ReceiptAddressActivity;
 
@@ -27,23 +28,23 @@ public class MyFragment extends BaseFragment {
                 startActivity(orderIntent);
                 break;
             case R.id.my_waiting_pay_view:
-
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_NO_PAYMENT);
                 startActivity(orderIntent);
                 break;
             case R.id.my_paied_view:
-
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_NO_DISPATCHER);
                 startActivity(orderIntent);
                 break;
             case R.id.my_waiting_evalute_view:
-
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_ALREADY_DISPATCHER);
                 startActivity(orderIntent);
                 break;
             case R.id.my_refunding_view:
-
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_WAIT_REFUND);
                 startActivity(orderIntent);
                 break;
             case R.id.refunded_view:
-
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_ALREADY_REFUND);
                 startActivity(orderIntent);
                 break;
             case R.id.my_volum_view:

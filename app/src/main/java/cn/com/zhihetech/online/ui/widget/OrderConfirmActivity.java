@@ -196,7 +196,7 @@ public class OrderConfirmActivity extends BaseActivity {
     private Order createOrderByOrderDetailGroup(OrderDetailGroup group) {
         Order order = new Order();
         order.setOrderName(group.getMerchant().getMerchName());
-        order.setReceiptAdress(addressView.getReceiptAddress());
+        order.setReceiptAddress(addressView.getReceiptAddress());
         order.setUser(new User(getUserId()));
         String[] goodsIds = new String[group.getOrderDetails().size()];
         int[] counts = new int[group.getOrderDetails().size()];

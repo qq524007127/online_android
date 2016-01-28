@@ -25,6 +25,7 @@ import cn.com.zhihetech.online.model.OrderModel;
  */
 @ContentView(R.layout.activity_orders)
 public class OrderActivity extends BaseActivity {
+    public final static String ORDER_STATE_KEY = "_order_state_key";
     @ViewInject(R.id.order_zsrl)
     private ZhiheSwipeRefreshLayout refreshLayout;
     @ViewInject(R.id.order_lv)
@@ -32,6 +33,8 @@ public class OrderActivity extends BaseActivity {
 
     private PageData<Order> pageData;
     private OrderAdapter adapter;
+
+    private int orderState = 0;
 
     private PageDataCallback<Order> loadCallback = new PageDataCallback<Order>() {
         @Override
@@ -53,6 +56,7 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        orderState = getIntent().getIntExtra(ORDER_STATE_KEY, 0);
         initViewAndData();
     }
 
@@ -71,22 +75,16 @@ public class OrderActivity extends BaseActivity {
                 loadData();
             }
         });
-        orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showMsg(view, "我被点击了");
-            }
-        });
         loadData();
     }
 
     private void loadData() {
-        Pager pager = new Pager(5);
+        Pager pager = new Pager();
         if (pageData == null) {
             refreshLayout.setRefreshing(true);
         } else {
             pager = pageData.getNextPage();
         }
-        new OrderModel().getOrdersByUserId(loadCallback, pager, getUserId(), null);
+        new OrderModel().getOrdersByUserId(loadCallback, pager, getUserId(), orderState);
     }
 }

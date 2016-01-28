@@ -8,4 +8,7 @@
     <color name="normalBackground">#f5f3f4</color>
     <color name="orange">#ffff5001</color>
     <color name="gray">#b4b4b2</color>
+    <color name="steelblue">#4682b4</color>
+    <color name="olivedrab">#6b8e23</color>
+    <color name="goldenrod">#daa520</color>
 </resources>

@@ -8,6 +8,18 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <!--环信权限配置-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
     <application
         android:name=".core.view.ZhiheApplication"
         android:allowBackup="true"
@@ -49,6 +61,9 @@
         <activity
             android:name=".ui.widget.OrderActivity"
             android:label="@string/my_order" />
+        <activity
+            android:name=".ui.widget.OrderDetailActivity"
+            android:label="@string/order_detail" />
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->
@@ -80,6 +95,12 @@
         <activity android:name="com.unionpay.uppay.PayActivity" />
         <!--Ping++支付配置结束-->
 
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="0871zhkj#zhihedianshang" />
+        <!-- 声明环信sdk所需的service SDK核心功能-->
+        <service android:name="com.easemob.chat.EMChatService" />
     </application>
 
 </manifest>

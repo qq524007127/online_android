@@ -3,6 +3,8 @@ package cn.com.zhihetech.online.bean;
 import java.util.Date;
 import java.util.List;
 
+import cn.com.zhihetech.online.core.common.Constant;
+
 /**
  * Created by YangDaiChun on 2015/11/12.
  */
@@ -181,7 +183,7 @@ public class Order extends BaseBean {
      *
      * @param address
      */
-    public void setReceiptAdress(ReceivedGoodsAddress address) {
+    public void setReceiptAddress(ReceivedGoodsAddress address) {
         this.receiverAdd = address.getDetailAddress();
         this.receiverName = address.getReceiverName();
         this.receiverPhone = address.getReceiverPhone();
@@ -201,5 +203,25 @@ public class Order extends BaseBean {
                 this.payType = "wx";
                 break;
         }
+    }
+
+    public String getStateDisplayText() {
+        switch (this.orderState) {
+            case Constant.ORDER_STATE_NO_SUBMIT:
+                return "订单未提交";
+            case Constant.ORDER_STATE_NO_PAYMENT:
+                return "待支付";
+            case Constant.ORDER_STATE_NO_DISPATCHER:
+                return "待发货";
+            case Constant.ORDER_STATE_ALREADY_DISPATCHER:
+                return "待收货";
+            case Constant.ORDER_STATE_ALREADY_CANCEL:
+                return "已取消";
+            case Constant.ORDER_STATE_WAIT_REFUND:
+                return "正在退款";
+            case Constant.ORDER_STATE_ALREADY_REFUND:
+                return "已退款";
+        }
+        return "";
     }
 }
