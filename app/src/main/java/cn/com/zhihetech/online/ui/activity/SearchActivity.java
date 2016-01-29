@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;

@@ -1,15 +1,23 @@
 package cn.com.zhihetech.online.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
+
+import com.easemob.chat.EMChat;
+import com.easemob.chat.EMChatManager;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.ui.widget.OrderActivity;
-import cn.com.zhihetech.online.ui.widget.ReceiptAddressActivity;
+import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
+import cn.com.zhihetech.online.ui.activity.LoginActivity;
+import cn.com.zhihetech.online.ui.activity.OrderActivity;
+import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -70,8 +78,30 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.exit_app_btn:
-
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.tip)
+                        .setMessage("确定要退出当前账号吗？")
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                logoutApp();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, null)
+                        .show();
                 break;
         }
+    }
+
+    /**
+     * 退出当前登录账号
+     */
+    private void logoutApp() {
+        SharedPreferenceUtils.getInstance(getContext()).clear();
+        ActivityStack.getInstance().removeWithout(getActivity());
+        EMChatManager.getInstance().logout(null);
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

@@ -1,8 +1,6 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;

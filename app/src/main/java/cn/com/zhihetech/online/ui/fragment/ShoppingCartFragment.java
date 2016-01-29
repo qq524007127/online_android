@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -16,9 +15,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
@@ -37,7 +34,7 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ShoppingCartAdapter;
 import cn.com.zhihetech.online.model.ShoppingCartModel;
-import cn.com.zhihetech.online.ui.widget.OrderConfirmActivity;
+import cn.com.zhihetech.online.ui.activity.OrderConfirmActivity;
 import de.greenrobot.event.EventBus;
 
 /**

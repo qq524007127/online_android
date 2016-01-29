@@ -20,7 +20,7 @@ import java.util.List;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ShoppingCart;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.ui.widget.GoodsInfoActivity;
+import cn.com.zhihetech.online.ui.activity.GoodsInfoActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/22.

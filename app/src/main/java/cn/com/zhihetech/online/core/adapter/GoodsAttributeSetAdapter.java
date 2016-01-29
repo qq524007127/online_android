@@ -13,7 +13,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.GoodsAttributeSet;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.view.FixedImageView;
-import cn.com.zhihetech.online.ui.widget.CategoryDetailActivity;
+import cn.com.zhihetech.online.ui.activity.CategoryDetailActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/21.

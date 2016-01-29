@@ -9,6 +9,13 @@ public class Area extends BaseBean {
     private Area parentArea;
     private String fullName;
 
+    public Area() {
+    }
+
+    public Area(String areaId) {
+        this.areaId = areaId;
+    }
+
     public String getAreaId() {
         return areaId;
     }
@@ -43,7 +50,7 @@ public class Area extends BaseBean {
 
     public String getFullName() {
         this.fullName = this.getAreaName();
-        if(this.getParentArea()!=null){
+        if (this.getParentArea() != null) {
             this.fullName = getParentFullName(this.getParentArea()) + this.fullName;
         }
         return fullName;
@@ -56,7 +63,7 @@ public class Area extends BaseBean {
     private String getParentFullName(Area pArea) {
 
         String tmp = pArea.getAreaName();
-        if (pArea.getParentArea() != null && !pArea.isRoot){
+        if (pArea.getParentArea() != null && !pArea.isRoot) {
             tmp = getParentFullName(pArea.getParentArea()) + tmp;
         }
         return tmp + ",";

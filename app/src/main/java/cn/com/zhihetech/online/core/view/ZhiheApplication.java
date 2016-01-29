@@ -20,7 +20,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 public class ZhiheApplication extends Application implements Thread.UncaughtExceptionHandler {
 
     private static ZhiheApplication instance;
-    private String userId = "647b184e-e45d-40c1-aa35-518cb118f479";
+    private String userId;
 
     @Override
     public void onCreate() {
@@ -31,7 +31,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         initEMChat();
     }
 
-    public static ZhiheApplication getInstandce() {
+    public static ZhiheApplication getInstance() {
         return instance;
     }
 
@@ -41,6 +41,24 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /**
+     * 获取环信用户名
+     *
+     * @return
+     */
+    public String getEMChatUserName() {
+        return this.userId.replaceAll("-", "");
+    }
+
+    /**
+     * 获取环信登录密码
+     *
+     * @return
+     */
+    public String getEMChatPassword() {
+        return this.userId;
     }
 
     @Override

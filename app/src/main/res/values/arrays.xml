@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="income_list">
+        <item>1000-3000</item>
+        <item>3001-5000</item>
+        <item>5001-8000</item>
+        <item>8001-10000</item>
+        <item>10000以上</item>
+    </string-array>
+    <string-array name="occupation_list">
+        <item>企事业单位</item>
+        <item>专业技术人员</item>
+        <item>公司职员/白领</item>
+        <item>商业/服务人员</item>
+        <item>农业生产</item>
+        <item>工人</item>
+        <item>军人</item>
+        <item>学生</item>
+    </string-array>
+</resources>

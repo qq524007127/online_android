@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -16,7 +15,7 @@ import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.DateUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.ui.widget.OrderDetailActivity;
+import cn.com.zhihetech.online.ui.activity.OrderDetailActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/27.

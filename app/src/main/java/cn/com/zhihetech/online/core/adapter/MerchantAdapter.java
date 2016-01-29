@@ -16,7 +16,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.ui.widget.MerchantHomeActivity;
+import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**

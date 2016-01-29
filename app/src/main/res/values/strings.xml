@@ -70,4 +70,23 @@
     <string name="aplay_refund">退款</string>
     <string name="order_detail">订单详情</string>
     <string name="received">签收</string>
+    <string name="account_number">登录账号（手机号）</string>
+    <string name="password">登录密码</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="get_ver_code">获取验证码</string>
+    <string name="next_step">下一步</string>
+    <string name="repeat_pwd">确认密码</string>
+    <string name="nickname">昵称</string>
+    <string name="invit_code">邀请码</string>
+    <string name="sex">性别</string>
+    <string name="birthday">生日</string>
+    <string name="occupation">职业</string>
+    <string name="area">区域</string>
+    <string name="income">收入</string>
+    <string name="accept_user_protocol">同意用户协议</string>
+    <string name="regist_vercode">获取注册验证码</string>
+    <string name="waiting_and_get_ver_code">{0}秒后重新获取</string>
+    <string name="user_info">用户信息</string>
 </resources>

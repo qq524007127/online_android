@@ -63,7 +63,7 @@ public class ModelParams {
 
     public ModelParams addSort(@NonNull String sortName, SortTabView.OrderType order) {
         params.put(SORT_NAME_KEY, sortName);
-        params.put(SORT_TYPE_KEY, StringUtils.Object2String(order));
+        params.put(SORT_TYPE_KEY, StringUtils.object2String(order));
         return this;
     }
 

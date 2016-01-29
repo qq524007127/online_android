@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,7 +19,6 @@ import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
-import cn.com.zhihetech.online.core.view.FixedBanner;
 import cn.com.zhihetech.online.core.view.HomeHeaderView;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;

@@ -54,4 +54,19 @@ public class ActivityStack {
     public void removeActivity(Activity activity) {
         activityStack.remove(activity);
     }
+
+    /**
+     * 清除除此之外的所有Activity
+     *
+     * @param activity
+     */
+    public void removeWithout(Activity activity) {
+        for (Activity tmp : activityStack) {
+            if (tmp != activity) {
+                tmp.finish();
+            }
+        }
+        activityStack.clear();
+        activityStack.push(activity);
+    }
 }

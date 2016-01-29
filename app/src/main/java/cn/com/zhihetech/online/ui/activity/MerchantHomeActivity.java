@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -102,7 +102,7 @@ public class MerchantHomeActivity extends BaseActivity {
     private void initMerchantInfo() {
         MerchantModel model = new MerchantModel();
         model.getMerchantById(merchantCallback, merchantId);
-        model.checkFucosState(checkFocusCallback, ZhiheApplication.getInstandce().getUserId(), merchantId);
+        model.checkFucosState(checkFocusCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
     }
 
     @Event({R.id.merchant_home_add_friend_btn, R.id.merchant_home_contact_btn})
@@ -110,7 +110,7 @@ public class MerchantHomeActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.merchant_home_add_friend_btn: //关注商家
                 addFriendBtn.setClickable(false);
-                new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstandce().getUserId(), merchantId);
+                new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
                 break;
             case R.id.merchant_home_contact_btn:    //点击跳转到与商家发送消息
 

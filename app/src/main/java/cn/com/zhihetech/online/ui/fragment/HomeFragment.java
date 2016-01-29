@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.Button;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -24,7 +23,7 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ActivityAdapter;
 import cn.com.zhihetech.online.model.ActivityModel;
-import cn.com.zhihetech.online.ui.widget.SearchActivity;
+import cn.com.zhihetech.online.ui.activity.SearchActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.

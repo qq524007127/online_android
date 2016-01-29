@@ -19,8 +19,8 @@ import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.model.ReceiptAddressModel;
-import cn.com.zhihetech.online.ui.widget.OrderConfirmActivity;
-import cn.com.zhihetech.online.ui.widget.ReceiptAddressActivity;
+import cn.com.zhihetech.online.ui.activity.OrderConfirmActivity;
+import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/27.
@@ -88,7 +88,7 @@ public class OrderReceiptAddressView extends FrameLayout {
 
     private void loadDefaultAddress() {
         dialog.show();
-        new ReceiptAddressModel().getDefaultReceiptAdress(callback, ZhiheApplication.getInstandce().getUserId());
+        new ReceiptAddressModel().getDefaultReceiptAdress(callback, ZhiheApplication.getInstance().getUserId());
     }
 
     public void bindReceiptAddress(ReceivedGoodsAddress address) {

@@ -25,6 +25,14 @@ public class DateUtils {
         return getDateFormat(format).format(date);
     }
 
+    public static Date String2Date(String target) {
+        return parseDate(target, DEFUALT_DATE_FORMAT);
+    }
+
+    public static Date String2DateTime(String target) {
+        return parseDate(target, DEFUALT_DATE_TIME_FORMAT);
+    }
+
     public static Date parseDate(String target, String format) {
         try {
             return getDateFormat(format).parse(target);

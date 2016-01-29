@@ -108,6 +108,8 @@ public class MyMessageFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getContext().unregisterReceiver(msgReceiver);
+        if (msgReceiver != null) {
+            getContext().unregisterReceiver(msgReceiver);
+        }
     }
 }

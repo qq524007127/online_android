@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="30.0dip"
+            android:paddingRight="30.0dip">
+
+            <EditText
+                android:id="@+id/user_mobile_num_et"
+                style="@style/EditViewTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_common_height"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:drawableLeft="@drawable/name"
+                android:editable="false" />
+
+            <EditText
+                android:id="@+id/user_pwd"
+                style="@style/EditViewTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_common_height"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:drawableLeft="@drawable/pwd"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLength="20" />
+
+            <EditText
+                android:id="@+id/user_repwd"
+                style="@style/EditViewTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_common_height"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:drawableLeft="@drawable/pwd"
+                android:hint="@string/repeat_pwd"
+                android:inputType="textPassword"
+                android:maxLength="20" />
+
+            <EditText
+                android:id="@+id/user_nickname"
+                style="@style/EditViewTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_common_height"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:drawableLeft="@drawable/name"
+                android:hint="@string/nickname"
+                android:maxLength="20" />
+
+            <EditText
+                android:id="@+id/invit_code"
+                style="@style/EditViewTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_common_height"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:drawableLeft="@drawable/name"
+                android:hint="@string/invit_code"
+                android:maxLength="11" />
+
+            <Button
+                android:id="@+id/sex_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:text="@string/sex"
+                android:textColor="@color/textColor" />
+
+            <Button
+                android:id="@+id/birthday_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:text="@string/birthday"
+                android:textColor="@color/textColor" />
+
+            <Button
+                android:id="@+id/occupation_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:text="@string/occupation"
+                android:textColor="@color/textColor" />
+
+            <Button
+                android:id="@+id/area_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:text="@string/area"
+                android:textColor="@color/textColor" />
+
+            <Button
+                android:id="@+id/income_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:text="@string/income"
+                android:textColor="@color/textColor" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/accept_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+
+                <TextView
+                    android:id="@+id/protocol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accept_user_protocol"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit_btn"
+                style="@style/ButtonTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:layout_marginTop="20dp"
+                android:text="@string/register" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -32,8 +32,8 @@ import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.BannerModel;
 import cn.com.zhihetech.online.model.NavigationModel;
-import cn.com.zhihetech.online.ui.widget.CategoryActivity;
-import cn.com.zhihetech.online.ui.widget.DailyNewActivity;
+import cn.com.zhihetech.online.ui.activity.CategoryActivity;
+import cn.com.zhihetech.online.ui.activity.DailyNewActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/18.

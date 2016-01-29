@@ -28,41 +28,48 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.widget.StartActivity">
+        <activity android:name=".ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.widget.MainActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity
-            android:name=".ui.widget.DailyNewActivity"
+            android:name=".ui.activity.RegisterVerCodeActivity"
+            android:label="@string/regist_vercode" />
+        <activity
+            android:name=".ui.activity.RegisterUserInfoActivity"
+            android:label="@string/user_info" />
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.DailyNewActivity"
             android:label="@string/daily_new"></activity>
         <activity
-            android:name=".ui.widget.MerchantHomeActivity"
+            android:name=".ui.activity.MerchantHomeActivity"
             android:label="@string/merchant_home"></activity>
         <activity
-            android:name=".ui.widget.GoodsInfoActivity"
+            android:name=".ui.activity.GoodsInfoActivity"
             android:label="@string/goods_detail"></activity>
         <activity
-            android:name=".ui.widget.CategoryActivity"
+            android:name=".ui.activity.CategoryActivity"
             android:label="@string/category"></activity>
-        <activity android:name=".ui.widget.CategoryDetailActivity" />
-        <activity android:name=".ui.widget.SearchActivity" />
+        <activity android:name=".ui.activity.CategoryDetailActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
         <activity
-            android:name=".ui.widget.ReceiptAddressActivity"
+            android:name=".ui.activity.ReceiptAddressActivity"
             android:label="@string/receipt_address" />
         <activity
-            android:name=".ui.widget.AddOrEditReceiptActivity"
+            android:name=".ui.activity.AddOrEditReceiptActivity"
             android:label="@string/add_receipt_address" />
         <activity
-            android:name=".ui.widget.OrderConfirmActivity"
+            android:name=".ui.activity.OrderConfirmActivity"
             android:label="@string/order_confirm" />
         <activity
-            android:name=".ui.widget.OrderActivity"
+            android:name=".ui.activity.OrderActivity"
             android:label="@string/my_order" />
         <activity
-            android:name=".ui.widget.OrderDetailActivity"
+            android:name=".ui.activity.OrderDetailActivity"
             android:label="@string/order_detail" />
 
         <!--Ping++支付配置开始-->

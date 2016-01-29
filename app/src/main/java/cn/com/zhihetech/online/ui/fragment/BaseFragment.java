@@ -42,7 +42,7 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected String getUseId() {
-        return ZhiheApplication.getInstandce().getUserId();
+        return ZhiheApplication.getInstance().getUserId();
     }
 
     protected String getLogTag() {

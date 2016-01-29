@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import org.xutils.view.annotation.ContentView;
 

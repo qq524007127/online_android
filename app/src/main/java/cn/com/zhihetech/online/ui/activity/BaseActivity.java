@@ -1,6 +1,7 @@
-package cn.com.zhihetech.online.ui.widget;
+package cn.com.zhihetech.online.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -88,7 +89,7 @@ public class BaseActivity extends AppCompatActivity {
      * @return
      */
     protected String getUserId() {
-        return ZhiheApplication.getInstandce().getUserId();
+        return ZhiheApplication.getInstance().getUserId();
     }
 
     protected String getTag() {
@@ -125,6 +126,20 @@ public class BaseActivity extends AppCompatActivity {
         Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
         snackbar.show();
+    }
+
+    /**
+     * 跳转到指定的Activity界面
+     *
+     * @param target   目标界面
+     * @param isFinish 是否finish当前界面
+     */
+    protected void navigation(Class<? extends BaseActivity> target, boolean isFinish) {
+        Intent intent = new Intent(this, target);
+        startActivity(intent);
+        if (isFinish) {
+            finish();
+        }
     }
 
     /**
