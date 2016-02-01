@@ -79,11 +79,9 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         progressDialog.show();
-        this.cancelable = new UserModel().login(new UserLoginCallback(this) {
+        this.cancelable = new UserModel().login(new UserLoginCallback(this, userCode, password) {
             @Override
             public void onLoginSuccess(Token token) {
-                preferenceUtils.setUserMobileNum(userCode);
-                preferenceUtils.setUserPassword(password);
                 Intent intent = new Intent(getSelf(), MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -99,7 +97,7 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onFinished() {
+            public void onLoginFinished() {
                 progressDialog.dismiss();
             }
         }, userCode, password);

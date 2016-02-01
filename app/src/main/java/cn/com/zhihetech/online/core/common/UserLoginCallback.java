@@ -1,10 +1,12 @@
 package cn.com.zhihetech.online.core.common;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMGroupManager;
 
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -19,10 +21,16 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
     private Context mContext;
     SharedPreferenceUtils preferenceUtils;
+    private String userCode;
+    private String userPwd;
     private Token token;
 
-    public UserLoginCallback(Context mContext) {
+    private boolean isLoged = false;
+
+    public UserLoginCallback(Context mContext, @NonNull String userCode, @NonNull String userPwd) {
         this.mContext = mContext;
+        this.userCode = userCode;
+        this.userPwd = userPwd;
         this.preferenceUtils = SharedPreferenceUtils.getInstance(this.mContext);
     }
 
@@ -33,14 +41,15 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
         @Override
         public void onSuccess() {
+            onEMLoginSuccess("申云杰");
             onLoginSuccess(token);
-            onFinished();
+            onLoginFinished();
         }
 
         @Override
         public void onError(int i, String s) {
             onLoginFail(new RuntimeException(s));
-            onFinished();
+            onLoginFinished();
         }
 
         @Override
@@ -58,8 +67,19 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         this.token = responseMessage.getData();
         ZhiheApplication.getInstance().setUserId(token.getUserID());
         preferenceUtils.setUserToken(token.getToken());
-        onLoginSuccess(this.token);
-        //loginEMChat();
+        preferenceUtils.setUserMobileNum(userCode);
+        preferenceUtils.setUserPassword(userPwd);
+        isLoged = true;
+        //onLoginSuccess(this.token);
+    }
+
+    @Override
+    public final void onFinished() {
+        if (!isLoged) { //如果平台账号未登录成功则回调onLoginFinish接口
+            onLoginFinished();
+        } else if (isLoged) {   //如果平台账号登录成功，则登录环信账号
+            loginEMChat();
+        }
     }
 
     /**
@@ -67,7 +87,12 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      */
     private void loginEMChat() {
         if (!EMChat.getInstance().isLoggedIn()) {
-            EMChatManager.getInstance().login(ZhiheApplication.getInstance().getEMChatUserName(), ZhiheApplication.getInstance().getEMChatPassword(), emCallBack);
+            String userName = ZhiheApplication.getInstance().getEMChatUserName();
+            String pwd = ZhiheApplication.getInstance().getEMChatPassword();
+            EMChatManager.getInstance().login(userName, pwd, emCallBack);
+        } else {
+            onLoginSuccess(this.token);
+            onEMLoginSuccess("申云杰");
         }
     }
 
@@ -76,6 +101,31 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         super.onError(ex, isOnCallback);
         onLoginFail(ex);
         //onFinished();
+    }
+
+    /**
+     * 环信登录成功后回调
+     *
+     * @param userNick
+     */
+    private void onEMLoginSuccess(String userNick) {
+        updateUserNick(userNick);
+        EMGroupManager.getInstance().loadAllGroups();
+        EMChatManager.getInstance().loadAllConversations();
+    }
+
+    /**
+     * 设置环信用户昵称
+     *
+     * @param userNick
+     */
+    private void updateUserNick(final String userNick) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EMChatManager.getInstance().updateCurrentUserNick(userNick);
+            }
+        }).start();
     }
 
     /**
@@ -91,4 +141,9 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      * @param ex
      */
     public abstract void onLoginFail(Throwable ex);
+
+    /**
+     * 登录完成回调
+     */
+    public abstract void onLoginFinished();
 }

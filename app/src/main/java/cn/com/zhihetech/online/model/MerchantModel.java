@@ -84,7 +84,21 @@ public class MerchantModel extends BaseModel<Merchant> {
      */
     public Callback.Cancelable getMerchantsByCategory(PageDataCallback<Merchant> callback, Pager pager, @NonNull String categoryId) {
         ModelParams params = new ModelParams().addPager(pager);
-        String url = MessageFormat.format(Constant.CATEGORY_MERCHANTS_URL,categoryId);
+        String url = MessageFormat.format(Constant.CATEGORY_MERCHANTS_URL, categoryId);
+        return getPageData(url, params, callback);
+    }
+
+    /**
+     * 根据用户ID获取收藏的商家（获取好友列表)
+     *
+     * @param callback
+     * @param pager
+     * @param userId
+     * @return
+     */
+    public Callback.Cancelable getFocusMerchantsByUserId(PageDataCallback<Merchant> callback, Pager pager, @NonNull String userId) {
+        String url = MessageFormat.format(Constant.USER_FOCUS_MERCHANTS_URL, userId);
+        ModelParams params = new ModelParams().addPager(pager);
         return getPageData(url, params, callback);
     }
 }

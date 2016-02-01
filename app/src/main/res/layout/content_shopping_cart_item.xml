@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/shopping_cart_cover_iv"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="centerCrop" />
 
     <LinearLayout

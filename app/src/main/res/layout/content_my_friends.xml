@@ -4,10 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/my_friends_lv"
+    <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
+        android:id="@+id/my_friends_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+        <ListView
+            android:id="@+id/my_friends_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/gray"
+            android:dividerHeight="1dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:scrollbars="none">
+
+        </ListView>
+    </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
 </LinearLayout>

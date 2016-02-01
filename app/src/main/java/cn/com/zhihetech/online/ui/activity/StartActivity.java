@@ -53,17 +53,20 @@ public class StartActivity extends BaseActivity {
             navigationLoginView();
             return;
         }
-        new UserModel().login(new UserLoginCallback(this) {
+        new UserModel().login(new UserLoginCallback(this, userNum, password) {
             @Override
             public void onLoginSuccess(Token token) {
-                localSharedPreferenceUtils.setUserPassword(password);
-                localSharedPreferenceUtils.setUserMobileNum(userNum);
                 navigationMainView();
             }
 
             @Override
             public void onLoginFail(Throwable ex) {
                 navigationLoginView();
+            }
+
+            @Override
+            public void onLoginFinished() {
+
             }
         }, userNum, password);
     }

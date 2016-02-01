@@ -3,87 +3,63 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ListView;
 
-import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.TextMessageBody;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Conversation;
+import cn.com.zhihetech.online.core.adapter.ConversationAdapter;
 
 /**
  * Created by ShenYunjie on 2016/1/28.
  */
 @ContentView(R.layout.content_my_message)
 public class MyMessageFragment extends BaseFragment {
-    @ViewInject(R.id.my_message_lv)
-    private ListView msgListView;
+    @ViewInject(R.id.my_conversation_lv)
+    private ListView converListView;
 
-    private final String pwd = "123456";
+    private NewMessageBroadcastReceiver newMsgReceiver;
 
-    private NewMessageBroadcastReceiver msgReceiver;
+    private ConversationAdapter adapter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViewAndData();
     }
 
-
-    @Event({R.id.test_btn, R.id.add_user})
-    private void onViewClick(final View view) {
-        switch (view.getId()) {
-            case R.id.test_btn:
-                EMChatManager.getInstance().login(getUseId().replaceAll("-", ""), pwd, new EMCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        showMsg(view, "登录成功");
-                        register();
-                    }
-
-                    @Override
-                    public void onError(int i, String s) {
-                        showMsg(view, "登录失败：" + s);
-                    }
-
-                    @Override
-                    public void onProgress(int i, String s) {
-
-                    }
-                });
-                break;
-            case R.id.add_user:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            EMChatManager.getInstance().createAccountOnServer("汉子用户", pwd);
-                            log("注册成功");
-                        } catch (Exception e) {
-                            log("注册失败");
-                        }
-                    }
-                }).start();
-                break;
+    private void initViewAndData() {
+        Hashtable<String, EMConversation> conversations = EMChatManager.getInstance().getAllConversations();
+        if (conversations == null || conversations.isEmpty()) {
+            return;
         }
+        List<Conversation> convers = new ArrayList<>();
+        for (String userName : conversations.keySet()) {
+            EMConversation conversation = conversations.get(userName);
+            Conversation conver = new Conversation();
+            conver.setEmConver(conversation);
+            EMMessage message = conversation.getLastMessage();
+            conver.setNickName(conversation.getLastMessage().getStringAttribute("nickName", "未知用户"));
+            convers.add(conver);
+        }
+        adapter = new ConversationAdapter(getContext(), convers);
+        converListView.setAdapter(adapter);
     }
 
-    private void register() {
-        msgReceiver = new NewMessageBroadcastReceiver();
-        IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
-        intentFilter.setPriority(3);
-        getContext().registerReceiver(msgReceiver, intentFilter);
-
-    }
 
     private class NewMessageBroadcastReceiver extends BroadcastReceiver {
         @Override
@@ -100,7 +76,7 @@ public class MyMessageFragment extends BaseFragment {
             EMMessage message = EMChatManager.getInstance().getMessage(msgId);
             EMConversation conversation = EMChatManager.getInstance().getConversation(msgFrom);
             if (msgType == EMMessage.Type.TXT.ordinal()) {
-                showMsg(msgListView, ((TextMessageBody) message.getBody()).getMessage());
+                showMsg(converListView, ((TextMessageBody) message.getBody()).getMessage());
             }
         }
     }
@@ -108,8 +84,8 @@ public class MyMessageFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (msgReceiver != null) {
-            getContext().unregisterReceiver(msgReceiver);
+        if (newMsgReceiver != null) {
+            getContext().unregisterReceiver(newMsgReceiver);
         }
     }
 }

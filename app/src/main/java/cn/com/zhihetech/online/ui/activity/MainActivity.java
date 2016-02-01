@@ -42,6 +42,9 @@ public class MainActivity extends BaseActivity {
         initMainTab();
     }
 
+    /**
+     * 首次初始化Tab和显示主界面
+     */
     private void initMainTab() {
         int[] tabs = {R.layout.content_home_tab, R.layout.content_message_tab, R.layout.content_shopping_cart_tab, R.layout.content_my_tab};
         for (int resId : tabs) {
@@ -70,6 +73,9 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.frame_content, homeFragment, HOME_FRAGMENT_TAG).commit();
     }
 
+    /**
+     * 隐藏所有Fragment
+     */
     private void hideFragments() {
         FragmentTransaction localFragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (this.homeFragment != null) {
@@ -87,6 +93,11 @@ public class MainActivity extends BaseActivity {
         localFragmentTransaction.commit();
     }
 
+    /**
+     * 根据所选中Tab显示对应的Fragment
+     *
+     * @param tabPosition
+     */
     private void showFragmentByTabIndex(int tabPosition) {
         FragmentManager localFragmentManager = getSupportFragmentManager();
         FragmentTransaction localFragmentTransaction = localFragmentManager.beginTransaction();

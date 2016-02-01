@@ -1,1 +1,3 @@
 include ':app', ':lib:bdwallet_pay_sdk', ':lib:pingpp'
+include ':easeUI'
+include ':easeUISimpleDemo'

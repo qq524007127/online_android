@@ -62,7 +62,6 @@ public class RegisterVerCodeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("验证码获取中...");
         progressDialog.setCancelable(false);
         progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -84,6 +83,7 @@ public class RegisterVerCodeActivity extends BaseActivity {
         new SMSVerCodeModel().getRegisterVerCode(new ResponseMessageCallback<Integer>() {
             @Override
             public void onResponseMessage(final ResponseMessage<Integer> responseMessage) {
+                verCodeBtn.setClickable(false);
                 final String textTpl = getString(R.string.waiting_and_get_ver_code);
                 final int waitTime = responseMessage.getData() / 1000;
                 String waitText = MessageFormat.format(textTpl, waitTime);
@@ -185,6 +185,7 @@ public class RegisterVerCodeActivity extends BaseActivity {
                     this.verCodeET.requestFocus();
                     return;
                 }
+                progressDialog.setMessage("号码验证中...");
                 verifyMobileNum(mobileNum, verCode);
                 return;
             case R.id.get_code_btn:
@@ -192,7 +193,7 @@ public class RegisterVerCodeActivity extends BaseActivity {
                     this.mobileNumEt.setError("请输入正确的手机号码");
                     return;
                 }
-                view.setClickable(false);
+                progressDialog.setMessage("正在获取验证码...");
                 getRegisterVerCode(mobileNum);
                 break;
         }

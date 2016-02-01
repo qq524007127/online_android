@@ -210,7 +210,7 @@ public class GoodsInfoActivity extends BaseActivity {
      */
     private void settingFocusState(boolean isFocus) {
         if (!isFocus) {
-            focusMsgTv.setText(R.string.un_collection);
+            focusMsgTv.setText(R.string.collectioned);
             collectionView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
