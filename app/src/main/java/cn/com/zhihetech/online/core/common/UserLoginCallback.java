@@ -41,7 +41,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
         @Override
         public void onSuccess() {
-            onEMLoginSuccess("申云杰");
+            onEMLoginSuccess(token.getUser().getUserName());
             onLoginSuccess(token);
             onLoginFinished();
         }
@@ -65,7 +65,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
             return;
         }
         this.token = responseMessage.getData();
-        ZhiheApplication.getInstance().setUserId(token.getUserID());
+        ZhiheApplication.getInstance().setUserId(token.getUser().getUserId()).setUser(responseMessage.getData().getUser());
         preferenceUtils.setUserToken(token.getToken());
         preferenceUtils.setUserMobileNum(userCode);
         preferenceUtils.setUserPassword(userPwd);
@@ -92,7 +92,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
             EMChatManager.getInstance().login(userName, pwd, emCallBack);
         } else {
             onLoginSuccess(this.token);
-            onEMLoginSuccess("申云杰");
+            onEMLoginSuccess(token.getUser().getUserName());
         }
     }
 

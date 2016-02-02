@@ -5,14 +5,31 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/conversation_header_civ"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="2dp" />
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/conversation_header_civ"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/conversation_bagde_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/badge_bg"
+            android:gravity="center"
+            android:text="99+"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

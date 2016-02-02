@@ -5,23 +5,23 @@ package cn.com.zhihetech.online.bean;
  */
 public class Token extends BaseBean {
 
-    private String userID;
+    private User user;
     private String token;
 
     public Token() {
     }
 
-    public Token(String userID, String token) {
-        this.userID = userID;
+    public Token(User user, String token) {
         this.token = token;
+        this.user = user;
     }
 
-    public String getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getToken() {

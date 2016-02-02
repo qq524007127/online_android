@@ -2,14 +2,22 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.easemob.chat.EMChatManager;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.ui.EaseChatFragment;
+import com.easemob.easeui.widget.EaseAlertDialog;
+import com.easemob.easeui.widget.EaseChatInputMenu;
+import com.easemob.easeui.widget.EaseChatPrimaryMenuBase;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
@@ -20,21 +28,24 @@ public class ChatActivity extends BaseActivity {
     public static String USER_NAME_KEY = "EMCHAT_USER_NAME";
 
     public static ChatActivity activityInstance;
-    private EaseChatFragment chatFragment;
-    String toChatUsername;
+    private SingleChatFragment chatFragment;
+    private String toChatUsername;
 
     @Override
-    protected void onCreate(Bundle arg0) {
-        super.onCreate(arg0);
-        //setContentView(R.layout.activity_chat);
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
         activityInstance = this;
+        initChatFragment();
+    }
+
+    private void initChatFragment() {
         //聊天人或群id
         toChatUsername = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new EaseChatFragment();
+        chatFragment = new SingleChatFragment();
+        chatFragment.hideTitleBar();
         //传入参数
         chatFragment.setArguments(getIntent().getExtras());
-        getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
-
+        getSupportFragmentManager().beginTransaction().add(R.id.chat_container_fl, chatFragment).commit();
     }
 
     @Override
@@ -53,7 +64,6 @@ public class ChatActivity extends BaseActivity {
             finish();
             startActivity(intent);
         }
-
     }
 
     @Override
@@ -72,5 +82,22 @@ public class ChatActivity extends BaseActivity {
             return userName;
         }
         return super.getToolbarTile();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat_options, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.chat_recycle) {
+            if (chatFragment != null) {
+                chatFragment.clearChatHistory();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

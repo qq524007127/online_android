@@ -38,7 +38,10 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, data.getMerchantId().replaceAll("-", "")));
+                Intent intent = new Intent(mContext, ChatActivity.class);
+                intent.putExtra(ChatActivity.USER_NAME_KEY, data.getMerchName());
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getMerchantId().replaceAll("-", ""));
+                mContext.startActivity(intent);
             }
         });
     }

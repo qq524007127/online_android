@@ -10,7 +10,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        //multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,9 +19,6 @@ android {
     }
 
 }
-/*configurations {
-    all*.exclude  module: 'easeUI'
-}*/
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -41,7 +37,5 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile project(':lib:pingpp')
     compile project(':easeUI')
-    compile files('libs/easemobchat_2.2.5.jar') {
-        exclude module: ('easeUI')
-    }
+    compile files('libs/android-viewbadger.jar')
 }

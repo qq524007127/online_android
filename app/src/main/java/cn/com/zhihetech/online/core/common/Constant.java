@@ -119,6 +119,21 @@ public class Constant implements Serializable, Cloneable {
     public static final int ORDER_STATE_WAIT_REFUND = 7;  //订单等待退款
     public static final int ORDER_STATE_ALREADY_REFUND = 8; //订单退款成功
 
+    /**
+     * 消息扩展属性名称
+     */
+    public final static String EXTEND_USER_NICK_NAME = "nickName"; //昵称
+    public final static String EXTEND_USER_HEAD_IMG = "headerImg";//头像
+    public final static String EXTEND_USER_ID = "userID";//用户ID
+    public final static String EXTEND_USER_TYPE = "userType";//userType用户类型
+
+    /**
+     * 消息扩展用户类型
+     */
+    public final static int EXTEND_NORMAL_USER = 1;    //普通用户
+    public final static int EXTEND_MERCHANT_USER = 2;  //商家
+    public final static int EXTEND_SERVICE_USER = 3;   //客服
+
 
     /**
      * 请求接口地址

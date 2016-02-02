@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.ui.activity.ChatActivity;
 
@@ -30,6 +31,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
 
     private static ZhiheApplication instance;
     private String userId;
+    private User user;
 
     @Override
     public void onCreate() {
@@ -48,8 +50,18 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public ZhiheApplication setUserId(String userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public ZhiheApplication setUser(User user) {
+        this.user = user;
+        return this;
     }
 
     /**

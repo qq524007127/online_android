@@ -22,7 +22,8 @@ public class ZhiheSwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     private void init() {
-        setColorSchemeResources(R.color.colorPrimary, R.color.textColor, R.color.colorAccent);
+        setColorSchemeResources(R.color.holo_blue_bright, R.color.holo_green_light,
+                R.color.holo_orange_light, R.color.holo_red_light);
         setProgressViewOffset(false, 0, DensityUtil.dip2px(80));
     }
 }

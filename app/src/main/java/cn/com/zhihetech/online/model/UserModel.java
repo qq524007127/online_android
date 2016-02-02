@@ -29,7 +29,7 @@ public class UserModel extends BaseModel<User> {
      */
     public Callback.Cancelable login(ResponseMessageCallback<Token> callback, @NonNull String userNum, @NonNull String password) {
         ModelParams params = new ModelParams().addParam("userPhone", userNum).addParam("pwd", password);
-        return new SimpleModel<Token>(Token.class).postResponseMessage(Constant.USER_LOGIN_URL, params, callback);
+        return new SimpleModel(Token.class).postResponseMessage(Constant.USER_LOGIN_URL, params, callback);
     }
 
     /**
