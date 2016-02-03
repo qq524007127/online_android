@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.view.View;
 import android.widget.ListView;
 
@@ -15,6 +18,8 @@ import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
+import com.easemob.easeui.controller.EaseUI;
+import com.easemob.easeui.domain.EaseUser;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -35,6 +40,9 @@ import cn.com.zhihetech.online.core.common.Constant;
  */
 @ContentView(R.layout.content_my_message)
 public class MyMessageFragment extends BaseFragment {
+    private final int MSG_LOAD_USER_INFO_SUCCESS = 1;
+    private final int MSG_LOAD_USER_INFO_FAIL = 2;
+
     @ViewInject(R.id.my_conversation_lv)
     private ListView converListView;
 
@@ -48,16 +56,26 @@ public class MyMessageFragment extends BaseFragment {
         IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
         intentFilter.setPriority(3);
         msgReceiver = new NewMessageBroadcastReceiver();
-        getContext().registerReceiver(msgReceiver, intentFilter);
+        getActivity().registerReceiver(msgReceiver, intentFilter);
         //EMChatManager.getInstance().registerEventListener(eventListener);
         EMChat.getInstance().setAppInited();
         initViewAndData();
     }
 
     private void initViewAndData() {
+        initEaseUI();
         adapter = new ConversationAdapter(getContext());
         converListView.setAdapter(adapter);
         loadCoversations();
+    }
+
+    private void initEaseUI() {
+       /* EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                return loadUserInfoByUserName(username);
+            }
+        });*/
     }
 
     private void loadCoversations() {
@@ -90,6 +108,25 @@ public class MyMessageFragment extends BaseFragment {
         adapter.refreshData(convers);
     }
 
+    /*private void loadEaseUsers(List<Conversation> conversations) {
+        List<Map<String, String>> userInfo = new ArrayList<>();
+        List<String> userNames = new ArrayList<>();
+        if (conversations != null && !conversations.isEmpty()) {
+            for (Conversation conver : conversations) {
+                userNames.add(conver.getEmConver().getUserName());
+            }
+        }
+        if(!userNames.isEmpty()){
+
+        }
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                return null;
+            }
+        });
+    }*/
+
     @Override
     public void onResume() {
         super.onResume();
@@ -100,7 +137,7 @@ public class MyMessageFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         if (msgReceiver != null) {
-            getContext().unregisterReceiver(msgReceiver);
+            getActivity().unregisterReceiver(msgReceiver);
         }
     }
 
