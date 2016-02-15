@@ -1,10 +1,11 @@
-package cn.com.zhihetech.online.core.view;
+package cn.com.zhihetech.online.core.common;
 
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
@@ -14,14 +15,21 @@ import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.easeui.controller.EaseUI;
 
+import org.xutils.DbManager;
+import org.xutils.common.util.FileUtil;
+import org.xutils.db.table.TableEntity;
+import org.xutils.ex.DbException;
 import org.xutils.x;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.User;
-import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.ui.activity.ChatActivity;
 
 /**
@@ -29,9 +37,15 @@ import cn.com.zhihetech.online.ui.activity.ChatActivity;
  */
 public class ZhiheApplication extends Application implements Thread.UncaughtExceptionHandler {
 
-    private static ZhiheApplication instance;
-    private String userId;
-    private User user;
+    private final int DB_VERVION = 1;
+    private final String DB_NAME = "zhihe_db";
+    private final String DB_DIR = "database";
+
+    protected static ZhiheApplication instance;
+    protected String userId;
+    protected User user;
+
+    protected DbManager dbManager;
 
     @Override
     public void onCreate() {
@@ -40,6 +54,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         x.Ext.setDebug(Constant.DEBUG);
         instance = this;
         initEMChat();
+        initDB();
     }
 
     public static ZhiheApplication getInstance() {
@@ -82,9 +97,39 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         return this.userId;
     }
 
+    public DbManager getDbManager() {
+        return dbManager;
+    }
+
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
 
+    }
+
+    /**
+     * 初始化本地数据库
+     */
+    private void initDB() {
+        Toast.makeText(this, FileUtil.getCacheDir(DB_DIR).getAbsolutePath(), Toast.LENGTH_LONG).show();
+        DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
+                .setDbName(DB_NAME) //设置数据库名
+                .setDbVersion(DB_VERVION) //设置数据库版本,每次启动应用时将会检查该版本号,
+                        //发现数据库版本低于这里设置的值将进行数据库升级并触发DbUpgradeListener
+                .setAllowTransaction(true)//设置是否开启事务,默认为false关闭事务
+                .setTableCreateListener(new DbManager.TableCreateListener() {
+                    @Override
+                    public void onTableCreated(DbManager db, TableEntity<?> table) {
+                        db.getDatabase().enableWriteAheadLogging(); // 开启WAL, 对写入加速提升巨大
+                    }
+                })//设置数据库创建时的Listener
+                .setDbDir(FileUtil.getCacheDir(DB_DIR))    //设置数据库.db文件存放的目录,默认为包名下databases目录下
+                .setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+                    @Override
+                    public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
+                        //balabala...
+                    }
+                });//设置数据库升级时的Listener,这里可以执行相关数据库表的相关修改,比如alter语句增加字段等
+        this.dbManager = x.getDb(daoConfig);
     }
 
     /**

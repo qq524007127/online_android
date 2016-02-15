@@ -20,7 +20,7 @@ import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.core.view.ZhiheApplication;
+import cn.com.zhihetech.online.core.common.ZhiheApplication;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityFragment;

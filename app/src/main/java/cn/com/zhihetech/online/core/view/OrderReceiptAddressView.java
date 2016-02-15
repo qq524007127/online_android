@@ -17,6 +17,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ReceivedGoodsAddress;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.common.ZhiheApplication;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.model.ReceiptAddressModel;
 import cn.com.zhihetech.online.ui.activity.OrderConfirmActivity;

@@ -24,6 +24,7 @@ public class User extends BaseBean {
     private String invitCode;
     private Date createDate;
     private int userType = Constant.COMMON_USER;    //默认为普通用户
+    private ImgInfo headerImg;  //用户头像
 
     public User() {
     }
@@ -150,6 +151,23 @@ public class User extends BaseBean {
 
     public void setUserType(int userType) {
         this.userType = userType;
+    }
+
+    public ImgInfo getHeaderImg() {
+        return headerImg;
+    }
+
+    public void setHeaderImg(ImgInfo headerImg) {
+        this.headerImg = headerImg;
+    }
+
+    /**
+     * 获取用户对应的环信账号的信息
+     *
+     * @return
+     */
+    public String getEMUserId() {
+        return getUserId().replaceAll("-", "");
     }
 }
 

@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.eventmessage;
+package cn.com.zhihetech.online.core.eventmsg;
 
 import cn.com.zhihetech.online.bean.BaseBean;
 

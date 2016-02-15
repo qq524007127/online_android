@@ -25,7 +25,7 @@ import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
-import cn.com.zhihetech.online.core.eventmessage.ShoppingCartMessageEvent;
+import cn.com.zhihetech.online.core.eventmsg.ShoppingCartMessageEvent;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;

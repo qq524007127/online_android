@@ -7,15 +7,20 @@ import android.view.MenuItem;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.easeui.EaseConstant;
+import com.easemob.easeui.controller.EaseUI;
+import com.easemob.easeui.domain.EaseUser;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.EaseAlertDialog;
 import com.easemob.easeui.widget.EaseChatInputMenu;
 import com.easemob.easeui.widget.EaseChatPrimaryMenuBase;
 
+import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
 
@@ -45,6 +50,24 @@ public class ChatActivity extends BaseActivity {
         chatFragment.hideTitleBar();
         //传入参数
         chatFragment.setArguments(getIntent().getExtras());
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                EaseUser easeUser = new EaseUser(username);
+                //easeUser.setNick(username);
+                EMUserInfo userInfo = null;
+                try {
+                    userInfo = new DBUtils().getUserInfoByUserName(username);
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                }
+                return easeUser;
+            }
+        });
         getSupportFragmentManager().beginTransaction().add(R.id.chat_container_fl, chatFragment).commit();
     }
 

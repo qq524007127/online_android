@@ -359,4 +359,13 @@ public class Merchant extends BaseBean {
     public void setMerchantDetails(String merchantDetails) {
         this.merchantDetails = merchantDetails;
     }
+
+    /**
+     * 获取对应环信用户ID
+     *
+     * @return
+     */
+    public String getEMUserId() {
+        return getMerchantId().replaceAll("-", "");
+    }
 }

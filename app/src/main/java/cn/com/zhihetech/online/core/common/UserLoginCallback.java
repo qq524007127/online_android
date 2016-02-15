@@ -8,10 +8,14 @@ import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 
+import org.xutils.ex.DbException;
+
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Token;
+import cn.com.zhihetech.online.bean.User;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
-import cn.com.zhihetech.online.core.view.ZhiheApplication;
 
 /**
  * 用户登录回调接口，登录成功后需再次登录环信、极光推送等第三方账号
@@ -70,7 +74,24 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         preferenceUtils.setUserMobileNum(userCode);
         preferenceUtils.setUserPassword(userPwd);
         isLoged = true;
+        try {
+            saveSelfInfo(token.getUser());
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
         //onLoginSuccess(this.token);
+    }
+
+    /**
+     * 保存当前登录用户的环信用户信息到本地数据库
+     */
+    protected void saveSelfInfo(User user) throws DbException {
+        String header = null;
+        if (user.getHeaderImg() != null) {
+            header = user.getHeaderImg().getUrl();
+        }
+        EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header, Constant.EXTEND_NORMAL_USER);
+        new DBUtils().saveOrUpdateUserInfo(userInfo);
     }
 
     @Override

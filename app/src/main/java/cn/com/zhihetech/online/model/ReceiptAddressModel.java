@@ -80,9 +80,6 @@ public class ReceiptAddressModel extends BaseModel<ReceivedGoodsAddress> {
         if (!StringUtils.isEmpty(address.getAddressId())) {
             params.addParam("addressId", address.getAddressId());
         }
-        /*if (address.getUser() != null && !StringUtils.isEmpty(address.getUser().getUserId())) {
-            params.addParam("user.userId", address.getUser().getUserId());
-        }*/
         return params;
     }
 }

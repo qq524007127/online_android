@@ -8,7 +8,7 @@ import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.core.view.ZhiheApplication;
+import cn.com.zhihetech.online.core.common.ZhiheApplication;
 
 
 /**

@@ -20,7 +20,7 @@ import cn.com.zhihetech.online.bean.GoodsDetail;
 import cn.com.zhihetech.online.bean.OrderDetail;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
-import cn.com.zhihetech.online.core.eventmessage.ShoppingCartMessageEvent;
+import cn.com.zhihetech.online.core.eventmsg.ShoppingCartMessageEvent;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
