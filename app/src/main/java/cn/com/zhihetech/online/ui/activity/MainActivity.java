@@ -1,16 +1,20 @@
 package cn.com.zhihetech.online.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.HomeFragment;
 import cn.com.zhihetech.online.ui.fragment.MessageFragment;
@@ -27,6 +31,8 @@ public class MainActivity extends BaseActivity {
     private final String MESSAGE_FRAGMENT_TAG = "message_tag";
     private final String MY_FRAGMENT_TAG = "my_tag";
     private final String SHOPPING_CART_FRAGMENT_TAG = "shopping_cart_tag";
+
+    private boolean isExit = false;
 
     private BaseFragment homeFragment;
     private BaseFragment messageFragment;
@@ -145,5 +151,33 @@ public class MainActivity extends BaseActivity {
             default:
         }
         localFragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            doubleClickBackKeyExitApp();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 双击返回键退出APP
+     */
+    private void doubleClickBackKeyExitApp() {
+        if (isExit) {
+            finish();
+            ActivityStack.getInstance().clearActivity();
+        } else {
+            isExit = true;
+            Toast.makeText(this, R.string.reclick_exit_app, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 1000);
+        }
     }
 }

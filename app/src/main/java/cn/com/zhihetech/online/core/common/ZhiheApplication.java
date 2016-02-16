@@ -50,11 +50,11 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         x.Ext.init(this);
         x.Ext.setDebug(Constant.DEBUG);
-        instance = this;
-        initEMChat();
         initDB();
+        initEMChat();
     }
 
     public static ZhiheApplication getInstance() {
@@ -110,7 +110,6 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
      * 初始化本地数据库
      */
     private void initDB() {
-        Toast.makeText(this, FileUtil.getCacheDir(DB_DIR).getAbsolutePath(), Toast.LENGTH_LONG).show();
         DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
                 .setDbName(DB_NAME) //设置数据库名
                 .setDbVersion(DB_VERVION) //设置数据库版本,每次启动应用时将会检查该版本号,
@@ -119,14 +118,14 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
                 .setTableCreateListener(new DbManager.TableCreateListener() {
                     @Override
                     public void onTableCreated(DbManager db, TableEntity<?> table) {
-                        db.getDatabase().enableWriteAheadLogging(); // 开启WAL, 对写入加速提升巨大
+                        //db.getDatabase().enableWriteAheadLogging(); // 开启WAL, 对写入加速提升巨大
                     }
                 })//设置数据库创建时的Listener
                 .setDbDir(FileUtil.getCacheDir(DB_DIR))    //设置数据库.db文件存放的目录,默认为包名下databases目录下
                 .setDbUpgradeListener(new DbManager.DbUpgradeListener() {
                     @Override
                     public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
-                        //balabala...
+
                     }
                 });//设置数据库升级时的Listener,这里可以执行相关数据库表的相关修改,比如alter语句增加字段等
         this.dbManager = x.getDb(daoConfig);

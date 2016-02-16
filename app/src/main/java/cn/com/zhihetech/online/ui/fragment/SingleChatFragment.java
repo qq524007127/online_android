@@ -65,7 +65,9 @@ public class SingleChatFragment extends EaseChatFragment {
 
     @Override
     protected void registerExtendMenuItem() {
-        super.registerExtendMenuItem();
+        for (int i = 0; i < itemStrings.length - 1; i++) {
+            inputMenu.registerExtendMenuItem(itemStrings[i], itemdrawables[i], itemIds[i], extendMenuItemClickListener);
+        }
     }
 
     /**

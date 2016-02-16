@@ -8,9 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.easemob.easeui.ui.EaseConversationListFragment;
-import com.easemob.easeui.widget.EaseConversationList;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -33,7 +30,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void initViews() {
-        final Fragment[] fragments = {new MyMessageFragment(), new MyFriendsFrgment()};
+        final Fragment[] fragments = {new MyContactListFragment(), new MyFriendsFragment()};
         final String[] tabs = {"消息", "我的好友"};
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override

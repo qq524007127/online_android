@@ -24,7 +24,7 @@ import cn.com.zhihetech.online.model.MerchantModel;
  * Created by ShenYunjie on 2016/1/28.
  */
 @ContentView(R.layout.content_my_friends)
-public class MyFriendsFrgment extends BaseFragment {
+public class MyFriendsFragment extends BaseFragment {
 
     @ViewInject(R.id.my_friends_refresh_layout)
     private ZhiheSwipeRefreshLayout refreshLayout;

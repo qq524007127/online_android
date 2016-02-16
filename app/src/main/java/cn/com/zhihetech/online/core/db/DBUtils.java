@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.core.db;
 
 import org.xutils.DbManager;
+import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.ex.DbException;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
@@ -19,7 +20,7 @@ public class DBUtils {
      * @throws DbException
      */
     public EMUserInfo getUserInfoByUserName(String userName) throws DbException {
-        return getDbManager().selector(EMUserInfo.class).where("userName", "=", userName).findFirst();
+        return getDbManager().selector(EMUserInfo.class).where("user_name", "=", userName).findFirst();
     }
 
     /**

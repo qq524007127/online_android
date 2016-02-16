@@ -43,7 +43,7 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ChatActivity.class);
-                intent.putExtra(ChatActivity.USER_NAME_KEY, data.getMerchName());
+                //intent.putExtra(ChatActivity.USER_NAME_KEY, data.getMerchName());
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getEMUserId());
                 try {
                     saveMerchantInfo(data);
@@ -57,8 +57,14 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
         });
     }
 
+    /**
+     * 将商家的环信用户基本信息保存到本地数据库
+     *
+     * @param merchant
+     * @throws DbException
+     */
     private void saveMerchantInfo(Merchant merchant) throws DbException {
-        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getHeaderImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getCoverImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
         new DBUtils().saveOrUpdateUserInfo(userInfo);
     }
 

@@ -1,6 +1,8 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,14 +12,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
+import com.easemob.easeui.EaseConstant;
 
+import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
+import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.common.ZhiheApplication;
@@ -106,15 +113,35 @@ public class MerchantHomeActivity extends BaseActivity {
     }
 
     @Event({R.id.merchant_home_add_friend_btn, R.id.merchant_home_contact_btn})
-    private void onAddFriendBtnClick(View view) {
+    private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.merchant_home_add_friend_btn: //关注商家
                 addFriendBtn.setClickable(false);
                 new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
                 break;
             case R.id.merchant_home_contact_btn:    //点击跳转到与商家发送消息
-
+                if (this.merchant != null) {
+                    saveMerchantInfo(this.merchant);
+                    Intent intent = new Intent(this, ChatActivity.class);
+                    intent.putExtra(EaseConstant.EXTRA_USER_ID, this.merchant.getEMUserId());
+                    startActivity(intent);
+                }
                 break;
+        }
+    }
+
+    /**
+     * 将商家的环信用户基本信息保存到本地数据库
+     *
+     * @param merchant
+     * @throws DbException
+     */
+    private void saveMerchantInfo(Merchant merchant) {
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getCoverImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
+        try {
+            new DBUtils().saveOrUpdateUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
         }
     }
 

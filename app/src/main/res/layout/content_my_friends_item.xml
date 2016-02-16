@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:padding="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friend_header_civ"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:scaleType="centerCrop"
         android:src="@drawable/my_activity"
         app:civ_border_color="@color/white"

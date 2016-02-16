@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.easemob.EMEventListener;
+import com.easemob.EMNotifierEvent;
 import com.easemob.chat.EMChatManager;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
@@ -54,7 +56,6 @@ public class ChatActivity extends BaseActivity {
             @Override
             public EaseUser getUser(String username) {
                 EaseUser easeUser = new EaseUser(username);
-                //easeUser.setNick(username);
                 EMUserInfo userInfo = null;
                 try {
                     userInfo = new DBUtils().getUserInfoByUserName(username);
@@ -100,9 +101,14 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     protected CharSequence getToolbarTile() {
-        String userName = getIntent().getStringExtra(USER_NAME_KEY);
-        if (!StringUtils.isEmpty(userName)) {
-            return userName;
+        String userId = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
+        try {
+            EMUserInfo userInfo = new DBUtils().getUserInfoByUserName(userId);
+            if (userInfo != null) {
+                return userInfo.getUserNick();
+            }
+        } catch (DbException e) {
+            e.printStackTrace();
         }
         return super.getToolbarTile();
     }

@@ -91,4 +91,5 @@
     <string name="user_info">用户信息</string>
     <string name="you_have_new_message">你有新消息</string>
     <string name="empty_the_chat_record">清空当前聊天记录</string>
+    <string name="reclick_exit_app">再按一次退出程序</string>
 </resources>
