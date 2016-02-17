@@ -6,11 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.xutils.common.Callback;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.Pager;
+import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 
@@ -18,6 +21,41 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
  * Created by ShenYunjie on 2016/1/26.
  */
 public class OrderModel extends BaseModel<Order> {
+
+    /**
+     * 申请订单退款
+     *
+     * @return
+     */
+    public Callback.Cancelable refundByOrderId(ObjectCallback<ResponseMessage> callback, @NonNull String orderId) {
+        String url = MessageFormat.format(Constant.ORDER_REFUND_URL, orderId);
+        return new SimpleModel(ResponseMessage.class).postObject(url, null, callback);
+    }
+
+    /**
+     * 取消订单
+     *
+     * @param callback
+     * @param orderId
+     * @return
+     */
+    public Callback.Cancelable cancelOrderByOrderId(ObjectCallback<ResponseMessage> callback, @NonNull String orderId) {
+        String url = MessageFormat.format(Constant.ORDER_CANCEL_URL, orderId);
+        return new SimpleModel(ResponseMessage.class).postObject(url, null, callback);
+    }
+
+    /**
+     * 根据订单ID获取charge支付信息
+     *
+     * @param callback
+     * @param orderId
+     * @return
+     */
+    public Callback.Cancelable getChargeByOrderId(ResponseMessageCallback<String> callback, @NonNull String orderId) {
+        String url = MessageFormat.format(Constant.ORDER_PAY_URL, orderId);
+        return new SimpleModel<String>(String.class).postResponseMessage(url, null, callback);
+    }
+
     /**
      * 提交订单
      *
@@ -25,7 +63,7 @@ public class OrderModel extends BaseModel<Order> {
      * @param orders   需要提交的订单列表
      * @return
      */
-    public Callback.Cancelable getChargeWithOrders(ResponseMessageCallback<String> callback, @NonNull List<Order> orders) {
+    public Callback.Cancelable getChargeByOrders(ResponseMessageCallback<String> callback, @NonNull List<Order> orders) {
         ModelParams params = new ModelParams().addParam("orderStr", JSONObject.toJSONString(orders));
         return new SimpleModel(String.class).postResponseMessage(Constant.ORDER_ADD_URL, params, callback);
     }
@@ -54,7 +92,7 @@ public class OrderModel extends BaseModel<Order> {
      * @param order
      * @return
      */
-    private ModelParams createOrderParams(Order order) {
+    protected ModelParams createOrderParams(Order order) {
         ModelParams params = new ModelParams();
         params.addParam("orderName", order.getOrderName()).addParam("user.userId", order.getUser().getUserId())
                 .addParam("orderTotal", String.valueOf(order.getOrderTotal())).addParam("userMsg", order.getUserMsg())

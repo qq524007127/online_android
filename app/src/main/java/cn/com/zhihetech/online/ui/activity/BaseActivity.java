@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -113,6 +114,10 @@ public class BaseActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
         }
+    }
+
+    protected void showMsg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     protected void showMsg(View view, String msg) {

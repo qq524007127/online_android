@@ -165,7 +165,7 @@ public class OrderConfirmActivity extends BaseActivity {
     private void getChargeAndPay() {
         List<Order> orders = createOrders();
         progressDialog.show();
-        new OrderModel().getChargeWithOrders(orderCallback, orders);
+        new OrderModel().getChargeByOrders(orderCallback, orders);
     }
 
     private List<Order> createOrders() {

@@ -145,7 +145,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         }
         EMChat.getInstance().init(this);
         EMChat.getInstance().setDebugMode(Constant.DEBUG);
-        EMChat.getInstance().setAutoLogin(true);
+        EMChat.getInstance().setAutoLogin(false);
         settingEMChatOptions();
         EaseUI.getInstance().init(this);
     }

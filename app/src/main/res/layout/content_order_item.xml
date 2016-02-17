@@ -10,20 +10,39 @@
         android:background="@color/gray"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/order_item_name_tv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:gravity="center_vertical"
-            android:maxLines="2"
-            android:padding="6dp" />
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/order_detail_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:text="@string/order_detail"
+                android:textColor="@color/steelblue"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="0"
+                android:src="@drawable/array_right" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/order_item_code_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
             android:padding="6dp"
             android:textColor="@color/olivedrab" />
@@ -31,9 +50,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/order_carriage_tv"
@@ -43,21 +63,12 @@
                 android:gravity="center_vertical|left"
                 android:padding="6dp" />
 
-            <TextView
-                android:id="@+id/order_total_price_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical|right"
-                android:padding="6dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -65,20 +76,9 @@
 
             <TextView
                 android:id="@+id/order_item_create_date_tv"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:gravity="center_vertical" />
-
-            <TextView
-                android:id="@+id/order_state__tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/steelblue"
-                android:gravity="center"
-                android:padding="6dp"
-                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -86,30 +86,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/order_receipt_person_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="6dp" />
 
-                <TextView
-                    android:id="@+id/order_receipt_person_name_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="6dp" />
-
-                <TextView
-                    android:id="@+id/order_receipt_person_num_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="6dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/order_receipt_person_num_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="2dp" />
 
             <TextView
                 android:id="@+id/order_receipt_detail_address_tv"
@@ -122,15 +120,53 @@
             android:id="@+id/order_user_msg_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
             android:padding="6dp"
             android:textSize="12sp" />
 
+        <TextView
+            android:id="@+id/order_carriage_info_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white"
+            android:padding="6dp"
+            android:textColor="@color/orange" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/order_total_price_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:padding="6dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/order_state__tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="6dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -164,7 +200,7 @@
                 android:layout_weight="1"
                 android:background="@color/olivedrab"
                 android:foreground="?attr/selectableItemBackground"
-                android:text="@string/aplay_refund"
+                android:text="@string/apply_refund"
                 android:textColor="@color/white" />
 
             <Button
@@ -176,6 +212,17 @@
                 android:background="@color/steelblue"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/received"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/order_item_evaluate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/olivedrab"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/evaluate"
                 android:textColor="@color/white" />
 
             <Button

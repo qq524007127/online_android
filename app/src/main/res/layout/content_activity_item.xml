@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left|center_vertical"
-                        android:text="@string/acitivty_date_msg"
+                        android:text="@string/activity_date_msg"
                         android:textColor="@color/white" />
                 </LinearLayout>
 

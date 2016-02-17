@@ -22,16 +22,14 @@ import cn.com.zhihetech.online.ui.activity.OrderDetailActivity;
  */
 public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHolder> {
 
+    private OnOrderItemClickListener itemClickListener;
+
     public OrderAdapter(Context mContext) {
-        super(mContext, R.layout.content_order_item);
+        this(mContext, R.layout.content_order_item);
     }
 
     public OrderAdapter(Context mContext, int layoutId) {
         super(mContext, layoutId);
-    }
-
-    public OrderAdapter(Context mContext, int layoutId, List<Order> mDatas) {
-        super(mContext, layoutId, mDatas);
     }
 
     @Override
@@ -41,7 +39,6 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
 
     @Override
     public void onBindViewHolder(OrderViewHolder holder, final Order data) {
-        holder.orderNameTv.setText("订单名：" + data.getOrderName());
         holder.orderCodeTv.setText("订单号：" + data.getOrderCode());
         holder.orderCarriage.setText("邮费：" + data.getCarriage());
         holder.totalPriceTv.setText("总价：" + data.getOrderTotal());
@@ -53,13 +50,13 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         holder.receiptNumTv.setText("联系电话：" + data.getReceiverPhone());
         holder.receiptDetailAddressTv.setText("地址：" + data.getReceiverAdd());
 
-        holder.cancelBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_NO_PAYMENT ? View.VISIBLE : View.GONE);
-        holder.payBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_NO_PAYMENT ? View.VISIBLE : View.GONE);
-        holder.refundBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_NO_DISPATCHER ? View.VISIBLE : View.GONE);
-        holder.receivedBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_ALREADY_DISPATCHER ? View.VISIBLE : View.GONE);
-        holder.deleteBtn.setVisibility(View.GONE);
+        holder.carriageInfoTv.setVisibility(View.GONE);
+        if (data.getOrderState() == Constant.ORDER_STATE_ALREADY_DISPATCHER && !StringUtils.isEmpty(data.getCarriageNum())) {
+            holder.carriageInfoTv.setVisibility(View.VISIBLE);
+            holder.carriageInfoTv.setText("快递信息：" + data.getCarriageNum());
+        }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.orderDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
@@ -67,11 +64,123 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
                 mContext.startActivity(intent);
             }
         });
+
+        initItemState(holder, data);
+
+        initItemClick(holder, data);
+    }
+
+    /**
+     * 初始化订单按钮显示状态,先隐藏所有功能按钮，再根据订单状态显示所需按钮
+     *
+     * @param holder
+     * @param data
+     */
+    private void initItemState(OrderViewHolder holder, Order data) {
+        hideAllItemView(holder);
+        holder.refundBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_NO_DISPATCHER ? View.VISIBLE : View.GONE);
+        holder.receivedBtn.setVisibility(data.getOrderState() == Constant.ORDER_STATE_ALREADY_DISPATCHER ? View.VISIBLE : View.GONE);
+        holder.deleteBtn.setVisibility(View.GONE);
+        switch (data.getOrderState()) {
+            case Constant.ORDER_STATE_NO_PAYMENT:
+                holder.cancelBtn.setVisibility(View.VISIBLE);
+                holder.payBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_NO_DISPATCHER:
+                holder.refundBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_ALREADY_DISPATCHER:
+                holder.receivedBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_ALREADY_DELIVER:
+                holder.evaluateBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_ALREADY_CANCEL:
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_ALREADY_REFUND:
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    /**
+     * 隐藏所有功能按钮
+     *
+     * @param holder
+     */
+    private void hideAllItemView(OrderViewHolder holder) {
+        holder.cancelBtn.setVisibility(View.GONE);
+        holder.payBtn.setVisibility(View.GONE);
+        holder.refundBtn.setVisibility(View.GONE);
+        holder.receivedBtn.setVisibility(View.GONE);
+        holder.evaluateBtn.setVisibility(View.GONE);
+        holder.deleteBtn.setVisibility(View.GONE);
+    }
+
+    /**
+     * 初始化订单功能按钮点击监听
+     *
+     * @param holder
+     * @param data
+     */
+    private void initItemClick(OrderViewHolder holder, Order data) {
+        if (this.itemClickListener == null) {
+            return;
+        }
+        OnViewClickListener clickListener = new OnViewClickListener(data, this.itemClickListener);
+        holder.cancelBtn.setOnClickListener(clickListener);
+        holder.payBtn.setOnClickListener(clickListener);
+        holder.refundBtn.setOnClickListener(clickListener);
+        holder.receivedBtn.setOnClickListener(clickListener);
+        holder.evaluateBtn.setOnClickListener(clickListener);
+        holder.deleteBtn.setOnClickListener(clickListener);
+    }
+
+    public void setItemClickListener(OnOrderItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    private class OnViewClickListener implements View.OnClickListener {
+        private Order order;
+        private OnOrderItemClickListener itemClickListener;
+
+        public OnViewClickListener(Order order, OnOrderItemClickListener itemClickListener) {
+            this.order = order;
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (order == null || itemClickListener == null) {
+                return;
+            }
+            switch (v.getId()) {
+                case R.id.order_item_cancel_btn:
+                    itemClickListener.onCancelClick(order, v);
+                    break;
+                case R.id.order_item_pay_btn:
+                    itemClickListener.onPayClick(order, v);
+                    break;
+                case R.id.order_item_aplay_refund_btn:
+                    itemClickListener.onRefundClick(order, v);
+                    break;
+                case R.id.order_item_received_btn:
+                    itemClickListener.onReceiptClick(order, v);
+                    break;
+                case R.id.order_item_evaluate:
+                    itemClickListener.onEvaluateClick(order, v);
+                    break;
+                case R.id.order_item_delete_btn:
+                    itemClickListener.onDeleteClick(order, v);
+                    break;
+            }
+        }
     }
 
     public class OrderViewHolder extends ZhiheAdapter.BaseViewHolder {
-        @ViewInject(R.id.order_item_name_tv)
-        public TextView orderNameTv;
+        @ViewInject(R.id.order_detail_view)
+        public TextView orderDetail;
         @ViewInject(R.id.order_item_code_tv)
         public TextView orderCodeTv;
         @ViewInject(R.id.order_carriage_tv)
@@ -90,6 +199,8 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         public TextView receiptNumTv;
         @ViewInject(R.id.order_receipt_detail_address_tv)
         public TextView receiptDetailAddressTv;
+        @ViewInject(R.id.order_carriage_info_tv)
+        public TextView carriageInfoTv;
 
         @ViewInject(R.id.order_item_cancel_btn)
         public Button cancelBtn;
@@ -99,11 +210,45 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         public Button refundBtn;
         @ViewInject(R.id.order_item_received_btn)
         public Button receivedBtn;
+        @ViewInject(R.id.order_item_evaluate)
+        public Button evaluateBtn;
         @ViewInject(R.id.order_item_delete_btn)
         public Button deleteBtn;
 
         public OrderViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public interface OnOrderItemClickListener {
+        /**
+         * 取消订单
+         */
+        void onCancelClick(Order order, View view);
+
+        /**
+         * 订单支付
+         */
+        void onPayClick(Order order, View view);
+
+        /**
+         * 退款
+         */
+        void onRefundClick(Order order, View view);
+
+        /**
+         * 签收
+         */
+        void onReceiptClick(Order order, View view);
+
+        /**
+         * 评价
+         */
+        void onEvaluateClick(Order order, View view);
+
+        /**
+         * 删除订单
+         */
+        void onDeleteClick(Order order, View view);
     }
 }

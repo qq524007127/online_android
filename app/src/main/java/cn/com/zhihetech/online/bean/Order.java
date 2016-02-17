@@ -26,6 +26,7 @@ public class Order extends BaseBean {
     private String receiverPhone;
     private String receiverAdd;
     private String orderDetailInfo;
+    private String carriageNum;  //快递公司及单号
     private List<OrderDetail> orderDetails;
 
     public Order() {
@@ -155,6 +156,14 @@ public class Order extends BaseBean {
         this.orderDetailInfo = orderDetailInfo;
     }
 
+    public String getCarriageNum() {
+        return carriageNum;
+    }
+
+    public void setCarriageNum(String carriageNum) {
+        this.carriageNum = carriageNum;
+    }
+
     /**
      * 根据商品id和数量生成订单详情组合
      *
@@ -215,6 +224,8 @@ public class Order extends BaseBean {
                 return "待发货";
             case Constant.ORDER_STATE_ALREADY_DISPATCHER:
                 return "待收货";
+            case Constant.ORDER_STATE_ALREADY_DELIVER:
+                return "待评价";
             case Constant.ORDER_STATE_ALREADY_CANCEL:
                 return "已取消";
             case Constant.ORDER_STATE_WAIT_REFUND:

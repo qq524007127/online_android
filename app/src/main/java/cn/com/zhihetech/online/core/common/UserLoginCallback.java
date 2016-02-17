@@ -97,8 +97,9 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
     @Override
     public final void onFinished() {
         if (!isLoged) { //如果平台账号未登录成功则回调onLoginFinish接口
-            onLoginFinished();
-        } else if (isLoged) {   //如果平台账号登录成功，则登录环信账号
+            //onLoginFinished();
+            emCallBack.onSuccess();
+        } else {   //如果平台账号登录成功，则登录环信账号
             loginEMChat();
         }
     }

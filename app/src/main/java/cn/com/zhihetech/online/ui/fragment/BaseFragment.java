@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import org.xutils.x;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ZhiheApplication;
 
@@ -42,7 +43,16 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected String getUseId() {
-        return ZhiheApplication.getInstance().getUserId();
+        return getUser().getUserId();
+    }
+
+    /**
+     * 获取当前登录的User
+     *
+     * @return
+     */
+    protected User getUser() {
+        return ZhiheApplication.getInstance().getUser();
     }
 
     protected String getLogTag() {

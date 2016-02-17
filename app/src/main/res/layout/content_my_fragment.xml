@@ -27,6 +27,7 @@
                 app:civ_border_width="2dp" />
 
             <TextView
+                android:id="@+id/my_nick_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -123,7 +124,33 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/my_paied_view"
+                    android:id="@+id/my_no_dispatch"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/my_item_bg"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="10.0dip"
+                    android:paddingTop="10.0dip">
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="30.0dip"
+                        android:src="@drawable/refunded" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/no_dispatch"
+                        android:textSize="12.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_already_dispatch_view"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
@@ -144,7 +171,7 @@
                         android:gravity="center"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
-                        android:text="@string/paied"
+                        android:text="@string/waiting_receipt"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
@@ -196,35 +223,10 @@
                         android:gravity="center"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
-                        android:text="@string/refunding"
+                        android:text="@string/refund_or_service"
                         android:textSize="12.0sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/refunded_view"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@drawable/my_item_bg"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingBottom="10.0dip"
-                    android:paddingTop="10.0dip">
-
-                    <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
-                        android:src="@drawable/refunded" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:text="@string/refunded"
-                        android:textSize="12.0sp" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

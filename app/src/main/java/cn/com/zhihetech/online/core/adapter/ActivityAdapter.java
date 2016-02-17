@@ -53,7 +53,7 @@ public class ActivityAdapter extends ZhiheAdapter<Activity, ActivityAdapter.Acti
         if (DateUtils.formatDate(tormary).equals(DateUtils.formatDate(data.getBeginDate()))) {
             today = "明日";
         }
-        String text = MessageFormat.format(mContext.getString(R.string.acitivty_date_msg), today,
+        String text = MessageFormat.format(mContext.getString(R.string.activity_date_msg), today,
                 DateUtils.formatDateByFormat(data.getBeginDate(), "MM/dd"),
                 DateUtils.formatDateByFormat(data.getBeginDate(), "HH:mm"),
                 DateUtils.formatDateByFormat(data.getEndDate(), "HH:mm"));
