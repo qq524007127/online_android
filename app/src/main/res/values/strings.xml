@@ -94,4 +94,5 @@
     <string name="reclick_exit_app">再按一次退出程序</string>
     <string name="evaluate">评价</string>
     <string name="no_dispatch">待发货</string>
+    <string name="order_evaluate">评价</string>
 </resources>

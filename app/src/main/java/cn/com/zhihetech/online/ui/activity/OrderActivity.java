@@ -38,7 +38,8 @@ import cn.com.zhihetech.online.model.OrderModel;
 public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderItemClickListener {
 
     public final static String ORDER_STATE_KEY = "_order_state_key";
-    public final static int REQUEST_CODE_PAYMENT = 0x001;
+    public final static int REQUEST_CODE_PAYMENT = 0x001;   //请求调用支付控件
+    public final static int REQUEST_CODE_EVALUATE = 0X002;    //评价
 
     @ViewInject(R.id.order_zsrl)
     private ZhiheSwipeRefreshLayout refreshLayout;
@@ -251,13 +252,50 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
     }
 
     @Override
-    public void onReceiptClick(Order order, View view) {
+    public void onReceiptClick(Order order, final View view) {
+        if (order.getOrderState() != Constant.ORDER_STATE_ALREADY_DISPATCHER) {
+            showMsg(view, "只有已发货的商品才可进行此操作！");
+            return;
+        }
+        progressDialog.show();
+        new OrderModel().orderReceipt(new ObjectCallback<ResponseMessage>() {
+            @Override
+            public void onObject(ResponseMessage data) {
+                if (data.getCode() == ResponseStateCode.SUCCESS) {
+                    showMsg(view, "订单签收成功，请勿完了给予商家评价哦！");
+                    refreshData();
+                } else {
+                    new AlertDialog.Builder(getSelf())
+                            .setTitle(R.string.tip)
+                            .setMessage(data.getMsg())
+                            .setPositiveButton(R.string.ok, null)
+                            .show();
+                }
+            }
 
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                super.onError(ex, isOnCallback);
+                showMsg(view, "签收失败，请重试");
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                progressDialog.dismiss();
+            }
+        }, order.getOrderId());
     }
 
     @Override
     public void onEvaluateClick(Order order, View view) {
-
+        if (order.getOrderState() != Constant.ORDER_STATE_ALREADY_DELIVER) {
+            showMsg(view, "只有已签收的商品才可已进行此操作！");
+            return;
+        }
+        Intent intent = new Intent(this, EvaluateActivity.class);
+        intent.putExtra(EvaluateActivity.ORDER_ID_KEY, order.getOrderId());
+        startActivityForResult(intent, REQUEST_CODE_EVALUATE);
     }
 
     @Override

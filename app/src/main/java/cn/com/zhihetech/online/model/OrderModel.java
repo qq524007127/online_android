@@ -23,6 +23,18 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 public class OrderModel extends BaseModel<Order> {
 
     /**
+     * 订单签收
+     *
+     * @param callback
+     * @param orderId
+     * @return
+     */
+    public Callback.Cancelable orderReceipt(ObjectCallback<ResponseMessage> callback, @NonNull String orderId) {
+        String url = MessageFormat.format(Constant.ORDER_RECEIPT_URL, orderId);
+        return new SimpleModel(ResponseMessage.class).postObject(url, null, callback);
+    }
+
+    /**
      * 申请订单退款
      *
      * @return

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
 
-import org.w3c.dom.Text;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -28,6 +27,8 @@ import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 @ContentView(R.layout.content_my_fragment)
 public class MyFragment extends BaseFragment {
 
+    private final int REFUND_AND_SERVICE = 101; //退款和售后
+
     @ViewInject(R.id.my_nick_name_tv)
     private TextView nickNameTv;
 
@@ -39,7 +40,7 @@ public class MyFragment extends BaseFragment {
 
     @Event({R.id.my_waiting_pay_view, R.id.my_no_dispatch, R.id.my_already_dispatch_view,
             R.id.my_waiting_evalute_view,
-            R.id.my_refunding_view, R.id.my_volum_view, R.id.my_red_money_view,
+            R.id.my_refund_and_service_view, R.id.my_volum_view, R.id.my_red_money_view,
             R.id.my_friends_view, R.id.my_baby_view, R.id.my_info_change_view, R.id.my_pwd_change_view,
             R.id.my_receiver_address_view, R.id.exit_app_btn, R.id.my_all_order_view})
     private void onViewClick(View view) {
@@ -64,8 +65,8 @@ public class MyFragment extends BaseFragment {
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_ALREADY_DELIVER);
                 startActivity(orderIntent);
                 break;
-            case R.id.my_refunding_view:
-                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_WAIT_REFUND);
+            case R.id.my_refund_and_service_view:
+                orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, REFUND_AND_SERVICE);
                 startActivity(orderIntent);
                 break;
             case R.id.my_volum_view:

@@ -13,6 +13,9 @@ public class OrderDetail extends BaseBean {
     private int count;  //数量
     private float totalPrice;   //总价（price * count)
 
+    public OrderDetail() {
+    }
+
     public OrderDetail(Goods goods, int amount) {
         this.goods = goods;
         this.count = amount;

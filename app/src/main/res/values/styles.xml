@@ -39,6 +39,13 @@
         <item name="android:minHeight">@dimen/view_min_height</item>
     </style>
 
+    <!--自定义评分控件样式-->
+    <style name="AppRatingBarStyle" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/merchant_rating_bar</item>
+        <item name="android:minHeight">26dp</item>
+        <item name="android:maxHeight">26dp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

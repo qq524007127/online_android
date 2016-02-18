@@ -69,6 +69,9 @@
             android:name=".ui.activity.OrderActivity"
             android:label="@string/my_order" />
         <activity
+            android:name=".ui.activity.EvaluateActivity"
+            android:label="@string/order_evaluate" />
+        <activity
             android:name=".ui.activity.OrderDetailActivity"
             android:label="@string/order_detail" />
         <activity android:name=".ui.activity.ChatActivity" />
