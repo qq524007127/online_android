@@ -95,4 +95,6 @@
     <string name="evaluate">评价</string>
     <string name="no_dispatch">待发货</string>
     <string name="order_evaluate">评价</string>
+    <string name="goods_evaluate_score">商品评分：</string>
+    <string name="input_goods_evaluate">写下对商品的评价</string>
 </resources>

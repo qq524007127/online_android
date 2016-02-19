@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/evaluate_dialog_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/gray_input_bg"
+        android:gravity="top"
+        android:hint="填写对商品的评价"
+        android:lines="3"
+        android:padding="4dp"
+        android:textColor="@color/textColor"
+        android:textSize="12sp" />
+</LinearLayout>

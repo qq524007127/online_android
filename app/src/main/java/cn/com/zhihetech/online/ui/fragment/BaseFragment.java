@@ -81,13 +81,13 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showMsg(View view, String msg) {
         Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
         snackbar.show();
     }
 
     protected void showMsg(View view, int resId) {
         Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
         snackbar.show();
     }
 }

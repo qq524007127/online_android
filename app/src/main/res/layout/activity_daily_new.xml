@@ -17,7 +17,7 @@
             android:id="@+id/merchant_list_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/normalBackground">
+            android:background="@color/normal_bg">
 
         </cn.com.zhihetech.online.core.view.LoadMoreListView>
     </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>

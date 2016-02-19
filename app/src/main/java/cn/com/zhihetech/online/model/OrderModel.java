@@ -23,6 +23,18 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 public class OrderModel extends BaseModel<Order> {
 
     /**
+     * 删除指定订单
+     *
+     * @param callback
+     * @param orderId
+     * @return
+     */
+    public Callback.Cancelable orderDelete(ObjectCallback<ResponseMessage> callback, @NonNull String orderId) {
+        String url = MessageFormat.format(Constant.ORDER_DELETE_URL, orderId);
+        return new SimpleModel(ResponseMessage.class).postObject(url, null, callback);
+    }
+
+    /**
      * 订单签收
      *
      * @param callback

@@ -118,7 +118,7 @@ public class Constant implements Serializable, Cloneable {
     public static final int ORDER_STATE_ALREADY_CANCEL = 6;  //订单已取消
     public static final int ORDER_STATE_WAIT_REFUND = 7;  //订单等待退款
     public static final int ORDER_STATE_ALREADY_REFUND = 8; //订单退款成功
-    public static final int ORDER_STATE_PAYING = 9;  //正在支付中
+    public static final int ORDER_STATE_ALREADY_EVALUATE = 9;  //已评价
 
     /**
      * 消息扩展属性名称
@@ -183,9 +183,11 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_ORDERS_URL = HOST + "order/list"; //用户订单
     public static final String ORDER_PAY_URL = HOST + "order/{0}/pay"; //支付指定订单
     public static final String ORDER_CANCEL_URL = HOST + "order/{0}/cancel"; //取消指定订单
+    public static final String ORDER_DELETE_URL = HOST + "order/{0}/delete"; //删除指定订单
     public static final String ORDER_REFUND_URL = HOST + "order/{0}/refund"; //申请退款
     public static final String ORDER_RECEIPT_URL = HOST + "order/{0}/confirmReceipt"; //订单签收
     public static final String ORDER_DETAIL_URL = HOST + "order/{0}/orderDetails"; //根据订单ID获取订单详情
+    public static final String ORDER_EVALUATE_URL = HOST + "order/evaluate"; //订单评价
     public static final String CHARGE_URL = HOST + "charge/get";    //支付API-获取charge信息
     public static final String CITY_AREAS_URL = HOST + "area/rootAreas"; //获取根级（市级）区域
 }

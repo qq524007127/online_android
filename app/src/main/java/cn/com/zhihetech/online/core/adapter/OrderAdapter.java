@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import org.xutils.view.annotation.ViewInject;
 
-import java.util.List;
-
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.core.common.Constant;
@@ -99,6 +97,9 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
                 holder.deleteBtn.setVisibility(View.VISIBLE);
                 break;
             case Constant.ORDER_STATE_ALREADY_REFUND:
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                break;
+            case Constant.ORDER_STATE_ALREADY_EVALUATE:
                 holder.deleteBtn.setVisibility(View.VISIBLE);
                 break;
         }

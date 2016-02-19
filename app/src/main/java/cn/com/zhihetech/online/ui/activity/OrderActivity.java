@@ -299,8 +299,36 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
     }
 
     @Override
-    public void onDeleteClick(Order order, View view) {
+    public void onDeleteClick(Order order, final View view) {
+        int state = order.getOrderState();
+        if (state != Constant.ORDER_STATE_ALREADY_CANCEL && state != Constant.ORDER_STATE_ALREADY_REFUND && state != Constant.ORDER_STATE_ALREADY_EVALUATE) {
+            showMsg(view, "此订单不能删除");
+            return;
+        }
+        progressDialog.show();
+        new OrderModel().orderDelete(new ObjectCallback<ResponseMessage>() {
+            @Override
+            public void onObject(ResponseMessage data) {
+                if (data.getCode() != ResponseStateCode.SUCCESS) {
+                    showMsg(view, data.getMsg());
+                    return;
+                }
+                showMsg(view, "订单删除成功");
+                refreshData();
+            }
 
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                super.onError(ex, isOnCallback);
+                showMsg(view, "订单删除失败！");
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                progressDialog.dismiss();
+            }
+        }, order.getOrderId());
     }
 
     /**
@@ -340,6 +368,8 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
             } else {
                 showMsg("未知错误！");
             }
+        } else if (requestCode == REQUEST_CODE_EVALUATE && resultCode == Activity.RESULT_OK) {
+            refreshData();
         }
     }
 

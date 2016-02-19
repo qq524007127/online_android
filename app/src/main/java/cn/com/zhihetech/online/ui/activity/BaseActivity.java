@@ -55,10 +55,17 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onHomeOptionItemSelected();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Toolbar上的Home键点击回调
+     */
+    protected void onHomeOptionItemSelected() {
+        finish();
     }
 
     /**
@@ -122,13 +129,13 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void showMsg(View view, String msg) {
         Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
         snackbar.show();
     }
 
     protected void showMsg(View view, int resId) {
         Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normalBackground));
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
         snackbar.show();
     }
 

@@ -232,6 +232,8 @@ public class Order extends BaseBean {
                 return "正在退款";
             case Constant.ORDER_STATE_ALREADY_REFUND:
                 return "已退款";
+            case Constant.ORDER_STATE_ALREADY_EVALUATE:
+                return "已评价";
         }
         return "";
     }

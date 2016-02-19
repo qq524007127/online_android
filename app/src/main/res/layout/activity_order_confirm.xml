@@ -22,7 +22,7 @@
         android:id="@+id/pay_type_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/normalBackground"
+        android:background="@color/normal_bg"
         android:padding="10dp">
 
         <RadioButton

@@ -1,5 +1,8 @@
 package cn.com.zhihetech.online.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by YangDaiChun on 2015/11/12.
  */
