@@ -75,6 +75,9 @@
             android:name=".ui.activity.OrderDetailActivity"
             android:label="@string/order_detail" />
         <activity android:name=".ui.activity.ChatActivity" />
+        <activity
+            android:name=".ui.activity.ActivityInfoActivity"
+            android:label="@string/activity_page" />
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

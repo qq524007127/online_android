@@ -14,6 +14,7 @@ public class Order extends BaseBean {
     private String orderId;
     private String orderName;
     private User user;
+    private Merchant merchant;
     private String orderCode;
     private float carriage; //运费
     private float orderTotal;
@@ -58,6 +59,14 @@ public class Order extends BaseBean {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 
     public String getOrderCode() {

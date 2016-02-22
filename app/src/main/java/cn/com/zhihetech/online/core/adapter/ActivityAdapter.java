@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import cn.com.zhihetech.online.bean.Activity;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.DateUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
+import cn.com.zhihetech.online.ui.activity.ActivityInfoActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
@@ -58,14 +60,19 @@ public class ActivityAdapter extends ZhiheAdapter<Activity, ActivityAdapter.Acti
                 DateUtils.formatDateByFormat(data.getBeginDate(), "HH:mm"),
                 DateUtils.formatDateByFormat(data.getEndDate(), "HH:mm"));
         holder.dateTv.setText(text);
-        if (onActivityClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onActivityClickListener == null) {
+                    Intent intent = new Intent(mContext, ActivityInfoActivity.class);
+                    intent.putExtra(ActivityInfoActivity.ACTIVITY_NAME_KEY, data.getActivitName());
+                    intent.putExtra(ActivityInfoActivity.ACTIVITY_ID_KEY, data.getActivitId());
+                    mContext.startActivity(intent);
+                } else {
                     onActivityClickListener.onAcitvityLick(data);
                 }
-            });
-        }
+            }
+        });
     }
 
     public void setOnActivityClickListener(OnActivityClickListener onActivityClickListener) {

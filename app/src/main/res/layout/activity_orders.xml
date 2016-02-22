@@ -19,6 +19,7 @@
             android:divider="@color/gray"
             android:dividerHeight="8dp"
             android:footerDividersEnabled="false"
+            android:listSelector="@null"
             android:scrollbars="none">
 
         </cn.com.zhihetech.online.core.view.LoadMoreListView>

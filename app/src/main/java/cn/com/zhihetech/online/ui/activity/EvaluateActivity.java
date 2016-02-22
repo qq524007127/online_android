@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
-import com.alibaba.fastjson.JSONObject;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;

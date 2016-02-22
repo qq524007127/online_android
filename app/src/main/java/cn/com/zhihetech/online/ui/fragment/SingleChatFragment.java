@@ -7,8 +7,11 @@ import com.easemob.chat.EMMessage;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
+import cn.com.zhihetech.online.bean.ImgInfo;
+import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.util.StringUtils;
 
 
 /**
@@ -26,8 +29,13 @@ public class SingleChatFragment extends EaseChatFragment {
         setChatFragmentListener(new EaseChatFragmentListener() {
             @Override
             public void onSetMessageAttributes(EMMessage message) {
-                message.setAttribute(Constant.EXTEND_USER_NICK_NAME, ZhiheApplication.getInstance().getUser().getUserName());
-                message.setAttribute(Constant.EXTEND_USER_ID, ZhiheApplication.getInstance().getUser().getUserId());
+                User user = ZhiheApplication.getInstance().getUser();
+                message.setAttribute(Constant.EXTEND_USER_NICK_NAME, user.getUserName());
+                message.setAttribute(Constant.EXTEND_USER_ID, user.getUserId());
+                ImgInfo headerImg = user.getHeaderImg();
+                if (headerImg != null && !StringUtils.isEmpty(headerImg.getUrl())) {
+                    message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, headerImg.getUrl());
+                }
                 message.setAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_NORMAL_USER);
             }
 

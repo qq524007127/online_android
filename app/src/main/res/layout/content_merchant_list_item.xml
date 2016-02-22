@@ -55,8 +55,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left|center_vertical"
-                            android:padding="5dp"
-                            android:text="工xx件宝贝" />
+                            android:padding="5dp" />
                     </LinearLayout>
                 </LinearLayout>
 

@@ -28,6 +28,7 @@ import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityFragment;
@@ -41,6 +42,7 @@ import cn.com.zhihetech.online.ui.fragment.MerchantInfoFragment;
 public class MerchantHomeActivity extends BaseActivity {
 
     public final static String MERCHANT_ID_KEY = "_merchant_id";
+    public final static String MERCHANT_NAME_KEY = "MERCHANT_NAME";
 
     private String merchantId;
     private Merchant merchant;
@@ -99,6 +101,15 @@ public class MerchantHomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         merchantId = getIntent().getStringExtra(MERCHANT_ID_KEY);
         initViews();
+    }
+
+    @Override
+    protected CharSequence getToolbarTile() {
+        String merchantName = getIntent().getStringExtra(MERCHANT_NAME_KEY);
+        if (!StringUtils.isEmpty(merchantName)) {
+            return merchantName;
+        }
+        return super.getToolbarTile();
     }
 
     private void initViews() {

@@ -37,6 +37,10 @@ public class OrderDetailAdapter extends ZhiheAdapter<OrderDetail, OrderDetailAda
         holder.goodsNameTv.setText(data.getGoods().getGoodsName());
         holder.detailCount.setText("数量:" + data.getCount());
         holder.detailPrice.setText("￥" + data.getPrice());
+        holder.detailCarriage.setText("邮费:包邮");
+        if (data.getOrder().getCarriage() > 0) {
+            holder.detailCarriage.setText("邮费:" + data.getOrder().getCarriage());
+        }
     }
 
     public class OrderDetailHolder extends ZhiheAdapter.BaseViewHolder {
@@ -46,6 +50,8 @@ public class OrderDetailAdapter extends ZhiheAdapter<OrderDetail, OrderDetailAda
         public TextView goodsNameTv;
         @ViewInject(R.id.order_detail_price_tv)
         public TextView detailPrice;
+        @ViewInject(R.id.order_detail_carriage_tv)
+        public TextView detailCarriage;
         @ViewInject(R.id.order_detail_count_tv)
         public TextView detailCount;
 

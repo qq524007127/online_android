@@ -41,7 +41,7 @@ public class MerchantAdapter extends ZhiheAdapter<Merchant, MerchantAdapter.Merc
     public void onBindViewHolder(MerchantHolder holder, final Merchant data) {
         ImageLoader.disPlayImage(holder.merchHeader, data.getCoverImg());
         holder.merchantNameTv.setText(data.getMerchName());
-        holder.merchGoodsCount.setText(data.getGoodsNum() + "");
+        holder.merchGoodsCount.setText("共 " + data.getGoodsNum() + " 件宝贝");
         holder.activityFlag.setVisibility(data.getIsActivating() ? View.VISIBLE : View.GONE);
         data.getRecommendGoodses();
         initRecommendGoods(data.getRecommendGoodses(), holder);
@@ -50,6 +50,7 @@ public class MerchantAdapter extends ZhiheAdapter<Merchant, MerchantAdapter.Merc
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MerchantHomeActivity.class);
                 intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, data.getMerchantId());
+                intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, data.getMerchName());
                 mContext.startActivity(intent);
             }
         });

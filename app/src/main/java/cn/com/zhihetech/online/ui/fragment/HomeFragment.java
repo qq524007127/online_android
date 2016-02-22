@@ -3,6 +3,7 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.INotificationSideChannel;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
@@ -23,13 +24,14 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ActivityAdapter;
 import cn.com.zhihetech.online.model.ActivityModel;
+import cn.com.zhihetech.online.ui.activity.ActivityInfoActivity;
 import cn.com.zhihetech.online.ui.activity.SearchActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
 @ContentView(R.layout.content_home_fragment)
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment{
     @ViewInject(R.id.home_srl)
     private ZhiheSwipeRefreshLayout swipeRefreshLayout;
     @ViewInject(R.id.home_activity_lv)
@@ -99,7 +101,7 @@ public class HomeFragment extends BaseFragment {
             public void onFinished() {
                 swipeRefreshLayout.setRefreshing(false);
             }
-        }, new Pager(5));
+        }, new Pager());
     }
 
     @Event({R.id.home_search_btn})

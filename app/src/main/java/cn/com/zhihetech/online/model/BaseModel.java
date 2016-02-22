@@ -49,9 +49,6 @@ public abstract class BaseModel<T> {
         return x.http().get(requestParams, new BaseCallback(callback) {
             @Override
             public void onSuccess(String result) {
-                if (Constant.DEBUG) {
-                    Log.d("HomeHeaderView", result);
-                }
                 List<T> datas = JSONArray.parseArray(result, getParamTypeClass());
                 if (callback != null) {
                     callback.onSuccess(result);

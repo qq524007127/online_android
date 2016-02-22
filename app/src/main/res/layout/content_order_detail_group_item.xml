@@ -23,8 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="挚合电商" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <ListView

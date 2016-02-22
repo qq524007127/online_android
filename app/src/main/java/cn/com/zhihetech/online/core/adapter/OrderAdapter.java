@@ -6,13 +6,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.easemob.easeui.widget.EaseImageView;
+
+import org.w3c.dom.Text;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.DateUtils;
+import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
 import cn.com.zhihetech.online.ui.activity.OrderDetailActivity;
 
 /**
@@ -47,6 +53,8 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         holder.receiptPersonNameTv.setText("收货人：" + data.getReceiverName());
         holder.receiptNumTv.setText("联系电话：" + data.getReceiverPhone());
         holder.receiptDetailAddressTv.setText("地址：" + data.getReceiverAdd());
+        ImageLoader.disPlayImage(holder.orderMerchantHeaderIv, data.getMerchant().getCoverImg());
+        holder.orderMerchantNameTv.setText(data.getMerchant().getMerchName());
 
         holder.carriageInfoTv.setVisibility(View.GONE);
         if (data.getOrderState() == Constant.ORDER_STATE_ALREADY_DISPATCHER && !StringUtils.isEmpty(data.getCarriageNum())) {
@@ -54,7 +62,24 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
             holder.carriageInfoTv.setText("快递信息：" + data.getCarriageNum());
         }
 
-        holder.orderDetail.setOnClickListener(new View.OnClickListener() {
+        /**
+         * 点击商家信息进入商家界面
+         */
+        holder.orderMerchanLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Merchant merchant = data.getMerchant();
+                Intent intent = new Intent(mContext, MerchantHomeActivity.class);
+                intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, merchant.getMerchantId());
+                intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, merchant.getMerchName());
+                mContext.startActivity(intent);
+            }
+        });
+
+        /**
+         * 点击订单详情监听
+         */
+        holder.orderDetailLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
@@ -180,6 +205,10 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
     }
 
     public class OrderViewHolder extends ZhiheAdapter.BaseViewHolder {
+        @ViewInject(R.id.order_merchant_header_iv)
+        public EaseImageView orderMerchantHeaderIv;
+        @ViewInject(R.id.order_merchant_name_tv)
+        public TextView orderMerchantNameTv;
         @ViewInject(R.id.order_detail_view)
         public TextView orderDetail;
         @ViewInject(R.id.order_item_code_tv)
@@ -202,6 +231,11 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         public TextView receiptDetailAddressTv;
         @ViewInject(R.id.order_carriage_info_tv)
         public TextView carriageInfoTv;
+
+        @ViewInject(R.id.order_merchant_layout)
+        public View orderMerchanLayout;
+        @ViewInject(R.id.order_detail_layout)
+        public View orderDetailLayout;
 
         @ViewInject(R.id.order_item_cancel_btn)
         public Button cancelBtn;

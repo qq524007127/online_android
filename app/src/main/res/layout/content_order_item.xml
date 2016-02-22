@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="6dp">
@@ -21,23 +22,60 @@
             android:paddingRight="10dp"
             android:paddingTop="5dp">
 
-            <TextView
-                android:id="@+id/order_detail_view"
+            <LinearLayout
+                android:id="@+id/order_merchant_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:maxLines="2"
-                android:text="@string/order_detail"
-                android:textColor="@color/steelblue"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                <com.easemob.easeui.widget.EaseImageView
+                    android:id="@+id/order_merchant_header_iv"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:ease_border_color="@color/white"
+                    app:ease_border_width="1dp"
+                    app:ease_shape_type="round" />
+
+                <TextView
+                    android:id="@+id/order_merchant_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:textColor="@color/textColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/order_detail_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:src="@drawable/array_right" />
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_detail_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="2"
+                    android:text="@string/order_detail"
+                    android:textColor="@color/steelblue"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/array_right" />
+            </LinearLayout>
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/order_item_code_tv"
