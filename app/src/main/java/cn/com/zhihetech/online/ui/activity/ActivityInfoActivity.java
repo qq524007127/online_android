@@ -2,15 +2,17 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.core.view.ZhiheProgressDialog;
+import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.view.ZhiheWebView;
 
 /**
@@ -22,10 +24,12 @@ public class ActivityInfoActivity extends BaseActivity {
     public final static String ACTIVITY_ID_KEY = "ACTIVITY_ID";
     public final static String ACTIVITY_NAME_KEY = "ACTIVITY_NAME";
 
+    @ViewInject(R.id.activity_name_tv)
+    private TextView activitNameTv;
+    @ViewInject(R.id.activity_container_zsrl)
+    private ZhiheSwipeRefreshLayout containerRefreshLayout;
     @ViewInject(R.id.activity_container_wv)
     private ZhiheWebView webView;
-
-    private ZhiheProgressDialog progressDialog;
 
     private String actId;
 
@@ -42,37 +46,51 @@ public class ActivityInfoActivity extends BaseActivity {
     }
 
     private void initViews() {
-        progressDialog = new ZhiheProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage(getString(R.string.data_loading));
+        containerRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                webView.reload();
+            }
+        });
+        initWebView();
+    }
+
+    private void initWebView() {
         webView.loadUrl("http://www.baidu.com");
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                setActivityName(title);
+            }
+        });
         webView.setListener(new ZhiheWebView.OnWebViewEventListener() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                progressDialog.show();
+                containerRefreshLayout.setRefreshing(true);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                progressDialog.dismiss();
+                containerRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     @Override
-    protected CharSequence getToolbarTile() {
-        if (!StringUtils.isEmpty(getIntent().getStringExtra(ACTIVITY_NAME_KEY))) {
-            return getIntent().getStringExtra(ACTIVITY_NAME_KEY);
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+            return;
         }
-        return super.getToolbarTile();
+        super.onBackPressed();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
-            webView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    /**
+     * 设置活动的名称
+     *
+     * @param name
+     */
+    protected void setActivityName(String name) {
+        this.activitNameTv.setText(name);
     }
 }

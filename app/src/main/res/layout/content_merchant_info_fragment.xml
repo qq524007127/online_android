@@ -41,8 +41,12 @@
 
                     <RatingBar
                         android:id="@+id/merchant_info_score_rb"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        style="@style/AppRatingBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="5" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -103,10 +107,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/merchant_desc" />
+
                 <TextView
                     android:id="@+id/merchant_info_desc_tv"
                     android:layout_width="match_parent"

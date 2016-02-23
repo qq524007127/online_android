@@ -72,10 +72,15 @@ public class ZhiheWebView extends WebView {
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);  //设置可以访问文件
         settings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+        settings.setAppCacheEnabled(true);
     }
 
     public void setListener(OnWebViewEventListener listener) {
         this.listener = listener;
+    }
+
+    public void jsCallBack(String target) {
+        addJavascriptInterface(null, target);
     }
 
     public interface OnWebViewEventListener {
