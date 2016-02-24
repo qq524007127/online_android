@@ -139,7 +139,8 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static String HOST = "http://192.168.0.11:8080/api/";
+    public static final String DOMAIN = "http://192.168.0.11:8080/";
+    public static final String HOST = DOMAIN + "api/";
 
     public static final String VER_CODE_URL = HOST + "securityCode/get";   //获取短信验证码
     public static final String VER_CODE_VERIY_URL = HOST + "securityCode/verify";   //验证码验证
@@ -149,6 +150,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
     public static final String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
     public static final String ACTIVITY_LIST_URL = HOST + "activity/list";    //获取正在开始或即将开始的活动
+    public static final String ACTIVITY_INFO_URL = HOST + "activity/{0}";    //根据ID获取活动
     public static final String CATEGORY_ACTIVITIES_URL = HOST + "goodsAttributeSet/{0}/activities";    //获取正在开始或即将开始的活动
     public static final String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
     public static final String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息

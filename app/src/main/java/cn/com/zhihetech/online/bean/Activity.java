@@ -17,6 +17,7 @@ public class Activity extends BaseBean {
     private Date createDate;    //活动创建时间
     private String contacterName;   //活动负责人姓名
     private String contactTell;   //活动负责人联系电话
+    private String chatRoomId;  //对应聊天室
     private String activitDesc; //活动备注信息
     private String displayState; //显示当前状态
 
@@ -122,6 +123,14 @@ public class Activity extends BaseBean {
 
     public void setContactTell(String contactTell) {
         this.contactTell = contactTell;
+    }
+
+    public String getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(String chatRoomId) {
+        this.chatRoomId = chatRoomId;
     }
 
     public String getActivitDesc() {

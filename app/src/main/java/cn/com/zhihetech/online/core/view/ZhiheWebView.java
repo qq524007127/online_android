@@ -68,7 +68,7 @@ public class ZhiheWebView extends WebView {
     }
 
     private void initSettings() {
-        WebSettings settings = getSettings();
+        WebSettings settings = this.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);  //设置可以访问文件
         settings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
