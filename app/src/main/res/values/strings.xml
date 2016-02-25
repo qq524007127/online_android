@@ -99,4 +99,6 @@
     <string name="input_goods_evaluate">写下对商品的评价</string>
     <string name="activity_page">活动详情</string>
     <string name="join_main_chat_room">进入主会场</string>
+    <string name="activity_main_center">活动会场</string>
+    <string name="activity_member">参与人员</string>
 </resources>

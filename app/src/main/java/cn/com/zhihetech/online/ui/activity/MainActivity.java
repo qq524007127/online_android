@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.easemob.chat.EMChatManager;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -167,8 +169,7 @@ public class MainActivity extends BaseActivity {
      */
     private void doubleClickBackKeyExitApp() {
         if (isExit) {
-            finish();
-            ActivityStack.getInstance().clearActivity();
+            exitApp();
         } else {
             isExit = true;
             Toast.makeText(this, R.string.reclick_exit_app, Toast.LENGTH_SHORT).show();
@@ -179,5 +180,14 @@ public class MainActivity extends BaseActivity {
                 }
             }, 1000);
         }
+    }
+
+    /**
+     * 退出程序
+     */
+    private void exitApp() {
+        EMChatManager.getInstance().logout(null);
+        finish();
+        ActivityStack.getInstance().clearActivity();
     }
 }

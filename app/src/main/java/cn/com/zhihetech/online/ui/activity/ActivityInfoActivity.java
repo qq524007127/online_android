@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +12,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.easemob.easeui.EaseConstant;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+
+import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Activity;
@@ -33,8 +38,12 @@ import cn.com.zhihetech.online.model.ActivityModel;
 @ContentView(R.layout.activity_activity_info)
 public class ActivityInfoActivity extends BaseActivity {
 
+    public final static int USER_ALREADY_IN_ACTIVITY_FANS = 820;    //用户已经加入活动
+
     public final static String ACTIVITY_ID_KEY = "ACTIVITY_ID";
     public final static String ACTIVITY_NAME_KEY = "ACTIVITY_NAME";
+
+    private final static String ACTIVITY_INFO_URL = Constant.DOMAIN + "web/activity/{0}";
 
 
     @ViewInject(R.id.activity_name_tv)
@@ -50,6 +59,7 @@ public class ActivityInfoActivity extends BaseActivity {
 
     private String actId;
     private Activity activity;
+    private boolean isJoined = false;
 
     /**
      * 加载活动详情回调
@@ -66,14 +76,52 @@ public class ActivityInfoActivity extends BaseActivity {
         @Override
         public void onFinished() {
             super.onFinished();
-            progressBar.setVisibility(View.GONE);
             if (activity != null && activity.getCurrentState() == Constant.ACTIVITY_STATE_STARTED) {
-                chatRoomBtn.setVisibility(View.VISIBLE);
+                joinActivity(activity);
             } else {
-                chatRoomBtn.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         }
     };
+
+    /**
+     * 加入活动回调
+     */
+    private ObjectCallback<ResponseMessage> joinActivityCallback = new ObjectCallback<ResponseMessage>() {
+        @Override
+        public void onObject(ResponseMessage data) {
+            int code = data.getCode();
+            progressBar.setVisibility(View.GONE);
+            if (code == ResponseStateCode.SUCCESS || code == USER_ALREADY_IN_ACTIVITY_FANS) {
+                chatRoomBtn.setVisibility(View.VISIBLE);
+            } else {
+                showMsg(chatRoomBtn, data.getMsg());
+            }
+
+        }
+
+        @Override
+        public void onError(Throwable ex, boolean isOnCallback) {
+            super.onError(ex, isOnCallback);
+            showMsg(chatRoomBtn, "数据初始化失败，请下拉刷新重试！");
+            progressBar.setVisibility(View.GONE);
+        }
+    };
+
+    /**
+     * 加入活动
+     *
+     * @param act
+     */
+    private void joinActivity(Activity act) {
+        //如果已经加入了活动则不用再次加入活动
+        if (isJoined) {
+            progressBar.setVisibility(View.GONE);
+            chatRoomBtn.setVisibility(View.VISIBLE);
+            return;
+        }
+        new ActivityModel().joinActivity(joinActivityCallback, getUserId(), act.getActivitId());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +145,7 @@ public class ActivityInfoActivity extends BaseActivity {
 
     private void loadActivityInfo(@NonNull String actId) {
         progressBar.setVisibility(View.VISIBLE);
-        chatRoomBtn.setVisibility(View.GONE);
+        chatRoomBtn.setVisibility(View.INVISIBLE);
         new ActivityModel().getActivityById(activityCallback, actId);
     }
 
@@ -116,7 +164,8 @@ public class ActivityInfoActivity extends BaseActivity {
     }
 
     private void initWebView() {
-        webView.loadUrl(Constant.DOMAIN + "web/activity/" + actId);
+        String url = MessageFormat.format(ACTIVITY_INFO_URL, actId);
+        webView.loadUrl(url);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
@@ -138,7 +187,14 @@ public class ActivityInfoActivity extends BaseActivity {
 
     @Event({R.id.enter_chat_room_btn})
     private void onViewClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.enter_chat_room_btn:
+                Intent intent = new Intent(getSelf(), ActivityChatRoomActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
+                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
+                intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
+                startActivity(intent);
+        }
     }
 
     @Override

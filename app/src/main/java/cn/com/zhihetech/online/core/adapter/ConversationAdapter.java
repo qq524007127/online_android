@@ -9,18 +9,16 @@ import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.easeui.EaseConstant;
-import com.readystatesoftware.viewbadger.BadgeView;
 
 import org.xutils.view.annotation.ViewInject;
 
-import java.nio.channels.Channel;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Conversation;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.ui.activity.ChatActivity;
+import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -63,8 +61,8 @@ public class ConversationAdapter extends ZhiheAdapter<Conversation, Conversation
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChatActivity.class);
-                intent.putExtra(ChatActivity.USER_NAME_KEY, data.getNickName());
+                Intent intent = new Intent(mContext, SingleChatActivity.class);
+                intent.putExtra(SingleChatActivity.USER_NAME_KEY, data.getNickName());
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getEmConver().getUserName());
                 mContext.startActivity(intent);
                 new Thread(new Runnable() {

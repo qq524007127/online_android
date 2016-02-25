@@ -2,7 +2,6 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -133,7 +132,7 @@ public class MerchantHomeActivity extends BaseActivity {
             case R.id.merchant_home_contact_btn:    //点击跳转到与商家发送消息
                 if (this.merchant != null) {
                     saveMerchantInfo(this.merchant);
-                    Intent intent = new Intent(this, ChatActivity.class);
+                    Intent intent = new Intent(this, SingleChatActivity.class);
                     intent.putExtra(EaseConstant.EXTRA_USER_ID, this.merchant.getEMUserId());
                     startActivity(intent);
                 }

@@ -20,7 +20,6 @@ import cn.com.zhihetech.online.core.util.StringUtils;
  */
 public class SingleChatFragment extends EaseChatFragment {
 
-
     @Override
     protected void initView() {
         super.initView();

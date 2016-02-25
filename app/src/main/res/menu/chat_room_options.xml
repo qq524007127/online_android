@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/chat_room_members"
+        android:icon="@drawable/ease_to_group_details_normal"
+        android:title="@string/activity_member"
+        app:showAsAction="always" />
+
+</menu>

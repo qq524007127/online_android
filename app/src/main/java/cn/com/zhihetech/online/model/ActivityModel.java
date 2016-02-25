@@ -76,4 +76,17 @@ public class ActivityModel extends BaseModel<Activity> {
         String url = MessageFormat.format(Constant.ACTIVITY_INFO_URL, activityId);
         return getResponseMessage(url, null, callback);
     }
+
+    /**
+     * 用户加入活动
+     *
+     * @param callback
+     * @param userId
+     * @param activityId
+     * @return
+     */
+    public Callback.Cancelable joinActivity(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String activityId) {
+        ModelParams params = new ModelParams().addParam("userId", userId).addParam("activityId", activityId);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.ACTIVITY_FANDS_ADD_URL, params, callback);
+    }
 }

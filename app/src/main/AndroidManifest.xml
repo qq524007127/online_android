@@ -74,10 +74,12 @@
         <activity
             android:name=".ui.activity.OrderDetailActivity"
             android:label="@string/order_detail" />
-        <activity android:name=".ui.activity.ChatActivity" />
+        <activity android:name=".ui.activity.SingleChatActivity" />
         <activity
             android:name=".ui.activity.ActivityInfoActivity"
             android:label="@string/activity_page" />
+        <activity android:name=".ui.activity.ActivityChatRoomActivity"
+            android:label="@string/activity_main_center"/>
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

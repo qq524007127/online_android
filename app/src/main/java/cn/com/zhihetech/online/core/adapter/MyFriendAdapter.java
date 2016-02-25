@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easemob.easeui.EaseConstant;
 
@@ -18,7 +17,7 @@ import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.ui.activity.ChatActivity;
+import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -42,8 +41,7 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChatActivity.class);
-                //intent.putExtra(ChatActivity.USER_NAME_KEY, data.getMerchName());
+                Intent intent = new Intent(mContext, SingleChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getEMUserId());
                 try {
                     saveMerchantInfo(data);

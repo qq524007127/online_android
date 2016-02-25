@@ -79,7 +79,6 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         } catch (DbException e) {
             e.printStackTrace();
         }
-        //onLoginSuccess(this.token);
     }
 
     /**

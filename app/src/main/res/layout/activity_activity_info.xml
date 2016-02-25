@@ -37,24 +37,27 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0">
 
+                <Button
+                    android:id="@+id/enter_chat_room_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/search_btn_bg"
+                    android:text="进入会场"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="invisible"/>
+
                 <ProgressBar
                     android:id="@+id/activity_progress_pb"
                     style="@android:style/Widget.ProgressBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:layout_margin="8dp"
                     android:minHeight="26dp"
                     android:minWidth="26dp" />
 
-                <Button
-                    android:id="@+id/enter_chat_room_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
-                    android:background="@drawable/search_btn_bg"
-                    android:text="进入会场"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.Toolbar>

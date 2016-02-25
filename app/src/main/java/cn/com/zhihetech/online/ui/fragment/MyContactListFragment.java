@@ -19,7 +19,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.db.DBUtils;
-import cn.com.zhihetech.online.ui.activity.ChatActivity;
+import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 
 /**
  * Created by ShenYunjie on 2016/2/16.
@@ -96,13 +96,13 @@ public class MyContactListFragment extends EaseConversationListFragment {
     }
 
     /**
-     * 设置回话点击事件
+     * 设置会话点击事件
      */
     private void initConversationListItemClickListener() {
         setConversationListItemClickListener(new EaseConversationListItemClickListener() {
             @Override
             public void onListItemClicked(final EMConversation conversation) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                Intent intent = new Intent(getActivity(), SingleChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName());
                 getActivity().startActivity(intent);
             }

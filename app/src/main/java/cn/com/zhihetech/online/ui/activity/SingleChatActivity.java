@@ -5,36 +5,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.easemob.EMEventListener;
-import com.easemob.EMNotifierEvent;
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMConversation;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
-import com.easemob.easeui.ui.EaseChatFragment;
-import com.easemob.easeui.widget.EaseAlertDialog;
-import com.easemob.easeui.widget.EaseChatInputMenu;
-import com.easemob.easeui.widget.EaseChatPrimaryMenuBase;
 
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
-import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
  */
 @ContentView(R.layout.activity_chat)
-public class ChatActivity extends BaseActivity {
+public class SingleChatActivity extends BaseActivity {
 
     public static String USER_NAME_KEY = "EMCHAT_USER_NAME";
 
-    public static ChatActivity activityInstance;
+    public static SingleChatActivity activityInstance;
     private SingleChatFragment chatFragment;
     private String toChatUsername;
 
@@ -81,7 +74,7 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         // 点击notification bar进入聊天页面，保证只有一个聊天页面
-        String username = intent.getStringExtra("userId");
+        String username = intent.getStringExtra(EaseConstant.EXTRA_USER_ID);
         if (toChatUsername.equals(username))
             super.onNewIntent(intent);
         else {
@@ -102,13 +95,18 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected CharSequence getToolbarTile() {
         String userId = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        try {
-            EMUserInfo userInfo = new DBUtils().getUserInfoByUserName(userId);
-            if (userInfo != null) {
-                return userInfo.getUserNick();
-            }
-        } catch (DbException e) {
-            e.printStackTrace();
+        EMConversation conversation = EMChatManager.getInstance().getConversation(userId);
+        switch (conversation.getType()) {
+            case Chat:
+                try {
+                    EMUserInfo userInfo = new DBUtils().getUserInfoByUserName(userId);
+                    if (userInfo != null) {
+                        return userInfo.getUserNick();
+                    }
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
         return super.getToolbarTile();
     }

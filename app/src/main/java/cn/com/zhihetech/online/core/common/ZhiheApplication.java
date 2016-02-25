@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
@@ -18,19 +17,14 @@ import com.easemob.easeui.controller.EaseUI;
 import org.xutils.DbManager;
 import org.xutils.common.util.FileUtil;
 import org.xutils.db.table.TableEntity;
-import org.xutils.ex.DbException;
 import org.xutils.x;
 
-import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.User;
-import cn.com.zhihetech.online.core.db.DBUtils;
-import cn.com.zhihetech.online.ui.activity.ChatActivity;
+import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -191,15 +185,12 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
 
             @Override
             public Intent onNotificationClick(EMMessage message) {
-                Intent intent = new Intent(getInstance(), ChatActivity.class);
+                Intent intent = new Intent(getInstance(), SingleChatActivity.class);
                 EMMessage.ChatType chatType = message.getChatType();
                 if (chatType == EMMessage.ChatType.Chat) { //单聊信息
-                    intent.putExtra(ChatActivity.USER_NAME_KEY, message.getFrom());
-                    //intent.putExtra("chatType", ChatActivity.CHATTYPE_SINGLE);
+                    intent.putExtra(SingleChatActivity.USER_NAME_KEY, message.getFrom());
                 } else { //群聊信息
-                    //message.getTo()为群聊id
-                    intent.putExtra(ChatActivity.USER_NAME_KEY, message.getTo());
-                    //intent.putExtra("chatType", ChatActivity.CHATTYPE_GROUP);
+                    intent.putExtra(SingleChatActivity.USER_NAME_KEY, message.getTo());
                 }
                 return intent;
             }
