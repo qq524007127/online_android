@@ -23,6 +23,9 @@ import cn.com.zhihetech.online.model.UserModel;
 
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
+
+    private final int REQUEST_MERCHANT_LOGIN_CODE = 1;
+
     @ViewInject(R.id.user_code_et)
     private EditText userCodeEt;
     @ViewInject(R.id.user_pwd_et)
@@ -52,7 +55,7 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @Event({R.id.register_btn, R.id.login_btn})
+    @Event({R.id.register_btn, R.id.login_btn, R.id.forget_password, R.id.merchant_version_login})
     private void onViewClick(View paramView) {
         switch (paramView.getId()) {
             case R.id.register_btn:
@@ -60,6 +63,13 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login_btn:
                 userLogin();
+                break;
+            case R.id.forget_password:
+
+                break;
+            case R.id.merchant_version_login:
+                Intent intent = new Intent(this, MerchantLoginActivity.class);
+                startActivityForResult(intent, REQUEST_MERCHANT_LOGIN_CODE);
                 break;
         }
     }
@@ -101,5 +111,14 @@ public class LoginActivity extends BaseActivity {
                 progressDialog.dismiss();
             }
         }, userCode, password);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_MERCHANT_LOGIN_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent(this, null);
+            startActivity(intent);
+            finish();
+        }
     }
 }

@@ -193,6 +193,7 @@ public class ActivityInfoActivity extends BaseActivity {
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
                 intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
                 intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
+                intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
                 startActivity(intent);
         }
     }

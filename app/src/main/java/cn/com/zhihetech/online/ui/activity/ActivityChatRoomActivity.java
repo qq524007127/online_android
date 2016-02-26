@@ -27,6 +27,9 @@ import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
 public class ActivityChatRoomActivity extends BaseActivity {
 
     public static String CHAT_ROOM_NAME = "CHAT_ROOM_NAME";
+    public static String ACTIVITY_ID = "ACTIVITY_ID";
+
+    private String activityId;
 
     public static ActivityChatRoomActivity activityInstance;
     private SingleChatFragment chatFragment;
@@ -35,6 +38,7 @@ public class ActivityChatRoomActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        activityId = getIntent().getStringExtra(ACTIVITY_ID);
         activityInstance = this;
         initChatFragment();
     }
@@ -117,6 +121,9 @@ public class ActivityChatRoomActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.chat_room_members) {
             //跳转到参加活动的会员列表
+            Intent intent = new Intent(this, ActivityFansActivity.class);
+            intent.putExtra(ActivityFansActivity.ACTIVITY_ID_KEY, activityId);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.MerchantLoginActivity" />
         <activity
             android:name=".ui.activity.RegisterVerCodeActivity"
             android:label="@string/regist_vercode" />
@@ -78,8 +79,12 @@
         <activity
             android:name=".ui.activity.ActivityInfoActivity"
             android:label="@string/activity_page" />
-        <activity android:name=".ui.activity.ActivityChatRoomActivity"
-            android:label="@string/activity_main_center"/>
+        <activity
+            android:name=".ui.activity.ActivityChatRoomActivity"
+            android:label="@string/activity_main_center" />
+        <activity
+            android:name=".ui.activity.ActivityFansActivity"
+            android:label="@string/activity_fans" />
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

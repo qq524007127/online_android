@@ -101,4 +101,8 @@
     <string name="join_main_chat_room">进入主会场</string>
     <string name="activity_main_center">活动会场</string>
     <string name="activity_member">参与人员</string>
+    <string name="activity_fans">活动会员</string>
+    <string name="merchant_version_login">商家版登录</string>
+    <string name="login_code">登录账号</string>
+    <string name="app_merchant_version">挚合实淘商家版</string>
 </resources>

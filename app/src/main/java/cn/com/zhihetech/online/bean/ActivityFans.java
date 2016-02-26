@@ -1,5 +1,7 @@
 package cn.com.zhihetech.online.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class ActivityFans extends BaseBean {
@@ -45,6 +47,7 @@ public class ActivityFans extends BaseBean {
         return user;
     }
 
+    @JSONField(name = "fans")
     public void setUser(User user) {
         this.user = user;
     }

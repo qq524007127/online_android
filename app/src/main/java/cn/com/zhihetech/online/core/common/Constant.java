@@ -193,5 +193,6 @@ public class Constant implements Serializable, Cloneable {
     public static final String CHARGE_URL = HOST + "charge/get";    //支付API-获取charge信息
     public static final String CITY_AREAS_URL = HOST + "area/rootAreas"; //获取根级（市级）区域
 
-    public static final String ACTIVITY_FANDS_ADD_URL = HOST + "activityFans/add";    //添加活动会员
+    public static final String ACTIVITY_FANS_ADD_URL = HOST + "activityFans/add";    //添加活动会员
+    public static final String ACTIVITY_FANS_LIST_URL = HOST + "activity/{0}/activityFans";    //添加活动会员
 }

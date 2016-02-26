@@ -87,6 +87,6 @@ public class ActivityModel extends BaseModel<Activity> {
      */
     public Callback.Cancelable joinActivity(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String activityId) {
         ModelParams params = new ModelParams().addParam("userId", userId).addParam("activityId", activityId);
-        return new SimpleModel(ResponseMessage.class).postObject(Constant.ACTIVITY_FANDS_ADD_URL, params, callback);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.ACTIVITY_FANS_ADD_URL, params, callback);
     }
 }
