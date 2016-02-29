@@ -7,7 +7,9 @@ import org.xutils.common.Callback;
 import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.bean.Merchant;
+import cn.com.zhihetech.online.bean.MerchantToken;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.common.MerchantLoginCallback;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
@@ -100,5 +102,18 @@ public class MerchantModel extends BaseModel<Merchant> {
         String url = MessageFormat.format(Constant.USER_FOCUS_MERCHANTS_URL, userId);
         ModelParams params = new ModelParams().addPager(pager);
         return getPageData(url, params, callback);
+    }
+
+    /**
+     * 商家版账号登录
+     *
+     * @param callback
+     * @param adminCode //商家登录账号
+     * @param adminPwd  //商家登录密码
+     * @return
+     */
+    public Callback.Cancelable login(MerchantLoginCallback callback, @NonNull String adminCode, @NonNull String adminPwd) {
+        ModelParams params = new ModelParams().addParam("adminCode", adminCode).addParam("adminPwd", adminPwd);
+        return new SimpleModel(MerchantToken.class).postResponseMessage(Constant.MERCHANT_LOGIN_URL, params, callback);
     }
 }

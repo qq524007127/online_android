@@ -5,7 +5,7 @@ import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.ex.DbException;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
-import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 
 /**
  * Created by ShenYunjie on 2016/2/15.
@@ -30,17 +30,10 @@ public class DBUtils {
      * @return
      * @throws DbException
      */
-    public EMUserInfo saveOrUpdateUserInfo(EMUserInfo userInfo) throws DbException {
-        EMUserInfo tmp = getUserInfoByUserName(userInfo.getUserName());
-        if (tmp == null) {
-            getDbManager().saveBindingId(userInfo);
-            return userInfo;
-        }
-        tmp.setAvatarUrl(userInfo.getAvatarUrl());
-        tmp.setUserNick(userInfo.getUserNick());
-        tmp.setUserType(userInfo.getUserType());
-        getDbManager().saveOrUpdate(tmp);
-        return tmp;
+    public EMUserInfo saveUserInfo(EMUserInfo userInfo) throws DbException {
+        getDbManager().delete(EMUserInfo.class, WhereBuilder.b("user_name", "=", userInfo.getUserName()));
+        getDbManager().saveBindingId(userInfo);
+        return userInfo;
     }
 
     protected DbManager getDbManager() {

@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import cn.com.zhihetech.online.core.common.Constant;
+
 public class SharedPreferenceUtils {
     private static final String SHARED_PREFERENCES_CONFIG = "zhihe_config";
+    private static final String USER_TYPE = "zhihe_user_type";
     private static final String MOBILE_KEY = "zhihe_user_mobile";
     private static final String USER_PASSWORD_KEY = "zhihe_user_login_password";
     private static final String TOKEN_KEY = "zhihe_login_token";
@@ -25,6 +28,14 @@ public class SharedPreferenceUtils {
 
     public SharedPreferences getSharedPreferences() {
         return this.mContext.getSharedPreferences(SHARED_PREFERENCES_CONFIG, Context.MODE_PRIVATE);
+    }
+
+    public int getUserType() {
+        return getSharedPreferences().getInt(USER_TYPE, Constant.COMMON_USER);
+    }
+
+    public void setUserType(int userType) {
+        getEditor().putInt(USER_TYPE, userType).commit();
     }
 
     public String getUserMobileNum() {

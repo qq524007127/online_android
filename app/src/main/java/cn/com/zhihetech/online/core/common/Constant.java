@@ -94,7 +94,8 @@ public class Constant implements Serializable, Cloneable {
      * 用户类型，分为普通用户与买手用户
      */
     public final static int COMMON_USER = 1;    //普通用户
-    public final static int BUYER_USER = 2; //买手用户
+    public final static int MERCHANT_USER = 2; //买手用户
+    public final static int BUYER_USER = 3; //买手用户
 
     /**
      * 轮播图所处的位置
@@ -154,6 +155,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String CATEGORY_ACTIVITIES_URL = HOST + "goodsAttributeSet/{0}/activities";    //获取正在开始或即将开始的活动
     public static final String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
     public static final String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息
+    public static final String MERCHANT_LOGIN_URL = HOST + "merchant/login";    //商家登录
     public static final String CHECK_MERCHANT_FUCOS_STATE_URL = HOST + "checkFocus";    //查询商家关注状态
     public static final String FOCUS_MERCHANT_URL = HOST + "focusMerchant/add";    //关注商家
     public static final String USER_FOCUS_MERCHANTS_URL = HOST + "user/{0}/focusMerchants";    //获取关注商家列表

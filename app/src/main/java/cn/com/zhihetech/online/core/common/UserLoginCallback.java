@@ -13,6 +13,7 @@ import org.xutils.ex.DbException;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.bean.User;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
@@ -70,6 +71,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         }
         this.token = responseMessage.getData();
         ZhiheApplication.getInstance().setUserId(token.getUser().getUserId()).setUser(responseMessage.getData().getUser());
+        preferenceUtils.setUserType(Constant.COMMON_USER);
         preferenceUtils.setUserToken(token.getToken());
         preferenceUtils.setUserMobileNum(userCode);
         preferenceUtils.setUserPassword(userPwd);
@@ -90,7 +92,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
             header = user.getHeaderImg().getUrl();
         }
         EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header, Constant.EXTEND_NORMAL_USER);
-        new DBUtils().saveOrUpdateUserInfo(userInfo);
+        new DBUtils().saveUserInfo(userInfo);
     }
 
     @Override
@@ -108,7 +110,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      */
     private void loginEMChat() {
         if (!EMChat.getInstance().isLoggedIn()) {
-            String userName = ZhiheApplication.getInstance().getEMChatUserName();
+            String userName = ZhiheApplication.getInstance().getEmChatUserName();
             String pwd = ZhiheApplication.getInstance().getEMChatPassword();
             EMChatManager.getInstance().login(userName, pwd, emCallBack);
         } else {

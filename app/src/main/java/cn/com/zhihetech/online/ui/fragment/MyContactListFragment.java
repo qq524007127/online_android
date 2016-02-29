@@ -33,7 +33,7 @@ public class MyContactListFragment extends EaseConversationListFragment {
                 case EventNewMessage:
                     EMMessage message = (EMMessage) emNotifierEvent.getData();
                     try {
-                        new DBUtils().saveOrUpdateUserInfo(createEMUserInfo(message));
+                        new DBUtils().saveUserInfo(createEMUserInfo(message));
                     } catch (DbException e) {
                         e.printStackTrace();
                     }

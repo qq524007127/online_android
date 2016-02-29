@@ -26,7 +26,7 @@ import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
@@ -149,7 +149,7 @@ public class MerchantHomeActivity extends BaseActivity {
     private void saveMerchantInfo(Merchant merchant) {
         EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getCoverImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
         try {
-            new DBUtils().saveOrUpdateUserInfo(userInfo);
+            new DBUtils().saveUserInfo(userInfo);
         } catch (DbException e) {
             e.printStackTrace();
         }

@@ -116,7 +116,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_MERCHANT_LOGIN_CODE && resultCode == RESULT_OK) {
-            Intent intent = new Intent(this, null);
+            Intent intent = new Intent(this, MerchantMainActivity.class);
             startActivity(intent);
             finish();
         }

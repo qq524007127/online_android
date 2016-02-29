@@ -10,7 +10,7 @@ import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.StringUtils;
 
 

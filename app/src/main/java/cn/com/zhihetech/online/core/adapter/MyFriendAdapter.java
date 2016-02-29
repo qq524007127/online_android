@@ -63,7 +63,7 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
      */
     private void saveMerchantInfo(Merchant merchant) throws DbException {
         EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getCoverImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
-        new DBUtils().saveOrUpdateUserInfo(userInfo);
+        new DBUtils().saveUserInfo(userInfo);
     }
 
     public class MyFriendViewHolder extends ZhiheAdapter.BaseViewHolder {

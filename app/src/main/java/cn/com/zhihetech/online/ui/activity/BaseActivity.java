@@ -17,7 +17,7 @@ import org.xutils.x;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.core.common.ZhiheApplication;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 
 /**
  * Created by ShenYunjie on 2016/1/15.

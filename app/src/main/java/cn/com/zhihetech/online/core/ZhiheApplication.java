@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.common;
+package cn.com.zhihetech.online.core;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -19,17 +19,27 @@ import org.xutils.common.util.FileUtil;
 import org.xutils.db.table.TableEntity;
 import org.xutils.x;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
+import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
 public class ZhiheApplication extends Application implements Thread.UncaughtExceptionHandler {
+
+    private final static String LOGIN_MERCHANT_EXT_KEY = "__current_loged_merchant";
+
+    public final static int COMMON_USER_TYPE = Constant.COMMON_USER;    //普通用户
+    public final static int MERCHANT_USER_TYPE = Constant.MERCHANT_USER;    //商家用户
 
     private final int DB_VERVION = 1;
     private final String DB_NAME = "zhihe_db";
@@ -38,8 +48,11 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     protected static ZhiheApplication instance;
     protected String userId;
     protected User user;
+    protected int userType = COMMON_USER_TYPE;
+    protected String emChatUserName;
 
     protected DbManager dbManager;
+    private Map<String, Object> extInfo = new HashMap<>();
 
     @Override
     public void onCreate() {
@@ -74,12 +87,32 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     }
 
     /**
+     * 设置环信账号
+     *
+     * @param emChatUserName
+     */
+    public void setEmChatUserName(String emChatUserName) {
+        this.emChatUserName = emChatUserName;
+    }
+
+    /**
      * 获取环信用户名
      *
      * @return
      */
-    public String getEMChatUserName() {
+    public String getEmChatUserName() {
+        if (!StringUtils.isEmpty(this.emChatUserName)) {
+            return this.emChatUserName;
+        }
         return this.userId.replaceAll("-", "");
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 
     /**
@@ -88,6 +121,12 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
      * @return
      */
     public String getEMChatPassword() {
+        switch (userType) {
+            case COMMON_USER_TYPE:
+                return getUser().getUserId();
+            case MERCHANT_USER_TYPE:
+                return getLogedMerchant().getMerchantId();
+        }
         return this.userId;
     }
 
@@ -98,6 +137,39 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
 
+    }
+
+    /**
+     * 添加扩展信息（如果key已经存在则覆盖之前的数据）
+     *
+     * @param key
+     * @param val
+     */
+    public void addExtInfo(String key, Object val) {
+        this.extInfo.put(key, val);
+    }
+
+    /**
+     * 获取扩展信息
+     *
+     * @param key
+     * @return
+     */
+    public Object getExtInfo(String key) {
+        return this.extInfo.get(key);
+    }
+
+    /**
+     * 将当前登录商家加入扩展信息中
+     *
+     * @param merchant
+     */
+    public void setMerchant(Merchant merchant) {
+        addExtInfo(LOGIN_MERCHANT_EXT_KEY, merchant);
+    }
+
+    public Merchant getLogedMerchant() {
+        return (Merchant) getExtInfo(LOGIN_MERCHANT_EXT_KEY);
     }
 
     /**
