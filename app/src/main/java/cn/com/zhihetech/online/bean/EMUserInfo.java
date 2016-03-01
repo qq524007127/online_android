@@ -17,15 +17,18 @@ public class EMUserInfo extends BaseBean {
     private String userNick;    //用户昵称
     @Column(name = "avatar_url")
     private String avatarUrl;   //用户头像地址
+    @Column(name = "app_user_id", property = "NOT NULL")
+    private String appUserId;   //平台用户ID
     private int userType;      //用户类型
 
     public EMUserInfo() {
     }
 
-    public EMUserInfo(String userName, String userNick, String avatarUrl, int userType) {
+    public EMUserInfo(String userName, String userNick, String avatarUrl, String appUserId, int userType) {
         this.userName = userName;
         this.userNick = userNick;
         this.avatarUrl = avatarUrl;
+        this.appUserId = appUserId;
         this.userType = userType;
     }
 
@@ -59,6 +62,14 @@ public class EMUserInfo extends BaseBean {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getAppUserId() {
+        return appUserId;
+    }
+
+    public void setAppUserId(String appUserId) {
+        this.appUserId = appUserId;
     }
 
     public int getUserType() {

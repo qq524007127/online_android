@@ -147,7 +147,8 @@ public class MerchantHomeActivity extends BaseActivity {
      * @throws DbException
      */
     private void saveMerchantInfo(Merchant merchant) {
-        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), merchant.getCoverImg().getUrl(), Constant.EXTEND_MERCHANT_USER);
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(),
+                merchant.getCoverImg().getUrl(), merchantId, Constant.EXTEND_MERCHANT_USER);
         try {
             new DBUtils().saveUserInfo(userInfo);
         } catch (DbException e) {

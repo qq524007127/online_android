@@ -87,7 +87,8 @@
             android:label="@string/activity_fans" />
 
         <!--商家版-->
-        <activity android:name=".ui.activity.MerchantMainActivity" />
+        <activity android:name=".ui.activity.MerchantMainActivity"
+            android:label="@string/app_merchant_version"/>
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

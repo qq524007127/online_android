@@ -24,7 +24,7 @@ import cn.com.zhihetech.online.model.MerchantModel;
  * Created by ShenYunjie on 2016/1/28.
  */
 @ContentView(R.layout.content_my_friends)
-public class MyFriendsFragment extends BaseFragment {
+public class MyFocusMercahntsFragment extends BaseFragment {
 
     @ViewInject(R.id.my_friends_refresh_layout)
     private ZhiheSwipeRefreshLayout refreshLayout;
@@ -77,6 +77,6 @@ public class MyFriendsFragment extends BaseFragment {
         if (!refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(true);
         }
-        new MerchantModel().getFocusMerchantsByUserId(friendCallback, new Pager(Integer.MAX_VALUE), getUseId());
+        new MerchantModel().getFocusMerchantsByUserId(friendCallback, new Pager(Integer.MAX_VALUE), getLoginUserId());
     }
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.xutils.x;
 
@@ -42,7 +43,7 @@ public abstract class BaseFragment extends Fragment {
      *
      * @return
      */
-    protected String getUseId() {
+    protected String getLoginUserId() {
         return getUser().getUserId();
     }
 
@@ -77,6 +78,10 @@ public abstract class BaseFragment extends Fragment {
                 ex.printStackTrace();
             }
         }
+    }
+
+    protected void showMsg(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     protected void showMsg(View view, String msg) {

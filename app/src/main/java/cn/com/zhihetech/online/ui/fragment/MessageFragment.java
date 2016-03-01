@@ -30,7 +30,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void initViews() {
-        final Fragment[] fragments = {new MyContactListFragment(), new MyFriendsFragment()};
+        final Fragment[] fragments = {new MyContactListFragment(), new MyFocusMercahntsFragment()};
         final String[] tabs = {"消息", "我的好友"};
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override

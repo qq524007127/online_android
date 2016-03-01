@@ -86,6 +86,7 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
         } catch (DbException e) {
             e.printStackTrace();
         }
+        updateEMUserNick(this.token.getMerchant().getMerchName());
         loginEMChat(application.getEmChatUserName(), application.getEMChatPassword());
     }
 
@@ -109,7 +110,7 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
         if (merchant.getCoverImg() != null) {
             header = merchant.getCoverImg().getUrl();
         }
-        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), header, Constant.EXTEND_MERCHANT_USER);
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), header, merchant.getEMUserId(), Constant.EXTEND_MERCHANT_USER);
         new DBUtils().saveUserInfo(userInfo);
     }
 
@@ -118,6 +119,15 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
      */
     protected void loginEMChat(String userName, String password) {
         EMChatManager.getInstance().login(userName, password, emCallback);
+    }
+
+    protected void updateEMUserNick(final String userNick) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EMChatManager.getInstance().updateCurrentUserNick(userNick);
+            }
+        }).start();
     }
 
     public abstract void onLoginSuccess(Merchant merchant);

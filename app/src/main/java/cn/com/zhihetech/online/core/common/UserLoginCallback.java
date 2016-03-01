@@ -91,7 +91,8 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         if (user.getHeaderImg() != null) {
             header = user.getHeaderImg().getUrl();
         }
-        EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header, Constant.EXTEND_NORMAL_USER);
+        EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header,
+                user.getUserId(), Constant.EXTEND_NORMAL_USER);
         new DBUtils().saveUserInfo(userInfo);
     }
 

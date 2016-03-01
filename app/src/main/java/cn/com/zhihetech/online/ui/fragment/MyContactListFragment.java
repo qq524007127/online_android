@@ -119,6 +119,8 @@ public class MyContactListFragment extends EaseConversationListFragment {
         EMUserInfo userInfo = new EMUserInfo();
         userInfo.setUserName(message.getUserName());
         userInfo.setUserNick(message.getStringAttribute(Constant.EXTEND_USER_NICK_NAME, "未知用户"));
+        userInfo.setAvatarUrl(message.getStringAttribute(Constant.EXTEND_USER_HEAD_IMG, ""));
+        userInfo.setAppUserId(message.getStringAttribute(Constant.EXTEND_USER_ID, ""));
         userInfo.setUserType(message.getIntAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_MERCHANT_USER));
         return userInfo;
     }

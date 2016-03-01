@@ -219,11 +219,11 @@ public class ShoppingCartFragment extends BaseFragment {
 
     private void refreshData() {
         refreshLayout.setRefreshing(true);
-        new ShoppingCartModel().getShoppingCartsByUserId(refreshCallback, new Pager(), getUseId());
+        new ShoppingCartModel().getShoppingCartsByUserId(refreshCallback, new Pager(), getLoginUserId());
     }
 
     private void loadMoreData() {
-        new ShoppingCartModel().getShoppingCartsByUserId(loadMoreCallback, pageData.getNextPage(), getUseId());
+        new ShoppingCartModel().getShoppingCartsByUserId(loadMoreCallback, pageData.getNextPage(), getLoginUserId());
     }
 
     @Override

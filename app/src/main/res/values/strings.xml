@@ -105,4 +105,8 @@
     <string name="merchant_version_login">商家版登录</string>
     <string name="login_code">登录账号</string>
     <string name="app_merchant_version">挚合实淘商家版</string>
+    <string name="red_envelope">红包</string>
+    <string name="shop_link">店铺链接</string>
+    <string name="goods_link">商品链接</string>
+    <string name="seckill_goods">秒杀商品</string>
 </resources>

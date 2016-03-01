@@ -128,13 +128,22 @@ public class Constant implements Serializable, Cloneable {
     public final static String EXTEND_USER_HEAD_IMG = "headerImg";//头像
     public final static String EXTEND_USER_ID = "userID";//用户ID
     public final static String EXTEND_USER_TYPE = "userType";//userType用户类型
+    public final static String EXTEND_MESSAGE_TYPE = "messageType"; //自定义扩展消息类型
 
     /**
-     * 消息扩展用户类型
+     * 自定义消息扩展用户类型
      */
     public final static int EXTEND_NORMAL_USER = 1;    //普通用户
     public final static int EXTEND_MERCHANT_USER = 2;  //商家
     public final static int EXTEND_SERVICE_USER = 3;   //客服
+
+    /**
+     * 自定义消息扩展消息类型
+     */
+    public final static int EXTEND_MESSAGE_RED_ENVELOPE = 1;
+    public final static int EXTEND_MESSAGE_SHOP_LINK = 2;
+    public final static int EXTEND_MESSAGE_GOODS_LINK = 3;
+    public final static int EXTEND_MESSAGE_SECKILL_GOODS = 4;
 
 
     /**
