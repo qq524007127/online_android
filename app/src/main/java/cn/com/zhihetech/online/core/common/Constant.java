@@ -94,7 +94,7 @@ public class Constant implements Serializable, Cloneable {
      * 用户类型，分为普通用户与买手用户
      */
     public final static int COMMON_USER = 1;    //普通用户
-    public final static int MERCHANT_USER = 2; //买手用户
+    public final static int MERCHANT_USER = 2; //商家用户
     public final static int BUYER_USER = 3; //买手用户
 
     /**
@@ -206,4 +206,7 @@ public class Constant implements Serializable, Cloneable {
 
     public static final String ACTIVITY_FANS_ADD_URL = HOST + "activityFans/add";    //添加活动会员
     public static final String ACTIVITY_FANS_LIST_URL = HOST + "activity/{0}/activityFans";    //添加活动会员
+
+    public static final String MERCHANT_ACTIVITY_RED_ENVELOPS_URL = HOST + "redEnvelop/list";  //商家的活动红包
+    public static final String UPDATE_RED_ENVELOP_STATU_URL = HOST + "redEnvelop/{0}/sended";  //更新红包状态为已发送
 }

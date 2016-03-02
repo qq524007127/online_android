@@ -17,7 +17,7 @@ import org.xutils.view.annotation.ContentView;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
-import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
+import cn.com.zhihetech.online.ui.fragment.ChatFragment;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
@@ -28,7 +28,7 @@ public class SingleChatActivity extends BaseActivity {
     public static String USER_NAME_KEY = "EMCHAT_USER_NAME";
 
     public static SingleChatActivity activityInstance;
-    private SingleChatFragment chatFragment;
+    private ChatFragment chatFragment;
     private String toChatUsername;
 
     @Override
@@ -41,7 +41,7 @@ public class SingleChatActivity extends BaseActivity {
     private void initChatFragment() {
         //聊天人或群id
         toChatUsername = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new SingleChatFragment();
+        chatFragment = new ChatFragment();
         chatFragment.hideTitleBar();
         //传入参数
         chatFragment.setArguments(getIntent().getExtras());

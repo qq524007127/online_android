@@ -15,9 +15,10 @@ import org.xutils.view.annotation.ContentView;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.ui.fragment.SingleChatFragment;
+import cn.com.zhihetech.online.ui.fragment.ChatFragment;
 
 /**
  * 活动聊天室
@@ -32,7 +33,7 @@ public class ActivityChatRoomActivity extends BaseActivity {
     private String activityId;
 
     public static ActivityChatRoomActivity activityInstance;
-    private SingleChatFragment chatFragment;
+    private ChatFragment chatFragment;
     private String toChatRoom;
 
     @Override
@@ -46,7 +47,7 @@ public class ActivityChatRoomActivity extends BaseActivity {
     private void initChatFragment() {
         //聊天人或群id
         toChatRoom = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new SingleChatFragment();
+        chatFragment = new ChatFragment();
         chatFragment.hideTitleBar();
         Bundle args = getIntent().getExtras();
         if (args == null) {
@@ -113,7 +114,9 @@ public class ActivityChatRoomActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.chat_room_options, menu);
+        if (ZhiheApplication.getInstance().getUserType() == ZhiheApplication.MERCHANT_USER_TYPE) {
+            getMenuInflater().inflate(R.menu.chat_room_options, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

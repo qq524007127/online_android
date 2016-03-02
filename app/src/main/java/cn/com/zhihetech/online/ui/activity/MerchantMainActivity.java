@@ -15,6 +15,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityChatRoomsFragment;
@@ -42,6 +43,7 @@ public class MerchantMainActivity extends MerchantBaseActivity {
     }
 
     private void initViewAndData() {
+        this.toolbar.setSubtitle(ZhiheApplication.getInstance().getLogedMerchant().getMerchName());
         initViews();
     }
 

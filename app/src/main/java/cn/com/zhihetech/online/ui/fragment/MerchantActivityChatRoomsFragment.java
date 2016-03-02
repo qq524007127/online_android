@@ -9,6 +9,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.easemob.easeui.EaseConstant;
+
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -30,6 +32,7 @@ import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.model.ActivityModel;
+import cn.com.zhihetech.online.ui.activity.ActivityChatRoomActivity;
 
 /**
  * Created by ShenYunjie on 2016/3/1.
@@ -105,11 +108,11 @@ public class MerchantActivityChatRoomsFragment extends BaseFragment {
             Activity activity = responseMessage.getData();
             if (activity.getCurrentState() == Constant.ACTIVITY_STATE_EXAMINED_OK ||
                     activity.getCurrentState() == Constant.ACTIVITY_STATE_STARTED) {
-                showMsg("跳转到活动主会场");
-                //refreshData();
+                navigationActivityChatRoom(activity);
                 return;
             }
             showMsg("活动已结束");
+            refreshData();
         }
 
         @Override
@@ -196,6 +199,21 @@ public class MerchantActivityChatRoomsFragment extends BaseFragment {
             refreshLayout.setRefreshing(true);
         }
         new ActivityModel().getActivitiesByMerchantId(refreshCallback, new Pager(10), getLoginUserId());
+    }
+
+    /**
+     * 跳转到活动聊天室
+     *
+     * @param activity
+     */
+    private void navigationActivityChatRoom(Activity activity) {
+        Intent intent = new Intent(getContext(), ActivityChatRoomActivity.class);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID, activity.getChatRoomId());
+        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
+        intent.putExtra(ChatFragment.ACTIVITY_ID_KEY, activity.getActivitId());
+        intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
+        intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
+        startActivity(intent);
     }
 
     @Override

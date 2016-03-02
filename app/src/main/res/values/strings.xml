@@ -109,4 +109,6 @@
     <string name="shop_link">店铺链接</string>
     <string name="goods_link">商品链接</string>
     <string name="seckill_goods">秒杀商品</string>
+    <string name="my_goods">我的商品</string>
+    <string name="my_red_envelope">我的红包</string>
 </resources>
