@@ -48,8 +48,8 @@ public class ChatFragment extends EaseChatFragment {
     protected int[] itemStrings = {com.easemob.easeui.R.string.attach_take_pic, com.easemob.easeui.R.string.attach_picture,
             R.string.shop_link, R.string.goods_link, R.string.red_envelope, R.string.seckill_goods};
     protected int[] itemdrawables = {com.easemob.easeui.R.drawable.ease_chat_takepic_selector,
-            com.easemob.easeui.R.drawable.ease_chat_image_selector, R.drawable.chat_shop_icon,
-            R.drawable.goods_icon, R.drawable.red_envelope_icon, R.drawable.seckill_goods_icon};
+            R.drawable.pick_picture, R.drawable.chat_shop_icon, R.drawable.goods_icon,
+            R.drawable.red_envelope_icon, R.drawable.seckill_goods_icon};
     protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_SHOP_LINK, ITEM_GOODS_LINK,
             ITEM_RED_ENVELOPE, ITEM_SECKILL_GOODS};
 
@@ -160,7 +160,7 @@ public class ChatFragment extends EaseChatFragment {
                     }
                     return;
                 case REQUEST_RED_ENVELOPE_CODE:
-                    Object result1 = data.getSerializableExtra(GoodsListActivity.RESULT_GOODS_KEY);
+                    Object result1 = data.getSerializableExtra(RedEnvelopeListActivity.RESULT_RED_ENVELOP_KEY);
                     if (result1 != null) {
                         sendRedEnvelop((RedEnvelop) result1);
                     }
@@ -180,7 +180,7 @@ public class ChatFragment extends EaseChatFragment {
     /*=================发送信息=======================*/
     protected void sendRedEnvelope() {
         EMMessage message = EMMessage.createTxtSendMessage("", toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOPE);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOP);
         sendMessage(message);
     }
 
@@ -230,9 +230,9 @@ public class ChatFragment extends EaseChatFragment {
     protected void sendRedEnvelop(RedEnvelop envelop) {
         Map<String, Object> map = new HashMap<>();
         map.put("redEnvelopId", envelop.getEnvelopId());
-        map.put("msg", envelop.getEnvelopMsg());
+        map.put("envelopMsg", envelop.getEnvelopMsg());
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_GOODS_LINK);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOP);
         sendMessage(message);
     }
 
@@ -261,7 +261,7 @@ public class ChatFragment extends EaseChatFragment {
                     Intent redEnvelopeIntent = new Intent(getContext(), RedEnvelopeListActivity.class);
                     redEnvelopeIntent.putExtra(RedEnvelopeListActivity.MERCHANT_ID_KEY, merchant.getMerchantId());
                     redEnvelopeIntent.putExtra(RedEnvelopeListActivity.ACTIVITY_ID_KEY, fragmentArgs.getString(ACTIVITY_ID_KEY));
-                    startActivityForResult(redEnvelopeIntent, REQUEST_GOODS_LINK_CODE);
+                    startActivityForResult(redEnvelopeIntent, REQUEST_RED_ENVELOPE_CODE);
                     return;
             }
             super.onClick(itemId, view);

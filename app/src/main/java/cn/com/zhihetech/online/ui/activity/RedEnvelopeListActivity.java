@@ -131,7 +131,7 @@ public class RedEnvelopeListActivity extends MerchantBaseActivity {
         loadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                progressDialog = ProgressDialog.show(getSelf(), "", "正在发送红包...");
+                progressDialog = ProgressDialog.show(getSelf(), "", "正在派发红包...");
                 new RedEnvelopModel().updateSendState(new ObjectCallback<ResponseMessage>() {
                     @Override
                     public void onObject(ResponseMessage data) {
@@ -147,12 +147,13 @@ public class RedEnvelopeListActivity extends MerchantBaseActivity {
 
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
-                        showMsg("红包发送失败，请重试！");
+                        showMsg("红包派发失败，请重试！");
                     }
 
                     @Override
                     public void onFinished() {
                         super.onFinished();
+                        progressDialog.dismiss();
                     }
                 }, adapter.getItem(position).getEnvelopId());
             }

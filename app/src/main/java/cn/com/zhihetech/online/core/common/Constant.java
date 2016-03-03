@@ -140,10 +140,10 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 自定义消息扩展消息类型
      */
-    public final static int EXTEND_MESSAGE_RED_ENVELOPE = 1;
-    public final static int EXTEND_MESSAGE_SHOP_LINK = 2;
-    public final static int EXTEND_MESSAGE_GOODS_LINK = 3;
-    public final static int EXTEND_MESSAGE_SECKILL_GOODS = 4;
+    public final static int EXTEND_MESSAGE_RED_ENVELOP = 1; //红包信息
+    public final static int EXTEND_MESSAGE_SHOP_LINK = 2;   //店铺链接
+    public final static int EXTEND_MESSAGE_GOODS_LINK = 3;  //商品链接
+    public final static int EXTEND_MESSAGE_SECKILL_GOODS = 4;   //秒杀商品链接
 
 
     /**
@@ -209,4 +209,5 @@ public class Constant implements Serializable, Cloneable {
 
     public static final String MERCHANT_ACTIVITY_RED_ENVELOPS_URL = HOST + "redEnvelop/list";  //商家的活动红包
     public static final String UPDATE_RED_ENVELOP_STATU_URL = HOST + "redEnvelop/{0}/sended";  //更新红包状态为已发送
+    public static final String GRAD_RED_ENVELOP_URL = HOST + "redEnvelopItem/get";  //抢红包
 }

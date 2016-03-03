@@ -9,6 +9,7 @@ import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
 import cn.com.zhihetech.online.bean.BaseBean;
 import cn.com.zhihetech.online.core.chatrow.GoodsLinkChatRow;
+import cn.com.zhihetech.online.core.chatrow.RedEnvelopChatRow;
 import cn.com.zhihetech.online.core.chatrow.ShopLinkChatRow;
 
 /**
@@ -44,7 +45,7 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
                 case Constant.EXTEND_MESSAGE_GOODS_LINK:
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_GOODS_LINK : MESSAGE_TYPE_SEND_GOODS_LINK;
-                case Constant.EXTEND_MESSAGE_RED_ENVELOPE:
+                case Constant.EXTEND_MESSAGE_RED_ENVELOP:
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_RED_ENVELOPE : MESSAGE_TYPE_SEND_RED_ENVELOPE;
                 case Constant.EXTEND_MESSAGE_SECKILL_GOODS:
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SECKILL_GOODS : MESSAGE_TYPE_SEND_SECKILL_GOODS;
@@ -60,8 +61,8 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
                 return new ShopLinkChatRow(mContext, message, position, adapter);
             case Constant.EXTEND_MESSAGE_GOODS_LINK:
                 return new GoodsLinkChatRow(mContext, message, position, adapter);
-            case Constant.EXTEND_MESSAGE_RED_ENVELOPE:
-                return null;
+            case Constant.EXTEND_MESSAGE_RED_ENVELOP:
+                return new RedEnvelopChatRow(mContext, message, position, adapter);
             case Constant.EXTEND_MESSAGE_SECKILL_GOODS:
                 return null;
         }
