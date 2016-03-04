@@ -296,8 +296,8 @@ public class RegisterUserInfoActivity extends BaseActivity {
             showMsg(this.userPhoneNum, "手机号码不正确");
             return false;
         }
-        if (StringUtils.isEmpty(this.user.getPwd())) {
-            this.userPwd.setError("密码不能为空");
+        if (StringUtils.isEmpty(this.user.getPwd()) || this.user.getPwd().length() < 6) {
+            this.userPwd.setError("密码长度不能小于6");
             this.userPwd.requestFocus();
             return false;
         }

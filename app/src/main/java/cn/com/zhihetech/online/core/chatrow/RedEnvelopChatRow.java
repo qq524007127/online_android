@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.easemob.chat.EMMessage;
 
+import org.xutils.common.Callback;
+
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.RedEnvelopItem;
 import cn.com.zhihetech.online.core.ZhiheApplication;
@@ -19,14 +21,14 @@ import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.model.RedEnvelopModel;
-import cn.com.zhihetech.online.ui.activity.RedEnvelopItemInfoActivity;
+import cn.com.zhihetech.online.ui.activity.RedEnvelopItemDetailActivity;
 
 /**
  * Created by ShenYunjie on 2016/3/3.
  */
 public class RedEnvelopChatRow extends BaseChatRow {
 
-    protected TextView redEnvelopMsgTv;
+    protected TextView redEnvelopMsgTv, envelopMerchantNameTv;
     protected ProgressDialog progressDialog;
 
     public RedEnvelopChatRow(Context context, EMMessage message, int position, BaseAdapter adapter) {
@@ -42,11 +44,13 @@ public class RedEnvelopChatRow extends BaseChatRow {
     @Override
     protected void onFindViewById() {
         redEnvelopMsgTv = (TextView) findViewById(R.id.chat_row_envelop_msg_tv);
+        envelopMerchantNameTv = (TextView) findViewById(R.id.chat_row_envelop_merchant_name_tv);
     }
 
     @Override
     public void onSetUpView() {
         this.redEnvelopMsgTv.setText(jsonObject.getString("envelopMsg"));
+        this.envelopMerchantNameTv.setText(jsonObject.getString("merchantName") + "的红包");
         handleTextMessage();
     }
 
@@ -74,9 +78,7 @@ public class RedEnvelopChatRow extends BaseChatRow {
                             .setPositiveButton("查看", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(getContext(), RedEnvelopItemInfoActivity.class);
-                                    intent.putExtra(RedEnvelopItemInfoActivity.RED_ENVELOP_ITEM_ID, responseMessage.getData().getEnvelopItemId());
-                                    getContext().startActivity(intent);
+                                    viewRedEnvelopItemDetail(responseMessage.getData().getEnvelopItemId());
                                 }
                             })
                             .setNegativeButton("知道了", null)
@@ -93,7 +95,13 @@ public class RedEnvelopChatRow extends BaseChatRow {
                     new AlertDialog.Builder(getContext())
                             .setTitle("提示")
                             .setMessage("你已领取过红包！")
-                            .setPositiveButton("知道了", null)
+                            .setPositiveButton("查看", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    viewRedEnvelopItemDetail(responseMessage.getData().getEnvelopItemId());
+                                }
+                            })
+                            .setNegativeButton("知道了", null)
                             .show();
                     break;
                 default:
@@ -119,13 +127,33 @@ public class RedEnvelopChatRow extends BaseChatRow {
     };
 
     /**
+     * 查看红包详情
+     *
+     * @param envelopItemId
+     */
+    private void viewRedEnvelopItemDetail(String envelopItemId) {
+        Intent intent = new Intent(getContext(), RedEnvelopItemDetailActivity.class);
+        intent.putExtra(RedEnvelopItemDetailActivity.RED_ENVELOP_ITEM_ID, envelopItemId);
+        getContext().startActivity(intent);
+    }
+
+    /**
      * 抢红包
      *
      * @param userId    用户ID
      * @param envelopId 红包ID
      */
     protected void gradEnvelop(@NonNull String userId, @NonNull String envelopId) {
-        new RedEnvelopModel().gradEnvelop(callback, userId, envelopId);
+        final Callback.Cancelable cancelable = new RedEnvelopModel().gradEnvelop(callback, userId, envelopId);
         progressDialog = ProgressDialog.show(getContext(), "", "正在抢红包...");
+        progressDialog.setCancelable(true);
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                if (!cancelable.isCancelled()) {
+                    cancelable.cancel();
+                }
+            }
+        });
     }
 }

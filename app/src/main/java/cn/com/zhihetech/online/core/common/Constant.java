@@ -156,6 +156,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String VER_CODE_VERIY_URL = HOST + "securityCode/verify";   //验证码验证
     public static final String USER_REGISTER_URL = HOST + "user/register"; //用户注册
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
+    public static final String USER_CHANGE_PWD_URL = HOST + "user/{0}/changepwd";    //修改登录密码
 
     public static final String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
     public static final String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
@@ -210,4 +211,6 @@ public class Constant implements Serializable, Cloneable {
     public static final String MERCHANT_ACTIVITY_RED_ENVELOPS_URL = HOST + "redEnvelop/list";  //商家的活动红包
     public static final String UPDATE_RED_ENVELOP_STATU_URL = HOST + "redEnvelop/{0}/sended";  //更新红包状态为已发送
     public static final String GRAD_RED_ENVELOP_URL = HOST + "redEnvelopItem/get";  //抢红包
+    public static final String RED_ENVELOP_ITEM_URL = HOST + "redEnvelopItem/{0}/details";  //抢红包
+    public static final String EXTRACT_RED_ENVELOP_ITEM_URL = HOST + "wallet/putRedEnvelop";  //将红包存入我的钱包
 }

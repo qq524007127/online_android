@@ -2,8 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+        <Button
+            android:id="@+id/merchant_change_password_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_white_bg"
+            android:text="@string/change_password" />
+
+        <Button
+            android:id="@+id/merchant_exit_app_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_white_bg"
+            android:text="@string/exit_account" />
+    </LinearLayout>
 
 </LinearLayout>

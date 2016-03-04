@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/main_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="80dp">
@@ -39,7 +39,8 @@
                 android:hint="@string/login_code"
                 android:maxLength="30"
                 android:singleLine="true"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/merchant_pwd_et"
@@ -51,7 +52,8 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLength="25"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/merchant_login_btn"

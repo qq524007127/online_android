@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import org.xutils.common.Callback;
 
-import java.util.Map;
-
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
@@ -41,6 +39,21 @@ public class UserModel extends BaseModel<User> {
      */
     public Callback.Cancelable register(ObjectCallback<ResponseMessage> callback, @NonNull User user) {
         return new SimpleModel(ResponseMessage.class).postObject(Constant.USER_REGISTER_URL, createParams(user), callback);
+    }
+
+    /**
+     * 修改登录密码
+     *
+     * @param callback
+     * @param userId
+     * @param oldPwd   原登录密码
+     * @param newPwd
+     * @return
+     */
+    public Callback.Cancelable chagePwd(ObjectCallback<ResponseMessage> callback, @NonNull String userId,
+                                        @NonNull String oldPwd, @NonNull String newPwd) {
+        ModelParams params = new ModelParams().addParam("userId", userId).addParam("oldPwd", oldPwd).addParam("newPwd", newPwd);
+        return new SimpleModel<ResponseMessage>(ResponseMessage.class).postObject(Constant.USER_CHANGE_PWD_URL, params, callback);
     }
 
     /**

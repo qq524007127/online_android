@@ -69,7 +69,13 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     }
 
     public String getUserId() {
-        return userId;
+        switch (userType) {
+            case MERCHANT_USER_TYPE:
+                return getLogedMerchant().getMerchantId();
+            case COMMON_USER_TYPE:
+                return this.getUser().getUserId();
+        }
+        return null;
     }
 
     public ZhiheApplication setUserId(String userId) {

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/main_bg"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout" />
@@ -15,8 +15,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="30.0dip"
-            android:paddingRight="30.0dip">
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <EditText
                 android:id="@+id/user_mobile_num_et"
@@ -25,7 +26,8 @@
                 android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:drawableLeft="@drawable/name"
-                android:editable="false" />
+                android:editable="false"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/user_pwd"
@@ -36,7 +38,8 @@
                 android:drawableLeft="@drawable/pwd"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:maxLength="20" />
+                android:maxLength="20"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/user_repwd"
@@ -47,7 +50,8 @@
                 android:drawableLeft="@drawable/pwd"
                 android:hint="@string/repeat_pwd"
                 android:inputType="textPassword"
-                android:maxLength="20" />
+                android:maxLength="20"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/user_nickname"
@@ -57,7 +61,8 @@
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:drawableLeft="@drawable/name"
                 android:hint="@string/nickname"
-                android:maxLength="20" />
+                android:maxLength="20"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/invit_code"
@@ -67,7 +72,8 @@
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:drawableLeft="@drawable/name"
                 android:hint="@string/invit_code"
-                android:maxLength="11" />
+                android:maxLength="11"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/sex_btn"
@@ -76,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/sex"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/birthday_btn"
@@ -85,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/birthday"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/occupation_btn"
@@ -94,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/occupation"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/area_btn"
@@ -103,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/area"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/income_btn"
@@ -112,7 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/income"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -130,7 +141,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/accept_user_protocol"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <Button
@@ -138,7 +150,7 @@
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/view_normal_margin"
+                android:layout_marginBottom="30dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/register" />
         </LinearLayout>

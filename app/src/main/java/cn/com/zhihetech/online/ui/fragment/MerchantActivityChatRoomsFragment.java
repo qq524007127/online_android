@@ -198,7 +198,7 @@ public class MerchantActivityChatRoomsFragment extends BaseFragment {
         if (!refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(true);
         }
-        new ActivityModel().getActivitiesByMerchantId(refreshCallback, new Pager(10), getLoginUserId());
+        new ActivityModel().getActivitiesByMerchantId(refreshCallback, new Pager(), getLoginUserId());
     }
 
     /**

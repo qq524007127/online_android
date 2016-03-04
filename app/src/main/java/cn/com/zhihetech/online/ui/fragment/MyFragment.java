@@ -17,6 +17,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
+import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
 import cn.com.zhihetech.online.ui.activity.LoginActivity;
 import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
@@ -85,7 +86,8 @@ public class MyFragment extends BaseFragment {
 
                 break;
             case R.id.my_pwd_change_view:
-
+                Intent changePwdIntent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(changePwdIntent);
                 break;
             case R.id.my_receiver_address_view:
                 Intent intent = new Intent(getContext(), ReceiptAddressActivity.class);
@@ -98,7 +100,7 @@ public class MyFragment extends BaseFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                logoutApp();
+                                logoutAccount();
                             }
                         })
                         .setNegativeButton(R.string.cancel, null)
@@ -110,7 +112,7 @@ public class MyFragment extends BaseFragment {
     /**
      * 退出当前登录账号
      */
-    private void logoutApp() {
+    private void logoutAccount() {
         SharedPreferenceUtils.getInstance(getContext()).clear();
         ActivityStack.getInstance().removeWithout(getActivity());
         EMChatManager.getInstance().logout(null);

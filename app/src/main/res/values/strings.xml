@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">挚合实体店</string>
+    <string name="app_name">挚合实淘</string>
     <string name="action_settings">设置</string>
     <string name="home">首页</string>
     <string name="message">消息</string>
@@ -112,4 +112,8 @@
     <string name="my_goods">我的商品</string>
     <string name="my_red_envelope">我的红包</string>
     <string name="merhcant_red_envelop">商家红包</string>
+    <string name="red_envelop_item_detail">红包详情</string>
+    <string name="saved_my_wallet">已存入我的钱包</string>
+    <string name="save_my_wallet">存入我的钱包</string>
+    <string name="modify">修改</string>
 </resources>

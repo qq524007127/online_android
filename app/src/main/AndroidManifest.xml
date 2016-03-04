@@ -85,6 +85,12 @@
         <activity
             android:name=".ui.activity.ActivityFansActivity"
             android:label="@string/activity_fans" />
+        <activity
+            android:name=".ui.activity.RedEnvelopItemDetailActivity"
+            android:label="@string/red_envelop_item_detail" />
+        <activity
+            android:name=".ui.activity.ChangePasswordActivity"
+            android:label="@string/change_password" />
 
         <!--商家版-->
         <activity

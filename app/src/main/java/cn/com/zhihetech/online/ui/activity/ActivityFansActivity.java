@@ -114,5 +114,7 @@ public class ActivityFansActivity extends BaseActivity {
                 loadMoreData();
             }
         });
+        adapter = new ActivityFansAdapter(this);
+        fansListView.setAdapter(adapter);
     }
 }

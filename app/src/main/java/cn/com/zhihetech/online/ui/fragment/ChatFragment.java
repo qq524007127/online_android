@@ -231,6 +231,7 @@ public class ChatFragment extends EaseChatFragment {
         Map<String, Object> map = new HashMap<>();
         map.put("redEnvelopId", envelop.getEnvelopId());
         map.put("envelopMsg", envelop.getEnvelopMsg());
+        map.put("merchantName", envelop.getMerchant().getMerchName());
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
         message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOP);
         sendMessage(message);

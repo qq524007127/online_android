@@ -13,6 +13,7 @@ public class RedEnvelopItem extends BaseBean {
     private boolean received;   //是否已被领取
     private Date receivedDate;  //红包领取时间
     private RedEnvelop redEnvelop;
+    private boolean extractState = false;   //是否已提取到我的钱包
 
     public String getEnvelopItemId() {
         return envelopItemId;
@@ -53,5 +54,13 @@ public class RedEnvelopItem extends BaseBean {
 
     public void setRedEnvelop(RedEnvelop redEnvelop) {
         this.redEnvelop = redEnvelop;
+    }
+
+    public boolean isExtractState() {
+        return extractState;
+    }
+
+    public void setExtractState(boolean extractState) {
+        this.extractState = extractState;
     }
 }
