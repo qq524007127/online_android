@@ -231,7 +231,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         /**
          * 设置后台收到新消息后通知
          */
-        options.setNotifyText(new OnMessageNotifyListener() {
+        /*options.setNotifyText(new OnMessageNotifyListener() {
 
             //设置自定义的文字提示
             @Override
@@ -254,7 +254,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
             public int onSetSmallIcon(EMMessage emMessage) {
                 return R.drawable.no_title_logo;
             }
-        });
+        });*/
 
         /**
          * 设置点击新消息通知跳转界面

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
+        android:id="@+id/activity_goods_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <cn.com.zhihetech.online.core.view.LoadMoreListView
+            android:id="@+id/activity_goods_load_more_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/normal_bg"
+            android:dividerHeight="10dp"
+            android:footerDividersEnabled="false">
+
+        </cn.com.zhihetech.online.core.view.LoadMoreListView>
+    </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
+
+</LinearLayout>

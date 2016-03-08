@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.ActivityGoods;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.Merchant;
@@ -24,6 +25,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ZhiheChatRowProvider;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.ui.activity.SeckillGoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.GoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.RedEnvelopeListActivity;
 
@@ -47,9 +49,9 @@ public class ChatFragment extends EaseChatFragment {
 
     protected int[] itemStrings = {com.easemob.easeui.R.string.attach_take_pic, com.easemob.easeui.R.string.attach_picture,
             R.string.shop_link, R.string.goods_link, R.string.red_envelope, R.string.seckill_goods};
-    protected int[] itemdrawables = {com.easemob.easeui.R.drawable.ease_chat_takepic_selector,
-            R.drawable.pick_picture, R.drawable.chat_shop_icon, R.drawable.goods_icon,
-            R.drawable.red_envelope_icon, R.drawable.seckill_goods_icon};
+    protected int[] itemdrawables = {R.drawable.pick_camera_icon,
+            R.drawable.pick_picture_icon, R.drawable.chat_shop_icon, R.drawable.goods_icon,
+            R.drawable.red_envelop_icon, R.drawable.seckill_goods_icon};
     protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_SHOP_LINK, ITEM_GOODS_LINK,
             ITEM_RED_ENVELOPE, ITEM_SECKILL_GOODS};
 
@@ -165,6 +167,12 @@ public class ChatFragment extends EaseChatFragment {
                         sendRedEnvelop((RedEnvelop) result1);
                     }
                     return;
+                case REQUEST_SECKILL_GOODS_CODE:
+                    Object result2 = data.getSerializableExtra(SeckillGoodsListActivity.RESULT_ACTIVITY_GOODS_KEY);
+                    if (result2 != null) {
+                        sendSeckillGoods((ActivityGoods) result2);
+                    }
+                    return;
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -237,6 +245,25 @@ public class ChatFragment extends EaseChatFragment {
         sendMessage(message);
     }
 
+    /**
+     * 发送活动（秒杀）商品链接
+     *
+     * @param activityGoods
+     */
+    protected void sendSeckillGoods(ActivityGoods activityGoods) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("agId", activityGoods.getAgId());
+        map.put("activityPrice", activityGoods.getActivityPrice());
+        Goods goods = activityGoods.getGoods();
+        map.put("goodsId", goods.getGoodsId());
+        map.put("goodsCoverImg", goods.getCoverImg().getUrl());
+        map.put("goodsPrice", goods.getPrice());
+        map.put("goodsName", goods.getGoodsName());
+        EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_SECKILL_GOODS);
+        sendMessage(message);
+    }
+
     class ExtendMenuItemClickListener extends MyItemClickListener {
         private Merchant merchant;
 
@@ -246,6 +273,7 @@ public class ChatFragment extends EaseChatFragment {
 
         @Override
         public void onClick(int itemId, View view) {
+            String activityId = fragmentArgs.getString(ACTIVITY_ID_KEY);
             switch (itemId) {
                 case ITEM_SHOP_LINK:
                     sendShopLink(merchant);
@@ -256,12 +284,14 @@ public class ChatFragment extends EaseChatFragment {
                     startActivityForResult(intent, REQUEST_GOODS_LINK_CODE);
                     return;
                 case ITEM_SECKILL_GOODS:
-
+                    Intent seckillGoodsIntent = new Intent(getContext(), SeckillGoodsListActivity.class);
+                    seckillGoodsIntent.putExtra(SeckillGoodsListActivity.ACTIVITY_ID_KEY, activityId);
+                    startActivityForResult(seckillGoodsIntent, REQUEST_SECKILL_GOODS_CODE);
                     return;
                 case ITEM_RED_ENVELOPE:
                     Intent redEnvelopeIntent = new Intent(getContext(), RedEnvelopeListActivity.class);
                     redEnvelopeIntent.putExtra(RedEnvelopeListActivity.MERCHANT_ID_KEY, merchant.getMerchantId());
-                    redEnvelopeIntent.putExtra(RedEnvelopeListActivity.ACTIVITY_ID_KEY, fragmentArgs.getString(ACTIVITY_ID_KEY));
+                    redEnvelopeIntent.putExtra(RedEnvelopeListActivity.ACTIVITY_ID_KEY, activityId);
                     startActivityForResult(redEnvelopeIntent, REQUEST_RED_ENVELOPE_CODE);
                     return;
             }

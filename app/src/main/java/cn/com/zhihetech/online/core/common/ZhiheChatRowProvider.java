@@ -10,6 +10,7 @@ import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import cn.com.zhihetech.online.bean.BaseBean;
 import cn.com.zhihetech.online.core.chatrow.GoodsLinkChatRow;
 import cn.com.zhihetech.online.core.chatrow.RedEnvelopChatRow;
+import cn.com.zhihetech.online.core.chatrow.SeckillGoodsChatRow;
 import cn.com.zhihetech.online.core.chatrow.ShopLinkChatRow;
 
 /**
@@ -64,7 +65,7 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
             case Constant.EXTEND_MESSAGE_RED_ENVELOP:
                 return new RedEnvelopChatRow(mContext, message, position, adapter);
             case Constant.EXTEND_MESSAGE_SECKILL_GOODS:
-                return null;
+                return new SeckillGoodsChatRow(mContext, message, position, adapter);
         }
         return null;
     }

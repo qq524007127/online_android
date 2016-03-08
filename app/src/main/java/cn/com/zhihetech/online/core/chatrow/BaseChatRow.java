@@ -16,12 +16,8 @@ import cn.com.zhihetech.online.core.ZhiheApplication;
 public class BaseChatRow extends EaseChatRowText {
 
 
-    protected JSONObject jsonObject;
-
     public BaseChatRow(Context context, EMMessage message, int position, BaseAdapter adapter) {
         super(context, message, position, adapter);
-        String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
-        jsonObject = JSONObject.parseObject(txtMsg);
     }
 
     /**

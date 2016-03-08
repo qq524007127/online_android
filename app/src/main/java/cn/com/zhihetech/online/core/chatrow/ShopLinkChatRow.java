@@ -2,9 +2,12 @@ package cn.com.zhihetech.online.core.chatrow;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.widget.BaseAdapter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.TextMessageBody;
 
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
@@ -20,9 +23,12 @@ public class ShopLinkChatRow extends BaseChatRow {
 
     @Override
     public void onSetUpView() {
-        String txtMsg = jsonObject.getString("merchName");
-        txtMsg = "[店铺链接]" + txtMsg;
-        this.contentView.setText(txtMsg);
+        String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
+        JSONObject jsonObject = JSONObject.parseObject(txtMsg);
+        String txt = jsonObject.getString("merchName");
+        txt = "[店铺链接]" + txt;
+        this.contentView.setText(txt);
+        this.contentView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         handleTextMessage();
     }
 
@@ -32,6 +38,8 @@ public class ShopLinkChatRow extends BaseChatRow {
             case ZhiheApplication.MERCHANT_USER_TYPE:
                 return;
             default:
+                String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
+                JSONObject jsonObject = JSONObject.parseObject(txtMsg);
                 Intent intent = new Intent(getContext(), MerchantHomeActivity.class);
                 intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, jsonObject.getString("merchantId"));
                 intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, jsonObject.getString("merchantName"));

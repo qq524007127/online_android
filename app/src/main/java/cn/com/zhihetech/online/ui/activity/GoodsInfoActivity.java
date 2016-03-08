@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.easemob.easeui.EaseConstant;
+
+import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -15,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.GoodsDetail;
+import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.OrderDetail;
+import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.eventmsg.ShoppingCartMessageEvent;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
@@ -251,7 +258,7 @@ public class GoodsInfoActivity extends BaseActivity {
         new FocusGoodsModel().unFocusGoods(unFocusCallback, goodsId, getUserId());
     }
 
-    @Event({R.id.goods_info_shop_view, R.id.goods_info_shopping_cart_view, R.id.goods_info_buy_view})
+    @Event({R.id.goods_info_shop_view, R.id.goods_info_shopping_cart_view, R.id.goods_info_buy_view, R.id.goods_info_service_view})
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.goods_info_shop_view:
@@ -295,9 +302,33 @@ public class GoodsInfoActivity extends BaseActivity {
                 });
                 goodsSheetBottomView.showWhithGoods(rootContent, goods);
                 break;
+            case R.id.goods_info_service_view:
+                if (this.goods == null) {
+                    return;
+                }
+                saveMerchantInfo(this.goods.getMerchant());
+                Intent intent = new Intent(this, SingleChatActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, goods.getMerchant().getEMUserId());
+                startActivity(intent);
+                break;
         }
     }
 
+    /**
+     * 将商家的环信用户基本信息保存到本地数据库
+     *
+     * @param merchant
+     * @throws DbException
+     */
+    private void saveMerchantInfo(Merchant merchant) {
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(),
+                merchant.getCoverImg().getUrl(), merchant.getMerchantId(), Constant.EXTEND_MERCHANT_USER);
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 添加当前商品到购物车

@@ -116,4 +116,6 @@
     <string name="saved_my_wallet">已存入我的钱包</string>
     <string name="save_my_wallet">存入我的钱包</string>
     <string name="modify">修改</string>
+    <string name="my_seckill_goods">我的秒杀商品</string>
+    <string name="now_grab_buy">立即抢购</string>
 </resources>

@@ -2,10 +2,12 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easemob.easeui.widget.EaseImageView;
 
@@ -15,6 +17,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.RedEnvelopItem;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
@@ -149,8 +152,9 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
      * @param data
      */
     private void bindingData(RedEnvelopItem data) {
-        ImageLoader.disPlayImage(merchantCoverIv, data.getRedEnvelop().getMerchant().getCoverImg());
-        this.envelopItemNameTv.setText(data.getRedEnvelop().getMerchant().getMerchName() + "发送的红包");
+        final Merchant merchant = data.getRedEnvelop().getMerchant();
+        ImageLoader.disPlayImage(merchantCoverIv, merchant.getCoverImg());
+        this.envelopItemNameTv.setText(merchant.getMerchName() + "发送的红包");
         this.envelopItemAmoutTv.setText(data.getAmountOfMoney() + "元");
         if (data.isExtractState()) {
             this.saveStateTv.setVisibility(View.VISIBLE);
@@ -159,5 +163,14 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
             this.saveStateTv.setVisibility(View.GONE);
             this.saveBtn.setVisibility(View.VISIBLE);
         }
+        this.merchantCoverIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getSelf(), MerchantHomeActivity.class);
+                intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, merchant.getMerchName());
+                intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, merchant.getMerchantId());
+                startActivity(intent);
+            }
+        });
     }
 }

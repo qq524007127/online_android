@@ -9,6 +9,7 @@ public class ActivityGoods extends BaseBean {
     private float activityPrice;    //活动价格
     private Activity activity;  //对应的活动
     private Goods goods;    //对应的商品
+    private Merchant merchant;  //对应的商家
 
     public String getAgId() {
         return agId;
@@ -40,5 +41,13 @@ public class ActivityGoods extends BaseBean {
 
     public void setGoods(Goods goods) {
         this.goods = goods;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 }

@@ -19,6 +19,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
 import cn.com.zhihetech.online.ui.activity.LoginActivity;
+import cn.com.zhihetech.online.ui.activity.MyRedEnvelopItemListActivity;
 import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 
@@ -41,7 +42,7 @@ public class MyFragment extends BaseFragment {
 
     @Event({R.id.my_waiting_pay_view, R.id.my_no_dispatch, R.id.my_already_dispatch_view,
             R.id.my_waiting_evalute_view,
-            R.id.my_refund_and_service_view, R.id.my_volum_view, R.id.my_red_money_view,
+            R.id.my_refund_and_service_view, R.id.my_volum_view, R.id.my_red_envelop_view,
             R.id.my_friends_view, R.id.my_baby_view, R.id.my_info_change_view, R.id.my_pwd_change_view,
             R.id.my_receiver_address_view, R.id.exit_app_btn, R.id.my_all_order_view})
     private void onViewClick(View view) {
@@ -73,8 +74,9 @@ public class MyFragment extends BaseFragment {
             case R.id.my_volum_view:
 
                 break;
-            case R.id.my_red_money_view:
-
+            case R.id.my_red_envelop_view:
+                Intent redEnvelopItemIntent = new Intent(getContext(), MyRedEnvelopItemListActivity.class);
+                startActivity(redEnvelopItemIntent);
                 break;
             case R.id.my_friends_view:
 

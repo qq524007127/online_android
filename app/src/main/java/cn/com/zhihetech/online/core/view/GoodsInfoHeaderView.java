@@ -30,23 +30,23 @@ import cn.com.zhihetech.online.model.GoodsBannerModel;
  */
 public class GoodsInfoHeaderView extends FrameLayout {
     @ViewInject(R.id.goods_info_header_banner)
-    private ZhiheBanner goodsBanner;
+    protected ZhiheBanner goodsBanner;
     @ViewInject(R.id.goods_info_name_tv)
-    private TextView goodsNameTv;
+    protected TextView goodsNameTv;
     @ViewInject(R.id.goods_info_price_tv)
-    private TextView goodsPriceTv;
+    protected TextView goodsPriceTv;
     @ViewInject(R.id.goods_info_stock_tv)
-    private TextView goodsStock;
+    protected TextView goodsStock;
     @ViewInject(R.id.goods_info_carriage_tv)
-    private TextView carriageTv;
+    protected TextView carriageTv;
     @ViewInject(R.id.goods_info_volume_tv)
-    private TextView volumeTv;
+    protected TextView volumeTv;
     @ViewInject(R.id.goods_info_desc_tv)
-    private TextView goodsDescTv;
+    protected TextView goodsDescTv;
 
-    private String goodsId;
+    protected String goodsId;
 
-    ArrayCallback<GoodsBanner> bannerCallback = new ArrayCallback<GoodsBanner>() {
+    protected ArrayCallback<GoodsBanner> bannerCallback = new ArrayCallback<GoodsBanner>() {
         @Override
         public void onArray(List<GoodsBanner> datas) {
             goodsBanner.setPages(new CBViewHolderCreator<GoodsBannerHolder>() {
@@ -64,7 +64,7 @@ public class GoodsInfoHeaderView extends FrameLayout {
         init();
     }
 
-    private void init() {
+    protected void init() {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.content_goods_info_header, null);
         addView(rootView);
         x.view().inject(this, rootView);

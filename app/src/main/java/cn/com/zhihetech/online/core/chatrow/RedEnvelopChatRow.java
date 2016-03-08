@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.TextMessageBody;
 
 import org.xutils.common.Callback;
 
@@ -49,6 +51,8 @@ public class RedEnvelopChatRow extends BaseChatRow {
 
     @Override
     public void onSetUpView() {
+        String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
+        JSONObject jsonObject = JSONObject.parseObject(txtMsg);
         this.redEnvelopMsgTv.setText(jsonObject.getString("envelopMsg"));
         this.envelopMerchantNameTv.setText(jsonObject.getString("merchantName") + "的红包");
         handleTextMessage();
@@ -60,6 +64,8 @@ public class RedEnvelopChatRow extends BaseChatRow {
             case ZhiheApplication.MERCHANT_USER_TYPE:
                 return;
             default:
+                String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
+                JSONObject jsonObject = JSONObject.parseObject(txtMsg);
                 gradEnvelop(ZhiheApplication.getInstance().getUserId(), jsonObject.getString("redEnvelopId"));
         }
     }
@@ -92,17 +98,7 @@ public class RedEnvelopChatRow extends BaseChatRow {
                             .show();
                     break;
                 case ResponseStateCode.RED_ENVELOP_ALREADY_RECEIVED:
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("提示")
-                            .setMessage("你已领取过红包！")
-                            .setPositiveButton("查看", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    viewRedEnvelopItemDetail(responseMessage.getData().getEnvelopItemId());
-                                }
-                            })
-                            .setNegativeButton("知道了", null)
-                            .show();
+                    viewRedEnvelopItemDetail(responseMessage.getData().getEnvelopItemId());
                     break;
                 default:
                     new AlertDialog.Builder(getContext())

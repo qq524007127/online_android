@@ -7,8 +7,11 @@ import android.widget.TextView;
 
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.Date;
+
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Activity;
+import cn.com.zhihetech.online.core.util.DateUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 
 /**
@@ -29,6 +32,8 @@ public class ActivityChatRoomAdapter extends ZhiheAdapter<Activity, ActivityChat
     public void onBindViewHolder(ActivityChatRoomHolder holder, Activity data) {
         ImageLoader.disPlayImage(holder.chatRoomCoverIv, data.getCoverImg());
         holder.chatRoomNameTv.setText(data.getActivitName());
+        String activityTime = DateUtils.formatDateByFormat(data.getBeginDate(), "HH点mm") + "-" + DateUtils.formatDateByFormat(data.getEndDate(), "HH点mm");
+        holder.chatRoomTimeTv.setText("活动时间：" + activityTime);
     }
 
     public class ActivityChatRoomHolder extends ZhiheAdapter.BaseViewHolder {
@@ -37,6 +42,9 @@ public class ActivityChatRoomAdapter extends ZhiheAdapter<Activity, ActivityChat
         public ImageView chatRoomCoverIv;
         @ViewInject(R.id.activity_chat_room_name_tv)
         public TextView chatRoomNameTv;
+        @ViewInject(R.id.activity_chat_room_time_tv)
+        public TextView chatRoomTimeTv;
+
 
         public ActivityChatRoomHolder(View itemView) {
             super(itemView);

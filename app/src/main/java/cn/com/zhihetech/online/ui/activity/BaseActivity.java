@@ -32,6 +32,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!isTaskRoot()){
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            if(intent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)){
+                finish();
+                return;
+            }
+        }
         ActivityStack.getInstance().addActivity(this);
         x.view().inject(this);
         initToolbar();

@@ -149,7 +149,7 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static final String DOMAIN = "http://192.168.0.11:8080/";
+    public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String VER_CODE_URL = HOST + "securityCode/get";   //获取短信验证码
@@ -213,4 +213,6 @@ public class Constant implements Serializable, Cloneable {
     public static final String GRAD_RED_ENVELOP_URL = HOST + "redEnvelopItem/get";  //抢红包
     public static final String RED_ENVELOP_ITEM_URL = HOST + "redEnvelopItem/{0}/details";  //抢红包
     public static final String EXTRACT_RED_ENVELOP_ITEM_URL = HOST + "wallet/putRedEnvelop";  //将红包存入我的钱包
+    public static final String MERCHANT_SECKILL_GOODSES_URL = HOST + "activity/activityGoods/list";  //指定活动和商家的活动商品
+    public static final String ACTIVITY_GOODS_URL = HOST + "activityGoods/{0}"; //获取指定活动商品详情
 }

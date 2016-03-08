@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -14,43 +13,40 @@ import com.easemob.chat.TextMessageBody;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.ui.activity.GoodsInfoActivity;
+import cn.com.zhihetech.online.ui.activity.SeckillGoodsInfoActivity;
 
 /**
- * Created by ShenYunjie on 2016/3/2.
+ * Created by ShenYunjie on 2016/3/7.
  */
-public class GoodsLinkChatRow extends BaseChatRow {
+public class SeckillGoodsChatRow extends GoodsLinkChatRow {
 
-    protected ImageView goodsCoverImg;
-    protected TextView goodsNameTv;
-    protected TextView goodsPriceTv;
+    protected TextView goodsSeckillPriceTv;
 
-    public GoodsLinkChatRow(Context context, EMMessage message, int position, BaseAdapter adapter) {
+    public SeckillGoodsChatRow(Context context, EMMessage message, int position, BaseAdapter adapter) {
         super(context, message, position, adapter);
     }
 
     @Override
     protected void onInflatView() {
         inflater.inflate(message.direct == EMMessage.Direct.RECEIVE ?
-                R.layout.chat_row_received_shop_link : R.layout.chat_row_send_shop_link, this);
+                R.layout.chat_row_received_seckill_goods : R.layout.chat_row_send_seckill_goods, this);
     }
 
     @Override
     protected void onFindViewById() {
-        this.goodsCoverImg = (ImageView) findViewById(R.id.chat_row_goods_cover_iv);
-        this.goodsNameTv = (TextView) findViewById(R.id.chat_row_goods_name_tv);
-        this.goodsPriceTv = (TextView) findViewById(R.id.chat_row_goods_price_tv);
+        super.onFindViewById();
+        goodsSeckillPriceTv = (TextView) findViewById(R.id.chat_row_goods_seckill_price_tv);
+        this.goodsPriceTv.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
-
 
     @Override
     public void onSetUpView() {
         String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
         JSONObject jsonObject = JSONObject.parseObject(txtMsg);
-        ImageLoader.disPlayImage(this.goodsCoverImg, jsonObject.getString("coverImg"));
+        ImageLoader.disPlayImage(this.goodsCoverImg, jsonObject.getString("goodsCoverImg"));
         this.goodsNameTv.setText(jsonObject.getString("goodsName"));
-        this.goodsPriceTv.setText("￥:" + jsonObject.getFloatValue("price"));
-
+        this.goodsPriceTv.setText(String.valueOf(jsonObject.getFloatValue("goodsPrice")));
+        this.goodsSeckillPriceTv.setText("现价:" + jsonObject.getFloatValue("activityPrice"));
         handleTextMessage();
     }
 
@@ -62,9 +58,9 @@ public class GoodsLinkChatRow extends BaseChatRow {
             default:
                 String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
                 JSONObject jsonObject = JSONObject.parseObject(txtMsg);
-                Intent intent = new Intent(getContext(), GoodsInfoActivity.class);
-                intent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, jsonObject.getString("goodsId"));
-                intent.putExtra(GoodsInfoActivity.GOODS_NAME_KEY, jsonObject.getString("goodsName"));
+                Intent intent = new Intent(getContext(), SeckillGoodsInfoActivity.class);
+                intent.putExtra(SeckillGoodsInfoActivity.SECKILL_GOODS_ID_KEY, jsonObject.getString("agId"));
+                intent.putExtra(SeckillGoodsInfoActivity.GOODS_NAME_KEY, jsonObject.getString("goodsName"));
                 getContext().startActivity(intent);
         }
     }
