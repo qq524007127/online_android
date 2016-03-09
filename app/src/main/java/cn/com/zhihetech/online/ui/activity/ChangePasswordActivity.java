@@ -18,6 +18,7 @@ import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.model.UserModel;
 
 /**
@@ -46,7 +47,7 @@ public class ChangePasswordActivity extends BaseActivity {
             return;
         }
         new AlertDialog.Builder(this)
-                .setMessage("确定要修改当前登录密码吗？修改后需重新登录")
+                .setMessage("确定要修改当前登录密码吗？")
                 .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -78,17 +79,14 @@ public class ChangePasswordActivity extends BaseActivity {
         String currentPwd = SharedPreferenceUtils.getInstance(this).getUserPassword();
         if (!oldPwd.equals(currentPwd)) {
             oldPwdEt.setError("原密码不正确，请重新输入");
-            oldPwdEt.setFocusable(true);
             return false;
         }
         if (StringUtils.isEmpty(newPwd) || newPwd.length() < 6) {
             newPwdEt.setError("密码长度必须大于6位");
-            newPwdEt.setFocusable(true);
             return false;
         }
-        if (!reNewEt.equals(newPwd)) {
+        if (!rePwd.equals(newPwd)) {
             reNewEt.setError("两次输入的新密码不相等，请重新输入");
-            reNewEt.setFocusable(true);
             return false;
         }
         return true;
@@ -99,9 +97,9 @@ public class ChangePasswordActivity extends BaseActivity {
         public void onObject(ResponseMessage data) {
             if (data.getCode() == ResponseStateCode.SUCCESS) {
                 showMsg(changeBtn, "密码修改成功");
-                return;
+            } else {
+                showMsg(changeBtn, data.getMsg());
             }
-            showMsg(changeBtn, data.getMsg());
         }
 
         @Override
@@ -122,13 +120,16 @@ public class ChangePasswordActivity extends BaseActivity {
      * 普通用户修改登录密码
      */
     private void changeUserPwd(String oldPwd, String newPwd) {
-        new UserModel().chagePwd(changeCallback, getUserId(), oldPwd, newPwd);
+        progressDialog = ProgressDialog.show(this,"",getString(R.string.data_loading));
+        new UserModel().changePwd(changeCallback, getUserId(), oldPwd, newPwd);
     }
 
     /**
      * 商家修改登录密码
      */
     private void merchantChangePwd(String oldPwd, String newPwd) {
-        //new UserModel().chagePwd(changeCallback, getUserId(), oldPwd, newPwd);
+        String adminCode = SharedPreferenceUtils.getInstance(this).getUserCode();
+        progressDialog = ProgressDialog.show(this,"",getString(R.string.data_loading));
+        new MerchantModel().changePwd(changeCallback, adminCode, oldPwd, newPwd);
     }
 }

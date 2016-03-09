@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.easemob.EMCallBack;
-import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 
@@ -25,12 +24,10 @@ import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
     private Context mContext;
-    SharedPreferenceUtils preferenceUtils;
+    private SharedPreferenceUtils preferenceUtils;
     private String userCode;
     private String userPwd;
     private Token token;
-
-    private boolean isLoged = false;
 
     public UserLoginCallback(Context mContext, @NonNull String userCode, @NonNull String userPwd) {
         this.mContext = mContext;
@@ -70,61 +67,59 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
             return;
         }
         this.token = responseMessage.getData();
-        ZhiheApplication.getInstance().setUserId(token.getUser().getUserId()).setUser(responseMessage.getData().getUser());
+        initApp(this.token.getUser());
+    }
+
+    protected void initApp(User user) {
+        ZhiheApplication application = ZhiheApplication.getInstance();
+        application.setUserType(ZhiheApplication.COMMON_USER_TYPE);
+        application.setUser(user);
+
         preferenceUtils.setUserType(Constant.COMMON_USER);
         preferenceUtils.setUserToken(token.getToken());
-        preferenceUtils.setUserMobileNum(userCode);
+        preferenceUtils.setUserCode(userCode);
         preferenceUtils.setUserPassword(userPwd);
-        isLoged = true;
-        try {
-            saveSelfInfo(token.getUser());
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+
+        saveUserInfo(token.getUser());
     }
 
     /**
      * 保存当前登录用户的环信用户信息到本地数据库
      */
-    protected void saveSelfInfo(User user) throws DbException {
+    protected void saveUserInfo(User user) {
         String header = null;
         if (user.getHeaderImg() != null) {
             header = user.getHeaderImg().getUrl();
         }
         EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header,
                 user.getUserId(), Constant.EXTEND_NORMAL_USER);
-        new DBUtils().saveUserInfo(userInfo);
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public final void onFinished() {
-        if (!isLoged) { //如果平台账号未登录成功则回调onLoginFinish接口
-            //onLoginFinished();
-            emCallBack.onSuccess();
+        if (this.token == null) { //如果平台账号未登录成功则回调onLoginFinish接口
+            onLoginFinished();
         } else {   //如果平台账号登录成功，则登录环信账号
-            loginEMChat();
+            loginEMChat(this.token.getUser());
         }
     }
 
     /**
      * 登录环信账号
      */
-    private void loginEMChat() {
-        if (!EMChat.getInstance().isLoggedIn()) {
-            String userName = ZhiheApplication.getInstance().getEmChatUserName();
-            String pwd = ZhiheApplication.getInstance().getEMChatPassword();
-            EMChatManager.getInstance().login(userName, pwd, emCallBack);
-        } else {
-            onLoginSuccess(this.token);
-            onEMLoginSuccess(token.getUser().getUserName());
-        }
+    private void loginEMChat(User user) {
+        EMChatManager.getInstance().login(user.getEMUserId(), user.getEMPwd(), emCallBack);
     }
 
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
         super.onError(ex, isOnCallback);
         onLoginFail(ex);
-        //onFinished();
     }
 
     /**

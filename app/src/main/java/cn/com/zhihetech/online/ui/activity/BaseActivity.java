@@ -32,16 +32,16 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!isTaskRoot()){
+        x.view().inject(this);
+        ActivityStack.getInstance().addActivity(this);
+        if (!isTaskRoot()) {
             Intent intent = getIntent();
             String action = intent.getAction();
-            if(intent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)){
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)) {
                 finish();
                 return;
             }
         }
-        ActivityStack.getInstance().addActivity(this);
-        x.view().inject(this);
         initToolbar();
     }
 
@@ -133,6 +133,10 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void showMsg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    protected void showMsg(int resId) {
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
     }
 
     protected void showMsg(View view, String msg) {

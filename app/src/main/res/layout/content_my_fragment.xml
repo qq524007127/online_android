@@ -301,7 +301,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/my_baby_view"
+            android:id="@+id/my_favorites_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -320,7 +320,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:padding="10.0dip"
-                android:text="@string/my_baby" />
+                android:text="@string/my_favorites" />
         </LinearLayout>
 
         <LinearLayout

@@ -66,6 +66,9 @@
             android:name=".ui.activity.AddOrEditReceiptActivity"
             android:label="@string/add_receipt_address" />
         <activity
+            android:name=".ui.activity.MyFavoritesActivity"
+            android:label="@string/my_favorites" />
+        <activity
             android:name=".ui.activity.OrderConfirmActivity"
             android:label="@string/order_confirm" />
         <activity
@@ -96,8 +99,9 @@
         <activity
             android:name=".ui.activity.SeckillGoodsInfoActivity"
             android:label="@string/goods_detail" />
-        <activity android:name=".ui.activity.MyRedEnvelopItemListActivity"
-            android:label="@string/my_red_envelope"/>
+        <activity
+            android:name=".ui.activity.MyRedEnvelopItemListActivity"
+            android:label="@string/my_red_envelope" />
 
         <!--商家版-->
         <activity

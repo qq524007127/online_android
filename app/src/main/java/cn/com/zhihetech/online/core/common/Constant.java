@@ -156,7 +156,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String VER_CODE_VERIY_URL = HOST + "securityCode/verify";   //验证码验证
     public static final String USER_REGISTER_URL = HOST + "user/register"; //用户注册
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
-    public static final String USER_CHANGE_PWD_URL = HOST + "user/{0}/changepwd";    //修改登录密码
+    public static final String USER_CHANGE_PWD_URL = HOST + "user/changePwd";    //普通用户修改登录密码
 
     public static final String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
     public static final String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
@@ -192,6 +192,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String ADD_OR_UPDATE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/addOrUpdate"; //添加或更新收货地址信息
     public static final String DELETE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/{0}/delete"; //添加或更新收货地址信息
     public static final String USER_DEFAULT_RECEIPT_ADDRESS_URL = HOST + "user/{0}/defaultReceivedAddress"; //用户默认收货地址
+    public static final String USER_FAVORITES_GOODSES_URL = HOST + "user/{0}/focusGoodses"; //获取用户收藏的商品
 
     public static final String ORDER_ADD_URL = HOST + "order/add";    //提交订单
     public static final String USER_ORDERS_URL = HOST + "order/list"; //用户订单
@@ -213,6 +214,8 @@ public class Constant implements Serializable, Cloneable {
     public static final String GRAD_RED_ENVELOP_URL = HOST + "redEnvelopItem/get";  //抢红包
     public static final String RED_ENVELOP_ITEM_URL = HOST + "redEnvelopItem/{0}/details";  //抢红包
     public static final String EXTRACT_RED_ENVELOP_ITEM_URL = HOST + "wallet/putRedEnvelop";  //将红包存入我的钱包
+    public static final String USER_RED_ENVELOP_ITEMS_URL = HOST + "user/{0}/redEnvelopItem/list";  //指定用户的红包
     public static final String MERCHANT_SECKILL_GOODSES_URL = HOST + "activity/activityGoods/list";  //指定活动和商家的活动商品
     public static final String ACTIVITY_GOODS_URL = HOST + "activityGoods/{0}"; //获取指定活动商品详情
+    public static final String ADMIN_CHANGE_PASSWORD_URL = HOST + "admin/changePwd"; //更改商家登录密码
 }

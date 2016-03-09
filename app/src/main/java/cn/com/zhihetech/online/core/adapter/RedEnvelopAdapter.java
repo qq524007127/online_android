@@ -15,7 +15,7 @@ import cn.com.zhihetech.online.bean.RedEnvelop;
 public class RedEnvelopAdapter extends ZhiheAdapter<RedEnvelop, RedEnvelopAdapter.RedEnvelopHolder> {
 
     public RedEnvelopAdapter(Context mContext) {
-        super(mContext, R.layout.content_red_envelop_item);
+        super(mContext, R.layout.content_merchant_red_envelop_item);
     }
 
     @Override

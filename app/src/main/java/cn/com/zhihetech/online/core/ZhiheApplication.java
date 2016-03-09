@@ -78,11 +78,6 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         return null;
     }
 
-    public ZhiheApplication setUserId(String userId) {
-        this.userId = userId;
-        return this;
-    }
-
     public User getUser() {
         return user;
     }
@@ -110,7 +105,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         if (!StringUtils.isEmpty(this.emChatUserName)) {
             return this.emChatUserName;
         }
-        return this.userId.replaceAll("-", "");
+        return this.getUserId().replaceAll("-", "");
     }
 
     public int getUserType() {

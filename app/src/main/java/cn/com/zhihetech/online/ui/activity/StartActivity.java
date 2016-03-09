@@ -51,7 +51,7 @@ public class StartActivity extends BaseActivity {
 
     private void autoLogin() {
         final SharedPreferenceUtils localSharedPreferenceUtils = SharedPreferenceUtils.getInstance(this);
-        final String code = localSharedPreferenceUtils.getUserMobileNum();
+        final String code = localSharedPreferenceUtils.getUserCode();
         final String password = localSharedPreferenceUtils.getUserPassword();
         int userType = localSharedPreferenceUtils.getUserType();
         if ((StringUtils.isEmpty(code)) || (StringUtils.isEmpty(password))) {

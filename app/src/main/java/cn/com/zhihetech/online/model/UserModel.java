@@ -4,9 +4,14 @@ import android.support.annotation.NonNull;
 
 import org.xutils.common.Callback;
 
+import java.text.MessageFormat;
+
+import cn.com.zhihetech.online.bean.FocusGoods;
+import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -17,6 +22,9 @@ import cn.com.zhihetech.online.core.util.StringUtils;
  * Created by ShenYunjie on 2016/1/29.
  */
 public class UserModel extends BaseModel<User> {
+
+
+
     /**
      * 用户登录
      *
@@ -50,10 +58,10 @@ public class UserModel extends BaseModel<User> {
      * @param newPwd
      * @return
      */
-    public Callback.Cancelable chagePwd(ObjectCallback<ResponseMessage> callback, @NonNull String userId,
-                                        @NonNull String oldPwd, @NonNull String newPwd) {
+    public Callback.Cancelable changePwd(ObjectCallback<ResponseMessage> callback, @NonNull String userId,
+                                         @NonNull String oldPwd, @NonNull String newPwd) {
         ModelParams params = new ModelParams().addParam("userId", userId).addParam("oldPwd", oldPwd).addParam("newPwd", newPwd);
-        return new SimpleModel<ResponseMessage>(ResponseMessage.class).postObject(Constant.USER_CHANGE_PWD_URL, params, callback);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.USER_CHANGE_PWD_URL, params, callback);
     }
 
     /**

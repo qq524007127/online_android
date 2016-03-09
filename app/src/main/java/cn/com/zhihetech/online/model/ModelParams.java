@@ -36,7 +36,7 @@ public class ModelParams {
 
     public ModelParams addPager(@NonNull Pager pager) {
         if (pager == null) {
-            throw new RuntimeException("pager param is not able null");
+            pager = new Pager();
         }
         params.put(PAGE_KEY, String.valueOf(pager.getPage()));
         params.put(ROWS_KEY, String.valueOf(pager.getRows()));

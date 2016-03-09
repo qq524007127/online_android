@@ -98,7 +98,7 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
     private void saveMerchantInfo2File(MerchantToken token) {
         preferenceUtils.setUserType(Constant.MERCHANT_USER);
         preferenceUtils.setUserToken(token.getToken());
-        preferenceUtils.setUserMobileNum(adminCode);
+        preferenceUtils.setUserCode(adminCode);
         preferenceUtils.setUserPassword(adminPwd);
     }
 

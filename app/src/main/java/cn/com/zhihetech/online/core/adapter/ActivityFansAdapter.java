@@ -38,7 +38,7 @@ public class ActivityFansAdapter extends ZhiheAdapter<User, ActivityFansAdapter.
     public void onBindViewHolder(ActivityFansHolder holder, User data) {
         ImageLoader.disPlayImage(holder.fansHeaderIv, data.getHeaderImg());
         holder.fansNameTv.setText(data.getUserName());
-        holder.fanseInfoTv.setText("性别:" + (data.isSex() ? "男" : "女") + "    年龄:" + data.getAge());
+        holder.fanseInfoTv.setText("性别:" + (data.isSex() ? "男" : "女") + "      年龄:" + data.getAge());
     }
 
     public class ActivityFansHolder extends ZhiheAdapter.BaseViewHolder {

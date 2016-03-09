@@ -116,4 +116,17 @@ public class MerchantModel extends BaseModel<Merchant> {
         ModelParams params = new ModelParams().addParam("adminCode", adminCode).addParam("adminPwd", adminPwd);
         return new SimpleModel(MerchantToken.class).postResponseMessage(Constant.MERCHANT_LOGIN_URL, params, callback);
     }
+
+    /**
+     * 更改当前商家登录密码
+     *
+     * @param changeCallback
+     * @param adminCode
+     * @param oldPwd
+     * @param newPwd
+     */
+    public Callback.Cancelable changePwd(ObjectCallback<ResponseMessage> changeCallback, @NonNull String adminCode, @NonNull String oldPwd, @NonNull String newPwd) {
+        ModelParams params = new ModelParams().addParam("adminCode", adminCode).addParam("oldPwd", oldPwd).addParam("newPwd", newPwd);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.ADMIN_CHANGE_PASSWORD_URL, params, changeCallback);
+    }
 }

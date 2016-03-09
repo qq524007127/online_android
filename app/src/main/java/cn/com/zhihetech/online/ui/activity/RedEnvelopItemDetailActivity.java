@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easemob.easeui.widget.EaseImageView;
 
@@ -34,6 +33,7 @@ import cn.com.zhihetech.online.model.RedEnvelopItemModel;
 public class RedEnvelopItemDetailActivity extends BaseActivity {
 
     public final static String RED_ENVELOP_ITEM_ID = "RED_ENVELOP_ITEM_ID";
+    public final static String RESULT_FLAG_KEY = "RESULT_FLAG_";
 
     @ViewInject(R.id.envelop_item_detail_merchant_cover_iv)
     private EaseImageView merchantCoverIv;
@@ -134,7 +134,7 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
     private void loadRedEnvelopItemDetail(String envelopItemId) {
         praProgressDialog = ProgressDialog.show(this, "", getString(R.string.data_loading));
         praProgressDialog.setCancelable(true);
-        final Callback.Cancelable cancelable = new RedEnvelopItemModel().getEnvelopItemByUserIdAndId(loadCallback, envelopItemId);
+        final Callback.Cancelable cancelable = new RedEnvelopItemModel().getEnvelopItemById(loadCallback, envelopItemId);
         praProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -172,5 +172,16 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        onHomeOptionItemSelected();
+    }
+
+    @Override
+    protected void onHomeOptionItemSelected() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

@@ -169,5 +169,14 @@ public class User extends BaseBean {
     public String getEMUserId() {
         return getUserId().replaceAll("-", "");
     }
+
+    /**
+     * 获取环信账号的登录密码
+     *
+     * @return
+     */
+    public String getEMPwd() {
+        return getUserId();
+    }
 }
 

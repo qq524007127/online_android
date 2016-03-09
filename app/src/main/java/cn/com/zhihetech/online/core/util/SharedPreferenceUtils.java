@@ -38,7 +38,7 @@ public class SharedPreferenceUtils {
         getEditor().putInt(USER_TYPE, userType).commit();
     }
 
-    public String getUserMobileNum() {
+    public String getUserCode() {
         return getSharedPreferences().getString(MOBILE_KEY, null);
     }
 
@@ -46,7 +46,7 @@ public class SharedPreferenceUtils {
         return PasswordUtils.decodePassword(getSharedPreferences().getString(USER_PASSWORD_KEY, null));
     }
 
-    public void setUserMobileNum(String paramString) {
+    public void setUserCode(String paramString) {
         getEditor().putString(MOBILE_KEY, paramString).commit();
     }
 
