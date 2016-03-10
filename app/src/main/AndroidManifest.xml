@@ -46,7 +46,13 @@
             android:label="@string/user_info" />
         <activity android:name=".ui.activity.MainActivity" />
         <activity
-            android:name=".ui.activity.DailyNewActivity"
+            android:name=".ui.activity.ShoppingCenterActivity"
+            android:label="@string/shopping_center" />
+        <activity
+            android:name=".ui.activity.FeaturedBlocksActivity"
+            android:label="@string/featured_block" />
+        <activity
+            android:name=".ui.activity.MerchantListActivity"
             android:label="@string/daily_new"></activity>
         <activity
             android:name=".ui.activity.MerchantHomeActivity"
@@ -102,7 +108,9 @@
         <activity
             android:name=".ui.activity.MyRedEnvelopItemListActivity"
             android:label="@string/my_red_envelope" />
-
+        <activity
+            android:name=".ui.activity.UserInfoChangeActivity"
+            android:label="@string/user_info_change" />
         <!--商家版-->
         <activity
             android:name=".ui.activity.MerchantMainActivity"

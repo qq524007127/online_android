@@ -10,6 +10,12 @@ import cn.com.zhihetech.online.core.http.ArrayCallback;
  * Created by ShenYunjie on 2016/1/15.
  */
 public class BannerModel extends BaseModel<Banner> {
+    /**
+     * 获取轮播图
+     *
+     * @param callback
+     * @return
+     */
     public Callback.Cancelable getBanners(ArrayCallback<Banner> callback) {
         return getArray(Constant.BANNERS_URL, null, callback);
     }

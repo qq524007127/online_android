@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.activity.MerchantListActivity">
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout" />
 
     <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
-        android:id="@+id/daily_new_srl"
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <cn.com.zhihetech.online.core.view.LoadMoreListView
-            android:id="@+id/merchant_list_lv"
+            android:id="@+id/load_more_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/normal_bg">
+            android:layout_height="match_parent">
 
         </cn.com.zhihetech.online.core.view.LoadMoreListView>
     </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
-
 </LinearLayout>

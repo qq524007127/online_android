@@ -400,6 +400,6 @@
             android:background="@drawable/orange_bg"
             android:text="@string/exit_account"
             android:textColor="@color/white"
-            android:textSize="16.0sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

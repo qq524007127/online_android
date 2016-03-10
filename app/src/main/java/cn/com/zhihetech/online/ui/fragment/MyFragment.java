@@ -23,6 +23,7 @@ import cn.com.zhihetech.online.ui.activity.MyFavoritesActivity;
 import cn.com.zhihetech.online.ui.activity.MyRedEnvelopItemListActivity;
 import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
+import cn.com.zhihetech.online.ui.activity.UserInfoChangeActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -87,7 +88,8 @@ public class MyFragment extends BaseFragment {
                 startActivity(myFavsIntent);
                 break;
             case R.id.my_info_change_view:
-
+                Intent infoChangeIntent = new Intent(getContext(), UserInfoChangeActivity.class);
+                startActivity(infoChangeIntent);
                 break;
             case R.id.my_pwd_change_view:
                 Intent changePwdIntent = new Intent(getContext(), ChangePasswordActivity.class);

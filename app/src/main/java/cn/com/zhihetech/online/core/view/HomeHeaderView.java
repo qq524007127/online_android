@@ -14,10 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bigkoo.convenientbanner.holder.Holder;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -25,23 +22,22 @@ import org.xutils.x;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.bean.Banner;
 import cn.com.zhihetech.online.bean.Navigation;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.model.BannerModel;
 import cn.com.zhihetech.online.model.NavigationModel;
+import cn.com.zhihetech.online.ui.activity.BaseActivity;
 import cn.com.zhihetech.online.ui.activity.CategoryActivity;
-import cn.com.zhihetech.online.ui.activity.DailyNewActivity;
+import cn.com.zhihetech.online.ui.activity.FeaturedBlocksActivity;
+import cn.com.zhihetech.online.ui.activity.MerchantListActivity;
+import cn.com.zhihetech.online.ui.activity.ShoppingCenterActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
  */
 public class HomeHeaderView extends FrameLayout {
 
-    @ViewInject(R.id.home_banner_cb)
-    private ConvenientBanner headerBanner;
     @ViewInject(R.id.home_navigation_rv)
     private RecyclerView navRV;
 
@@ -68,7 +64,6 @@ public class HomeHeaderView extends FrameLayout {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.content_home_header, null);
         addView(rootView);
         x.view().inject(this, rootView);
-        initBanners();
         initNavigations();
     }
 
@@ -116,44 +111,36 @@ public class HomeHeaderView extends FrameLayout {
      */
     private void doNavigation(Navigation nav) {
         switch (nav.getViewTargert()) {
-            case Constant.NAV_VIEWTARGET_DAILY_NEW:
-                Intent intent = new Intent(getContext(), DailyNewActivity.class);
-                getContext().startActivity(intent);
+            case Constant.NAVIGATION_ONE:
+                Toast.makeText(getContext(), "正在建设中", Toast.LENGTH_LONG).show();
                 break;
-            case Constant.NAV_VIEWTARGET_BUG_KUMING:
-                Intent intent1 = new Intent(getContext(), DailyNewActivity.class);
-                getContext().startActivity(intent1);
-                break;
-            case Constant.NAV_VIEWTARGET_BUG_PREFECTURES:
-                Intent intent2 = new Intent(getContext(), DailyNewActivity.class);
+            case Constant.NAVIGATION_TWO:
+                Intent intent2 = new Intent(getContext(), ShoppingCenterActivity.class);
+                intent2.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent2);
                 break;
-            case Constant.NAV_VIEWTARGET_BIG_BRAND:
-
+            case Constant.NAVIGATION_THREE:
+                Intent intent3 = new Intent(getContext(), ShoppingCenterActivity.class);
+                intent3.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
+                getContext().startActivity(intent3);
                 break;
-            case Constant.NAV_VIEWTARGET_TYPE_CATEGOR:
-                Intent intent4 = new Intent(getContext(), CategoryActivity.class);
+            case Constant.NAVIGATION_FOUR:
+                Intent intent4 = new Intent(getContext(), FeaturedBlocksActivity.class);
+                intent4.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent4);
                 break;
-            case Constant.NAV_VIEWTARGET_TYPE_ACTIVITY_ZONE:
-
+            case Constant.NAVIGATION_FIVE:
+                Intent intent5 = new Intent(getContext(), MerchantListActivity.class);
+                intent5.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
+                intent5.putExtra(MerchantListActivity.MERCHANT_TYPE_KEY, MerchantListActivity.FEATURED_SHOP_TYPE);
+                getContext().startActivity(intent5);
+                break;
+            case Constant.NAVIGATION_SIX:
+                Intent intent6 = new Intent(getContext(), CategoryActivity.class);
+                intent6.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
+                getContext().startActivity(intent6);
                 break;
         }
-    }
-
-    private void initBanners() {
-
-        new BannerModel().getBanners(new ArrayCallback<Banner>() {
-            @Override
-            public void onArray(List<Banner> datas) {
-                headerBanner.setPages(new CBViewHolderCreator<BannerHolder>() {
-                    @Override
-                    public BannerHolder createHolder() {
-                        return new BannerHolder();
-                    }
-                }, datas);
-            }
-        });
     }
 
     public class NavigationViewHolder extends RecyclerView.ViewHolder {
@@ -165,26 +152,6 @@ public class HomeHeaderView extends FrameLayout {
         public NavigationViewHolder(View itemView) {
             super(itemView);
             x.view().inject(this, itemView);
-        }
-    }
-
-    /**
-     * Created by ShenYunjie on 2016/1/18.
-     */
-    public static class BannerHolder implements Holder<Banner> {
-
-        private ImageView bannerImg;
-
-        @Override
-        public View createView(Context context) {
-            bannerImg = new ImageView(context);
-            bannerImg.setScaleType(ImageView.ScaleType.FIT_XY);
-            return bannerImg;
-        }
-
-        @Override
-        public void UpdateUI(Context context, int position, Banner data) {
-            ImageLoader.disPlayImage(bannerImg, data.getImgInfo());
         }
     }
 }

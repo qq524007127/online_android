@@ -10,9 +10,21 @@
         android:id="@+id/receipt_address_lmlv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/gray"
-        android:dividerHeight="1dp"
+        android:layout_weight="1"
+        android:divider="@color/normal_bg"
+        android:dividerHeight="10dp"
         android:footerDividersEnabled="false">
 
     </cn.com.zhihetech.online.core.view.LoadMoreListView>
+
+    <Button
+        android:id="@+id/add_receipt_address_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:background="@color/orange"
+        android:text="@string/add_receipt_address"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 </LinearLayout>

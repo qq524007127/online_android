@@ -25,13 +25,11 @@ import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.AreaModel;
 import cn.com.zhihetech.online.model.UserModel;
 
-import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @ContentView(R.layout.activity_regist_userinfo)
@@ -49,7 +47,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     private EditText nickName;
     @ViewInject(R.id.invit_code)
     private EditText invitCode;
-    @ViewInject(R.id.sex_btn)
+    @ViewInject(R.id.user_sex_btn)
     private Button sexButton;
     @ViewInject(R.id.birthday_btn)
     private Button birthdayButton;
@@ -233,11 +231,11 @@ public class RegisterUserInfoActivity extends BaseActivity {
                 .create();
     }
 
-    @Event({R.id.sex_btn, R.id.birthday_btn, R.id.area_btn, R.id.income_btn, R.id.occupation_btn,
+    @Event({R.id.user_sex_btn, R.id.birthday_btn, R.id.area_btn, R.id.income_btn, R.id.occupation_btn,
             R.id.protocol, R.id.submit_btn})
     private void onViewClick(View view) {
         switch (view.getId()) {
-            case R.id.sex_btn:
+            case R.id.user_sex_btn:
                 sexPicker.show();
                 break;
             case R.id.birthday_btn:

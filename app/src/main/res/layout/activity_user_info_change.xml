@@ -14,8 +14,8 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="10dp"
+            android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
@@ -30,30 +30,6 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/user_pwd"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/pwd"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/user_repwd"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/pwd"
-                android:hint="@string/repeat_pwd"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textSize="14sp" />
-
-            <EditText
                 android:id="@+id/user_nickname"
                 style="@style/EditViewTheme"
                 android:layout_width="fill_parent"
@@ -62,17 +38,6 @@
                 android:drawableLeft="@drawable/name"
                 android:hint="@string/nickname"
                 android:maxLength="20"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/invit_code"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:hint="@string/invit_code"
-                android:maxLength="11"
                 android:textSize="14sp" />
 
             <Button
@@ -86,7 +51,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/birthday_btn"
+                android:id="@+id/user_birthday_btn"
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +61,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/occupation_btn"
+                android:id="@+id/user_occupation_btn"
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +71,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/area_btn"
+                android:id="@+id/user_area_btn"
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +81,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/income_btn"
+                android:id="@+id/user_income_btn"
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -125,34 +90,14 @@
                 android:textColor="@color/textColor"
                 android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/accept_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true" />
-
-                <TextView
-                    android:id="@+id/protocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/accept_user_protocol"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
             <Button
-                android:id="@+id/submit_btn"
+                android:id="@+id/submit_info_changed_btn"
                 style="@style/ButtonTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/register" />
+                android:text="@string/confirm_modify" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

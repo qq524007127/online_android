@@ -18,11 +18,14 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
+import cn.com.zhihetech.online.core.util.StringUtils;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
 public class BaseActivity extends AppCompatActivity {
+
+    public static final String CUSTOM_TITLE_KEY = "_custom_title";
 
     @ViewInject(R.id.toolbar)
     protected Toolbar toolbar;
@@ -82,6 +85,10 @@ public class BaseActivity extends AppCompatActivity {
      * @return
      */
     protected CharSequence getToolbarTile() {
+        String title = getIntent().getStringExtra(CUSTOM_TITLE_KEY);
+        if (!StringUtils.isEmpty(title)) {
+            return title;
+        }
         return getTitle();
     }
 

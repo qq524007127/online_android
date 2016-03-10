@@ -3,10 +3,11 @@ package cn.com.zhihetech.online.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.io.Serializable;
@@ -38,6 +39,8 @@ public class ReceiptAddressActivity extends BaseActivity {
 
     @ViewInject(R.id.receipt_address_lmlv)
     private LoadMoreListView listView;
+    @ViewInject(R.id.add_receipt_address_btn)
+    private Button addRecAddBtn;
 
     private ReceiptAddressAdapter adapter;
 
@@ -100,34 +103,25 @@ public class ReceiptAddressActivity extends BaseActivity {
         new ReceiptAddressModel().getReceiptAdressesByUserId(loadCallback, getUserId());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_receipt, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.receipt_address_menu_add:
-                Intent intent = new Intent(this, AddOrEditReceiptActivity.class);
-                startActivityForResult(intent, ADD_ADDRESS_REQUEST_CODE);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    @Event({R.id.add_receipt_address_btn})
+    private void onViewClick(View view) {
+        Intent intent = new Intent(this, AddOrEditReceiptActivity.class);
+        startActivityForResult(intent, ADD_ADDRESS_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_ADDRESS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY) != null) {
+            /*if (data != null && data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY) != null) {
                 Serializable obj = data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY);
                 if (obj instanceof ReceivedGoodsAddress) {
                     adapter.addData((ReceivedGoodsAddress) obj);
                 }
-            }
+            }*/
+            loadData();
         } else if (requestCode == EDIT_ADDRESS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            adapter.update((ReceivedGoodsAddress) data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY));
+            //adapter.update((ReceivedGoodsAddress) data.getSerializableExtra(AddOrEditReceiptActivity.ADDRESS_KEY));
+            loadData();
         }
     }
 }

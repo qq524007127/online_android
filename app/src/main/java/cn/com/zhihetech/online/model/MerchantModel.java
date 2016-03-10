@@ -28,9 +28,12 @@ public class MerchantModel extends BaseModel<Merchant> {
      * @param callback
      * @param pager
      */
-    public Callback.Cancelable getDailyNewList(PageDataCallback<Merchant> callback, Pager pager) {
-        ModelParams params = new ModelParams().addPager(pager);
-        return getPageData(Constant.DAILY_NEW_URL, params, callback);
+    public Callback.Cancelable getMerchantsByTypeAndTypeId(PageDataCallback<Merchant> callback, Pager pager, int type, String typeId) {
+        ModelParams params = new ModelParams().addPager(pager).addParam("type", String.valueOf(type));
+        if (type != 3) {
+            params.addParam("typeId", typeId);
+        }
+        return getPageData(Constant.FEATURED_BLOCK_OR_SHOPPING_CENTER_MERCHANTS_URL, params, callback);
     }
 
     /**
@@ -40,7 +43,7 @@ public class MerchantModel extends BaseModel<Merchant> {
      * @param params
      */
     public Callback.Cancelable getMerchantsByModelParams(PageDataCallback<Merchant> callback, ModelParams params) {
-        return getPageData(Constant.DAILY_NEW_URL, params, callback);
+        return getPageData(Constant.MERCHANT_LIST_URL, params, callback);
     }
 
     /**

@@ -67,12 +67,13 @@ public class Constant implements Serializable, Cloneable {
     /**
      * APP端viewTarget相关
      */
-    public final static String NAV_VIEWTARGET_DAILY_NEW = "1";//每日上新
-    public final static String NAV_VIEWTARGET_BIG_BRAND = "2";//大品牌
-    public final static String NAV_VIEWTARGET_BUG_KUMING = "3";//买昆明
-    public final static String NAV_VIEWTARGET_BUG_PREFECTURES = "4";//购地州
-    public final static String NAV_VIEWTARGET_TYPE_CATEGOR = "5";//类别
-    public final static String NAV_VIEWTARGET_TYPE_ACTIVITY_ZONE = "6";//活动专区
+    public final static String NAVIGATION_ONE = "1";//投诉维权
+    public final static String NAVIGATION_TWO = "2";//购物中心
+    public final static String NAVIGATION_THREE = "3";//活动专区
+    public final static String NAVIGATION_FOUR = "4";//特色街区
+    public final static String NAVIGATION_FIVE = "5";//特色店
+    public final static String NAVIGATION_SIX = "6";//分类
+
     /**
      * 验证码类型
      */
@@ -158,12 +159,16 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
     public static final String USER_CHANGE_PWD_URL = HOST + "user/changePwd";    //普通用户修改登录密码
 
+    public static final String FEATURED_BLOCKS_URL = HOST + "featuredBlock/list";  //特色街区列表
+    public static final String SHOPPING_CENTERS_URL = HOST + "shoppingCenter/list";  //购物中心列表
+
     public static final String BANNERS_URL = HOST + "banners";  //获取主页顶部轮播图
     public static final String NAVIGATIONS_URL = HOST + "navigations";   //获取主页导航菜单
     public static final String ACTIVITY_LIST_URL = HOST + "activity/list";    //获取正在开始或即将开始的活动
     public static final String ACTIVITY_INFO_URL = HOST + "activity/{0}";    //根据ID获取活动
     public static final String CATEGORY_ACTIVITIES_URL = HOST + "goodsAttributeSet/{0}/activities";    //获取正在开始或即将开始的活动
-    public static final String DAILY_NEW_URL = HOST + "dailyNew/list";    //获取每日上新数据
+    public static final String MERCHANT_LIST_URL = HOST + "merchantOrGoods/list";    //获取商家数据列表
+    public static final String FEATURED_BLOCK_OR_SHOPPING_CENTER_MERCHANTS_URL = HOST + "scOrFbOrFs/list";    //获取每日上新数据
     public static final String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息
     public static final String MERCHANT_LOGIN_URL = HOST + "merchant/login";    //商家登录
     public static final String CHECK_MERCHANT_FUCOS_STATE_URL = HOST + "checkFocus";    //查询商家关注状态
