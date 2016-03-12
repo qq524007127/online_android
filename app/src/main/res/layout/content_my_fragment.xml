@@ -289,7 +289,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/red_money" />
+                android:src="@drawable/wallet" />
 
             <TextView
                 android:layout_width="wrap_content"

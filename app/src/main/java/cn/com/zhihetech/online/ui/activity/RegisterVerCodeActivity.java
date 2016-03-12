@@ -80,7 +80,7 @@ public class RegisterVerCodeActivity extends BaseActivity {
      */
     private void getRegisterVerCode(String mobileNum) {
         progressDialog.show();
-        new SMSVerCodeModel().getRegisterVerCode(new ResponseMessageCallback<Integer>() {
+        new SMSVerCodeModel().getRegistVerifyCode(new ResponseMessageCallback<Integer>() {
             @Override
             public void onResponseMessage(final ResponseMessage<Integer> responseMessage) {
                 verCodeBtn.setClickable(false);

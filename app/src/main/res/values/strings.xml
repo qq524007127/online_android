@@ -126,4 +126,5 @@
     <string name="confirm_modify">确认修改</string>
     <string name="header_modify">头像编辑</string>
     <string name="my_wallet">我的钱包</string>
+    <string name="find_password">找回密码</string>
 </resources>

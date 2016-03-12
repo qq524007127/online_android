@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
@@ -30,6 +32,8 @@ public class LoginActivity extends BaseActivity {
     private EditText userCodeEt;
     @ViewInject(R.id.user_pwd_et)
     private EditText userPwdEt;
+    @ViewInject(R.id.forget_password)
+    private TextView forgetPwdLinkTv;
     @ViewInject(R.id.login_btn)
     private Button loginBtn;
 
@@ -53,6 +57,7 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+        forgetPwdLinkTv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @Event({R.id.register_btn, R.id.login_btn, R.id.forget_password, R.id.merchant_version_login})
@@ -65,7 +70,7 @@ public class LoginActivity extends BaseActivity {
                 userLogin();
                 break;
             case R.id.forget_password:
-
+                navigation(ForgetPwdActivity.class, false);
                 break;
             case R.id.merchant_version_login:
                 Intent intent = new Intent(this, MerchantLoginActivity.class);

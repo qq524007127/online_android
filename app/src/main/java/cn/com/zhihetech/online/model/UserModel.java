@@ -6,12 +6,9 @@ import org.xutils.common.Callback;
 
 import java.text.MessageFormat;
 
-import cn.com.zhihetech.online.bean.FocusGoods;
-import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
-import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -22,6 +19,48 @@ import cn.com.zhihetech.online.core.util.StringUtils;
  * Created by ShenYunjie on 2016/1/29.
  */
 public class UserModel extends BaseModel<User> {
+
+    /**
+     * 找回登录密码
+     *
+     * @param callback
+     * @param mobileNum 手机号码
+     * @param vercode   短信验证码
+     * @return
+     */
+    public Callback.Cancelable findPassword(ObjectCallback<ResponseMessage> callback, @NonNull String mobileNum, @NonNull String vercode) {
+        ModelParams params = new ModelParams().addParam("userPhone", mobileNum).addParam("verCode", vercode);
+        return new SimpleModel<ResponseMessage>(ResponseMessage.class).postObject(null, params, callback);
+    }
+
+    /**
+     * 用户提现
+     *
+     * @param callback
+     * @param userId     用户ID
+     * @param vercode    验证码
+     * @param alipayCode 提现支付宝账号
+     * @param amount     提现金额
+     * @return
+     */
+    public Callback.Cancelable takeWalletMoney(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String vercode,
+                                               @NonNull String alipayCode, @NonNull float amount) {
+        ModelParams params = new ModelParams().addParam("userId", userId).addParam("securityCode", vercode)
+                .addParam("aliCode", alipayCode).addParam("money", String.valueOf(amount));
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.USER_APPLY_TAKE_WALLET_MONEY_URL, params, callback);
+    }
+
+    /**
+     * 获取用户钱包金额
+     *
+     * @param callback
+     * @param userId
+     * @return
+     */
+    public Callback.Cancelable getWalletTotalMoney(ResponseMessageCallback<Float> callback, @NonNull String userId) {
+        String url = MessageFormat.format(Constant.USER_WALLET_TOTAL_MONEY_URL, userId);
+        return new SimpleModel(Float.class).getResponseMessage(url, null, callback);
+    }
 
     /**
      * 用户修改基本信息

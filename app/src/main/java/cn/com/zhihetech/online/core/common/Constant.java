@@ -161,7 +161,8 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
     public static final String USER_CHANGE_PWD_URL = HOST + "user/changePwd";    //普通用户修改登录密码
     public static final String USER_CHANGE_HEADER_URL = HOST + "user/updatePortrait";    //修改用户头像
-    public static final String USER_MODIFY_INFO_URL = HOST + "user/updateUserInfo";    //修改用户头像
+    public static final String USER_MODIFY_INFO_URL = HOST + "user/updateUserInfo";    //修改用户基本信息
+    public static final String USER_APPLY_TAKE_WALLET_MONEY_URL = HOST + "userWithdraw/apply";    //用户提现请求
 
     public static final String FEATURED_BLOCKS_URL = HOST + "featuredBlock/list";  //特色街区列表
     public static final String SHOPPING_CENTERS_URL = HOST + "shoppingCenter/list";  //购物中心列表
@@ -202,6 +203,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String DELETE_RECEIPT_ADDRESS_URL = HOST + "receivedGoodsAddress/{0}/delete"; //添加或更新收货地址信息
     public static final String USER_DEFAULT_RECEIPT_ADDRESS_URL = HOST + "user/{0}/defaultReceivedAddress"; //用户默认收货地址
     public static final String USER_FAVORITES_GOODSES_URL = HOST + "user/{0}/focusGoodses"; //获取用户收藏的商品
+    public static final String USER_WALLET_TOTAL_MONEY_URL = HOST + "user/{0}/walletTotalMoney"; //获取用户收藏的商品
 
     public static final String ORDER_ADD_URL = HOST + "order/add";    //提交订单
     public static final String USER_ORDERS_URL = HOST + "order/list"; //用户订单

@@ -39,4 +39,5 @@ dependencies {
     compile project(':lib:pingpp')
     compile project(':easeUI')
     compile files('libs/android-viewbadger.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
