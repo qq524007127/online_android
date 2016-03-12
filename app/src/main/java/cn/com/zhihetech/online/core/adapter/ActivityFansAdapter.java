@@ -6,13 +6,11 @@ import android.widget.TextView;
 
 import com.easemob.easeui.widget.EaseImageView;
 
-import org.w3c.dom.Text;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.bean.ActivityFans;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 
@@ -36,7 +34,7 @@ public class ActivityFansAdapter extends ZhiheAdapter<User, ActivityFansAdapter.
 
     @Override
     public void onBindViewHolder(ActivityFansHolder holder, User data) {
-        ImageLoader.disPlayImage(holder.fansHeaderIv, data.getHeaderImg());
+        ImageLoader.disPlayImage(holder.fansHeaderIv, data.getPortrait());
         holder.fansNameTv.setText(data.getUserName());
         holder.fanseInfoTv.setText("性别:" + (data.isSex() ? "男" : "女") + "      年龄:" + data.getAge());
     }

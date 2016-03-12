@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
@@ -16,8 +17,53 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:id="@+id/user_header_edit_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="80dp"
+                android:orientation="horizontal">
+
+                <com.easemob.easeui.widget.EaseImageView
+                    android:id="@+id/user_header_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:ease_border_color="@color/white"
+                    app:ease_border_width="2dp"
+                    app:ease_shape_type="round" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="修改头像"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="6dp"
+                        android:src="@drawable/array_right" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/normal_bg" />
 
             <EditText
                 android:id="@+id/user_mobile_num_et"
@@ -37,7 +83,8 @@
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:drawableLeft="@drawable/name"
                 android:hint="@string/nickname"
-                android:maxLength="20"
+                android:maxLength="10"
+                android:singleLine="true"
                 android:textSize="14sp" />
 
             <Button

@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,6 +90,22 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
 
     @Event({R.id.envelop_item_save_my_wallet_btn})
     private void onVeiwClic(final View view) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("须将红包商家加为好友才可将红包存入钱包，是否将商家加为好友？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        putRedItemToWallte();
+                    }
+                }).show();
+    }
+
+    /**
+     * 将红包存入我的钱包
+     */
+    private void putRedItemToWallte() {
         final ProgressDialog progressDialog = ProgressDialog.show(this, "", getString(R.string.data_executing));
         final Callback.Cancelable cancelable = new RedEnvelopItemModel().extractRedEnvelopItem(new ObjectCallback<ResponseMessage>() {
             @Override
@@ -96,18 +113,18 @@ public class RedEnvelopItemDetailActivity extends BaseActivity {
                 int code = data.getCode();
                 switch (code) {
                     case ResponseStateCode.SUCCESS:
-                        showMsg(view, "操作成功！");
+                        showMsg(saveBtn, "操作成功！");
                         saveBtn.setVisibility(View.GONE);
                         saveStateTv.setVisibility(View.VISIBLE);
                         break;
                     default:
-                        showMsg(view, data.getMsg());
+                        showMsg(saveBtn, data.getMsg());
                 }
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                showMsg(view, "操作失败，请重试！");
+                showMsg(saveBtn, "操作失败，请重试！");
             }
 
             @Override

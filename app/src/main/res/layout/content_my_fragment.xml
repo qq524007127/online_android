@@ -20,8 +20,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/my_header_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/home"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="2dp" />
@@ -274,6 +274,29 @@
                 android:gravity="center_vertical"
                 android:padding="10.0dip"
                 android:text="@string/my_red_money" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_wallet"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/my_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/red_money" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="@string/my_wallet" />
         </LinearLayout>
 
         <LinearLayout

@@ -124,4 +124,6 @@
     <string name="featured_block">特色街区</string>
     <string name="user_info_change">用户信息修改</string>
     <string name="confirm_modify">确认修改</string>
+    <string name="header_modify">头像编辑</string>
+    <string name="my_wallet">我的钱包</string>
 </resources>

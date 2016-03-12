@@ -1,6 +1,8 @@
 package cn.com.zhihetech.online.core.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,6 +19,7 @@ import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
+import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,6 +56,32 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
                 mContext.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.tip)
+                        .setMessage("确定要取消与此商家的好友关系吗？")
+                        .setPositiveButton(R.string.cancel, null)
+                        .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                cancelFocus(data);
+                            }
+                        }).show();
+                return true;
+            }
+        });
+    }
+
+    /**
+     * 取消关注商家
+     *
+     * @param merchant
+     */
+    private void cancelFocus(Merchant merchant) {
+        notifyDataSetChanged();
     }
 
     /**

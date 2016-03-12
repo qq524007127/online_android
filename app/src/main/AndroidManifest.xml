@@ -109,8 +109,16 @@
             android:name=".ui.activity.MyRedEnvelopItemListActivity"
             android:label="@string/my_red_envelope" />
         <activity
+            android:name=".ui.activity.MyWalletActivity"
+            android:label="@string/my_wallet" />
+        <activity
             android:name=".ui.activity.UserInfoChangeActivity"
             android:label="@string/user_info_change" />
+        <activity
+            android:name=".ui.activity.UserHeaderModifyActivity"
+            android:label="@string/header_modify" />
+
+
         <!--商家版-->
         <activity
             android:name=".ui.activity.MerchantMainActivity"

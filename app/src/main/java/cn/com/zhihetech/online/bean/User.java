@@ -24,7 +24,7 @@ public class User extends BaseBean {
     private String invitCode;
     private Date createDate;
     private int userType = Constant.COMMON_USER;    //默认为普通用户
-    private ImgInfo headerImg;  //用户头像
+    private ImgInfo portrait;  //用户头像
 
     public User() {
     }
@@ -153,12 +153,12 @@ public class User extends BaseBean {
         this.userType = userType;
     }
 
-    public ImgInfo getHeaderImg() {
-        return headerImg;
+    public ImgInfo getPortrait() {
+        return portrait;
     }
 
-    public void setHeaderImg(ImgInfo headerImg) {
-        this.headerImg = headerImg;
+    public void setPortrait(ImgInfo portrait) {
+        this.portrait = portrait;
     }
 
     /**

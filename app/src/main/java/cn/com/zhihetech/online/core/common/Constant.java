@@ -153,11 +153,15 @@ public class Constant implements Serializable, Cloneable {
     public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 
+    public static final String QINIU_UPLOAD_TOKEN_URL = DOMAIN + "qiniu/api/image/uptoken"; //获取七牛上传token
+
     public static final String VER_CODE_URL = HOST + "securityCode/get";   //获取短信验证码
     public static final String VER_CODE_VERIY_URL = HOST + "securityCode/verify";   //验证码验证
     public static final String USER_REGISTER_URL = HOST + "user/register"; //用户注册
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
     public static final String USER_CHANGE_PWD_URL = HOST + "user/changePwd";    //普通用户修改登录密码
+    public static final String USER_CHANGE_HEADER_URL = HOST + "user/updatePortrait";    //修改用户头像
+    public static final String USER_MODIFY_INFO_URL = HOST + "user/updateUserInfo";    //修改用户头像
 
     public static final String FEATURED_BLOCKS_URL = HOST + "featuredBlock/list";  //特色街区列表
     public static final String SHOPPING_CENTERS_URL = HOST + "shoppingCenter/list";  //购物中心列表

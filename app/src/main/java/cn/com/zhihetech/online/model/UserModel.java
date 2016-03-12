@@ -23,7 +23,38 @@ import cn.com.zhihetech.online.core.util.StringUtils;
  */
 public class UserModel extends BaseModel<User> {
 
+    /**
+     * 用户修改基本信息
+     *
+     * @param callback
+     * @param userId   用户ID
+     * @param userNick 用户昵称
+     * @param userSex  用户性别
+     * @param birthday 用户生日
+     * @param occName  职业
+     * @param areaId   区域ID
+     * @param income   收入
+     * @return
+     */
+    public Callback.Cancelable modifyBaseInfo(ResponseMessageCallback<User> callback, @NonNull String userId, @NonNull String userNick, @NonNull boolean userSex,
+                                              @NonNull String birthday, @NonNull String occName, @NonNull String areaId, @NonNull String income) {
+        ModelParams params = new ModelParams().addParam("userId", userId).addParam("userName", userNick).addParam("sex", String.valueOf(userSex))
+                .addParam("userBirthday", birthday).addParam("occupation", occName).addParam("area.areaId", areaId).addParam("income", income);
+        return postResponseMessage(Constant.USER_MODIFY_INFO_URL, params, callback);
+    }
 
+    /**
+     * 修改头像
+     *
+     * @param callback
+     * @param userId
+     * @param imgInfoId
+     * @return
+     */
+    public Callback.Cancelable changeHeader(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String imgInfoId) {
+        ModelParams params = new ModelParams().addParam("userId", userId).addParam("imgInfoId", imgInfoId);
+        return new SimpleModel(ResponseMessage.class).postObject(Constant.USER_CHANGE_HEADER_URL, params, callback);
+    }
 
     /**
      * 用户登录

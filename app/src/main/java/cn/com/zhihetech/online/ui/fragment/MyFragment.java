@@ -1,8 +1,11 @@
 package cn.com.zhihetech.online.ui.fragment;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,16 +17,22 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.User;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
 import cn.com.zhihetech.online.ui.activity.LoginActivity;
 import cn.com.zhihetech.online.ui.activity.MyFavoritesActivity;
 import cn.com.zhihetech.online.ui.activity.MyRedEnvelopItemListActivity;
+import cn.com.zhihetech.online.ui.activity.MyWalletActivity;
 import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
+import cn.com.zhihetech.online.ui.activity.UserHeaderModifyActivity;
 import cn.com.zhihetech.online.ui.activity.UserInfoChangeActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -33,20 +42,42 @@ public class MyFragment extends BaseFragment {
 
     private final int REFUND_AND_SERVICE = 101; //退款和售后
 
+    @ViewInject(R.id.my_header_img)
+    private CircleImageView headerImg;
     @ViewInject(R.id.my_nick_name_tv)
     private TextView nickNameTv;
+
+    private BroadcastReceiver userHeaderChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION)) {
+                User user = ZhiheApplication.getInstance().getUser();
+                ImageLoader.disPlayImage(headerImg, user.getPortrait());
+            }
+        }
+    };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         nickNameTv.setText(getUser().getUserName());
+        User user = ZhiheApplication.getInstance().getUser();
+        ImageLoader.disPlayImage(headerImg, user.getPortrait());
+        IntentFilter filter = new IntentFilter(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION);
+        getActivity().registerReceiver(userHeaderChangeReceiver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(userHeaderChangeReceiver);
     }
 
     @Event({R.id.my_waiting_pay_view, R.id.my_no_dispatch, R.id.my_already_dispatch_view,
             R.id.my_waiting_evalute_view,
             R.id.my_refund_and_service_view, R.id.my_volum_view, R.id.my_red_envelop_view,
             R.id.my_friends_view, R.id.my_favorites_view, R.id.my_info_change_view, R.id.my_pwd_change_view,
-            R.id.my_receiver_address_view, R.id.exit_app_btn, R.id.my_all_order_view})
+            R.id.my_receiver_address_view, R.id.exit_app_btn, R.id.my_all_order_view, R.id.my_wallet})
     private void onViewClick(View view) {
         Intent orderIntent = new Intent(getContext(), OrderActivity.class);
         switch (view.getId()) {
@@ -98,6 +129,10 @@ public class MyFragment extends BaseFragment {
             case R.id.my_receiver_address_view:
                 Intent intent = new Intent(getContext(), ReceiptAddressActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.my_wallet:
+                Intent walletIntent = new Intent(getContext(), MyWalletActivity.class);
+                startActivity(walletIntent);
                 break;
             case R.id.exit_app_btn:
                 new AlertDialog.Builder(getContext())

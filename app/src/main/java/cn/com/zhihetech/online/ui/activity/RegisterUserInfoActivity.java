@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.ui.activity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @ContentView(R.layout.activity_regist_userinfo)
@@ -62,7 +64,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     @ViewInject(R.id.submit_btn)
     private Button submitButton;
 
-    private AlertDialog birthdayPicker;
+    private DatePickerDialog birthDayPickerDialog;
     private AlertDialog sexPicker;
     private AlertDialog areaPicker;
     private AlertDialog occupationPicker;
@@ -110,9 +112,9 @@ public class RegisterUserInfoActivity extends BaseActivity {
         this.incomeArray = getResources().getStringArray(R.array.income_list);
         initUserPhone();
         initBirthdayPicker();
-        initSexSheetMenu();
-        initIncomeSheet();
-        initOccupationSheet();
+        initSexPicker();
+        initIncomePicker();
+        initOccupationPicker();
         this.acceptCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton paramAnonymousCompoundButton, boolean paramAnonymousBoolean) {
                 submitButton.setClickable(paramAnonymousBoolean);
@@ -137,25 +139,23 @@ public class RegisterUserInfoActivity extends BaseActivity {
      * 创建出生日期选择器
      */
     private void initBirthdayPicker() {
-        final DatePicker datePicker = new DatePicker(this);
-        datePicker.setBackgroundResource(R.color.gray);
-        birthdayPicker = new android.app.AlertDialog.Builder(this).setView(datePicker)
-                .setTitle("选择出生日期")
-                .setNeutralButton(R.string.cancel, null)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
-                        Calendar localCalendar = Calendar.getInstance();
-                        localCalendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-                        birthdayButton.setTag(DateUtils.formatDateTime(localCalendar.getTime()));
-                        birthdayButton.setText(DateUtils.formatDate(localCalendar.getTime()));
-                    }
-                }).create();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        birthDayPickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Date birthDay = DateUtils.parseDate(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth, "yyyy-MM-dd");
+                birthdayButton.setText(DateUtils.formatDate(birthDay));
+                birthdayButton.setTag(birthDay);
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        birthDayPickerDialog.setTitle("请选择出生日期");
     }
 
     /**
      * 创建收入选择器
      */
-    private void initIncomeSheet() {
+    private void initIncomePicker() {
         incomePicker = new AlertDialog.Builder(this)
                 .setTitle("选择职业")
                 .setItems(incomeArray, new DialogInterface.OnClickListener() {
@@ -172,7 +172,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     /**
      * 创建职业选择器
      */
-    private void initOccupationSheet() {
+    private void initOccupationPicker() {
         occupationPicker = new AlertDialog.Builder(this)
                 .setTitle("选择职业")
                 .setItems(occupationArray, new DialogInterface.OnClickListener() {
@@ -189,7 +189,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     /**
      * 创建性别选择器
      */
-    private void initSexSheetMenu() {
+    private void initSexPicker() {
         sexPicker = new AlertDialog.Builder(this)
                 .setTitle("请选择性别")
                 .setItems(new CharSequence[]{"女", "男"}, new DialogInterface.OnClickListener() {
@@ -239,7 +239,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
                 sexPicker.show();
                 break;
             case R.id.birthday_btn:
-                birthdayPicker.show();
+                birthDayPickerDialog.show();
                 break;
             case R.id.area_btn:
                 areaPicker.show();
@@ -341,7 +341,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
             user.setSex((Boolean) this.sexButton.getTag());
         }
         if (this.birthdayButton.getTag() != null) {
-            user.setBirthday(DateUtils.String2DateTime(this.birthdayButton.getTag().toString()));
+            user.setBirthday((Date) birthdayButton.getTag());
         }
         user.setOccupation(StringUtils.object2String(this.occupationButton.getTag()));
         String area = StringUtils.object2String(this.areaButton.getTag());

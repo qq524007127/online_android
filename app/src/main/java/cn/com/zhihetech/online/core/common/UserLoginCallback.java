@@ -88,8 +88,8 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      */
     protected void saveUserInfo(User user) {
         String header = null;
-        if (user.getHeaderImg() != null) {
-            header = user.getHeaderImg().getUrl();
+        if (user.getPortrait() != null) {
+            header = user.getPortrait().getUrl();
         }
         EMUserInfo userInfo = new EMUserInfo(user.getEMUserId(), user.getUserName(), header,
                 user.getUserId(), Constant.EXTEND_NORMAL_USER);

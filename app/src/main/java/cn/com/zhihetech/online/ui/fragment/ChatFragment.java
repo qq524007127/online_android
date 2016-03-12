@@ -109,7 +109,7 @@ public class ChatFragment extends EaseChatFragment {
                 User user = ZhiheApplication.getInstance().getUser();
                 message.setAttribute(Constant.EXTEND_USER_NICK_NAME, user.getUserName());
                 message.setAttribute(Constant.EXTEND_USER_ID, user.getUserId());
-                ImgInfo headerImg = user.getHeaderImg();
+                ImgInfo headerImg = user.getPortrait();
                 if (headerImg != null && !StringUtils.isEmpty(headerImg.getUrl())) {
                     message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, headerImg.getUrl());
                 }
