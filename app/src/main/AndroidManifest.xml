@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!--环信权限配置-->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -37,13 +38,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.MerchantLoginActivity" />
         <activity
             android:name=".ui.activity.RegisterVerCodeActivity"
             android:label="@string/regist_vercode" />
         <activity
             android:name=".ui.activity.RegisterUserInfoActivity"
             android:label="@string/user_info" />
+        <activity
+            android:name=".ui.activity.UserProtocolActivity"
+            android:label="@string/user_protocol" />
         <activity
             android:name=".ui.activity.ForgetPwdActivity"
             android:label="@string/find_password" />
@@ -115,14 +118,23 @@
             android:name=".ui.activity.MyWalletActivity"
             android:label="@string/my_wallet" />
         <activity
+            android:name=".ui.activity.AboutUsActivity"
+            android:label="@string/about_us" />
+        <activity
             android:name=".ui.activity.UserInfoChangeActivity"
             android:label="@string/user_info_change" />
         <activity
             android:name=".ui.activity.UserHeaderModifyActivity"
             android:label="@string/header_modify" />
+        <activity
+            android:name=".ui.activity.WalletTakeMoneyResultActivity"
+            android:label="@string/take_money_result" />
 
 
         <!--商家版-->
+        <activity
+            android:name=".ui.activity.MerchantLoginActivity"
+            android:label="@string/merchant_login" />
         <activity
             android:name=".ui.activity.MerchantMainActivity"
             android:label="@string/app_merchant_version" />
@@ -135,6 +147,9 @@
         <activity
             android:name=".ui.activity.SeckillGoodsListActivity"
             android:label="@string/my_seckill_goods" />
+
+        <!--Services配置-->
+        <service android:name=".core.service.CheckAppUpdateService" />
 
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->

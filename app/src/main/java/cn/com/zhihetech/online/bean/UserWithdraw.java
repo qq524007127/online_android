@@ -6,16 +6,16 @@ import java.util.Date;
  * 用户提现申请
  * Created by ShenYunjie on 2016/3/12.
  */
-public class UserWhithdraw extends BaseBean {
+public class UserWithdraw extends BaseBean {
 
     public static final int APPLY_WITHDRAW = 1;  //申请提现
     public static final int WITHDRAW_OK = 2;  //提现成功
     public static final int WITHDRAW_ERR = 3;  //提现失败
 
     private String userWithdrawId;   //id
-    private float money;  //提现的钱
-    private float poundage;  //手续费
-    private float realMoney;  //实际提现的钱
+    private float money;  //申请提现金额
+    private float poundage;  //提现手续费
+    private float realMoney;  //实际到账金额
     private Date applyDate;  //申请提现的日期
     private Date withdrawDate;   //管理员确认提现日期
     private String operator;  //进行提现确认的企业名称
@@ -103,13 +103,13 @@ public class UserWhithdraw extends BaseBean {
         this.reason = reason;
     }
 
-    public String displayState() {
+    public String getDisplayState() {
         switch (withdrawState) {
             case WITHDRAW_OK:
                 return "提现成功";
             case WITHDRAW_ERR:
                 return "提现失败";
         }
-        return "已申请，待提现";
+        return "提现中";
     }
 }

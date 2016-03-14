@@ -14,6 +14,7 @@ import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.MerchantLoginCallback;
 import cn.com.zhihetech.online.core.common.UserLoginCallback;
+import cn.com.zhihetech.online.core.service.CheckAppUpdateService;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -32,6 +33,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, CheckAppUpdateService.class));
         loadStartImage();
         waitAndLogin();
     }

@@ -29,8 +29,8 @@ public class UserModel extends BaseModel<User> {
      * @return
      */
     public Callback.Cancelable findPassword(ObjectCallback<ResponseMessage> callback, @NonNull String mobileNum, @NonNull String vercode) {
-        ModelParams params = new ModelParams().addParam("userPhone", mobileNum).addParam("verCode", vercode);
-        return new SimpleModel<ResponseMessage>(ResponseMessage.class).postObject(null, params, callback);
+        ModelParams params = new ModelParams().addParam("phoneNumber", mobileNum).addParam("securityCode", vercode);
+        return new SimpleModel<ResponseMessage>(ResponseMessage.class).postObject(Constant.USER_RESET_PWD_URL, params, callback);
     }
 
     /**

@@ -85,7 +85,7 @@
     <string name="occupation">职业</string>
     <string name="area">区域</string>
     <string name="income">收入</string>
-    <string name="accept_user_protocol">同意用户协议</string>
+    <string name="accept_user_protocol">《同意用户协议》</string>
     <string name="regist_vercode">获取注册验证码</string>
     <string name="waiting_and_get_ver_code">{0}秒后重新获取</string>
     <string name="user_info">用户信息</string>
@@ -118,7 +118,7 @@
     <string name="modify">修改</string>
     <string name="my_seckill_goods">我的秒杀商品</string>
     <string name="now_grab_buy">立即抢购</string>
-    <string name="data_load_fial_please_try_agin">数据加载失败请重试</string>
+    <string name="data_load_fial_please_try_agin">数据加载失败，请重试</string>
     <string name="my_favorites">我的收藏</string>
     <string name="shopping_center">购物中心</string>
     <string name="featured_block">特色街区</string>
@@ -127,4 +127,9 @@
     <string name="header_modify">头像编辑</string>
     <string name="my_wallet">我的钱包</string>
     <string name="find_password">找回密码</string>
+    <string name="take_money_result">提现记录</string>
+    <string name="merchant_login">商家登录</string>
+    <string name="about_us">关于我们</string>
+    <string name="app_name_and_version_name">挚合实淘  {0}</string>
+    <string name="user_protocol">用户协议</string>
 </resources>

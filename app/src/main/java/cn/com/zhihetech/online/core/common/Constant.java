@@ -150,19 +150,24 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static final String DOMAIN = "http://192.168.1.11:8080/";
+    public static final String DOMAIN = "http://192.168.1.14:8080/";
     public static final String HOST = DOMAIN + "api/";
 
+    public static final String USER_PROTOCOL_URL = DOMAIN + "common/user_protocol.html";    //用户协议
     public static final String QINIU_UPLOAD_TOKEN_URL = DOMAIN + "qiniu/api/image/uptoken"; //获取七牛上传token
+    public static final String APP_NEW_VERSION_URL = HOST + "app/lastVersion";  //后去App最新版本
 
     public static final String VER_CODE_URL = HOST + "securityCode/get";   //获取短信验证码
     public static final String VER_CODE_VERIY_URL = HOST + "securityCode/verify";   //验证码验证
     public static final String USER_REGISTER_URL = HOST + "user/register"; //用户注册
     public static final String USER_LOGIN_URL = HOST + "user/login";    //用户登录
     public static final String USER_CHANGE_PWD_URL = HOST + "user/changePwd";    //普通用户修改登录密码
+    public static final String USER_RESET_PWD_URL = HOST + "user/resetPwd";    //普通用户重置登录密码
     public static final String USER_CHANGE_HEADER_URL = HOST + "user/updatePortrait";    //修改用户头像
     public static final String USER_MODIFY_INFO_URL = HOST + "user/updateUserInfo";    //修改用户基本信息
-    public static final String USER_APPLY_TAKE_WALLET_MONEY_URL = HOST + "userWithdraw/apply";    //用户提现请求
+    public static final String USER_APPLY_TAKE_WALLET_MONEY_URL = HOST + "userWithdraw/apply";    //用户申请提现请求
+
+    public static final String USER_WITH_DRAW_RESULTS_URL = HOST + "user/{0}/withdrawRecord";    //用户提现记录
 
     public static final String FEATURED_BLOCKS_URL = HOST + "featuredBlock/list";  //特色街区列表
     public static final String SHOPPING_CENTERS_URL = HOST + "shoppingCenter/list";  //购物中心列表

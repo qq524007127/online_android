@@ -3,6 +3,7 @@ package cn.com.zhihetech.online.ui.activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -108,7 +109,8 @@ public class MyWalletActivity extends BaseActivity {
     }
 
     @Event({R.id.amount_of_money_one, R.id.amount_of_money_two, R.id.amount_of_money_three,
-            R.id.amount_of_money_four, R.id.wallet_get_vercode_btn, R.id.wallet_take_money_btn})
+            R.id.amount_of_money_four, R.id.wallet_get_vercode_btn, R.id.wallet_take_money_btn,
+            R.id.view_wallet_take_money_result_btn})
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.amount_of_money_one:
@@ -129,6 +131,10 @@ public class MyWalletActivity extends BaseActivity {
                 break;
             case R.id.wallet_take_money_btn:
                 checkDataAndTakeMoney();
+                break;
+            case R.id.view_wallet_take_money_result_btn:
+                Intent resultIntent = new Intent(this, WalletTakeMoneyResultActivity.class);
+                startActivity(resultIntent);
                 break;
         }
     }
@@ -332,6 +338,4 @@ public class MyWalletActivity extends BaseActivity {
             }
         }
     }
-
-
 }

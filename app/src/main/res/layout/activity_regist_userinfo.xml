@@ -137,7 +137,7 @@
                     android:checked="true" />
 
                 <TextView
-                    android:id="@+id/protocol"
+                    android:id="@+id/user_protocol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/accept_user_protocol"

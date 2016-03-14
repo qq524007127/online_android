@@ -49,8 +49,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/money_bg"
-                        android:tag="10"
-                        android:text="￥10"
+                        android:tag="20"
+                        android:text="￥20"
                         android:textColor="@color/tab_text_color"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -174,12 +174,25 @@
                 android:id="@+id/wallet_take_money_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/orange_bg"
                 android:text="申请提现"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/view_wallet_take_money_result_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/orange_bg"
+                android:text="提现记录"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>

@@ -415,6 +415,29 @@
                 android:text="@string/my_receiv_address" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/about_us_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@drawable/my_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/about_us_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10.0dip"
+                android:text="@string/about_us" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/exit_app_btn"
             android:layout_width="fill_parent"

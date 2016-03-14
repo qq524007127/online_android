@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,7 +60,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     private Button incomeButton;
     @ViewInject(R.id.occupation_btn)
     private Button occupationButton;
-    @ViewInject(R.id.protocol)
+    @ViewInject(R.id.user_protocol)
     private TextView userProtocol;
     @ViewInject(R.id.submit_btn)
     private Button submitButton;
@@ -232,7 +233,7 @@ public class RegisterUserInfoActivity extends BaseActivity {
     }
 
     @Event({R.id.user_sex_btn, R.id.birthday_btn, R.id.area_btn, R.id.income_btn, R.id.occupation_btn,
-            R.id.protocol, R.id.submit_btn})
+            R.id.user_protocol, R.id.submit_btn})
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.user_sex_btn:
@@ -250,8 +251,9 @@ public class RegisterUserInfoActivity extends BaseActivity {
             case R.id.occupation_btn:
                 occupationPicker.show();
                 break;
-            case R.id.protocol:
-                //this.incomeSheet.show();
+            case R.id.user_protocol:
+                Intent protocolIntent = new Intent(this, UserProtocolActivity.class);
+                startActivity(protocolIntent);
                 break;
             case R.id.submit_btn:
                 userRegister();

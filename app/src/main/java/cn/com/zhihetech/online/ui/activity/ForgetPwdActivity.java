@@ -118,7 +118,7 @@ public class ForgetPwdActivity extends BaseActivity {
             @Override
             public void onResponseMessage(ResponseMessage<Integer> res) {
                 if (res.getCode() != ResponseStateCode.SUCCESS) {
-                    showMsg(getVerCodeBtn, res.getMsg());
+                    showMsg(res.getMsg());
                     getVerCodeBtn.setClickable(true);
                     return;
                 }
