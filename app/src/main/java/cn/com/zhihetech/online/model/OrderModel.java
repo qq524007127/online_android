@@ -9,6 +9,7 @@ import org.xutils.common.Callback;
 import java.text.MessageFormat;
 import java.util.List;
 
+import cn.com.zhihetech.online.bean.ActivityGoods;
 import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.Pager;
@@ -90,6 +91,23 @@ public class OrderModel extends BaseModel<Order> {
     public Callback.Cancelable getChargeByOrders(ResponseMessageCallback<String> callback, @NonNull List<Order> orders) {
         ModelParams params = new ModelParams().addParam("orderStr", JSONObject.toJSONString(orders));
         return new SimpleModel(String.class).postResponseMessage(Constant.ORDER_ADD_URL, params, callback);
+    }
+
+    /**
+     * 提交秒杀商品订单
+     *
+     * @param callback
+     * @param order
+     * @param activityGoods 对应的秒杀商品
+     * @return
+     */
+    public Callback.Cancelable getActivityGoodsChargeByOrderAndActivityGoods(ResponseMessageCallback<String> callback, @NonNull Order order, @NonNull ActivityGoods activityGoods) {
+        ModelParams params = new ModelParams().addParam("orderName", order.getOrderName()).addParam("user.userId", order.getUser().getUserId())
+                .addParam("orderTotal", String.valueOf(order.getOrderTotal())).addParam("userMsg", order.getUserMsg())
+                .addParam("receiverName", order.getReceiverName()).addParam("receiverPhone", order.getReceiverPhone())
+                .addParam("receiverAdd", order.getReceiverAdd()).addParam("activityGoods.agId", activityGoods.getAgId())
+                .addParam("payType", order.getPayType()).addParam("carriage", String.valueOf(order.getCarriage()));
+        return new SimpleModel(String.class).postResponseMessage(Constant.ACTIVITY_GOODS_ORDER_ADD_URL, params, callback);
     }
 
     /**

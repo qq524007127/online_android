@@ -40,14 +40,15 @@
                 android:id="@+id/goods_info_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
                 android:gravity="center_horizontal"
+                android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/seckill_goods_info_old_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:gravity="center_horizontal"
                 android:textSize="14sp"
                 android:visibility="gone" />

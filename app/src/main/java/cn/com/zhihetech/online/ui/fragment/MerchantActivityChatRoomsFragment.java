@@ -188,7 +188,7 @@ public class MerchantActivityChatRoomsFragment extends BaseFragment {
      * 加载更多数据
      */
     private void loadMoreData() {
-        new ActivityModel().getActivitiesByMerchantId(loadMoreCallback, pageData.getNextPage(), getLoginUserId());
+        new ActivityModel().getStartedActivitiesByMerchantId(loadMoreCallback, pageData.getNextPage(), getLoginUserId());
     }
 
     /**
@@ -198,7 +198,7 @@ public class MerchantActivityChatRoomsFragment extends BaseFragment {
         if (!refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(true);
         }
-        new ActivityModel().getActivitiesByMerchantId(refreshCallback, new Pager(), getLoginUserId());
+        new ActivityModel().getStartedActivitiesByMerchantId(refreshCallback, new Pager(), getLoginUserId());
     }
 
     /**

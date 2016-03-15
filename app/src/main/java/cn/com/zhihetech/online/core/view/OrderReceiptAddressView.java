@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -74,7 +75,11 @@ public class OrderReceiptAddressView extends FrameLayout {
     };
 
     public OrderReceiptAddressView(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public OrderReceiptAddressView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         init();
     }
 

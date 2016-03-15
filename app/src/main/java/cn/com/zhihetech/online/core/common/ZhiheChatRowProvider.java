@@ -57,7 +57,7 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
 
     @Override
     public EaseChatRow getCustomChatRow(EMMessage message, int position, BaseAdapter adapter) {
-        switch (message.getIntAttribute(Constant.EXTEND_MESSAGE_TYPE, 0)) {
+       switch (message.getIntAttribute(Constant.EXTEND_MESSAGE_TYPE, 0)) {
             case Constant.EXTEND_MESSAGE_SHOP_LINK:
                 return new ShopLinkChatRow(mContext, message, position, adapter);
             case Constant.EXTEND_MESSAGE_GOODS_LINK:

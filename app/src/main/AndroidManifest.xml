@@ -100,6 +100,9 @@
             android:name=".ui.activity.ActivityChatRoomActivity"
             android:label="@string/activity_main_center" />
         <activity
+            android:name=".ui.activity.ActivityGoodsOrderActivity"
+            android:label="@string/order_confirm" />
+        <activity
             android:name=".ui.activity.ActivityFansActivity"
             android:label="@string/activity_fans" />
         <activity

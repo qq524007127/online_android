@@ -150,7 +150,7 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static final String DOMAIN = "http://192.168.1.14:8080/";
+    public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_URL = DOMAIN + "common/user_protocol.html";    //用户协议
@@ -186,6 +186,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_FOCUS_MERCHANTS_URL = HOST + "user/{0}/focusMerchants";    //获取关注商家列表
     public static final String CANCEL_FOCUS_MERCHANT_URL = HOST + "cancelFocusMerchant ";    //取消商家收藏
     public static final String MERCHANT_ACTIVITIES_URL = HOST + "merchant/{0}/activities";    //获取指定商家的活动
+    public static final String MERCHANT_STARTED_GOODSES_URL = HOST + "merchant/{0}/startedActivity/list";   //获取指定商家已经开始的活动
     public static final String MERCHANT_GOODSES_URL = HOST + "goodses/{0}";   //获取指定商家的商品
 
     public static final String GOODS_BANNERS_URL = HOST + "goodsBanners/{0}";   //获取指定商品的轮播图
@@ -211,6 +212,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_WALLET_TOTAL_MONEY_URL = HOST + "user/{0}/walletTotalMoney"; //获取用户收藏的商品
 
     public static final String ORDER_ADD_URL = HOST + "order/add";    //提交订单
+    public static final String ACTIVITY_GOODS_ORDER_ADD_URL = HOST + "activityGoodsOrder/add";    //提交活动商品订单
     public static final String USER_ORDERS_URL = HOST + "order/list"; //用户订单
     public static final String ORDER_PAY_URL = HOST + "order/{0}/pay"; //支付指定订单
     public static final String ORDER_CANCEL_URL = HOST + "order/{0}/cancel"; //取消指定订单

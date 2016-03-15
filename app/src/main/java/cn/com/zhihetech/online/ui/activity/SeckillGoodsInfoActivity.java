@@ -166,7 +166,9 @@ public class SeckillGoodsInfoActivity extends MerchantBaseActivity {
         this.buySeckillGoodsTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getSelf(), ActivityGoodsOrderActivity.class);
+                intent.putExtra(ActivityGoodsOrderActivity.ACTIVITY_GOODS_KEY,activityGoods);
+                startActivity(intent);
             }
         });
     }

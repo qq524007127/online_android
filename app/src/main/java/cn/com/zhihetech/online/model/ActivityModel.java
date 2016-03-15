@@ -46,6 +46,19 @@ public class ActivityModel extends BaseModel<Activity> {
      * @param pager
      * @param merchantId
      */
+    public Callback.Cancelable getStartedActivitiesByMerchantId(PageDataCallback<Activity> callback, Pager pager, @NonNull String merchantId) {
+        ModelParams params = new ModelParams().addPager(pager);
+        String url = MessageFormat.format(Constant.MERCHANT_STARTED_GOODSES_URL, merchantId);
+        return getPageData(url, params, callback);
+    }
+
+    /**
+     * 根据指定ID商家的已开始和即将开始的活动
+     *
+     * @param callback
+     * @param pager
+     * @param merchantId
+     */
     public Callback.Cancelable getActivitiesByMerchantId(PageDataCallback<Activity> callback, Pager pager, @NonNull String merchantId) {
         ModelParams params = new ModelParams().addPager(pager);
         String url = MessageFormat.format(Constant.MERCHANT_ACTIVITIES_URL, merchantId);

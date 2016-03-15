@@ -10,6 +10,7 @@ public class ActivityGoods extends BaseBean {
     private Activity activity;  //对应的活动
     private Goods goods;    //对应的商品
     private Merchant merchant;  //对应的商家
+    private int count;  //数量
 
     public String getAgId() {
         return agId;
@@ -49,5 +50,13 @@ public class ActivityGoods extends BaseBean {
 
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }
