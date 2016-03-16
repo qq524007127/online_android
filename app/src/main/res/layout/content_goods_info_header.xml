@@ -21,20 +21,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/normal_padding">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/goods_info_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp" />
+            android:padding="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/normal_bg" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/goods_info_price_tv"
@@ -62,11 +66,16 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/normal_bg" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/goods_info_carriage_tv"
@@ -83,18 +92,28 @@
                 android:gravity="center_vertical" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/normal_bg" />
+
         <TextView
             android:id="@+id/goods_info_desc_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp" />
+            android:padding="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/normal_bg" />
 
         <RelativeLayout
             android:id="@+id/goods_info_evaluate_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/normal_bg"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,13 +122,17 @@
                 android:text="@string/goods_evaluate" />
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/array_right" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/white" />
     </LinearLayout>
 
     <cn.com.zhihetech.online.core.view.FixedLayout

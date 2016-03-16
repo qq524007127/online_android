@@ -23,8 +23,10 @@ import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
+import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -61,12 +63,21 @@ public class MerchantHomeActivity extends BaseActivity {
 
     String[] tabs = {"活动", "宝贝", "详情"};
 
-    ObjectCallback<Merchant> merchantCallback = new ObjectCallback<Merchant>() {
+    ResponseMessageCallback<Merchant> merchantCallback = new ResponseMessageCallback<Merchant>() {
         @Override
-        public void onObject(Merchant data) {
-            merchant = data;
-            ImageLoader.disPlayImage(merchantTopImg, data.getHeaderImg());
-            ImageLoader.disPlayImage(merchantHeaderImg, data.getCoverImg());
+        public void onResponseMessage(ResponseMessage<Merchant> responseMessage) {
+            if(responseMessage.getCode() != ResponseStateCode.SUCCESS){
+                showMsg(responseMessage.getMsg());
+                return;
+            }
+            merchant = responseMessage.getData();
+            ImageLoader.disPlayImage(merchantTopImg, merchant.getHeaderImg());
+            ImageLoader.disPlayImage(merchantHeaderImg, merchant.getCoverImg());
+        }
+
+        @Override
+        public void onError(Throwable ex, boolean isOnCallback) {
+            showMsg("加载商家信息失败，请重试！");
         }
     };
 

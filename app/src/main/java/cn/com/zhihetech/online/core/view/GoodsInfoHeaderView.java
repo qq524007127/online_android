@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.core.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.GoodsBannerModel;
+import cn.com.zhihetech.online.ui.activity.GoodsCommentActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/20.
@@ -43,6 +45,8 @@ public class GoodsInfoHeaderView extends FrameLayout {
     protected TextView volumeTv;
     @ViewInject(R.id.goods_info_desc_tv)
     protected TextView goodsDescTv;
+    @ViewInject(R.id.goods_info_evaluate_view)
+    private View goodsCommentView;
 
     protected String goodsId;
 
@@ -75,7 +79,7 @@ public class GoodsInfoHeaderView extends FrameLayout {
         new GoodsBannerModel().getGoodsBannersByGoodsId(bannerCallback, goodsId);
     }
 
-    public void bindGoodsData(@NonNull Goods goods) {
+    public void bindGoodsData(@NonNull final Goods goods) {
         goodsNameTv.setText(goods.getGoodsName());
         String text = MessageFormat.format(getContext().getString(R.string.goods_price), goods.getPrice());
         goodsPriceTv.setText(text);
@@ -93,6 +97,15 @@ public class GoodsInfoHeaderView extends FrameLayout {
             text = MessageFormat.format(getContext().getString(R.string.goods_desc), goods.getGoodsDesc());
         }
         goodsDescTv.setText(text);
+
+        goodsCommentView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), GoodsCommentActivity.class);
+                intent.putExtra(GoodsCommentActivity.GOODS_ID_KEY, goods.getGoodsId());
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     public class GoodsBannerHolder implements Holder<GoodsBanner> {

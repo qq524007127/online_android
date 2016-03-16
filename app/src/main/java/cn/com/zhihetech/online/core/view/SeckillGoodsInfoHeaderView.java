@@ -36,5 +36,6 @@ public class SeckillGoodsInfoHeaderView extends GoodsInfoHeaderView {
         this.goodsPriceTv.setText("现价:" + activityGoods.getActivityPrice());
         this.seckillOldPriceTv.setText("原价:" + goods.getPrice());
         this.goodsStock.setText("还剩:(" + activityGoods.getCount() + ")");
+        this.volumeTv.setText("");
     }
 }

@@ -132,4 +132,5 @@
     <string name="about_us">关于我们</string>
     <string name="app_name_and_version_name">挚合实淘  {0}</string>
     <string name="user_protocol">用户协议</string>
+    <string name="goods_comment">商品评价</string>
 </resources>

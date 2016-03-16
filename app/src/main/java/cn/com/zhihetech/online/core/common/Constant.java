@@ -179,7 +179,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String CATEGORY_ACTIVITIES_URL = HOST + "goodsAttributeSet/{0}/activities";    //获取正在开始或即将开始的活动
     public static final String MERCHANT_LIST_URL = HOST + "merchantOrGoods/list";    //获取商家数据列表
     public static final String FEATURED_BLOCK_OR_SHOPPING_CENTER_MERCHANTS_URL = HOST + "scOrFbOrFs/list";    //获取每日上新数据
-    public static final String MERCHANT_URL = HOST + "merchant/{0}";    //根据ID获取商家基本信息
+    public static final String MERCHANT_INFO_URL = HOST + "merchant/{0}/info";    //根据ID获取商家基本信息
     public static final String MERCHANT_LOGIN_URL = HOST + "merchant/login";    //商家登录
     public static final String CHECK_MERCHANT_FUCOS_STATE_URL = HOST + "checkFocus";    //查询商家关注状态
     public static final String FOCUS_MERCHANT_URL = HOST + "focusMerchant/add";    //关注商家
@@ -188,11 +188,13 @@ public class Constant implements Serializable, Cloneable {
     public static final String MERCHANT_ACTIVITIES_URL = HOST + "merchant/{0}/activities";    //获取指定商家的活动
     public static final String MERCHANT_STARTED_GOODSES_URL = HOST + "merchant/{0}/startedActivity/list";   //获取指定商家已经开始的活动
     public static final String MERCHANT_GOODSES_URL = HOST + "goodses/{0}";   //获取指定商家的商品
+    public static final String MERCHANT_SHOP_SHOWS_URL = HOST + "merchant/{0}/shopShows";   //获取指定商家的门店照
 
     public static final String GOODS_BANNERS_URL = HOST + "goodsBanners/{0}";   //获取指定商品的轮播图
     public static final String GOODS_DETAILS_URL = HOST + "goodsDetails/{0}";   //获取指定商品的详情图
     public static final String GOODS_URL = HOST + "goods/{0}";   //根据ID获取商品
-    public static final String GOODSES_URL = HOST + "goodses";   //根据ID获取商品
+    public static final String GOODSES_URL = HOST + "goodses";   //获取所有商品列表
+    public static final String GOODS_COMMNETS_URL = HOST + "goods/{0}/goodsScores";   //获取指定商品的评论
     public static final String CATEGORY_GOODSES_URL = HOST + "goodsAttributeSet/{0}/goodses"; //获取指定类别的商品
 
     public static final String CHECK_FOCUS_GOODS_URL = HOST + "checkFocusGoods";  //检查用户对商品的收藏状态

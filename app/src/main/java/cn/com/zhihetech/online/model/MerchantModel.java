@@ -14,6 +14,7 @@ import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
+import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
@@ -52,9 +53,9 @@ public class MerchantModel extends BaseModel<Merchant> {
      * @param callback
      * @param merchantId 商家ID
      */
-    public Callback.Cancelable getMerchantById(ObjectCallback<Merchant> callback, @NonNull String merchantId) {
-        String url = MessageFormat.format(Constant.MERCHANT_URL, merchantId);
-        return getObject(url, null, callback);
+    public Callback.Cancelable getMerchantById(ResponseMessageCallback<Merchant> callback, @NonNull String merchantId) {
+        String url = MessageFormat.format(Constant.MERCHANT_INFO_URL, merchantId);
+        return getResponseMessage(url, null, callback);
     }
 
     /**

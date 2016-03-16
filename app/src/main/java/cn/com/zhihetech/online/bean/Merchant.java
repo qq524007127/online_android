@@ -59,6 +59,8 @@ public class Merchant extends BaseBean {
     private long goodsNum; //该商家有多少商品
     private boolean isActivating;  //该商家现在是否有活动正在进行
 
+    private float score = 5f;
+
 
     public String getMerchantId() {
         return merchantId;
@@ -358,6 +360,14 @@ public class Merchant extends BaseBean {
 
     public void setMerchantDetails(String merchantDetails) {
         this.merchantDetails = merchantDetails;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 
     /**

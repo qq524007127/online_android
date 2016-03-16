@@ -44,6 +44,7 @@
                         style="@style/AppRatingBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:isIndicator="true"
                         android:numStars="5"
                         android:rating="5" />
@@ -54,20 +55,27 @@
                 android:id="@+id/merchant_info_address_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:padding="10dp"
                 android:text="@string/shop_address" />
 
             <TextView
                 android:id="@+id/merchant_info_tell_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:padding="10dp"
                 android:text="@string/contact_num" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,35 +86,41 @@
                     android:id="@+id/merchant_info_buss_photo_iv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:scaleType="fitXY" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="门店照" />
 
-                <cn.com.zhihetech.online.core.view.FixedLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/merchant_info_show_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:aspect_ratio="0.4">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/white"
+                    android:minHeight="90dp">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/merchant_info_show_rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-                </cn.com.zhihetech.online.core.view.FixedLayout>
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -117,7 +131,9 @@
                     android:id="@+id/merchant_info_desc_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/merchant_desc" />
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 

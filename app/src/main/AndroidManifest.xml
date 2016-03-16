@@ -67,6 +67,9 @@
             android:name=".ui.activity.GoodsInfoActivity"
             android:label="@string/goods_detail"></activity>
         <activity
+            android:name=".ui.activity.GoodsCommentActivity"
+            android:label="@string/goods_comment" />
+        <activity
             android:name=".ui.activity.CategoryActivity"
             android:label="@string/category"></activity>
         <activity android:name=".ui.activity.CategoryDetailActivity" />
