@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -19,13 +18,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
-import cn.com.zhihetech.online.ui.activity.GoodsInfoActivity;
 import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
 import cn.com.zhihetech.online.ui.activity.SeckillGoodsInfoActivity;
 
