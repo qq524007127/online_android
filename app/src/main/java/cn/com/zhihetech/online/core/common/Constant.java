@@ -67,12 +67,12 @@ public class Constant implements Serializable, Cloneable {
     /**
      * APP端viewTarget相关
      */
-    public final static String NAVIGATION_ONE = "1";//投诉维权
-    public final static String NAVIGATION_TWO = "2";//购物中心
-    public final static String NAVIGATION_THREE = "3";//活动专区
-    public final static String NAVIGATION_FOUR = "4";//特色街区
-    public final static String NAVIGATION_FIVE = "5";//特色店
-    public final static String NAVIGATION_SIX = "6";//分类
+    public final static String NAVIGATION_COMPLAINT = "1";//投诉维权
+    public final static String NAVIGATION_SHOPPING_CENTER = "2";//购物中心
+    public final static String NAVIGATION_CORE_ACTIVITY = "3";//活动专区
+    public final static String NAVIGATION_FEATURED_BLOCK = "4";//特色街区
+    public final static String NAVIGATION_FEATURED_SHOP = "5";//特色店
+    public final static String NAVIGATION_CATEGORY = "6";//分类
 
     /**
      * 验证码类型
@@ -212,6 +212,8 @@ public class Constant implements Serializable, Cloneable {
     public static final String USER_DEFAULT_RECEIPT_ADDRESS_URL = HOST + "user/{0}/defaultReceivedAddress"; //用户默认收货地址
     public static final String USER_FAVORITES_GOODSES_URL = HOST + "user/{0}/focusGoodses"; //获取用户收藏的商品
     public static final String USER_WALLET_TOTAL_MONEY_URL = HOST + "user/{0}/walletTotalMoney"; //获取用户收藏的商品
+    public static final String USER_COUPON_ITEMS_URL = HOST + "user/{0}/couponItem/list"; //获取指定用户的优惠券
+    public static final String COUPON_ITEM_DETAILS_URL = HOST + "couponItem/{0}/details"; //优惠券详情
 
     public static final String ORDER_ADD_URL = HOST + "order/add";    //提交订单
     public static final String ACTIVITY_GOODS_ORDER_ADD_URL = HOST + "activityGoodsOrder/add";    //提交活动商品订单

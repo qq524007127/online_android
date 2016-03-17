@@ -1,5 +1,7 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -172,10 +176,25 @@ public class ActivityInfoActivity extends BaseActivity {
                 setActivityName(title);
             }
         });
-        webView.setListener(new ZhiheWebView.OnWebViewEventListener() {
+        webView.setWebViewEventListener(new ZhiheWebView.WebViewEventListener() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 containerRefreshLayout.setRefreshing(true);
+            }
+
+            @Override
+            public void onPageError(WebView view, WebResourceRequest request, WebResourceError error) {
+                new AlertDialog.Builder(getSelf())
+                        .setTitle(R.string.tip)
+                        .setMessage("页面加载失败是否重新加载？")
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                webView.reload();
+                                loadActivityInfo(actId);
+                            }
+                        })
+                        .setPositiveButton(R.string.ok, null).show();
             }
 
             @Override

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/webview_load_error_layout_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/webview_reload_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/load_error_click_reload"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
+            android:id="@+id/webview_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <cn.com.zhihetech.online.core.view.ZhiheWebView
+                android:id="@+id/webview_container_wv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </cn.com.zhihetech.online.core.view.ZhiheWebView>
+        </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
+    </LinearLayout>
+</RelativeLayout>

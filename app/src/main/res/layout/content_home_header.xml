@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <cn.com.zhihetech.online.core.view.FixedLayout
+    <cn.com.zhihetech.online.core.view.FixedWidthLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:aspect_ratio="0.4">
@@ -17,7 +17,7 @@
             app:banner_type="type_main">
 
         </cn.com.zhihetech.online.core.view.CommonBanner>
-    </cn.com.zhihetech.online.core.view.FixedLayout>
+    </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -34,11 +34,11 @@
         </android.support.v7.widget.RecyclerView>
     </FrameLayout>
 
-    <cn.com.zhihetech.online.core.view.FixedLayout
+    <cn.com.zhihetech.online.core.view.FixedWidthLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_separate"
         app:aspect_ratio="0.08">
 
-    </cn.com.zhihetech.online.core.view.FixedLayout>
+    </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 </LinearLayout>

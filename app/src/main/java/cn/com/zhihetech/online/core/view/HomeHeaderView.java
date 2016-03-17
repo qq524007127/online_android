@@ -29,6 +29,8 @@ import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.NavigationModel;
 import cn.com.zhihetech.online.ui.activity.BaseActivity;
 import cn.com.zhihetech.online.ui.activity.CategoryActivity;
+import cn.com.zhihetech.online.ui.activity.ComplaintActivity;
+import cn.com.zhihetech.online.ui.activity.CoreCenterActivity;
 import cn.com.zhihetech.online.ui.activity.FeaturedBlocksActivity;
 import cn.com.zhihetech.online.ui.activity.MerchantListActivity;
 import cn.com.zhihetech.online.ui.activity.ShoppingCenterActivity;
@@ -111,31 +113,33 @@ public class HomeHeaderView extends FrameLayout {
      */
     private void doNavigation(Navigation nav) {
         switch (nav.getViewTargert()) {
-            case Constant.NAVIGATION_ONE:
-                Toast.makeText(getContext(), "正在建设中", Toast.LENGTH_LONG).show();
+            case Constant.NAVIGATION_COMPLAINT:
+                Intent complaintIntent = new Intent(getContext(), ComplaintActivity.class);
+                complaintIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
+                getContext().startActivity(complaintIntent);
                 break;
-            case Constant.NAVIGATION_TWO:
+            case Constant.NAVIGATION_SHOPPING_CENTER:
                 Intent intent2 = new Intent(getContext(), ShoppingCenterActivity.class);
                 intent2.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent2);
                 break;
-            case Constant.NAVIGATION_THREE:
-                Intent intent3 = new Intent(getContext(), ShoppingCenterActivity.class);
+            case Constant.NAVIGATION_CORE_ACTIVITY:
+                Intent intent3 = new Intent(getContext(), CoreCenterActivity.class);
                 intent3.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent3);
                 break;
-            case Constant.NAVIGATION_FOUR:
+            case Constant.NAVIGATION_FEATURED_BLOCK:
                 Intent intent4 = new Intent(getContext(), FeaturedBlocksActivity.class);
                 intent4.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent4);
                 break;
-            case Constant.NAVIGATION_FIVE:
+            case Constant.NAVIGATION_FEATURED_SHOP:
                 Intent intent5 = new Intent(getContext(), MerchantListActivity.class);
                 intent5.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 intent5.putExtra(MerchantListActivity.MERCHANT_TYPE_KEY, MerchantListActivity.FEATURED_SHOP_TYPE);
                 getContext().startActivity(intent5);
                 break;
-            case Constant.NAVIGATION_SIX:
+            case Constant.NAVIGATION_CATEGORY:
                 Intent intent6 = new Intent(getContext(), CategoryActivity.class);
                 intent6.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent6);

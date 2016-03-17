@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <com.easemob.easeui.widget.EaseImageView
+                android:id="@+id/coupon_info_merchant_cover_iv"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:ease_shape_type="round" />
+
+            <TextView
+                android:id="@+id/coupon_info_merchant_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:maxLines="1"
+                android:textColor="@color/coupon_info_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/coupon_info_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/coupon_item_face_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥200"
+                android:textColor="@color/coupon_face_value_color"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/coupon_info_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="代金券"
+                android:textColor="@color/coupon_face_value_color"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/coupon_info_code_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="2dp"
+                android:text="券码:165345665465465456"
+                android:textColor="@color/coupon_info_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/coupon_item_validity_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="有效期至：2016-12-10"
+                android:textColor="@color/coupon_info_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/coupon_item_state_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="未使用"
+                android:textColor="@color/coupon_face_value_color"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用规则"
+                android:textColor="@color/coupon_info_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/coupon_item_detail_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="2dp"
+                android:text="asdfsadfsadfsdafsafd"
+                android:textColor="@color/textColor" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

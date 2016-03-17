@@ -13,7 +13,7 @@
         app:dtlCaptureTop="false"
         app:dtlOverDrag="false">
 
-        <cn.com.zhihetech.online.core.view.FixedLayout
+        <cn.com.zhihetech.online.core.view.FixedWidthLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:aspect_ratio="0.4">
@@ -62,7 +62,7 @@
                         android:text="@string/contact_merchanter" />
                 </LinearLayout>
             </RelativeLayout>
-        </cn.com.zhihetech.online.core.view.FixedLayout>
+        </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

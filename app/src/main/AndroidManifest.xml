@@ -61,6 +61,12 @@
             android:name=".ui.activity.MerchantListActivity"
             android:label="@string/daily_new"></activity>
         <activity
+            android:name=".ui.activity.CoreCenterActivity"
+            android:label="@string/core_activity" />
+        <activity
+            android:name=".ui.activity.ComplaintActivity"
+            android:label="@string/complaint_rights" />
+        <activity
             android:name=".ui.activity.MerchantHomeActivity"
             android:label="@string/merchant_home"></activity>
         <activity
@@ -117,6 +123,12 @@
         <activity
             android:name=".ui.activity.SeckillGoodsInfoActivity"
             android:label="@string/goods_detail" />
+        <activity
+            android:name=".ui.activity.MyCouponItemActivity"
+            android:label="@string/my_coupon" />
+        <activity
+            android:name=".ui.activity.CouponItemInfoActivity"
+            android:label="@string/coupon_detail_info" />
         <activity
             android:name=".ui.activity.MyRedEnvelopItemListActivity"
             android:label="@string/my_red_envelope" />

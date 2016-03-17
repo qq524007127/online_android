@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <cn.com.zhihetech.online.core.view.FixedLayout
+    <cn.com.zhihetech.online.core.view.FixedWidthLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:aspect_ratio="0.4">
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
         </cn.com.zhihetech.online.core.view.ZhiheBanner>
-    </cn.com.zhihetech.online.core.view.FixedLayout>
+    </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,7 +135,7 @@
             android:background="@color/white" />
     </LinearLayout>
 
-    <cn.com.zhihetech.online.core.view.FixedLayout
+    <cn.com.zhihetech.online.core.view.FixedWidthLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shangpinxiangqing"

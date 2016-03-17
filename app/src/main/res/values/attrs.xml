@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="FixedLayout">
+    <declare-styleable name="FixedWidthLayout">
         <attr name="aspect_ratio" format="float" />
     </declare-styleable>
     <declare-styleable name="FixedImageView">
@@ -19,5 +19,8 @@
             <enum name="type_three" value="3" />
             <enum name="type_four" value="4" />
         </attr>
+    </declare-styleable>
+    <declare-styleable name="FixedHeightLayout">
+        <attr name="fixed_height_aspect_ratio" format="float" />
     </declare-styleable>
 </resources>

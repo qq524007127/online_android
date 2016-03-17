@@ -38,7 +38,7 @@
     <string name="waiting_evaluate">待评价</string>
     <string name="refund_or_service">退款/售后</string>
     <string name="refunded">已退款</string>
-    <string name="my_volum">我的优惠券</string>
+    <string name="my_coupon">我的优惠券</string>
     <string name="my_red_money">我的红包</string>
     <string name="my_friends">我的好友</string>
     <string name="my_baby">我的宝贝</string>
@@ -133,4 +133,8 @@
     <string name="app_name_and_version_name">挚合实淘  {0}</string>
     <string name="user_protocol">用户协议</string>
     <string name="goods_comment">商品评价</string>
+    <string name="core_activity">活动专区</string>
+    <string name="coupon_detail_info">优惠券（代金券）详情</string>
+    <string name="load_error_click_reload">加载失败，点击重新加载</string>
+    <string name="complaint_rights">投诉维权</string>
 </resources>

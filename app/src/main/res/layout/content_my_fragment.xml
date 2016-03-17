@@ -231,7 +231,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/my_volum_view"
+            android:id="@+id/my_coupon_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
@@ -250,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:text="@string/my_volum" />
+                android:text="@string/my_coupon" />
         </LinearLayout>
 
         <LinearLayout

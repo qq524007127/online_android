@@ -17,4 +17,6 @@
     <color name="holo_green_light">#ff99cc00</color>
     <color name="holo_orange_light">#ffffbb33</color>
     <color name="holo_red_light">#ffff4444</color>
+    <color name="coupon_face_value_color">#ff5001</color>
+    <color name="coupon_info_color">#906538</color>
 </resources>

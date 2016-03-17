@@ -34,7 +34,7 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(this, CheckAppUpdateService.class));
-        loadStartImage();
+        //loadStartImage();
         waitAndLogin();
     }
 
