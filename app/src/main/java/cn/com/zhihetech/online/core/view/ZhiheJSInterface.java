@@ -1,12 +1,18 @@
 package cn.com.zhihetech.online.core.view;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import java.text.MessageFormat;
 
+import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.ui.activity.CouponItemInfoActivity;
@@ -22,6 +28,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
 
     private Context mContext;
     private WebView target;
+    private ProgressDialog progressDialog;
 
     public ZhiheJSInterface(Context mContext, WebView target) {
         this.mContext = mContext;
@@ -35,6 +42,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * @param goodsName
      */
     @Override
+    @JavascriptInterface
     public void navigationActivityGoods(final String goodsId, final String goodsName) {
         target.post(new Runnable() {
             @Override
@@ -54,6 +62,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * @param goodsName
      */
     @Override
+    @JavascriptInterface
     public void navigationGoods(final String goodsId, final String goodsName) {
         target.post(new Runnable() {
             @Override
@@ -73,6 +82,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * @param merchantName
      */
     @Override
+    @JavascriptInterface
     public void navigationMerchant(final String merchantId, final String merchantName) {
         target.post(new Runnable() {
             @Override
@@ -91,6 +101,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * @param couponItemId
      */
     @Override
+    @JavascriptInterface
     public void navigationCouponItemInfo(final String couponItemId) {
         target.post(new Runnable() {
             @Override
@@ -106,6 +117,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * 获取当前登录用户的token
      */
     @Override
+    @JavascriptInterface
     public void getUserToken() {
         SharedPreferenceUtils sharedPreferenceUtils = SharedPreferenceUtils.getInstance(mContext);
         final String token = sharedPreferenceUtils.getUserToken();
@@ -122,6 +134,7 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
      * 获取当前登录用户的ID
      */
     @Override
+    @JavascriptInterface
     public void getUserId() {
         final String userId = ZhiheApplication.getInstance().getUserId();
         final String onBackUserIdTpl = "javascript:onBackUserId(\"{0}\")";
@@ -134,8 +147,52 @@ public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
     }
 
     @Override
+    @JavascriptInterface
     public void initJsRuntime() {
         getUserId();
         getUserToken();
+    }
+
+    @Override
+    @JavascriptInterface
+    public void callPhone(@NonNull final String phoneNumber) {
+        target.post(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.tip)
+                        .setMessage("确定要拨打" + phoneNumber + "吗？")
+                        .setNegativeButton(R.string.cancel, null)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_CALL);
+                                intent.setData(Uri.parse("tel:" + phoneNumber));
+                                //开启系统拨号器
+                                mContext.startActivity(intent);
+                            }
+                        }).show();
+            }
+        });
+    }
+
+    @Override
+    @JavascriptInterface
+    public void toggleProgressDialog(boolean toggleState, String msg) {
+        if (!toggleState) {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } else {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog.show(mContext, "", msg);
+            } else {
+                progressDialog.setMessage(msg);
+                if (!progressDialog.isShowing()) {
+                    progressDialog.show();
+                }
+            }
+        }
     }
 }

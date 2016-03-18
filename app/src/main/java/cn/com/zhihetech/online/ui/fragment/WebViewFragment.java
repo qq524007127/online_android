@@ -24,6 +24,7 @@ import cn.com.zhihetech.online.core.view.ZhiheWebView;
 public class WebViewFragment extends BaseFragment {
 
     public final static String LOAD_URL = "_LOAD_URL";
+    public final static String ENABLE_REFRESH = "_ENABLE_REFRESH";
 
     @ViewInject(R.id.webview_load_error_layout_view)
     private LinearLayout errorLayout;
@@ -38,7 +39,11 @@ public class WebViewFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle args = getArguments();
+        if (args == null) {
+            return;
+        }
         String url = args.getString(LOAD_URL);
+        refreshLayout.setEnabled(args.getBoolean(ENABLE_REFRESH, true));
         if (!StringUtils.isEmpty(url)) {
             initAndLoadPageByUrl(url);
         } else {
@@ -79,10 +84,6 @@ public class WebViewFragment extends BaseFragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                ZhiheWebView.JsInterface jsInterface = webView.getJsInterface();
-                if (jsInterface != null) {
-                    jsInterface.initJsRuntime();
-                }
                 refreshLayout.setRefreshing(false);
             }
         });

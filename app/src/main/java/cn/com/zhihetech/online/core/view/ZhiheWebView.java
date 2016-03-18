@@ -4,10 +4,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -45,17 +47,11 @@ public class ZhiheWebView extends WebView {
     }
 
     private void init() {
-        initSettings();
         setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
                 if (webViewEventListener != null) {
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
-                            webViewEventListener.onPageStarted(view, url, favicon);
-                        }
-                    });
+                    webViewEventListener.onPageStarted(view, url, favicon);
                 }
                 super.onPageStarted(view, url, favicon);
             }
@@ -63,12 +59,10 @@ public class ZhiheWebView extends WebView {
             @Override
             public void onPageFinished(final WebView view, final String url) {
                 if (webViewEventListener != null) {
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
-                            webViewEventListener.onPageFinished(view, url);
-                        }
-                    });
+                    webViewEventListener.onPageFinished(view, url);
+                }
+                if (jsInterface != null) {
+                    jsInterface.initJsRuntime();
                 }
                 super.onPageFinished(view, url);
             }
@@ -77,12 +71,7 @@ public class ZhiheWebView extends WebView {
             public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
                 super.onReceivedError(view, request, error);
                 if (webViewEventListener != null) {
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
-                            webViewEventListener.onPageError(view, request, error);
-                        }
-                    });
+                    webViewEventListener.onPageError(view, request, error);
                 }
             }
 
@@ -94,6 +83,7 @@ public class ZhiheWebView extends WebView {
         });
         setWebChromeClient(new ZhiheWbChromeClient());
         setJsInterface(new ZhiheJSInterface(getContext(), this));
+        initSettings();
     }
 
     private void initSettings() {
@@ -118,7 +108,7 @@ public class ZhiheWebView extends WebView {
 
     public void setJsInterface(JsInterface jsInterface) {
         this.jsInterface = jsInterface;
-        addJavascriptInterface(jsInterface, "JSInterface");
+        addJavascriptInterface(this.jsInterface, "JSInterface");
     }
 
     public interface WebViewEventListener {
@@ -202,5 +192,22 @@ public class ZhiheWebView extends WebView {
          */
         @JavascriptInterface
         void initJsRuntime();
+
+        /**
+         * 拨打电话
+         *
+         * @param tellNumber
+         */
+        @JavascriptInterface
+        void callPhone(@NonNull String tellNumber);
+
+        /**
+         * 开启或关闭加载框
+         *
+         * @param toggleState true:开启；false:关闭
+         * @param msg         显示的内容
+         */
+        @JavascriptInterface
+        void toggleProgressDialog(boolean toggleState, String msg);
     }
 }

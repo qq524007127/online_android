@@ -20,6 +20,6 @@ public class UserProtocolActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        containerWebView.loadUrl(Constant.USER_PROTOCOL_URL);
+        containerWebView.loadUrl(Constant.USER_PROTOCOL_PAGE_URL);
     }
 }
