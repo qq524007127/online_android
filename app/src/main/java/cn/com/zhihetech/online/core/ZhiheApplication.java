@@ -10,7 +10,6 @@ import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMMessage;
-import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.easeui.controller.EaseUI;
 
@@ -30,6 +29,7 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -62,6 +62,15 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         x.Ext.setDebug(Constant.DEBUG);
         initDB();
         initEMChat();
+        initJPush();
+    }
+
+    /**
+     * 初始化极光推送
+     */
+    private void initJPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     public static ZhiheApplication getInstance() {

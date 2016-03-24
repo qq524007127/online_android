@@ -17,7 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+        destinationDir file("$projectDir/libs")
+        baseName "Native_Libs2"
+        extension "jar"
+        from fileTree(dir: "libs", include: "**/*.so")
+        into "lib"
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn(nativeLibsToJar)
+    }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -38,5 +50,6 @@ dependencies {
     compile project(':lib:pingpp')
     compile project(':easeUI')
     compile files('libs/android-viewbadger.jar')
+    compile files('libs/jpush-android-2.1.0.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
