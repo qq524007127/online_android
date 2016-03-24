@@ -9,6 +9,9 @@ import com.easemob.chat.EMGroupManager;
 
 import org.xutils.ex.DbException;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.bean.User;
@@ -16,6 +19,8 @@ import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 用户登录回调接口，登录成功后需再次登录环信、极光推送等第三方账号
@@ -81,6 +86,29 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         preferenceUtils.setUserPassword(userPwd);
 
         saveUserInfo(token.getUser());
+
+        initJPushAliasAndTags(this.token.getUser());
+    }
+
+    /**
+     * 设置极光推送的别名和标签
+     *
+     * @param user
+     */
+    protected void initJPushAliasAndTags(User user) {
+        Set<String> tags = new HashSet<>();
+        tags.add(user.isSex() ? "男" : "女");
+        tags.add(user.getIncome());
+        tags.add(user.getOccupation());
+        tags.add(String.valueOf(user.getAge()));
+        tags.add(user.getArea().getAreaId().replaceAll("-", ""));
+        JPushInterface.setAliasAndTags(mContext, user.getUserId().replaceAll("-", ""), JPushInterface.filterValidTags(tags), new TagAliasCallback() {
+
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+
+            }
+        });
     }
 
     /**

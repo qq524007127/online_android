@@ -22,6 +22,7 @@ import cn.com.zhihetech.online.ui.fragment.HomeFragment;
 import cn.com.zhihetech.online.ui.fragment.MessageFragment;
 import cn.com.zhihetech.online.ui.fragment.MyFragment;
 import cn.com.zhihetech.online.ui.fragment.ShoppingCartFragment;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by ShenYunjie on 2016/1/15.

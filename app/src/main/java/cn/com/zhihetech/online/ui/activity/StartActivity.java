@@ -9,24 +9,29 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.Merchant;
+import cn.com.zhihetech.online.bean.SystemConfig;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.MerchantLoginCallback;
+import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.common.UserLoginCallback;
+import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.service.CheckAppUpdateService;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.MerchantModel;
+import cn.com.zhihetech.online.model.SystemConfigModel;
 import cn.com.zhihetech.online.model.UserModel;
+import cn.jpush.android.api.JPushInterface;
 
 @ContentView(R.layout.activity_start)
 public class StartActivity extends BaseActivity {
     @ViewInject(R.id.start_img)
     private ImageView startImg;
-
-    private String url = "http://7xofn0.com1.z0.glb.clouddn.com/144947890994513979.jpg";
 
     private boolean isFinished = false;
 
@@ -34,15 +39,34 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(this, CheckAppUpdateService.class));
-        //loadStartImage();
+        loadStartImage();
         waitAndLogin();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
     }
 
     /**
      * 加载启动页面
      */
     private void loadStartImage() {
-        ImageLoader.disPlayImage(startImg, url);
+        new SystemConfigModel().getStartImg(new ResponseMessageCallback<ImgInfo>() {
+            @Override
+            public void onResponseMessage(ResponseMessage<ImgInfo> responseMessage) {
+                if (responseMessage.getCode() == ResponseStateCode.SUCCESS) {
+                    ImageLoader.disPlayImage(startImg, responseMessage.getData());
+                }
+            }
+        });
     }
 
     @Override

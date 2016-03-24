@@ -2,6 +2,7 @@ package cn.com.zhihetech.online.core;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -29,6 +30,7 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
+import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -71,6 +73,7 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
     private void initJPush() {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        JPushInterface.requestPermission(this);
     }
 
     public static ZhiheApplication getInstance() {

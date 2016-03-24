@@ -7,13 +7,18 @@ import com.easemob.chat.EMChatManager;
 
 import org.xutils.ex.DbException;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.MerchantToken;
+import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by ShenYunjie on 2016/2/29.
@@ -53,10 +58,21 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
         preferenceUtils = SharedPreferenceUtils.getInstance(mContext);
     }
 
+    /**
+     * 设置极光推送的别名和标签
+     *
+     * @param merchant
+     */
+    protected void initJPushAliasAndTags(Merchant merchant) {
+        Set<String> tags = new HashSet<>();
+        JPushInterface.setAliasAndTags(mContext, merchant.getMerchantId().replaceAll("-", ""), tags);
+    }
+
     @Override
     public void onResponseMessage(ResponseMessage<MerchantToken> responseMessage) {
         if (responseMessage.getCode() == ResponseStateCode.SUCCESS) {
             this.token = responseMessage.getData();
+            initJPushAliasAndTags(this.token.getMerchant());
         } else {
             onLoginError(new RuntimeException(responseMessage.getMsg()));
         }
