@@ -6,13 +6,17 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import java.util.Date;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.JPushNotification;
 import cn.com.zhihetech.online.ui.activity.MainActivity;
+import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
+import cn.com.zhihetech.online.ui.activity.PushNotificationDetailActivity;
+import cn.com.zhihetech.online.ui.activity.SearchActivity;
 import cn.com.zhihetech.online.ui.activity.StartActivity;
 import cn.jpush.android.api.JPushInterface;
 
@@ -20,6 +24,9 @@ import cn.jpush.android.api.JPushInterface;
  * Created by ShenYunjie on 2016/3/24.
  */
 public class JPushReceiver extends BroadcastReceiver {
+
+    public final static String JPUSH_NOTIFICATION_OPENED_ACTION = "JPUSH_NOTIFICATION_OPENED_ACTION";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         switch (intent.getAction()) {
@@ -39,7 +46,7 @@ public class JPushReceiver extends BroadcastReceiver {
 
                 break;
             case "cn.jpush.android.intent.NOTIFICATION_OPENED":
-                Toast.makeText(context, intent.getStringExtra(JPushInterface.EXTRA_ALERT), Toast.LENGTH_SHORT).show();
+                onNotificationOpened(context, intent);
                 break;
             case "cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK":
 
@@ -50,6 +57,37 @@ public class JPushReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * 当通知打开时回调
+     *
+     * @param context
+     * @param intent
+     */
+    private void onNotificationOpened(Context context, Intent intent) {
+        Bundle bundle = intent.getExtras();
+        String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
+        String alert = bundle.getString(JPushInterface.EXTRA_ALERT);
+        String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        int notificationId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+        String msgId = bundle.getString(JPushInterface.EXTRA_MSG_ID);
+
+        JPushNotification notification = new JPushNotification(msgId, title, alert, extra, notificationId);
+        bundle.putSerializable(JPushNotification.EXTRA_JPUSH_NOTIFICATION, notification);
+
+        Intent targetIntent = new Intent(context, PushNotificationDetailActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setAction(JPUSH_NOTIFICATION_OPENED_ACTION).putExtras(bundle);
+        context.startActivity(targetIntent);
+    }
+
+    /**
+     * 收到自定义消息后自定义显示通知
+     *
+     * @param context
+     * @param msgId
+     * @param title
+     * @param msg
+     */
     protected void showNotification(Context context, String msgId, String title, String msg) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
 

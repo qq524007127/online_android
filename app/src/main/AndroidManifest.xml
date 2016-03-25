@@ -59,6 +59,10 @@
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
         <activity
+            android:name=".ui.activity.PushNotificationDetailActivity"
+            android:label="@string/push_detail"
+            android:launchMode="singleTop" />
+        <activity
             android:name=".ui.activity.RegisterVerCodeActivity"
             android:label="@string/regist_vercode" />
         <activity

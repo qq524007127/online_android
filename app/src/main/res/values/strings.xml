@@ -137,4 +137,5 @@
     <string name="coupon_detail_info">优惠券（代金券）详情</string>
     <string name="load_error_click_reload">加载失败，点击重新加载</string>
     <string name="complaint_rights">投诉维权</string>
+    <string name="push_detail">推送详情</string>
 </resources>
