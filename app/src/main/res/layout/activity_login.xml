@@ -16,46 +16,71 @@
         android:paddingRight="30dp">
 
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/logo" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/user_code_et"
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/border_white_bg"
-                android:drawableLeft="@drawable/account"
-                android:hint="@string/account_number"
-                android:inputType="numberSigned"
-                android:maxLength="11"
-                android:singleLine="true"
-                android:textColor="@color/textColor"
-                android:textSize="14sp" />
+                android:layout_height="@dimen/edit_text_layout_height"
+                android:layout_marginTop="20dp">
 
-            <EditText
-                android:id="@+id/user_pwd_et"
-                android:layout_width="fill_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_white_bg"
-                android:drawableLeft="@drawable/pwd"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textColor="@color/textColor"
-                android:textSize="14sp" />
+                <ImageView
+                    style="@style/InputIconStyle"
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/account" />
+
+                <EditText
+                    style="@style/CommonInputStyle"
+                    android:id="@+id/user_code_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:hint="@string/account_number"
+                    android:inputType="numberSigned"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_layout_height"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    style="@style/InputIconStyle"
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/pwd" />
+
+                <EditText
+                    style="@style/CommonInputStyle"
+                    android:id="@+id/user_pwd_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -82,7 +107,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="24dp"
                 android:orientation="horizontal">
 
                 <Button

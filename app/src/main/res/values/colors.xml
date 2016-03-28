@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#fc3343</color>
     <color name="colorPrimaryDark">#fc3343</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#fe7d5b</color>
     <color name="white">#ffffff</color>
     <color name="textColor">#272c35</color>
     <color name="normal_bg">#f5f3f4</color>
@@ -19,4 +19,6 @@
     <color name="holo_red_light">#ffff4444</color>
     <color name="coupon_face_value_color">#ff5001</color>
     <color name="coupon_info_color">#906538</color>
+    <color name="activity_item_tip_bg">#333333</color>
+    <color name="change_pwd_bg">#f5f4f4</color>
 </resources>

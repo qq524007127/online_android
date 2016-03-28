@@ -31,20 +31,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="4dp">
 
                     <TextView
                         android:id="@+id/merchant_info_name_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:padding="2dp" />
 
                     <RatingBar
                         android:id="@+id/merchant_info_score_rb"
                         style="@style/AppRatingBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:isIndicator="true"
                         android:numStars="5"
                         android:rating="5" />

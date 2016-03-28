@@ -6,10 +6,11 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <android.support.v7.widget.AppCompatCheckBox
+    <CheckBox
         android:id="@+id/shopping_cart_accb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp" />
 
     <ImageView
         android:id="@+id/shopping_cart_cover_iv"
@@ -42,8 +43,8 @@
 
             <ImageButton
                 android:id="@+id/shopping_cart_reduce_ib"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
                 android:background="@drawable/reduce_icon" />
 
             <Button
@@ -55,15 +56,15 @@
                 android:clickable="false"
                 android:gravity="center"
                 android:inputType="numberSigned"
-                android:minHeight="25dp"
+                android:minHeight="@dimen/input_icon_size"
                 android:minWidth="60dp"
                 android:singleLine="true"
                 android:textColor="@color/textColor" />
 
             <ImageButton
                 android:id="@+id/shopping_cart_add_ib"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
                 android:background="@drawable/add_icon" />
         </LinearLayout>
 

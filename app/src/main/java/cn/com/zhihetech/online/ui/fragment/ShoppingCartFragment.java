@@ -191,9 +191,9 @@ public class ShoppingCartFragment extends BaseFragment {
     private void initListViewAndAdapter() {
         adapter = new ShoppingCartAdapter(getContext(), R.layout.content_shopping_cart_item);
         listView.setAdapter(adapter);
-        adapter.setOnShoppingCatrAmountChangeListener(new ShoppingCartAdapter.OnShoppingCatrAmountChangeListener() {
+        adapter.setOnShoppingCartAmountChangeListener(new ShoppingCartAdapter.OnShoppingCartAmountChangeListener() {
             @Override
-            public void onAmountCanged(ShoppingCart data, int amount) {
+            public void onAmountChanged(ShoppingCart data, int amount) {
                 updateAmount(data, amount);
             }
         });

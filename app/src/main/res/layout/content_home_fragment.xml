@@ -17,15 +17,31 @@
 
         <ImageView
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="39dp"
             android:src="@drawable/no_title_logo" />
 
-        <Button
-            android:id="@+id/home_search_btn"
-            style="@style/HomeSearchStyle"
+        <LinearLayout
+            android:id="@+id/home_search_box_view"
+            style="@style/CommonViewLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/main_serch_hint" />
+            android:layout_height="@dimen/main_search_box_height"
+            android:layout_marginLeft="@dimen/main_search_box_margin_left"
+            android:layout_marginRight="@dimen/main_search_box_margin_right">
+
+            <ImageView
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
+                android:src="@drawable/search_icon" />
+
+            <TextView
+                style="@style/HomeSearchBoxStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:singleLine="true"
+                android:text="@string/main_search_hint"
+                android:textSize="12sp" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
     <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout

@@ -185,6 +185,6 @@ public class StartActivity extends BaseActivity {
                     autoLogin();
                 }
             }
-        }, 3000);
+        }, 3000/1000);
     }
 }

@@ -8,7 +8,7 @@
         android:id="@+id/category_cover_fiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:width_height_ratio="0.8" />
+        app:width_height_ratio="0.634" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,8 @@
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/category_name_tv"

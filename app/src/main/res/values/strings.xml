@@ -6,7 +6,7 @@
     <string name="my">我的</string>
     <string name="shopping_cart">购物车</string>
     <string name="data_loading">数据加载中...</string>
-    <string name="main_serch_hint">查找活动、商品、店铺</string>
+    <string name="main_search_hint">查找活动、商品、店铺</string>
     <string name="activity_date_msg">{0} ({1}) {2}-{3}</string>
     <string name="add_friend">加为好友</string>
     <string name="contact_merchanter">联系商家</string>
@@ -138,4 +138,5 @@
     <string name="load_error_click_reload">加载失败，点击重新加载</string>
     <string name="complaint_rights">投诉维权</string>
     <string name="push_detail">推送详情</string>
+    <string name="all_checked">全选</string>
 </resources>

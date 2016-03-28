@@ -3,7 +3,6 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.INotificationSideChannel;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
@@ -24,7 +23,6 @@ import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.adapter.ActivityAdapter;
 import cn.com.zhihetech.online.model.ActivityModel;
-import cn.com.zhihetech.online.ui.activity.ActivityInfoActivity;
 import cn.com.zhihetech.online.ui.activity.SearchActivity;
 
 /**
@@ -104,10 +102,10 @@ public class HomeFragment extends BaseFragment{
         }, new Pager());
     }
 
-    @Event({R.id.home_search_btn})
+    @Event({R.id.home_search_box_view})
     private void onViewClick(View view) {
         switch (view.getId()) {
-            case R.id.home_search_btn:
+            case R.id.home_search_box_view:
                 Intent intent = new Intent(getContext(), SearchActivity.class);
                 getContext().startActivity(intent);
                 break;

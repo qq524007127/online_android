@@ -27,54 +27,105 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:gravity="center_vertical"
-        android:minHeight="50dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/textColor" />
 
         <LinearLayout
-            android:id="@+id/shopping_cart_delete_view"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:minHeight="50dp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="4dp">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/delete_icon" />
-
-            <TextView
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:text="@string/delete"
-                android:textSize="12sp" />
+                android:padding="10dp"
+                android:text="@string/all_checked" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="合计：￥359.2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="不含运费" />
+            </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/textColor" />
+
         <LinearLayout
-            android:id="@+id/shopping_cart_buy_view"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/orange"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:minHeight="50dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/shopping_cart_buy" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/shopping_cart_delete_view"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:text="@string/buy"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:minHeight="50dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/delete_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:text="@string/delete"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shopping_cart_buy_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:minHeight="50dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/shopping_cart_buy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:text="@string/buy"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

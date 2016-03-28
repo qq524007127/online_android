@@ -2,11 +2,10 @@ package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
 
     private List<ShoppingCart> checkedCarts = new ArrayList<>();
 
-    private OnShoppingCatrAmountChangeListener onShoppingCatrAmountChangeListener;
+    private OnShoppingCartAmountChangeListener onShoppingCartAmountChangeListener;
 
     public ShoppingCartAdapter(Context mContext, int layoutId) {
         super(mContext, layoutId);
@@ -51,21 +50,39 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         holder.numberBtn.setText(String.valueOf(data.getAmount()));
         holder.numberBtn.setClickable(false);
         holder.priceTv.setText(MessageFormat.format(mContext.getString(R.string.goods_price), data.getGoods().getPrice()));
+
         if (checkedCarts.contains(data)) {
             holder.checkBox.setChecked(true);
         } else {
             holder.checkBox.setChecked(false);
         }
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.checkBox.isChecked()) {
+                    //holder.checkBox.setChecked(false);
+                    if (!checkedCarts.contains(data)) {
+                        checkedCarts.add(data);
+                    }
+                } else {
+                    //holder.checkBox.setChecked(true);
+                    if (checkedCarts.contains(data)) {
+                        checkedCarts.add(data);
+                    }
+                }
+            }
+        });
+        /*holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Toast.makeText(mContext, data.getGoods().getGoodsName(), Toast.LENGTH_SHORT).show();
                 if (isChecked) {
                     checkedCarts.add(data);
                 } else {
                     checkedCarts.remove(data);
                 }
             }
-        });
+        });*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +99,10 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
             public void onClick(View v) {
                 Log.d("ShoppingCartAdapter", holder.numberBtn.getText().toString());
                 int amount = Integer.parseInt(holder.numberBtn.getText().toString());
-                if (amount > 1 && onShoppingCatrAmountChangeListener != null) {
+                if (amount > 1 && onShoppingCartAmountChangeListener != null) {
                     amount--;
                     //holder.numberBtn.setText(String.valueOf(amount));
-                    onShoppingCatrAmountChangeListener.onAmountCanged(data, amount);
+                    onShoppingCartAmountChangeListener.onAmountChanged(data, amount);
                 }
             }
         });
@@ -95,10 +112,10 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
             public void onClick(View v) {
                 Log.d("ShoppingCartAdapter", holder.numberBtn.getText().toString());
                 int amount = Integer.parseInt(holder.numberBtn.getText().toString());
-                if (amount < data.getGoods().getCurrentStock() && onShoppingCatrAmountChangeListener != null) {
+                if (amount < data.getGoods().getCurrentStock() && onShoppingCartAmountChangeListener != null) {
                     amount++;
                     //holder.numberBtn.setText(String.valueOf(amount));
-                    onShoppingCatrAmountChangeListener.onAmountCanged(data, amount);
+                    onShoppingCartAmountChangeListener.onAmountChanged(data, amount);
                 }
             }
         });
@@ -114,13 +131,13 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         return checkedCarts;
     }
 
-    public void setOnShoppingCatrAmountChangeListener(OnShoppingCatrAmountChangeListener onShoppingCatrAmountChangeListener) {
-        this.onShoppingCatrAmountChangeListener = onShoppingCatrAmountChangeListener;
+    public void setOnShoppingCartAmountChangeListener(OnShoppingCartAmountChangeListener onShoppingCartAmountChangeListener) {
+        this.onShoppingCartAmountChangeListener = onShoppingCartAmountChangeListener;
     }
 
     public class ShoppingCartHolder extends ZhiheAdapter.BaseViewHolder {
         @ViewInject(R.id.shopping_cart_accb)
-        public AppCompatCheckBox checkBox;
+        public CheckBox checkBox;
         @ViewInject(R.id.shopping_cart_cover_iv)
         public ImageView coverImg;
         @ViewInject(R.id.shopping_cart_goods_name_tv)
@@ -139,7 +156,7 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         }
     }
 
-    public interface OnShoppingCatrAmountChangeListener {
-        void onAmountCanged(ShoppingCart data, int amount);
+    public interface OnShoppingCartAmountChangeListener {
+        void onAmountChanged(ShoppingCart data, int amount);
     }
 }

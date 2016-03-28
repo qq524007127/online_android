@@ -8,27 +8,42 @@
     <include layout="@layout/toolbar_layout" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-80dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp">
-
-        <EditText
-            android:id="@id/user_code_et"
-            style="@style/EditViewTheme"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/view_common_height"
-            android:layout_marginBottom="@dimen/view_normal_margin"
-            android:drawableLeft="@drawable/account"
-            android:hint="@string/account_number"
-            android:inputType="numberSigned"
-            android:maxLength="11"
-            android:textSize="14sp" />
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            style="@style/CommonViewLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_common_height"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                style="@style/InputIconStyle"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
+                android:src="@drawable/account" />
+
+            <EditText
+                android:id="@id/user_code_et"
+                style="@style/CommonInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/account_number"
+                android:inputType="numberSigned"
+                android:maxLength="11"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/view_normal_margin"
             android:orientation="horizontal"
             android:paddingBottom="5.0dip">
 
@@ -56,8 +71,9 @@
         <Button
             android:id="@+id/next_step_btn"
             style="@style/ButtonTheme"
-            android:layout_width="fill_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:text="@string/next_step" />
     </LinearLayout>
 </LinearLayout>

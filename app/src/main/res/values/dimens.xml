@@ -9,4 +9,23 @@
     <dimen name="cardview_radius">0dp</dimen>
     <dimen name="view_common_height">45dp</dimen>
     <dimen name="view_normal_margin">10dp</dimen>
+
+    <!--主界面Tab布局相关-->
+    <dimen name="tab_icon_width">24dp</dimen>
+    <dimen name="tab_icon_height">24dp</dimen>
+    <dimen name="tab_icon_padding">1dp</dimen>
+    <dimen name="tab_text_size">12sp</dimen>
+    <dimen name="tab_text_padding">0dp</dimen>
+    <dimen name="main_tab_layout_height">52dp</dimen>
+    <dimen name="main_tab_layout_padding">2dp</dimen>
+    <!--主界面顶部搜索框-->
+    <dimen name="main_search_box_height">40dp</dimen>
+    <dimen name="main_search_box_padding">6dp</dimen>
+    <dimen name="edit_text_layout_height">45dp</dimen>
+    <dimen name="input_icon_size">20dp</dimen>
+
+    <dimen name="view_min_height">45dp</dimen>
+    <dimen name="main_search_box_margin_right">56dp</dimen>
+    <dimen name="main_search_box_margin_left">30dp</dimen>
+
 </resources>

@@ -13,14 +13,11 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
-    <style name="HomeSearchStyle">
-        <item name="android:background">@drawable/home_search_bg</item>
-        <item name="android:drawableLeft">@drawable/search_icon</item>
+    <style name="HomeSearchBoxStyle">
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:layout_marginRight">30dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:padding">@dimen/main_search_box_padding</item>
     </style>
 
     <style name="PopWindowStyle">
@@ -42,13 +39,30 @@
     <!--自定义评分控件样式-->
     <style name="AppRatingBarStyle" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/merchant_rating_bar</item>
-        <item name="android:minHeight">26dp</item>
-        <item name="android:maxHeight">26dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <dimen name="view_min_height">45dp</dimen>
+    <!--带图标的输入框容器-->
+    <style name="CommonViewLayoutStyle">
+        <item name="android:background">@drawable/border_white_bg</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="InputIconStyle">
+        <item name="android:width">@dimen/input_icon_size</item>
+        <item name="android:height">@dimen/input_icon_size</item>
+        <item name="android:layout_margin">6dp</item>
+    </style>
+
+    <style name="CommonInputStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>

@@ -77,8 +77,8 @@
 
             <ImageButton
                 android:id="@+id/sheet_goods_reduce_ib"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
                 android:background="@drawable/reduce_icon" />
 
             <Button
@@ -90,15 +90,15 @@
                 android:clickable="false"
                 android:gravity="center"
                 android:inputType="numberSigned"
-                android:minHeight="30dp"
-                android:minWidth="80dp"
+                android:minHeight="22dp"
+                android:minWidth="60dp"
                 android:singleLine="true"
                 android:textColor="@color/textColor" />
 
             <ImageButton
                 android:id="@+id/sheet_goods_add_ib"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
                 android:background="@drawable/add_icon" />
 
         </LinearLayout>

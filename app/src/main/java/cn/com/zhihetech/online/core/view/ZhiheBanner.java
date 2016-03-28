@@ -24,7 +24,7 @@ public class ZhiheBanner<T> extends ConvenientBanner<T> {
 
     protected void initBanner() {
         setPageIndicator(new int[]{R.drawable.banner_indicator_normal, R.drawable.banner_indicator_activity})
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+                .setPageIndicatorAlign(PageIndicatorAlign.CENTER_HORIZONTAL)
                 .startTurning(1000 * 3);
     }
 }

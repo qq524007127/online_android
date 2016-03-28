@@ -32,12 +32,14 @@
 
                 <Button
                     android:id="@+id/search_type_btn"
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:background="@drawable/drop_down_bg"
+                    android:gravity="center"
                     android:paddingLeft="5dp"
                     android:text="商品"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/search_input_et"
@@ -59,7 +61,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0"
                 android:background="@drawable/search_btn_bg"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/search"
                 android:textColor="@color/white"
                 android:textSize="12sp" />

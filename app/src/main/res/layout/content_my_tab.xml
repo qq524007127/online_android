@@ -6,8 +6,9 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/tab_icon_width"
+        android:layout_height="@dimen/tab_icon_height"
+        android:padding="@dimen/tab_icon_padding"
         android:src="@drawable/tab_my" />
 
     <TextView
@@ -16,5 +17,6 @@
         android:gravity="center"
         android:text="@string/my"
         android:textColor="@color/tab_text_color"
-        android:textSize="14sp" />
+        android:textSize="@dimen/tab_text_size"
+        android:padding="@dimen/tab_text_padding" />
 </LinearLayout>
