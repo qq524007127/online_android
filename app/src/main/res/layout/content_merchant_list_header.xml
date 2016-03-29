@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/merchant_separate"
-        app:aspect_ratio="0.106">
+        app:aspect_ratio="0.1">
 
     </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 </LinearLayout>

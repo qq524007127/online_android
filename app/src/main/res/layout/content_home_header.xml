@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_separate"
-        app:aspect_ratio="0.0796">
+        app:aspect_ratio="0.1">
 
     </cn.com.zhihetech.online.core.view.FixedWidthLayout>
 </LinearLayout>

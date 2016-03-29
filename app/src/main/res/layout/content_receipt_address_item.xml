@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="6dp">
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="[默认]"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:visibility="gone" />
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/receipt_tell_tv"
@@ -38,7 +39,9 @@
         <TextView
             android:id="@+id/receipt_detail_address_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dp"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,15 +53,15 @@
 
         <Button
             android:id="@+id/receipt_address_edit_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/input_icon_size"
+            android:layout_height="@dimen/input_icon_size"
             android:layout_margin="10dp"
             android:background="@drawable/receip_address_edit" />
 
         <Button
             android:id="@+id/receipt_address_delete_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/input_icon_size"
+            android:layout_height="@dimen/input_icon_size"
             android:layout_margin="10dp"
             android:background="@drawable/receip_address_delete" />
     </LinearLayout>

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="0"
-        android:background="@color/orange"
+        android:background="@drawable/orange_bg"
         android:text="@string/add_receipt_address"
         android:textColor="@color/white"
         android:textSize="16sp" />

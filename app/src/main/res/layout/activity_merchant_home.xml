@@ -30,13 +30,6 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/activity_separate" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/merchant_home_header_iv"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/my" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -46,19 +39,37 @@
                     android:orientation="vertical"
                     android:paddingRight="5dp">
 
-                    <Button
-                        android:id="@+id/merchant_home_add_friend_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
-                        android:text="@string/add_friend"
-                        android:visibility="gone" />
+                    <com.easemob.easeui.widget.EaseImageView
+                        android:id="@+id/merchant_home_header_iv"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/my"
+                        app:ease_radius="5dp"
+                        app:ease_shape_type="rectangle"
+                        android:visibility="gone"/>
 
                     <Button
+                        style="@android:style/Widget.Button.Small"
+                        android:layout_width="70dp"
+                        android:layout_height="34dp"
+                        android:id="@+id/merchant_home_add_friend_btn"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/orange_bg"
+                        android:text="@string/add_friend"
+                        android:textSize="12sp"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        style="@android:style/Widget.Button.Small"
                         android:id="@+id/merchant_home_contact_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
+                        android:layout_width="70dp"
+                        android:layout_height="34dp"
+                        android:layout_margin="2dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/orange_bg"
                         android:text="@string/contact_merchanter" />
                 </LinearLayout>
             </RelativeLayout>

@@ -111,16 +111,6 @@ public class MyFavoritesActivity extends BaseActivity {
                 loadMoreData();
             }
         });
-        loadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Goods goods = adapter.getItem(position).getGoods();
-                Intent intent = new Intent(getSelf(), GoodsInfoActivity.class);
-                intent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, goods.getGoodsId());
-                intent.putExtra(GoodsInfoActivity.GOODS_NAME_KEY, goods.getGoodsName());
-                startActivity(intent);
-            }
-        });
         loadMoreListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -134,7 +124,17 @@ public class MyFavoritesActivity extends BaseActivity {
                                 deleteFavorite(adapter.getItem(position));
                             }
                         }).show();
-                return false;
+                return true;
+            }
+        });
+        loadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Goods goods = adapter.getItem(position).getGoods();
+                Intent intent = new Intent(getSelf(), GoodsInfoActivity.class);
+                intent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, goods.getGoodsId());
+                intent.putExtra(GoodsInfoActivity.GOODS_NAME_KEY, goods.getGoodsName());
+                startActivity(intent);
             }
         });
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

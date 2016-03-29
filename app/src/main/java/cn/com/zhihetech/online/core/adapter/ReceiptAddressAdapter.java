@@ -34,7 +34,7 @@ public class ReceiptAddressAdapter extends ZhiheAdapter<ReceivedGoodsAddress, Re
     public void onBindViewHolder(ReceiptAddressHolder holder, final ReceivedGoodsAddress data) {
         holder.defaultFlagTv.setVisibility(data.isDefaultAddress() ? View.VISIBLE : View.GONE);
         holder.receiverNameTv.setText(MessageFormat.format(mContext.getString(R.string.receiver_person_name), data.getReceiverName()));
-        holder.receiverTellTv.setText(MessageFormat.format(mContext.getString(R.string.contact_num), data.getReceiverPhone()));
+        holder.receiverTellTv.setText("电话:" + data.getReceiverPhone());
         holder.detailAddress.setText(MessageFormat.format(mContext.getString(R.string.detail_address), data.getDetailAddress()));
         if (onButtonClickListener != null) {
             holder.editBtn.setOnClickListener(new View.OnClickListener() {

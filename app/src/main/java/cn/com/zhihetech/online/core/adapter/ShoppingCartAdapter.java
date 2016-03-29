@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -29,6 +30,7 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
     private List<ShoppingCart> checkedCarts = new ArrayList<>();
 
     private OnShoppingCartAmountChangeListener onShoppingCartAmountChangeListener;
+    private OnCheckedShoppingCartsChangedListener onCheckedShoppingCartsChangedListener;
 
     public ShoppingCartAdapter(Context mContext, int layoutId) {
         super(mContext, layoutId);
@@ -51,6 +53,18 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         holder.numberBtn.setClickable(false);
         holder.priceTv.setText(MessageFormat.format(mContext.getString(R.string.goods_price), data.getGoods().getPrice()));
 
+        /*List<ShoppingCart> _tmp = new ArrayList<>();
+        for (ShoppingCart cart : checkedCarts) {
+            for (ShoppingCart _cart : mDatas) {
+                if (cart.getShoppingCartId().equals(_cart.getShoppingCartId())) {
+                    _tmp.add(_cart);
+                    break;
+                }
+            }
+        }
+        checkedCarts.clear();
+        checkedCarts.addAll(_tmp);*/
+
         if (checkedCarts.contains(data)) {
             holder.checkBox.setChecked(true);
         } else {
@@ -60,29 +74,20 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
             @Override
             public void onClick(View v) {
                 if (holder.checkBox.isChecked()) {
-                    //holder.checkBox.setChecked(false);
                     if (!checkedCarts.contains(data)) {
                         checkedCarts.add(data);
                     }
                 } else {
-                    //holder.checkBox.setChecked(true);
                     if (checkedCarts.contains(data)) {
-                        checkedCarts.add(data);
+                        checkedCarts.remove(data);
                     }
+                }
+                if (onCheckedShoppingCartsChangedListener != null) {
+                    onCheckedShoppingCartsChangedListener.onCheckedCartsChange(checkedCarts);
                 }
             }
         });
-        /*holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(mContext, data.getGoods().getGoodsName(), Toast.LENGTH_SHORT).show();
-                if (isChecked) {
-                    checkedCarts.add(data);
-                } else {
-                    checkedCarts.remove(data);
-                }
-            }
-        });*/
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,11 +102,12 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         holder.reduceIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ShoppingCartAdapter", holder.numberBtn.getText().toString());
                 int amount = Integer.parseInt(holder.numberBtn.getText().toString());
+                if (amount == 1) {
+                    Toast.makeText(mContext, "受不了了，宝贝不能再减少了！", Toast.LENGTH_SHORT).show();
+                }
                 if (amount > 1 && onShoppingCartAmountChangeListener != null) {
                     amount--;
-                    //holder.numberBtn.setText(String.valueOf(amount));
                     onShoppingCartAmountChangeListener.onAmountChanged(data, amount);
                 }
             }
@@ -112,6 +118,9 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
             public void onClick(View v) {
                 Log.d("ShoppingCartAdapter", holder.numberBtn.getText().toString());
                 int amount = Integer.parseInt(holder.numberBtn.getText().toString());
+                if (amount >= data.getGoods().getCurrentStock()) {
+                    Toast.makeText(mContext, "受不了了，宝贝不能再增加了！", Toast.LENGTH_SHORT).show();
+                }
                 if (amount < data.getGoods().getCurrentStock() && onShoppingCartAmountChangeListener != null) {
                     amount++;
                     //holder.numberBtn.setText(String.valueOf(amount));
@@ -122,9 +131,46 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        List<ShoppingCart> carts = new ArrayList<>();
+        for (ShoppingCart cart : checkedCarts) {
+            for (ShoppingCart data : mDatas) {
+                if (cart.getShoppingCartId().equals(data.getShoppingCartId())) {
+                    carts.add(data);
+                    break;
+                }
+            }
+        }
+
+        checkedCarts.clear();
+        checkedCarts.addAll(carts);
+
+        if (onCheckedShoppingCartsChangedListener != null) {
+            onCheckedShoppingCartsChangedListener.onCheckedCartsChange(checkedCarts);
+        }
+    }
+
+    @Override
     public void refreshData(List<ShoppingCart> datas) {
         this.checkedCarts.clear();
         super.refreshData(datas);
+    }
+
+    /**
+     * 全选或取消全选
+     *
+     * @param allChecked true:全选；false:取消全选
+     */
+    public void toggleAllChecked(boolean allChecked) {
+        checkedCarts.clear();
+        if (allChecked) {
+            checkedCarts.addAll(mDatas);
+        }
+        notifyDataSetChanged();
+        if (onCheckedShoppingCartsChangedListener != null) {
+            onCheckedShoppingCartsChangedListener.onCheckedCartsChange(checkedCarts);
+        }
     }
 
     public List<ShoppingCart> getCheckedCarts() {
@@ -133,6 +179,10 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
 
     public void setOnShoppingCartAmountChangeListener(OnShoppingCartAmountChangeListener onShoppingCartAmountChangeListener) {
         this.onShoppingCartAmountChangeListener = onShoppingCartAmountChangeListener;
+    }
+
+    public void setOnCheckedShoppingCartsChangedListener(OnCheckedShoppingCartsChangedListener onCheckedShoppingCartsChangedListener) {
+        this.onCheckedShoppingCartsChangedListener = onCheckedShoppingCartsChangedListener;
     }
 
     public class ShoppingCartHolder extends ZhiheAdapter.BaseViewHolder {
@@ -158,5 +208,9 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
 
     public interface OnShoppingCartAmountChangeListener {
         void onAmountChanged(ShoppingCart data, int amount);
+    }
+
+    public interface OnCheckedShoppingCartsChangedListener {
+        void onCheckedCartsChange(List<ShoppingCart> checkedCarts);
     }
 }

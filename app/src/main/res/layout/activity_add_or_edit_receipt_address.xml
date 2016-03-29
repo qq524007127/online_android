@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/change_pwd_bg"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout" />
@@ -13,38 +13,82 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <EditText
-            android:id="@+id/receipt_person_name_et"
+        <LinearLayout
+            style="@style/CommonViewLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/home_search_bg"
-            android:hint="@string/receipt_person"
-            android:minHeight="40dp"
-            android:padding="5dp"
-            android:singleLine="true"
-            android:textColor="@color/textColor"
-            android:textSize="14sp" />
+            android:layout_height="@dimen/edit_text_layout_height"
+            android:background="@drawable/change_pwd_input_bg">
 
-        <EditText
-            android:id="@+id/receipt_tell_num_et"
+            <ImageView
+                style="@style/InputIconStyle"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
+                android:src="@drawable/name" />
+
+            <EditText
+                android:id="@+id/receipt_person_name_et"
+                style="@style/CommonInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/receipt_person"
+                android:singleLine="true"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/CommonViewLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/home_search_bg"
-            android:hint="联系电话"
-            android:inputType="number"
-            android:maxLength="11"
-            android:minHeight="40dp"
-            android:padding="5dp"
-            android:textColor="@color/textColor"
-            android:textSize="14sp" />
+            android:layout_height="@dimen/edit_text_layout_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/change_pwd_input_bg">
+
+            <ImageView
+                style="@style/InputIconStyle"
+                android:layout_width="@dimen/input_icon_size"
+                android:layout_height="@dimen/input_icon_size"
+                android:src="@drawable/tellphone" />
+
+            <EditText
+                style="@style/CommonInputStyle"
+                android:id="@+id/receipt_tell_num_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="联系电话"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:padding="5dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/receipt_detail_address_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/change_pwd_input_bg"
+                android:gravity="top"
+                android:hint="详细地址"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
+                android:minHeight="40dp"
+                android:minLines="4"
+                android:padding="5dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
             <CheckBox
                 android:id="@+id/receipt_default_address_cb"
@@ -53,45 +97,13 @@
                 android:text="@string/is_default_receipt_address" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:text="详细地址:" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/receipt_detail_address_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/home_search_bg"
-                android:gravity="top"
-                android:inputType="textMultiLine"
-                android:maxLines="6"
-                android:minHeight="40dp"
-                android:minLines="6"
-                android:padding="5dp"
-                android:scrollbars="vertical"
-                android:textColor="@color/textColor"
-                android:textSize="14sp" />
-        </LinearLayout>
-
         <Button
             android:id="@+id/receipt_info_submit_btn"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/orange_bg"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/change_pwd_btn_bg"
             android:text="@string/ok"
             android:textColor="@color/white"
             android:textSize="18sp" />

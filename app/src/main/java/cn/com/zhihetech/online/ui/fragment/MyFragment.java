@@ -24,6 +24,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.ui.activity.AboutUsActivity;
+import cn.com.zhihetech.online.ui.activity.BaseActivity;
 import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
 import cn.com.zhihetech.online.ui.activity.LoginActivity;
 import cn.com.zhihetech.online.ui.activity.MyFavoritesActivity;
@@ -52,9 +53,14 @@ public class MyFragment extends BaseFragment {
     private BroadcastReceiver userHeaderChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION)) {
-                User user = ZhiheApplication.getInstance().getUser();
-                ImageLoader.disPlayImage(headerImg, user.getPortrait());
+            User user = ZhiheApplication.getInstance().getUser();
+            switch (intent.getAction()) {
+                case UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION:
+                    ImageLoader.disPlayImage(headerImg, user.getPortrait());
+                    break;
+                case UserInfoChangeActivity.USER_INFO_MODIFIED_ACTION:
+                    nickNameTv.setText(user.getUserName());
+                    break;
             }
         }
     };
@@ -66,6 +72,7 @@ public class MyFragment extends BaseFragment {
         User user = ZhiheApplication.getInstance().getUser();
         ImageLoader.disPlayImage(headerImg, user.getPortrait());
         IntentFilter filter = new IntentFilter(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION);
+        filter.addAction(UserInfoChangeActivity.USER_INFO_MODIFIED_ACTION);
         getActivity().registerReceiver(userHeaderChangeReceiver, filter);
     }
 
@@ -88,22 +95,27 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.my_waiting_pay_view:
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_NO_PAYMENT);
+                orderIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, "待付款");
                 startActivity(orderIntent);
                 break;
             case R.id.my_no_dispatch:
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_NO_DISPATCHER);
+                orderIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, "代发货");
                 startActivity(orderIntent);
                 break;
             case R.id.my_already_dispatch_view:
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_ALREADY_DISPATCHER);
+                orderIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, "待收货");
                 startActivity(orderIntent);
                 break;
             case R.id.my_waiting_evalute_view:
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, Constant.ORDER_STATE_ALREADY_DELIVER);
+                orderIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, "待评价");
                 startActivity(orderIntent);
                 break;
             case R.id.my_refund_and_service_view:
                 orderIntent.putExtra(OrderActivity.ORDER_STATE_KEY, REFUND_AND_SERVICE);
+                orderIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, "退款/售后");
                 startActivity(orderIntent);
                 break;
             case R.id.my_coupon_view:

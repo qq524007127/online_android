@@ -46,7 +46,11 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
         float goodsTotal = 0f;
         float totalCarrige = 0f;
         for (OrderDetail orderDetail : data.getOrderDetails()) {
-            totalCarrige += orderDetail.getGoods().getCarriage() * orderDetail.getCount();
+            if (orderDetail.getGoods().getCarriage() > totalCarrige) {
+                totalCarrige = orderDetail.getGoods().getCarriage();
+            }
+        }
+        for (OrderDetail orderDetail : data.getOrderDetails()) {
             totalPrice += (orderDetail.getPrice() * orderDetail.getCount());
             goodsTotal += orderDetail.getCount();
         }
@@ -82,9 +86,8 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
     public float getTotalPrice(int position) {
         OrderDetailGroup group = mDatas.get(position);
         float totalPrice = 0f;
-        float totalCarrige = 0f;
+        float totalCarrige = getTotalCarrige(position);
         for (OrderDetail orderDetail : group.getOrderDetails()) {
-            totalCarrige += orderDetail.getGoods().getCarriage() * orderDetail.getCount();
             totalPrice += (orderDetail.getPrice() * orderDetail.getCount());
         }
         return (totalPrice + totalCarrige);
@@ -98,13 +101,13 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
      */
     public float getTotalCarrige(int position) {
         OrderDetailGroup group = mDatas.get(position);
-        float totalPrice = 0f;
-        float totalCarrige = 0f;
+        float carrige = 0f;
         for (OrderDetail orderDetail : group.getOrderDetails()) {
-            totalCarrige += orderDetail.getGoods().getCarriage() * orderDetail.getCount();
-            totalPrice += (orderDetail.getPrice() * orderDetail.getCount()) + totalCarrige;
+            if (orderDetail.getGoods().getCarriage() > carrige) {
+                carrige = orderDetail.getGoods().getCarriage();
+            }
         }
-        return totalCarrige;
+        return carrige;
     }
 
     /**

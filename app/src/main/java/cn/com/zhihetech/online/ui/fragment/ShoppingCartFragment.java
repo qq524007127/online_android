@@ -10,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -55,6 +57,10 @@ public class ShoppingCartFragment extends BaseFragment {
     private View deleteView;
     @ViewInject(R.id.shopping_cart_buy_view)
     private View buyView;
+    @ViewInject(R.id.tmp_total_price_tv)
+    private TextView totalPriceTv;
+    @ViewInject(R.id.shopping_cart_all_checked_cb)
+    private CheckBox allCheckedCb;
 
     private ProgressDialog progressDialog;
 
@@ -174,12 +180,22 @@ public class ShoppingCartFragment extends BaseFragment {
 
     private void initViews() {
         initToolbar();
+        initAllCheckedEvent();
         initProgress();
         initListViewAndAdapter();
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshData();
+            }
+        });
+    }
+
+    private void initAllCheckedEvent() {
+        allCheckedCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.toggleAllChecked(allCheckedCb.isChecked());
             }
         });
     }
@@ -195,6 +211,21 @@ public class ShoppingCartFragment extends BaseFragment {
             @Override
             public void onAmountChanged(ShoppingCart data, int amount) {
                 updateAmount(data, amount);
+            }
+        });
+        adapter.setOnCheckedShoppingCartsChangedListener(new ShoppingCartAdapter.OnCheckedShoppingCartsChangedListener() {
+            @Override
+            public void onCheckedCartsChange(List<ShoppingCart> checkedCarts) {
+                float _tmp = 0f;
+                for (ShoppingCart cart : checkedCarts) {
+                    _tmp += cart.getGoods().getPrice() * cart.getAmount();
+                }
+                if (checkedCarts.size() == adapter.getCount()) {
+                    allCheckedCb.setChecked(true);
+                } else {
+                    allCheckedCb.setChecked(false);
+                }
+                totalPriceTv.setText("合计：￥" + _tmp);
             }
         });
         listView.setOnLoadMoreListener(new OnLoadMoreListener() {

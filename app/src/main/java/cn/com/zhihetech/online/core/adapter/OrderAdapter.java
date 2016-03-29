@@ -45,7 +45,7 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
     public void onBindViewHolder(OrderViewHolder holder, final Order data) {
         holder.orderCodeTv.setText("订单号：" + data.getOrderCode());
         holder.orderCarriage.setText("邮费：" + data.getCarriage());
-        holder.totalPriceTv.setText("总价：" + data.getOrderTotal());
+        holder.totalPriceTv.setText("总价：" + data.getOrderTotal() + "元");
         holder.orderCreateDateTv.setText("下单时间：" + DateUtils.formatDateTime(data.getCreateDate()));
         holder.orderSateTv.setText(data.getStateDisplayText());
         holder.userMsgTv.setText("留言：" + data.getUserMsg());

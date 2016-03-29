@@ -130,7 +130,7 @@
     <string name="take_money_result">提现记录</string>
     <string name="merchant_login">商家登录</string>
     <string name="about_us">关于我们</string>
-    <string name="app_name_and_version_name">挚合实淘  {0}</string>
+    <string name="app_name_and_version_name">实淘  {0}</string>
     <string name="user_protocol">用户协议</string>
     <string name="goods_comment">商品评价</string>
     <string name="core_activity">活动专区</string>

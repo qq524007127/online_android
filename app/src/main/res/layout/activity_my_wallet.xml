@@ -13,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="81dp"
@@ -47,7 +48,7 @@
                     <Button
                         android:id="@+id/amount_of_money_one"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/money_bg"
                         android:tag="20"
                         android:text="￥20"
@@ -66,7 +67,7 @@
                     <Button
                         android:id="@+id/amount_of_money_two"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/money_bg"
                         android:tag="100"
                         android:text="￥100"
@@ -92,7 +93,7 @@
                     <Button
                         android:id="@+id/amount_of_money_three"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/money_bg"
                         android:tag="150"
                         android:text="￥150"
@@ -111,7 +112,7 @@
                     <Button
                         android:id="@+id/amount_of_money_four"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="45dp"
                         android:background="@drawable/money_bg"
                         android:tag="200"
                         android:text="￥200"

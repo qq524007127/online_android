@@ -10,18 +10,19 @@
         android:background="#fff5f3f4"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:minHeight="60.0dip"
-            android:padding="10.0dip">
+            android:orientation="horizontal"
+            android:minHeight="120dp"
+            android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/my_header_img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/home"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="2dp" />
@@ -30,13 +31,12 @@
                 android:id="@+id/my_nick_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/my_header_img"
-                android:padding="15.0dip"
-                android:text="xxxxxx"
+                android:layout_centerInParent="true"
+                android:padding="10dp"
                 android:textColor="@color/white"
-                android:textSize="20.0sp" />
-        </RelativeLayout>
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -53,8 +53,8 @@
 
                 <ImageView
                     android:id="@+id/my_order_icon"
-                    android:layout_width="30.0dip"
-                    android:layout_height="30.0dip"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/order_detail" />
 
                 <TextView
@@ -64,7 +64,7 @@
                     android:layout_marginLeft="10.0dip"
                     android:layout_toRightOf="@id/my_order_icon"
                     android:text="@string/my_order"
-                    android:textSize="16.0sp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -78,11 +78,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/see_all_order"
-                        android:textSize="14.0sp" />
+                        android:textSize="12sp" />
 
                     <ImageView
-                        android:layout_width="15.0dip"
-                        android:layout_height="15.0dip"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:src="@drawable/array_right" />
                 </LinearLayout>
             </RelativeLayout>
@@ -109,8 +109,8 @@
                     android:paddingTop="10.0dip">
 
                     <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/waiting_pay" />
 
                     <TextView
@@ -135,8 +135,8 @@
                     android:paddingTop="10.0dip">
 
                     <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/refunded" />
 
                     <TextView
@@ -161,8 +161,8 @@
                     android:paddingTop="10.0dip">
 
                     <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/paied" />
 
                     <TextView
@@ -187,8 +187,8 @@
                     android:paddingTop="10.0dip">
 
                     <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/waiting_evaluate" />
 
                     <TextView
@@ -213,8 +213,8 @@
                     android:paddingTop="10.0dip">
 
                     <ImageView
-                        android:layout_width="30.0dip"
-                        android:layout_height="30.0dip"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/refunding" />
 
                     <TextView
@@ -241,8 +241,8 @@
             android:padding="10.0dip">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/volum" />
 
             <TextView
@@ -264,8 +264,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/red_money" />
 
             <TextView
@@ -287,8 +287,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/wallet" />
 
             <TextView
@@ -334,8 +334,8 @@
             android:padding="10.0dip">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_baby" />
 
             <TextView
@@ -357,8 +357,8 @@
             android:padding="10.0dip">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/self_info" />
 
             <TextView
@@ -380,8 +380,8 @@
             android:padding="10.0dip">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/chang_password" />
 
             <TextView
@@ -396,22 +396,22 @@
             android:id="@+id/my_receiver_address_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10.0dip"
+            android:layout_marginTop="10dp"
             android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10.0dip">
+            android:padding="10dp">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/receiv_address" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:padding="10.0dip"
+                android:padding="10dp"
                 android:text="@string/my_receiv_address" />
         </LinearLayout>
 
@@ -419,15 +419,15 @@
             android:id="@+id/about_us_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10.0dip"
+            android:layout_marginTop="10dp"
             android:background="@drawable/my_item_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10.0dip">
+            android:padding="10dp">
 
             <ImageView
-                android:layout_width="30.0dip"
-                android:layout_height="30.0dip"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/about_us_icon" />
 
             <TextView
@@ -442,7 +442,7 @@
             android:id="@+id/exit_app_btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10.0dip"
+            android:layout_margin="10dp"
             android:background="@drawable/orange_bg"
             android:text="@string/exit_account"
             android:textColor="@color/white"
