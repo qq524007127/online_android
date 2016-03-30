@@ -66,6 +66,8 @@ public class GoodsInfoActivity extends BaseActivity {
     private View shoppingCartView;
     @ViewInject(R.id.goods_info_buy_view)
     private View buyView;
+    @ViewInject(R.id.goods_info_bottom_layout_view)
+    private View bottomLayout;
 
     private GoodsCartOrBuySheetBottomView goodsSheetBottomView;
     private ProgressDialog progressDialog;
@@ -94,7 +96,16 @@ public class GoodsInfoActivity extends BaseActivity {
             if (responseMessage.getCode() == 200) {
                 goods = responseMessage.getData();
                 bindHeaderViewGoods();
+            } else {
+                showMsg("次商品已下架或已删除");
+                bottomLayout.setVisibility(View.GONE);
             }
+        }
+
+        @Override
+        public void onError(Throwable ex, boolean isOnCallback) {
+            showMsg("出错了！");
+            finish();
         }
     };
 

@@ -192,7 +192,9 @@
 
         <!--Services配置-->
         <service android:name=".core.service.CheckAppUpdateService" />
-
+        
+        <!---->
+        
         <!--Ping++支付配置开始-->
         <!-- Ping++ SDK -->
         <activity

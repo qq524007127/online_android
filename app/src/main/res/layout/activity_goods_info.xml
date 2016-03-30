@@ -18,6 +18,7 @@
     </ListView>
 
     <LinearLayout
+        android:id="@+id/goods_info_bottom_layout_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"

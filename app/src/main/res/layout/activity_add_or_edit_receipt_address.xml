@@ -16,7 +16,7 @@
         <LinearLayout
             style="@style/CommonViewLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_layout_height"
+            android:layout_height="@dimen/common_layout_height"
             android:background="@drawable/change_pwd_input_bg">
 
             <ImageView
@@ -39,7 +39,7 @@
         <LinearLayout
             style="@style/CommonViewLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edit_text_layout_height"
+            android:layout_height="@dimen/common_layout_height"
             android:layout_marginTop="20dp"
             android:background="@drawable/change_pwd_input_bg">
 

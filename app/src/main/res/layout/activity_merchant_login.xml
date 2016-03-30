@@ -27,7 +27,7 @@
             <LinearLayout
                 style="@style/CommonViewLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="@dimen/common_layout_height">
 
                 <ImageView
                     style="@style/InputIconStyle"
@@ -50,7 +50,7 @@
             <LinearLayout
                 style="@style/CommonViewLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/common_layout_height"
                 android:layout_marginTop="10dp">
 
                 <ImageView

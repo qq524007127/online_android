@@ -21,4 +21,5 @@
     <color name="coupon_info_color">#906538</color>
     <color name="activity_item_tip_bg">#333333</color>
     <color name="change_pwd_bg">#f5f4f4</color>
+    <color name="pay_order_color">#fe5000</color>
 </resources>

@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <LinearLayout
                 android:id="@+id/user_header_edit_view"
@@ -30,8 +30,8 @@
 
                 <com.easemob.easeui.widget.EaseImageView
                     android:id="@+id/user_header_img"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     app:ease_border_color="@color/white"
                     app:ease_border_width="2dp"
                     app:ease_shape_type="round" />
@@ -45,14 +45,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         android:text="修改头像"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:layout_marginRight="6dp"
                         android:src="@drawable/array_right" />
                 </LinearLayout>
@@ -65,33 +65,53 @@
                 android:layout_marginTop="6dp"
                 android:background="@color/normal_bg" />
 
-            <EditText
-                android:id="@+id/user_mobile_num_et"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:editable="false"
-                android:textSize="14sp" />
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
 
-            <EditText
-                android:id="@+id/user_nickname"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:hint="@string/nickname"
-                android:maxLength="10"
-                android:singleLine="true"
-                android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/account" />
+
+                <EditText
+                    android:id="@+id/user_mobile_num_et"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/account" />
+
+                <EditText
+                    android:id="@+id/user_nickname"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/nickname"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/user_sex_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/sex"
                 android:textColor="@color/textColor"
@@ -100,8 +120,8 @@
             <Button
                 android:id="@+id/user_birthday_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/birthday"
                 android:textColor="@color/textColor"
@@ -110,8 +130,8 @@
             <Button
                 android:id="@+id/user_occupation_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/occupation"
                 android:textColor="@color/textColor"
@@ -120,8 +140,8 @@
             <Button
                 android:id="@+id/user_area_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/area"
                 android:textColor="@color/textColor"
@@ -130,8 +150,8 @@
             <Button
                 android:id="@+id/user_income_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="@dimen/view_normal_margin"
                 android:text="@string/income"
                 android:textColor="@color/textColor"
@@ -140,8 +160,8 @@
             <Button
                 android:id="@+id/submit_info_changed_btn"
                 style="@style/ButtonTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_common_height"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/confirm_modify" />

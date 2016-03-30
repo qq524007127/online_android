@@ -2,6 +2,7 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -145,11 +146,24 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
      * @param view
      */
     @Override
-    public void onCancelClick(Order order, final View view) {
+    public void onCancelClick(final Order order, final View view) {
         if (order.getOrderState() != Constant.ORDER_STATE_NO_PAYMENT) {
             showMsg(view, "只有未付款的订单才支持此操作");
             return;
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("确定要取消此订单吗？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doCancelOrder(view, order);
+                    }
+                }).show();
+    }
+
+    private void doCancelOrder(final View view, Order order) {
         progressDialog.show();
         new OrderModel().cancelOrderByOrderId(new ObjectCallback<ResponseMessage>() {
             @Override
@@ -182,11 +196,24 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
      * @param view
      */
     @Override
-    public void onPayClick(Order order, final View view) {
+    public void onPayClick(final Order order, final View view) {
         if (order.getOrderState() != Constant.ORDER_STATE_NO_PAYMENT) {
             showMsg(view, "只有未付款的订单才支持此操作");
             return;
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("确定要支付此订单吗？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doPayOrder(view, order);
+                    }
+                }).show();
+    }
+
+    private void doPayOrder(final View view, Order order) {
         progressDialog.show();
         new OrderModel().getChargeByOrderId(new ResponseMessageCallback<String>() {
             @Override
@@ -216,12 +243,32 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
         }, order.getOrderId());
     }
 
+    /**
+     * 申请退款回调
+     *
+     * @param order
+     * @param view
+     */
     @Override
-    public void onRefundClick(Order order, final View view) {
+    public void onRefundClick(final Order order, final View view) {
+
         if (order.getOrderState() != Constant.ORDER_STATE_NO_DISPATCHER) {
             showMsg(view, "只有已付款且未发货的订单才能退款，若要退款请与商家联系");
             return;
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("确定要申请退款吗？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doRefundOrder(view, order);
+                    }
+                }).show();
+    }
+
+    private void doRefundOrder(final View view, Order order) {
         progressDialog.show();
         new OrderModel().refundByOrderId(new ObjectCallback<ResponseMessage>() {
             @Override
@@ -251,12 +298,31 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
         }, order.getOrderId());
     }
 
+    /**
+     * 签收回调
+     *
+     * @param order
+     * @param view
+     */
     @Override
-    public void onReceiptClick(Order order, final View view) {
+    public void onReceiptClick(final Order order, final View view) {
         if (order.getOrderState() != Constant.ORDER_STATE_ALREADY_DISPATCHER) {
             showMsg(view, "只有已发货的商品才可进行此操作！");
             return;
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("确定要签收此订单吗，请确认收到货后才进行此操作？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doReceivedOrder(view, order);
+                    }
+                }).show();
+    }
+
+    private void doReceivedOrder(final View view, Order order) {
         progressDialog.show();
         new OrderModel().orderReceipt(new ObjectCallback<ResponseMessage>() {
             @Override
@@ -299,12 +365,25 @@ public class OrderActivity extends BaseActivity implements OrderAdapter.OnOrderI
     }
 
     @Override
-    public void onDeleteClick(Order order, final View view) {
+    public void onDeleteClick(final Order order, final View view) {
         int state = order.getOrderState();
         if (state != Constant.ORDER_STATE_ALREADY_CANCEL && state != Constant.ORDER_STATE_ALREADY_REFUND && state != Constant.ORDER_STATE_ALREADY_EVALUATE) {
             showMsg(view, "此订单不能删除");
             return;
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("确定要删除此订单吗？")
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doDeleteOrder(view, order);
+                    }
+                }).show();
+    }
+
+    private void doDeleteOrder(final View view, Order order) {
         progressDialog.show();
         new OrderModel().orderDelete(new ObjectCallback<ResponseMessage>() {
             @Override

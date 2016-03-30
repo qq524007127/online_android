@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.easemob.easeui.widget.EaseImageView;
 
-import org.w3c.dom.Text;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
@@ -188,7 +187,7 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
                 case R.id.order_item_pay_btn:
                     itemClickListener.onPayClick(order, v);
                     break;
-                case R.id.order_item_aplay_refund_btn:
+                case R.id.order_item_apply_refund_btn:
                     itemClickListener.onRefundClick(order, v);
                     break;
                 case R.id.order_item_received_btn:
@@ -241,7 +240,7 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         public Button cancelBtn;
         @ViewInject(R.id.order_item_pay_btn)
         public Button payBtn;
-        @ViewInject(R.id.order_item_aplay_refund_btn)
+        @ViewInject(R.id.order_item_apply_refund_btn)
         public Button refundBtn;
         @ViewInject(R.id.order_item_received_btn)
         public Button receivedBtn;

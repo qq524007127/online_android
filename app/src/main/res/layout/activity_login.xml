@@ -29,7 +29,7 @@
             <LinearLayout
                 style="@style/CommonViewLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_layout_height"
+                android:layout_height="@dimen/common_layout_height"
                 android:layout_marginTop="20dp">
 
                 <ImageView
@@ -56,7 +56,7 @@
             <LinearLayout
                 style="@style/CommonViewLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_layout_height"
+                android:layout_height="@dimen/common_layout_height"
                 android:layout_marginTop="20dp">
 
                 <ImageView
@@ -112,20 +112,20 @@
 
                 <Button
                     android:id="@+id/register_btn"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/view_common_height"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1.0"
+                    android:layout_weight="1"
                     android:background="@drawable/border_white_bg"
                     android:text="@string/register"
                     android:textColor="@color/colorAccent" />
 
                 <Button
                     android:id="@+id/login_btn"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/view_common_height"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="1.0"
+                    android:layout_weight="1"
                     android:background="@drawable/border_white_bg"
                     android:text="@string/login"
                     android:textColor="@color/colorAccent" />

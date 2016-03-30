@@ -154,7 +154,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议
-    public static final String COMPLAINT_AND_ROGHTS_PAGE_URL = DOMAIN + "web/complaintAndRightProtect";    //维权投诉
+    public static final String COMPLAINT_AND_RIGHTS_PAGE_URL = DOMAIN + "web/complaintAndRightProtect";    //维权投诉
     public static final String ACTIVITY_CENTER_PAGE_URL = DOMAIN + "web/activityCenter";    //活动专区
     public static final String QINIU_UPLOAD_TOKEN_URL = DOMAIN + "qiniu/api/image/uptoken"; //获取七牛上传token
     public static final String APP_NEW_VERSION_URL = HOST + "app/lastVersion";  //获取App最新版本

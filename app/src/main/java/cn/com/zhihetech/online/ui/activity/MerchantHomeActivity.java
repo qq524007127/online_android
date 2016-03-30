@@ -66,7 +66,7 @@ public class MerchantHomeActivity extends BaseActivity {
     ResponseMessageCallback<Merchant> merchantCallback = new ResponseMessageCallback<Merchant>() {
         @Override
         public void onResponseMessage(ResponseMessage<Merchant> responseMessage) {
-            if(responseMessage.getCode() != ResponseStateCode.SUCCESS){
+            if (responseMessage.getCode() != ResponseStateCode.SUCCESS) {
                 showMsg(responseMessage.getMsg());
                 return;
             }
@@ -84,8 +84,22 @@ public class MerchantHomeActivity extends BaseActivity {
     ObjectCallback<ResponseMessage> checkFocusCallback = new ObjectCallback<ResponseMessage>() {
         @Override
         public void onObject(ResponseMessage data) {
-            if (data.getCode() != 200) {
-                addFriendBtn.setVisibility(View.VISIBLE);
+            if (data.getCode() != ResponseStateCode.SUCCESS) {
+                addFriendBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addFriendBtn.setClickable(false);
+                        new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
+                    }
+                });
+            } else {
+                addFriendBtn.setText("已是好友");
+                addFriendBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showMsg("此商家已是您的好友！");
+                    }
+                });
             }
         }
     };
@@ -93,10 +107,14 @@ public class MerchantHomeActivity extends BaseActivity {
     ObjectCallback<ResponseMessage> addFriendCallback = new ObjectCallback<ResponseMessage>() {
         @Override
         public void onObject(ResponseMessage data) {
-            log(JSON.toJSONString(data));
             if (data.getCode() == 200) {
-                addFriendBtn.setVisibility(View.GONE);
-                showMsg(addFriendBtn, R.string.add_friend_success);
+                addFriendBtn.setText("已是好友");
+                addFriendBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showMsg("此商家已是您的好友！");
+                    }
+                });
             }
         }
 
@@ -133,13 +151,9 @@ public class MerchantHomeActivity extends BaseActivity {
         model.checkFucosState(checkFocusCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
     }
 
-    @Event({R.id.merchant_home_add_friend_btn, R.id.merchant_home_contact_btn})
+    @Event({R.id.merchant_home_contact_btn})
     private void onViewClick(View view) {
         switch (view.getId()) {
-            case R.id.merchant_home_add_friend_btn: //关注商家
-                addFriendBtn.setClickable(false);
-                new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
-                break;
             case R.id.merchant_home_contact_btn:    //点击跳转到与商家发送消息
                 if (this.merchant != null) {
                     saveMerchantInfo(this.merchant);

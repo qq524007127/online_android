@@ -14,66 +14,118 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
-            <EditText
-                android:id="@+id/user_mobile_num_et"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:editable="false"
-                android:textSize="14sp" />
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
 
-            <EditText
-                android:id="@+id/user_pwd"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/pwd"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/account" />
 
-            <EditText
-                android:id="@+id/user_repwd"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/pwd"
-                android:hint="@string/repeat_pwd"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/user_mobile_num_et"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/user_nickname"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:hint="@string/nickname"
-                android:maxLength="20"
-                android:textSize="14sp" />
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
 
-            <EditText
-                android:id="@+id/invit_code"
-                style="@style/EditViewTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/view_common_height"
-                android:layout_marginBottom="@dimen/view_normal_margin"
-                android:drawableLeft="@drawable/name"
-                android:hint="@string/invit_code"
-                android:maxLength="11"
-                android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/pwd" />
+
+                <EditText
+                    android:id="@+id/user_pwd"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/pwd" />
+
+                <EditText
+                    android:id="@+id/user_repwd"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/repeat_pwd"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/name" />
+
+                <EditText
+                    android:id="@+id/user_nickname"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/nickname"
+                    android:maxLength="20"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CommonViewLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_layout_height"
+                android:layout_marginBottom="@dimen/view_normal_margin">
+
+                <ImageView
+                    android:layout_width="@dimen/input_icon_size"
+                    android:layout_height="@dimen/input_icon_size"
+                    android:src="@drawable/name" />
+
+                <EditText
+                    android:id="@+id/invit_code"
+                    style="@style/CommonInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/invit_code"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/user_sex_btn"

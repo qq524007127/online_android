@@ -7,7 +7,7 @@
     <dimen name="cardview_margin">0dp</dimen>
     <dimen name="cardview_elevation">5dp</dimen>
     <dimen name="cardview_radius">0dp</dimen>
-    <dimen name="view_common_height">45dp</dimen>
+    <dimen name="view_common_height">42dp</dimen>
     <dimen name="view_normal_margin">10dp</dimen>
 
     <!--主界面Tab布局相关-->
@@ -21,11 +21,13 @@
     <!--主界面顶部搜索框-->
     <dimen name="main_search_box_height">40dp</dimen>
     <dimen name="main_search_box_padding">6dp</dimen>
-    <dimen name="edit_text_layout_height">45dp</dimen>
+    <dimen name="common_layout_height">42dp</dimen>
     <dimen name="input_icon_size">20dp</dimen>
 
-    <dimen name="view_min_height">45dp</dimen>
+    <dimen name="view_min_height">40dp</dimen>
     <dimen name="main_search_box_margin_right">56dp</dimen>
     <dimen name="main_search_box_margin_left">30dp</dimen>
+    <dimen name="button_corners_size">4dp</dimen>
+    <dimen name="order_item_margin">6dp</dimen>
 
 </resources>

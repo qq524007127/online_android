@@ -77,7 +77,7 @@
             android:id="@+id/order_item_code_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:padding="10dp"
             android:textColor="@color/olivedrab" />
@@ -103,7 +103,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -121,7 +121,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:orientation="vertical"
             android:padding="10dp">
@@ -153,7 +153,7 @@
             android:id="@+id/order_user_msg_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:padding="10dp"
             android:textSize="12sp" />
@@ -162,7 +162,7 @@
             android:id="@+id/order_carriage_info_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:padding="10dp"
             android:textColor="@color/orange" />
@@ -170,7 +170,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -199,7 +199,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/goldenrod"
+                android:background="@drawable/cancel_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/cancel"
                 android:textColor="@color/white" />
@@ -221,18 +221,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/steelblue"
+                android:background="@drawable/pay_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/pay"
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/order_item_aplay_refund_btn"
+                android:id="@+id/order_item_apply_refund_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/olivedrab"
+                android:background="@drawable/refund_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/apply_refund"
                 android:textColor="@color/white" />
@@ -243,7 +243,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/steelblue"
+                android:background="@drawable/received_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/received"
                 android:textColor="@color/white" />
@@ -254,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/olivedrab"
+                android:background="@drawable/evaluate_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/evaluate"
                 android:textColor="@color/white" />
@@ -265,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/delete_order_btn_bg"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/delete"
                 android:textColor="@color/white" />
