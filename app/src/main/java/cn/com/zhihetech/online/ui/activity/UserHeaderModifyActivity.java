@@ -27,11 +27,13 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.ImgInfo;
+import cn.com.zhihetech.online.bean.ShowImageInfo;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
@@ -68,6 +70,19 @@ public class UserHeaderModifyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         user = ZhiheApplication.getInstance().getUser();
         ImageLoader.disPlayImage(userHeaderImg, user.getPortrait());
+        userHeaderImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ShowImageInfo> imageInfos = new ArrayList<>();
+                ShowImageInfo imageInfo = new ShowImageInfo(user.getPortrait().getUrl(), "");
+                imageInfo.setShowDesc(false);
+                imageInfos.add(imageInfo);
+
+                Intent intent = new Intent(v.getContext(), ShowBigImageActivity.class);
+                intent.putExtra(ShowBigImageActivity.IMAGE_LIST_KEY, imageInfos);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

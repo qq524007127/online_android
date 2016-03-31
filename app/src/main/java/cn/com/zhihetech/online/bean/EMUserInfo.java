@@ -1,7 +1,11 @@
 package cn.com.zhihetech.online.bean;
 
+import com.easemob.chat.EMMessage;
+
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
+
+import cn.com.zhihetech.online.core.common.Constant;
 
 /**
  * 环信用户信息
@@ -78,5 +82,15 @@ public class EMUserInfo extends BaseBean {
 
     public void setUserType(int userType) {
         this.userType = userType;
+    }
+
+    public static EMUserInfo createEMUserInfo(EMMessage message){
+        EMUserInfo userInfo = new EMUserInfo();
+        userInfo.setUserName(message.getUserName());
+        userInfo.setUserNick(message.getStringAttribute(Constant.EXTEND_USER_NICK_NAME, "未知用户"));
+        userInfo.setAvatarUrl(message.getStringAttribute(Constant.EXTEND_USER_HEAD_IMG, ""));
+        userInfo.setAppUserId(message.getStringAttribute(Constant.EXTEND_USER_ID, ""));
+        userInfo.setUserType(message.getIntAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_MERCHANT_USER));
+        return userInfo;
     }
 }

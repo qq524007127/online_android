@@ -28,6 +28,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.common.CrashHandler;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
@@ -36,7 +37,7 @@ import cn.jpush.android.api.JPushInterface;
 /**
  * Created by ShenYunjie on 2016/1/15.
  */
-public class ZhiheApplication extends Application implements Thread.UncaughtExceptionHandler {
+public class ZhiheApplication extends Application {
 
     private final static String LOGIN_MERCHANT_EXT_KEY = "__current_loged_merchant";
 
@@ -65,6 +66,15 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
         initDB();
         initEMChat();
         initJPush();
+        initCrashHandler();
+    }
+
+    /**
+     * 程序崩溃处理
+     */
+    private void initCrashHandler() {
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
     }
 
     /**
@@ -145,11 +155,6 @@ public class ZhiheApplication extends Application implements Thread.UncaughtExce
 
     public DbManager getDbManager() {
         return dbManager;
-    }
-
-    @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
-
     }
 
     /**

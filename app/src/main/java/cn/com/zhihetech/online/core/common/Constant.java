@@ -73,6 +73,7 @@ public class Constant implements Serializable, Cloneable {
     public final static String NAVIGATION_FEATURED_BLOCK = "4";//特色街区
     public final static String NAVIGATION_FEATURED_SHOP = "5";//特色店
     public final static String NAVIGATION_CATEGORY = "6";//分类
+    public final static String NAVIGATION_WEB_PAGE = "10"; //导航到一个网页地址
 
     /**
      * 验证码类型

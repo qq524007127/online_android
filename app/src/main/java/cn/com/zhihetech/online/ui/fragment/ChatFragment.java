@@ -94,6 +94,7 @@ public class ChatFragment extends EaseChatFragment {
             @Override
             public EaseCustomChatRowProvider onSetCustomChatRowProvider() {
                 return new ZhiheChatRowProvider(getContext());
+                //return null;
             }
         });
     }
@@ -183,13 +184,6 @@ public class ChatFragment extends EaseChatFragment {
      */
     public void clearChatHistory() {
         emptyHistory();
-    }
-
-    /*=================发送信息=======================*/
-    protected void sendRedEnvelope() {
-        EMMessage message = EMMessage.createTxtSendMessage("", toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOP);
-        sendMessage(message);
     }
 
     /*=====================自定义发送信息========================*/

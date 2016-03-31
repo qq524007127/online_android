@@ -40,10 +40,19 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
 
     @Override
     public int getCustomChatRowType(EMMessage message) {
+
         if (message.getType() == EMMessage.Type.TXT) {
-            switch (message.getIntAttribute(Constant.EXTEND_MESSAGE_TYPE, 0)) {
+            int msgType = 0;
+            try {
+                msgType = Integer.parseInt(message.getStringAttribute(Constant.EXTEND_MESSAGE_TYPE, "0"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            switch (msgType) {
                 case Constant.EXTEND_MESSAGE_SHOP_LINK:
-                    return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
+                    int value = message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
+                    //return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
+                    return value;
                 case Constant.EXTEND_MESSAGE_GOODS_LINK:
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_GOODS_LINK : MESSAGE_TYPE_SEND_GOODS_LINK;
                 case Constant.EXTEND_MESSAGE_RED_ENVELOP:
@@ -57,7 +66,13 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
 
     @Override
     public EaseChatRow getCustomChatRow(EMMessage message, int position, BaseAdapter adapter) {
-       switch (message.getIntAttribute(Constant.EXTEND_MESSAGE_TYPE, 0)) {
+        int msgType = 0;
+        try {
+            msgType = Integer.parseInt(message.getStringAttribute(Constant.EXTEND_MESSAGE_TYPE, "0"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        switch (msgType) {
             case Constant.EXTEND_MESSAGE_SHOP_LINK:
                 return new ShopLinkChatRow(mContext, message, position, adapter);
             case Constant.EXTEND_MESSAGE_GOODS_LINK:

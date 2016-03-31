@@ -34,6 +34,7 @@ import cn.com.zhihetech.online.ui.activity.CoreCenterActivity;
 import cn.com.zhihetech.online.ui.activity.FeaturedBlocksActivity;
 import cn.com.zhihetech.online.ui.activity.MerchantListActivity;
 import cn.com.zhihetech.online.ui.activity.ShoppingCenterActivity;
+import cn.com.zhihetech.online.ui.activity.WebPageActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
@@ -143,6 +144,12 @@ public class HomeHeaderView extends FrameLayout {
                 Intent intent6 = new Intent(getContext(), CategoryActivity.class);
                 intent6.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent6);
+                break;
+            case Constant.NAVIGATION_WEB_PAGE:
+               /* Intent webIntent = new Intent(getContext(), WebPageActivity.class);
+                webIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
+                aaa
+                getContext().startActivity(webIntent);*/
                 break;
         }
     }

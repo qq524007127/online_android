@@ -29,7 +29,9 @@ android {
         compileTask -> compileTask.dependsOn(nativeLibsToJar)
     }
 }
-
+repositories {
+    flatDir { dirs 'libs' }
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -47,6 +49,7 @@ dependencies {
     compile 'com.github.iwgang:familiarrecyclerview:1.2.3'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.qiniu:qiniu-android-sdk:7.1.0'
+    compile(name: 'subsampling-scale-image-view-3.4.1', ext: 'aar')
     compile project(':lib:pingpp')
     compile project(':easeUI')
     compile files('libs/android-viewbadger.jar')
