@@ -51,7 +51,6 @@ public class ZhiheChatRowProvider extends BaseBean implements EaseCustomChatRowP
             switch (msgType) {
                 case Constant.EXTEND_MESSAGE_SHOP_LINK:
                     int value = message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
-                    //return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_SHOP_LINK : MESSAGE_TYPE_SEND_SHOP_LINK;
                     return value;
                 case Constant.EXTEND_MESSAGE_GOODS_LINK:
                     return message.direct == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_GOODS_LINK : MESSAGE_TYPE_SEND_GOODS_LINK;

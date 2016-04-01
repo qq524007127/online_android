@@ -98,11 +98,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             System.exit(1);
 
             // 重新启动程序，注释上面的退出程序
-            Intent intent = new Intent();
+            /*Intent intent = new Intent();
             intent.setClass(mContext, StartActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
-            android.os.Process.killProcess(android.os.Process.myPid());
+            android.os.Process.killProcess(android.os.Process.myPid());*/
         }
     }
 
@@ -122,7 +122,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(mContext, "很抱歉，程序出现异常，即将重新启动。", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "很抱歉，程序出现异常，即将退出...", Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }.start();

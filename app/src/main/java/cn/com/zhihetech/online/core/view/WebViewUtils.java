@@ -1,11 +1,10 @@
 package cn.com.zhihetech.online.core.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
-import android.util.AttributeSet;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -13,41 +12,42 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 /**
  * Created by ShenYunjie on 2016/2/22.
  */
-public class ZhiheWebView extends WebView {
+public class WebViewUtils {
 
     private WebViewEventListener webViewEventListener;
     private JsInterface jsInterface;
 
-    public ZhiheWebView(Context context) {
-        this(context, null);
+    private Context mContext;
+    private WebView webView;
+
+    private final int ERROR_CODE = -1;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case ERROR_CODE:
+                    if (webViewEventListener != null) {
+                        webViewEventListener.onPageError(webView, null, null);
+                    }
+                    Toast.makeText(mContext, "加载页面出错！onReceivedError()", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+
+    public WebViewUtils(Context mContext, WebView webView) {
+        this.mContext = mContext;
+        this.webView = webView;
     }
 
-    public ZhiheWebView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public ZhiheWebView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ZhiheWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
-    public ZhiheWebView(Context context, AttributeSet attrs, int defStyleAttr, boolean privateBrowsing) {
-        super(context, attrs, defStyleAttr, privateBrowsing);
-        init();
-    }
-
-    private void init() {
-        setWebViewClient(new WebViewClient() {
+    public void setUpSettigs() {
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
                 if (webViewEventListener != null) {
@@ -69,10 +69,10 @@ public class ZhiheWebView extends WebView {
 
             @Override
             public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
-                super.onReceivedError(view, request, error);
                 if (webViewEventListener != null) {
-                    webViewEventListener.onPageError(view, request, error);
+                    webViewEventListener.onPageError(webView, null, null);
                 }
+                super.onReceivedError(view, request, error);
             }
 
             @Override
@@ -81,17 +81,18 @@ public class ZhiheWebView extends WebView {
                 return true;
             }
         });
-        setWebChromeClient(new ZhiheWbChromeClient());
-        setJsInterface(new ZhiheJSInterface(getContext(), this));
+        this.webView.setWebChromeClient(new ZHWebChromeClient());
+        setJsInterface(new ZHJSInterface(mContext, webView));
         initSettings();
     }
 
     private void initSettings() {
-        WebSettings settings = this.getSettings();
+        WebSettings settings = this.webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setAllowFileAccess(true);  //设置可以访问文件
         settings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         settings.setAppCacheEnabled(true);
+        settings.setUseWideViewPort(true);
     }
 
     public void setWebViewEventListener(WebViewEventListener webViewEventListener) {
@@ -106,9 +107,9 @@ public class ZhiheWebView extends WebView {
         return jsInterface;
     }
 
-    public void setJsInterface(JsInterface jsInterface) {
+    protected void setJsInterface(JsInterface jsInterface) {
         this.jsInterface = jsInterface;
-        addJavascriptInterface(this.jsInterface, "JSInterface");
+        this.webView.addJavascriptInterface(this.jsInterface, "JSInterface");
     }
 
     public interface WebViewEventListener {

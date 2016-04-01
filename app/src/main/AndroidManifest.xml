@@ -172,6 +172,9 @@
             android:name=".ui.activity.WalletTakeMoneyResultActivity"
             android:label="@string/take_money_result" />
         <activity android:name=".ui.activity.ShowBigImageActivity" />
+        <activity
+            android:name=".ui.activity.WebPageActivity"
+            android:windowSoftInputMode="adjustResize" />
 
 
         <!--商家版-->

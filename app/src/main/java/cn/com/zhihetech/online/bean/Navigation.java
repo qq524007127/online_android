@@ -13,6 +13,7 @@ public class Navigation extends BaseBean {
     private boolean permit;   //是否启用
     private String desc;    //描述
     private ImgInfo img;   //导航图标
+    private String viewUrl; //导航跳转的url地址，viewTarget为10时才有效
 
     public String getNavigationId() {
         return navigationId;
@@ -69,5 +70,13 @@ public class Navigation extends BaseBean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getViewUrl() {
+        return viewUrl;
+    }
+
+    public void setViewUrl(String viewUrl) {
+        this.viewUrl = viewUrl;
     }
 }

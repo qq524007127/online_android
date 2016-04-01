@@ -3,6 +3,7 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -15,7 +16,7 @@ import org.xutils.view.annotation.ViewInject;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
-import cn.com.zhihetech.online.core.view.ZhiheWebView;
+import cn.com.zhihetech.online.core.view.WebViewUtils;
 
 /**
  * Created by ShenYunjie on 2016/3/17.
@@ -26,14 +27,16 @@ public class WebViewFragment extends BaseFragment {
     public final static String LOAD_URL = "_LOAD_URL";
     public final static String ENABLE_REFRESH = "_ENABLE_REFRESH";
 
-    @ViewInject(R.id.webview_load_error_layout_view)
+    @ViewInject(R.id.web_view_load_error_layout_view)
     private LinearLayout errorLayout;
-    @ViewInject(R.id.webview_reload_view)
+    @ViewInject(R.id.web_view_reload_view)
     private View reloadView;
-    @ViewInject(R.id.webview_refresh_layout)
+    @ViewInject(R.id.web_view_container_ll)
+    private LinearLayout containerLayout;
+    @ViewInject(R.id.web_view_refresh_layout)
     private ZhiheSwipeRefreshLayout refreshLayout;
-    @ViewInject(R.id.webview_container_wv)
-    private ZhiheWebView webView;
+    @ViewInject(R.id.web_view_container_wv)
+    private WebView webView;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -54,22 +57,12 @@ public class WebViewFragment extends BaseFragment {
     private void initAndLoadPageByUrl(String url) {
         initViews();
         webView.loadUrl(url);
+        webView.requestFocus();
     }
 
     private void initViews() {
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                webView.reload();
-            }
-        });
-        reloadView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.reload();
-            }
-        });
-        webView.setWebViewEventListener(new ZhiheWebView.WebViewEventListener() {
+        WebViewUtils utils = new WebViewUtils(getContext(), webView);
+        utils.setWebViewEventListener(new WebViewUtils.WebViewEventListener() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 if (!refreshLayout.isRefreshing()) {
@@ -79,7 +72,8 @@ public class WebViewFragment extends BaseFragment {
 
             @Override
             public void onPageError(WebView view, WebResourceRequest request, WebResourceError error) {
-                errorLayout.setVisibility(View.VISIBLE);
+                //errorLayout.setVisibility(View.VISIBLE);
+                containerLayout.setVisibility(View.GONE);
             }
 
             @Override
@@ -87,5 +81,32 @@ public class WebViewFragment extends BaseFragment {
                 refreshLayout.setRefreshing(false);
             }
         });
+        utils.setUpSettigs();
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                containerLayout.setVisibility(View.VISIBLE);
+                webView.reload();
+            }
+        });
+        reloadView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.reload();
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView.canGoBack()) {
+                webView.goBack();//返回上一页面
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

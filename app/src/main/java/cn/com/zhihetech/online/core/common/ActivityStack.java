@@ -69,4 +69,8 @@ public class ActivityStack {
         activityStack.clear();
         activityStack.push(activity);
     }
+
+    public Stack<Activity> getActivities() {
+        return this.activityStack;
+    }
 }

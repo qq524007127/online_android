@@ -33,7 +33,7 @@ import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
-import cn.com.zhihetech.online.core.view.ZhiheWebView;
+import cn.com.zhihetech.online.core.view.WebViewUtils;
 import cn.com.zhihetech.online.model.ActivityModel;
 
 /**
@@ -59,7 +59,7 @@ public class ActivityInfoActivity extends BaseActivity {
     @ViewInject(R.id.activity_container_zsrl)
     private ZhiheSwipeRefreshLayout containerRefreshLayout;
     @ViewInject(R.id.activity_container_wv)
-    private ZhiheWebView webView;
+    private WebView webView;
 
     private String actId;
     private Activity activity;
@@ -169,14 +169,14 @@ public class ActivityInfoActivity extends BaseActivity {
 
     private void initWebView() {
         String url = MessageFormat.format(ACTIVITY_INFO_URL, actId);
+        setUpWebView();
         webView.loadUrl(url);
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onReceivedTitle(WebView view, String title) {
-                setActivityName(title);
-            }
-        });
-        webView.setWebViewEventListener(new ZhiheWebView.WebViewEventListener() {
+
+    }
+
+    private void setUpWebView() {
+        WebViewUtils utils = new WebViewUtils(this, webView);
+        utils.setWebViewEventListener(new WebViewUtils.WebViewEventListener() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 containerRefreshLayout.setRefreshing(true);
@@ -200,6 +200,13 @@ public class ActivityInfoActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 containerRefreshLayout.setRefreshing(false);
+            }
+        });
+        utils.setUpSettigs();
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                setActivityName(title);
             }
         });
     }

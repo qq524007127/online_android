@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import cn.com.zhihetech.online.bean.AppVersion;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -61,7 +62,6 @@ public class CheckAppUpdateService extends Service {
                 }).create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
-
     }
 
     @Nullable

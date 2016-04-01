@@ -1,20 +1,25 @@
 package cn.com.zhihetech.online.core.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
 
+import cn.com.zhihetech.online.core.common.ActivityStack;
+
 /**
  * Created by ShenYunjie on 2016/3/17.
  */
-public class ZhiheWbChromeClient extends WebChromeClient {
+public class ZHWebChromeClient extends WebChromeClient {
     @Override
     public void onCloseWindow(WebView window) {
         super.onCloseWindow(window);
@@ -31,6 +36,9 @@ public class ZhiheWbChromeClient extends WebChromeClient {
      */
     public boolean onJsAlert(WebView view, String url, String message,
                              JsResult result) {
+        if (!contextIsActivity(view)) {
+            return true;
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
         builder.setTitle("对话框")
@@ -63,6 +71,9 @@ public class ZhiheWbChromeClient extends WebChromeClient {
      */
     public boolean onJsConfirm(WebView view, String url, String message,
                                final JsResult result) {
+        if (!contextIsActivity(view)) {
+            return true;
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         builder.setTitle("对话框")
                 .setMessage(message)
@@ -104,6 +115,9 @@ public class ZhiheWbChromeClient extends WebChromeClient {
      */
     public boolean onJsPrompt(WebView view, String url, String message,
                               String defaultValue, final JsPromptResult result) {
+        if (!contextIsActivity(view)) {
+            return true;
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
         builder.setTitle("对话框").setMessage(message);
@@ -156,5 +170,24 @@ public class ZhiheWbChromeClient extends WebChromeClient {
     @Override
     public void onRequestFocus(WebView view) {
         super.onRequestFocus(view);
+    }
+
+
+    /**
+     * 判断当前view的Context是否还存活，如果是Activity则判断是否存活（如果不是Activity则存活）
+     *
+     * @return boolean true:存活；false:已finish
+     */
+    private boolean contextIsActivity(View view) {
+        Context mContext = view.getContext();
+        if (mContext instanceof Activity) {
+            for (Activity _tmp : ActivityStack.getInstance().getActivities()) {
+                if (_tmp == mContext) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return true;
     }
 }

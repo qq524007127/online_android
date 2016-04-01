@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.core.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,13 +25,13 @@ import cn.com.zhihetech.online.ui.activity.SeckillGoodsInfoActivity;
  * Android与WebView中js交互的接口
  * Created by ShenYunjie on 2016/3/17.
  */
-public class ZhiheJSInterface implements ZhiheWebView.JsInterface {
+public class ZHJSInterface implements WebViewUtils.JsInterface {
 
     private Context mContext;
     private WebView target;
     private ProgressDialog progressDialog;
 
-    public ZhiheJSInterface(Context mContext, WebView target) {
+    public ZHJSInterface(Context mContext, WebView target) {
         this.mContext = mContext;
         this.target = target;
     }

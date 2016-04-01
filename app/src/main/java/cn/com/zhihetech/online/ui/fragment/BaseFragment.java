@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,5 +95,16 @@ public abstract class BaseFragment extends Fragment {
         Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
         snackbar.show();
+    }
+
+    /**
+     * 相应onKeyDown事件，与Activity共享
+     *
+     * @param keyCode
+     * @param event
+     * @return boolean true:消耗了此事件;false:未消耗此事件
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return false;
     }
 }

@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -146,10 +145,10 @@ public class HomeHeaderView extends FrameLayout {
                 getContext().startActivity(intent6);
                 break;
             case Constant.NAVIGATION_WEB_PAGE:
-               /* Intent webIntent = new Intent(getContext(), WebPageActivity.class);
+                Intent webIntent = new Intent(getContext(), WebPageActivity.class);
                 webIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
-                aaa
-                getContext().startActivity(webIntent);*/
+                webIntent.putExtra(WebPageActivity.PAGE_URL, nav.getViewUrl());
+                getContext().startActivity(webIntent);
                 break;
         }
     }

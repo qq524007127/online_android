@@ -4,15 +4,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/webview_load_error_layout_view"
+        android:id="@+id/web_view_load_error_layout_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/webview_reload_view"
+            android:id="@+id/web_view_reload_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -22,21 +21,22 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/web_view_container_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout
-            android:id="@+id/webview_refresh_layout"
+            android:id="@+id/web_view_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <cn.com.zhihetech.online.core.view.ZhiheWebView
-                android:id="@+id/webview_container_wv"
+            <WebView
+                android:id="@+id/web_view_container_wv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            </cn.com.zhihetech.online.core.view.ZhiheWebView>
+            </WebView>
         </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
     </LinearLayout>
 </RelativeLayout>
