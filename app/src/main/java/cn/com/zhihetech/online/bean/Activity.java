@@ -1,4 +1,5 @@
 package cn.com.zhihetech.online.bean;
+
 import java.util.Date;
 
 import cn.com.zhihetech.online.core.common.Constant;
@@ -20,6 +21,8 @@ public class Activity extends BaseBean {
     private String chatRoomId;  //对应聊天室
     private String activitDesc; //活动备注信息
     private String displayState; //显示当前状态
+
+    private ReceptionRoom receptionRoom;
 
     public String getActivitId() {
         return activitId;
@@ -167,5 +170,13 @@ public class Activity extends BaseBean {
 
     public void setDisplayState(String displayState) {
         this.displayState = displayState;
+    }
+
+    public ReceptionRoom getReceptionRoom() {
+        return receptionRoom;
+    }
+
+    public void setReceptionRoom(ReceptionRoom receptionRoom) {
+        this.receptionRoom = receptionRoom;
     }
 }

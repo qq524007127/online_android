@@ -1,6 +1,5 @@
 package cn.com.zhihetech.online.core.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;

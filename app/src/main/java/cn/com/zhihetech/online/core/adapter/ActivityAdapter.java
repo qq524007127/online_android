@@ -42,7 +42,8 @@ public class ActivityAdapter extends ZhiheAdapter<Activity, ActivityAdapter.Acti
 
     @Override
     public void onBindViewHolder(ActivityHolder holder, final Activity data) {
-        ImageLoader.disPlayImage(holder.coverImage, data.getCoverImg());
+        //ImageLoader.disPlayImage(holder.coverImage, data.getCoverImg());
+        ImageLoader.disPlayImage(holder.coverImage, data.getReceptionRoom().getCoverImg());
         holder.ingFlag.setVisibility(data.getCurrentState() == Constant.ACTIVITY_STATE_STARTED ? View.VISIBLE : View.GONE);
         String today = "";
         Calendar calendar = Calendar.getInstance();
