@@ -6,11 +6,14 @@ import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.easeui.controller.EaseUI;
 
@@ -19,12 +22,14 @@ import org.xutils.common.util.FileUtil;
 import org.xutils.db.table.TableEntity;
 import org.xutils.x;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
@@ -240,21 +245,25 @@ public class ZhiheApplication extends Application {
     private void settingEMChatOptions() {
         //获取到配置options对象
         EMChatOptions options = EMChatManager.getInstance().getChatOptions();
+
         /**
          * 设置后台收到新消息后通知
          */
-        /*options.setNotifyText(new OnMessageNotifyListener() {
+        options.setNotifyText(new OnMessageNotifyListener() {
 
             //设置自定义的文字提示
             @Override
             public String onNewMessageNotify(EMMessage message) {
+                String msg = "{0}发来一条新消息！";
+                EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
                 //可以根据message的类型提示不同文字，这里为一个简单的示例
-                return "你的好基友" + message.getFrom() + "发来了一条消息哦";
+                return MessageFormat.format(msg, userInfo.getUserNick());
             }
 
             @Override
             public String onLatestMessageNotify(EMMessage message, int fromUsersNum, int messageNum) {
-                return fromUsersNum + "个基友，发来了" + messageNum + "条消息";
+                EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+                return fromUsersNum + "个好友，发来了" + messageNum + "条消息！";
             }
 
             @Override
@@ -264,9 +273,9 @@ public class ZhiheApplication extends Application {
 
             @Override
             public int onSetSmallIcon(EMMessage emMessage) {
-                return R.drawable.no_title_logo;
+                return R.mipmap.ic_launcher;
             }
-        });*/
+        });
 
         /**
          * 设置点击新消息通知跳转界面

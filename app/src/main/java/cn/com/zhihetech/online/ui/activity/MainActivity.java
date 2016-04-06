@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -62,15 +63,25 @@ public class MainActivity extends BaseActivity {
         }
         mainTabLayout.getTabAt(0).select();
         mainTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            int lastPosition = 0;
+
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 1) {
+                    Intent intent = new Intent(getSelf(), MessageActivity.class);
+                    intent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, tab.getText());
+                    startActivity(intent);
+                    mainTabLayout.getTabAt(lastPosition).select();
+                    return;
+                }
                 hideFragments();
                 showFragmentByTabIndex(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                lastPosition = tab.getPosition();
             }
 
             @Override
