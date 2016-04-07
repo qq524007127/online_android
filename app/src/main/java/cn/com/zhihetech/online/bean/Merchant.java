@@ -378,4 +378,8 @@ public class Merchant extends BaseBean {
     public String getEMUserId() {
         return getMerchantId().replaceAll("-", "");
     }
+
+    public String getEMUserPwd() {
+        return getMerchantId();
+    }
 }

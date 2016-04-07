@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.chatrow;
+package cn.com.zhihetech.online.core.emchat.chatrow;
 
 import android.content.Context;
 import android.content.Intent;

@@ -2,6 +2,7 @@ package cn.com.zhihetech.online.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +24,8 @@ import cn.com.zhihetech.online.bean.RedEnvelop;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
-import cn.com.zhihetech.online.core.common.ZhiheChatRowProvider;
+import cn.com.zhihetech.online.core.emchat.ZhiheChatRowProvider;
+import cn.com.zhihetech.online.core.service.EMChatEventService;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SeckillGoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.GoodsListActivity;
@@ -31,7 +33,7 @@ import cn.com.zhihetech.online.ui.activity.RedEnvelopeListActivity;
 
 
 /**
- * 单人聊天界面
+ * 聊天界面
  * Created by ShenYunjie on 2016/2/2.
  */
 public class ChatFragment extends EaseChatFragment {
@@ -94,7 +96,6 @@ public class ChatFragment extends EaseChatFragment {
             @Override
             public EaseCustomChatRowProvider onSetCustomChatRowProvider() {
                 return new ZhiheChatRowProvider(getContext());
-                //return null;
             }
         });
     }
@@ -201,7 +202,7 @@ public class ChatFragment extends EaseChatFragment {
             map.put("coverImg", merchant.getCoverImg().getUrl());
         }
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_SHOP_LINK);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, String.valueOf(Constant.EXTEND_MESSAGE_SHOP_LINK));
         sendMessage(message);
     }
 
@@ -220,7 +221,7 @@ public class ChatFragment extends EaseChatFragment {
             map.put("coverImg", goods.getCoverImg().getUrl());
         }
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_GOODS_LINK);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, String.valueOf(Constant.EXTEND_MESSAGE_GOODS_LINK));
         sendMessage(message);
     }
 
@@ -235,7 +236,7 @@ public class ChatFragment extends EaseChatFragment {
         map.put("envelopMsg", envelop.getEnvelopMsg());
         map.put("merchantName", envelop.getMerchant().getMerchName());
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_RED_ENVELOP);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, String.valueOf(Constant.EXTEND_MESSAGE_RED_ENVELOP));
         sendMessage(message);
     }
 
@@ -254,7 +255,7 @@ public class ChatFragment extends EaseChatFragment {
         map.put("goodsPrice", goods.getPrice());
         map.put("goodsName", goods.getGoodsName());
         EMMessage message = EMMessage.createTxtSendMessage(JSONObject.toJSONString(map), toChatUsername);
-        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, Constant.EXTEND_MESSAGE_SECKILL_GOODS);
+        message.setAttribute(Constant.EXTEND_MESSAGE_TYPE, String.valueOf(Constant.EXTEND_MESSAGE_SECKILL_GOODS));
         sendMessage(message);
     }
 

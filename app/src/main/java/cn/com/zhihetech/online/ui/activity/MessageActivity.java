@@ -10,6 +10,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.service.EMChatEventService;
 import cn.com.zhihetech.online.ui.fragment.MyContactListFragment;
 import cn.com.zhihetech.online.ui.fragment.MyFocusMercahntsFragment;
 
@@ -30,6 +31,13 @@ public class MessageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initViews();
+        EMChatEventService.setStoped(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EMChatEventService.setStoped(false);
     }
 
     private void initViews() {

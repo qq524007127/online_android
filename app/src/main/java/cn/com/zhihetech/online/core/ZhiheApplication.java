@@ -29,11 +29,14 @@ import java.util.List;
 import java.util.Map;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Activity;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.CrashHandler;
+import cn.com.zhihetech.online.core.common.ServiceStack;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
@@ -315,5 +318,10 @@ public class ZhiheApplication extends Application {
             }
         }
         return processName;
+    }
+
+    public void appCrash() {
+        ActivityStack.getInstance().clearActivity();
+        ServiceStack.getInstance().clearService();
     }
 }

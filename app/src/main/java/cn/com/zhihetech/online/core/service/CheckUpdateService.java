@@ -1,7 +1,6 @@
 package cn.com.zhihetech.online.core.service;
 
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import cn.com.zhihetech.online.bean.AppVersion;
-import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -21,14 +19,15 @@ import cn.com.zhihetech.online.model.AppVersionModel;
 /**
  * Created by ShenYunjie on 2016/3/14.
  */
-public class CheckAppUpdateService extends Service {
+public class CheckUpdateService extends BaseService {
 
     private ResponseMessageCallback<AppVersion> callback = new ResponseMessageCallback<AppVersion>() {
         @Override
         public void onResponseMessage(ResponseMessage<AppVersion> responseMessage) {
             if (responseMessage.getCode() == ResponseStateCode.SUCCESS) {
                 AppVersion version = responseMessage.getData();
-                if (AppUtils.getVersionCode(CheckAppUpdateService.this) > version.getVersionCode()) {
+                int versionCode = AppUtils.getVersionCode(CheckUpdateService.this);
+                if (versionCode < version.getVersionCode()) {
                     showAlert(version);
                 }
             }
@@ -36,7 +35,7 @@ public class CheckAppUpdateService extends Service {
 
         @Override
         public void onError(Throwable ex, boolean isOnCallback) {
-            Toast.makeText(CheckAppUpdateService.this, "检查更新出错", Toast.LENGTH_LONG).show();
+            Toast.makeText(CheckUpdateService.this, "检查更新出错", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -72,6 +71,7 @@ public class CheckAppUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        checkUpdate();
         return super.onStartCommand(intent, flags, startId);
     }
 

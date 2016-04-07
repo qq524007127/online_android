@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.common;
+package cn.com.zhihetech.online.core.emchat;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
@@ -8,10 +8,11 @@ import com.easemob.easeui.widget.chatrow.EaseChatRow;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
 import cn.com.zhihetech.online.bean.BaseBean;
-import cn.com.zhihetech.online.core.chatrow.GoodsLinkChatRow;
-import cn.com.zhihetech.online.core.chatrow.RedEnvelopChatRow;
-import cn.com.zhihetech.online.core.chatrow.SeckillGoodsChatRow;
-import cn.com.zhihetech.online.core.chatrow.ShopLinkChatRow;
+import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.emchat.chatrow.GoodsLinkChatRow;
+import cn.com.zhihetech.online.core.emchat.chatrow.RedEnvelopChatRow;
+import cn.com.zhihetech.online.core.emchat.chatrow.SeckillGoodsChatRow;
+import cn.com.zhihetech.online.core.emchat.chatrow.ShopLinkChatRow;
 
 /**
  * Created by ShenYunjie on 2016/3/2.

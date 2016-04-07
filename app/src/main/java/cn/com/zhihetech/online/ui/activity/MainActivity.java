@@ -12,18 +12,25 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMMessage;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.common.ActivityStack;
+import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
+import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
+import cn.com.zhihetech.online.core.emchat.helpers.EMEventHandle;
+import cn.com.zhihetech.online.core.service.EMChatConnectionService;
+import cn.com.zhihetech.online.core.service.EMChatEventService;
+import cn.com.zhihetech.online.core.util.NotificationHelper;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.HomeFragment;
 import cn.com.zhihetech.online.ui.fragment.MessageFragment;
 import cn.com.zhihetech.online.ui.fragment.MyFragment;
 import cn.com.zhihetech.online.ui.fragment.ShoppingCartFragment;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -50,6 +57,7 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initMainTab();
+        initEMChatSettings();
     }
 
     /**
@@ -165,6 +173,14 @@ public class MainActivity extends BaseActivity {
             default:
         }
         localFragmentTransaction.commit();
+    }
+
+    private void initEMChatSettings() {
+        Intent connectionIntent = new Intent(this, EMChatConnectionService.class);
+        startService(connectionIntent);
+
+        Intent eventIntent = new Intent(this, EMChatEventService.class);
+        startService(eventIntent);
     }
 
     @Override

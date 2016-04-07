@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.chatrow;
+package cn.com.zhihetech.online.core.emchat.chatrow;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

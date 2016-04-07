@@ -11,7 +11,6 @@ import org.xutils.view.annotation.ViewInject;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.Merchant;
-import cn.com.zhihetech.online.bean.SystemConfig;
 import cn.com.zhihetech.online.bean.Token;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.MerchantLoginCallback;
@@ -19,7 +18,7 @@ import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.common.UserLoginCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
-import cn.com.zhihetech.online.core.service.CheckAppUpdateService;
+import cn.com.zhihetech.online.core.service.CheckUpdateService;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -38,7 +37,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startService(new Intent(this, CheckAppUpdateService.class));
+        startService(new Intent(this, CheckUpdateService.class));
         loadStartImage();
         waitAndLogin();
     }

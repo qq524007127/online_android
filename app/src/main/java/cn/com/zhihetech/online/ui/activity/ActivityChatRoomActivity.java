@@ -9,6 +9,7 @@ import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
 
+import org.jivesoftware.smack.Chat;
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 
@@ -19,6 +20,7 @@ import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.fragment.ChatFragment;
+import cn.com.zhihetech.online.ui.fragment.UpgradeChatFragment;
 
 /**
  * 活动聊天室
@@ -32,22 +34,22 @@ public class ActivityChatRoomActivity extends BaseActivity {
 
     private String activityId;
 
-    public static ActivityChatRoomActivity activityInstance;
-    private ChatFragment chatFragment;
+    //public static ActivityChatRoomActivity activityInstance;
+    private UpgradeChatFragment chatFragment;
     private String toChatRoom;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         activityId = getIntent().getStringExtra(ACTIVITY_ID);
-        activityInstance = this;
+        //activityInstance = this;
         initChatFragment();
     }
 
     private void initChatFragment() {
         //聊天人或群id
         toChatRoom = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new ChatFragment();
+        chatFragment = new UpgradeChatFragment();
         chatFragment.hideTitleBar();
         Bundle args = getIntent().getExtras();
         if (args == null) {
@@ -79,7 +81,7 @@ public class ActivityChatRoomActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        activityInstance = null;
+        //activityInstance = null;
     }
 
     @Override

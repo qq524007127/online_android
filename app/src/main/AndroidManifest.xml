@@ -134,7 +134,9 @@
         <activity
             android:name=".ui.activity.OrderDetailActivity"
             android:label="@string/order_detail" />
-        <activity android:name=".ui.activity.SingleChatActivity" />
+        <activity
+            android:name=".ui.activity.SingleChatActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activity.ActivityInfoActivity"
             android:label="@string/activity_page" />
@@ -204,7 +206,14 @@
             android:label="@string/my_seckill_goods" />
 
         <!--Services配置-->
-        <service android:name=".core.service.CheckAppUpdateService" />
+
+        <service android:name=".core.service.CheckUpdateService" />
+        <!--后台检查更新-->
+        <service android:name=".core.service.EMChatConnectionService" />
+        <!--环信连接监听-->
+        <service android:name=".core.service.EMChatEventService" />
+        <!--环信信息监听-->
+
         <!--Services配置完成-->
 
         <!--Ping++支付配置开始-->

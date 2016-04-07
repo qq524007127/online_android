@@ -18,6 +18,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.ui.fragment.ChatFragment;
+import cn.com.zhihetech.online.ui.fragment.UpgradeChatFragment;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
@@ -41,7 +42,7 @@ public class SingleChatActivity extends BaseActivity {
     private void initChatFragment() {
         //聊天人或群id
         toChatUsername = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new ChatFragment();
+        chatFragment = new UpgradeChatFragment();
         chatFragment.hideTitleBar();
         //传入参数
         chatFragment.setArguments(getIntent().getExtras());

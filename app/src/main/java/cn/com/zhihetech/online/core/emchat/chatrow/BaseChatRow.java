@@ -1,11 +1,9 @@
-package cn.com.zhihetech.online.core.chatrow;
+package cn.com.zhihetech.online.core.emchat.chatrow;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
 
-import com.alibaba.fastjson.JSONObject;
 import com.easemob.chat.EMMessage;
-import com.easemob.chat.TextMessageBody;
 import com.easemob.easeui.widget.chatrow.EaseChatRowText;
 
 import cn.com.zhihetech.online.core.ZhiheApplication;
