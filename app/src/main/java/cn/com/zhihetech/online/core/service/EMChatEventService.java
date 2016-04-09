@@ -7,6 +7,7 @@ import com.easemob.chat.EMMessage;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
+import cn.com.zhihetech.online.core.emchat.helpers.AbstractEventHandle;
 import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
 import cn.com.zhihetech.online.core.emchat.helpers.EMEventHandle;
 import cn.com.zhihetech.online.core.util.NotificationHelper;
@@ -19,7 +20,7 @@ public class EMChatEventService extends BaseService {
 
     private static boolean stoped = false;
 
-    private EMEventHandle.OnEMEventListener eventListener = new EMEventHandle.AbstractEventHandle() {
+    private EMEventHandle.OnEMEventListener eventListener = new AbstractEventHandle() {
         @Override
         public int getLevel() {
             return 1;
@@ -39,7 +40,7 @@ public class EMChatEventService extends BaseService {
                 intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
                 pendingIntent = PendingIntent.getActivity(self, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             }
-            NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFYID,
+            NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
                     userinfo.getUserNick() + "发来一条新信息",
                     EMMessageHelper.getMessageBody(message), pendingIntent);
             return true;

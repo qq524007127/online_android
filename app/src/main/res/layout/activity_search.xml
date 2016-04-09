@@ -35,11 +35,10 @@
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:background="@drawable/drop_down_bg"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
+                    android:gravity="center_horizontal|bottom"
                     android:text="商品"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/search_input_et"
@@ -56,7 +55,7 @@
                 android:id="@+id/search_submit_btn"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0"

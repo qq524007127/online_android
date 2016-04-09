@@ -2,10 +2,10 @@ package cn.com.zhihetech.online.core.emchat.helpers;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.easemob.EMEventListener;
 import com.easemob.EMNotifierEvent;
+import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMMessage;
 
 import org.xutils.ex.DbException;
@@ -37,6 +37,15 @@ public class EMEventHandle implements EMEventListener {
     private static EMEventHandle instance;
 
     private EMEventHandle() {
+        EMNotifierEvent.Event[] events = new EMNotifierEvent.Event[]{EMNotifierEvent.Event.EventNewMessage,
+                EMNotifierEvent.Event.EventNewCMDMessage,
+                EMNotifierEvent.Event.EventReadAck,
+                EMNotifierEvent.Event.EventDeliveryAck,
+                EMNotifierEvent.Event.EventOfflineMessage,
+                EMNotifierEvent.Event.EventConversationListChanged,
+                EMNotifierEvent.Event.EventMessageChanged,
+                EMNotifierEvent.Event.EventLogout};
+        EMChatManager.getInstance().registerEventListener(this, events);
     }
 
     public static EMEventHandle getInstance() {
@@ -94,6 +103,9 @@ public class EMEventHandle implements EMEventListener {
         int currentMaxLevel = -1;
         saveEMUserInfo(message);
         for (OnEMEventListener listener : this.eventListeners) {
+            if (listener == null) {
+                continue;
+            }
             if (currentMaxLevel > listener.getLevel()) {
                 break;
             }
@@ -112,6 +124,9 @@ public class EMEventHandle implements EMEventListener {
         int currentMaxLevel = -1;
         saveEMUserInfo(message);
         for (OnEMEventListener listener : this.eventListeners) {
+            if (listener == null) {
+                continue;
+            }
             if (currentMaxLevel > listener.getLevel()) {
                 break;
             }
@@ -122,18 +137,13 @@ public class EMEventHandle implements EMEventListener {
     }
 
     private void saveEMUserInfo(EMMessage message) {
-        final EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                DBUtils dbUtils = new DBUtils();
-                try {
-                    dbUtils.saveUserInfo(userInfo);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        DBUtils dbUtils = new DBUtils();
+        try {
+            dbUtils.saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -145,6 +155,7 @@ public class EMEventHandle implements EMEventListener {
                 EMMessage message = (EMMessage) emNotifierEvent.getData();
                 msg.what = NEW_MESSAGE_CODE;
                 msg.obj = message;
+                eventHandler.sendMessage(msg);
                 break;
             }
             case EventDeliveryAck: {//接收已发送回执
@@ -161,6 +172,7 @@ public class EMEventHandle implements EMEventListener {
                 EMMessage message = (EMMessage) emNotifierEvent.getData();
                 msg.what = NEW_CMD_MESSAGE_CODE;
                 msg.obj = message;
+                eventHandler.sendMessage(msg);
                 break;
             }
 
@@ -177,7 +189,6 @@ public class EMEventHandle implements EMEventListener {
             default:
                 break;
         }
-        eventHandler.sendMessage(msg);
     }
 
     protected boolean isEmpty() {
@@ -247,21 +258,5 @@ public class EMEventHandle implements EMEventListener {
          * @return
          */
         boolean onNewCMDMessage(EMMessage message);
-    }
-
-    public static abstract class AbstractEventHandle implements OnEMEventListener {
-
-        @Override
-        public abstract int getLevel();
-
-        @Override
-        public boolean onNewMessage(EMMessage message) {
-            return true;
-        }
-
-        @Override
-        public boolean onNewCMDMessage(EMMessage message) {
-            return true;
-        }
     }
 }

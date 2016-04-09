@@ -151,6 +151,7 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
+    //public static final String DOMAIN = "http://120.27.24.49/";
     public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 

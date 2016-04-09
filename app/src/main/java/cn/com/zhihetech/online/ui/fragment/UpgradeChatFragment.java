@@ -4,15 +4,18 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.easemob.EMNotifierEvent;
 import com.easemob.chat.EMMessage;
+import com.easemob.easeui.controller.EaseUI;
 
 import org.xutils.ex.DbException;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
+import cn.com.zhihetech.online.core.emchat.helpers.AbstractEventHandle;
 import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
 import cn.com.zhihetech.online.core.emchat.helpers.EMEventHandle;
 import cn.com.zhihetech.online.core.util.NotificationHelper;
@@ -26,7 +29,7 @@ import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 public class UpgradeChatFragment extends ChatFragment {
 
     protected EMEventHandle.OnEMEventListener eventListener =
-            new EMEventHandle.AbstractEventHandle() {
+            new AbstractEventHandle() {
 
                 @Override
                 public int getLevel() {
@@ -43,7 +46,6 @@ public class UpgradeChatFragment extends ChatFragment {
                 public boolean onNewMessage(EMMessage message) {
                     EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
                     saveUserInfo(userInfo);
-                    saveUserInfo(userInfo);
                     if (message.getFrom().equals(toChatUsername)) {
                         return true;
                     }
@@ -58,38 +60,39 @@ public class UpgradeChatFragment extends ChatFragment {
     }
 
     private void onReceiveNewMessage(EMMessage message) {
-        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
-        saveUserInfo(userInfo);
-        Intent intent = new Intent(getContext(), SingleChatActivity.class);
-        /*EMMessage.ChatType chatType = message.getChatType();
-        if (chatType == EMMessage.ChatType.ChatRoom) {
-            intent = new Intent(getContext(), ActivityChatRoomActivity.class);
-            intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
-            intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
-            intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
-            intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
-        }*/
-
+        Log.d(getClass().getName(), "收到一条新信息！=> " + message.getFrom());
         String toUserName = message.getChatType() == EMMessage.ChatType.Chat ? message.getFrom() :
                 message.getTo();
-        intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFYID,
-                userInfo.getUserNick() + "发来一条新信息",
-                EMMessageHelper.getMessageBody(message), pendingIntent);
+        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        saveUserInfo(userInfo);
+        if (toUserName.equals(toChatUsername)) {
+            messageList.refreshSelectLast();
+            NotificationHelper.playRingtoneAndVibrator(getContext());
+        }else {
+            // 如果消息不是和当前聊天ID的消息
+            Intent intent = new Intent(getContext(), SingleChatActivity.class);
+            /*EMMessage.ChatType chatType = message.getChatType();
+            if (chatType == EMMessage.ChatType.ChatRoom) {
+                intent = new Intent(getContext(), ActivityChatRoomActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
+                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
+                intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
+                intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
+            }*/
+            intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
+            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
+                    userInfo.getUserNick() + "发来一条新信息",
+                    EMMessageHelper.getMessageBody(message), null);
+        }
     }
 
     protected void saveUserInfo(final EMUserInfo userInfo) {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    new DBUtils().saveUserInfo(userInfo);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -115,26 +118,7 @@ public class UpgradeChatFragment extends ChatFragment {
             case EventNewMessage:
                 // 获取到message
                 EMMessage message = (EMMessage) event.getData();
-
-                String username = null;
-                // 群组消息
-                if (message.getChatType() == EMMessage.ChatType.GroupChat || message.getChatType() == EMMessage.ChatType.ChatRoom) {
-                    username = message.getTo();
-                } else {
-                    // 单聊消息
-                    username = message.getFrom();
-                }
-
-                // 如果是当前会话的消息，刷新聊天页面
-                if (username.equals(toChatUsername)) {
-                    messageList.refreshSelectLast();
-                    // 声音和震动提示有新消息
-                    //EaseUI.getInstance().getNotifier().viberateAndPlayTone(message);
-                } else {
-                    // 如果消息不是和当前聊天ID的消息
-                    //EaseUI.getInstance().getNotifier().onNewMsg(message);
-                }
-
+                onReceiveNewMessage(message);
                 break;
             case EventDeliveryAck:
             case EventReadAck:
@@ -142,9 +126,6 @@ public class UpgradeChatFragment extends ChatFragment {
                 messageList.refresh();
                 break;
             case EventOfflineMessage:
-                // a list of offline messages
-                // List<EMMessage> offlineMessages = (List<EMMessage>)
-                // event.getData();
                 messageList.refresh();
                 break;
             default:

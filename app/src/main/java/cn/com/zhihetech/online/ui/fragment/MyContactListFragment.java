@@ -1,6 +1,9 @@
 package cn.com.zhihetech.online.ui.fragment;
 
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.easemob.EMEventListener;
@@ -17,8 +20,10 @@ import org.xutils.ex.DbException;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
-import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.db.DBUtils;
+import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
+import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
+import cn.com.zhihetech.online.core.util.NotificationHelper;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 
 /**
@@ -32,12 +37,7 @@ public class MyContactListFragment extends EaseConversationListFragment {
             switch (emNotifierEvent.getEvent()) {
                 case EventNewMessage:
                     EMMessage message = (EMMessage) emNotifierEvent.getData();
-                    try {
-                        new DBUtils().saveUserInfo(EMUserInfo.createEMUserInfo(message));
-                    } catch (DbException e) {
-                        e.printStackTrace();
-                    }
-                    EaseUI.getInstance().getNotifier().onNewMsg(message);
+                    onReceiveNewMessage(message);
                     refresh();
                     break;
             }
@@ -45,6 +45,8 @@ public class MyContactListFragment extends EaseConversationListFragment {
     };
 
     private boolean isRegisterEventListener = false;    //是否已注册事件监听
+
+    private boolean isNotify = true;
 
     @Override
     protected void initView() {
@@ -70,29 +72,77 @@ public class MyContactListFragment extends EaseConversationListFragment {
         });
     }
 
-
     @Override
-    public void onResume() {
-        super.onResume();
-        if (!isRegisterEventListener) {
-            EMChatManager.getInstance().registerEventListener(eventListener);
-            isRegisterEventListener = true;
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        registerEventListener();
     }
 
-
     @Override
-    public void onPause() {
-        super.onPause();
-        if (isRegisterEventListener) {
-            EMChatManager.getInstance().registerEventListener(eventListener);
-            isRegisterEventListener = false;
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterEventListener();
     }
 
     @Override
     protected void setUpView() {
         super.setUpView();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isNotify = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isNotify = false;
+        refresh();
+    }
+
+    /**
+     * 收到新信息时回调
+     *
+     * @param message
+     */
+    private void onReceiveNewMessage(EMMessage message) {
+        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        saveUserInfo(userInfo);
+        if (isNotify) {
+            notifyNewMessage(message);
+        } else {
+            NotificationHelper.playRingtoneAndVibrator(getContext());//如果不显示通知栏则通过提示应提示
+        }
+    }
+
+    private void notifyNewMessage(EMMessage message) {
+        String toUserName = message.getChatType() == EMMessage.ChatType.Chat ? message.getFrom() :
+                message.getTo();
+        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        Intent intent = new Intent(getContext(), SingleChatActivity.class);
+            /*EMMessage.ChatType chatType = message.getChatType();
+            if (chatType == EMMessage.ChatType.ChatRoom) {
+                intent = new Intent(getContext(), ActivityChatRoomActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
+                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
+                intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
+                intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
+            }*/
+        intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
+                userInfo.getUserNick() + "发来一条新信息",
+                EMMessageHelper.getMessageBody(message), null);
+    }
+
+    protected void saveUserInfo(final EMUserInfo userInfo) {
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -105,7 +155,22 @@ public class MyContactListFragment extends EaseConversationListFragment {
                 Intent intent = new Intent(getActivity(), SingleChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName());
                 getActivity().startActivity(intent);
+                isNotify = false;
             }
         });
+    }
+
+    private void registerEventListener() {
+        if (!isRegisterEventListener) {
+            EMChatManager.getInstance().registerEventListener(eventListener);
+            isRegisterEventListener = true;
+        }
+    }
+
+    private void unregisterEventListener() {
+        if (isRegisterEventListener) {
+            EMChatManager.getInstance().unregisterEventListener(eventListener);
+            isRegisterEventListener = false;
+        }
     }
 }

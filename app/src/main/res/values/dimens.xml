@@ -22,7 +22,7 @@
     <dimen name="main_search_box_height">40dp</dimen>
     <dimen name="main_search_box_padding">6dp</dimen>
     <dimen name="common_layout_height">42dp</dimen>
-    <dimen name="input_icon_size">20dp</dimen>
+    <dimen name="input_icon_size">16dp</dimen>
 
     <dimen name="view_min_height">40dp</dimen>
     <dimen name="main_search_box_margin_right">56dp</dimen>

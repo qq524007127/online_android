@@ -5,6 +5,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Vibrator;
 import android.widget.RemoteViews;
 
 import java.util.Date;
@@ -52,5 +56,18 @@ public class NotificationHelper {
         notification.contentView = contentView;
         notification.contentIntent = pendingIntent;
         notificationManager.notify(notifyId, notification);
+    }
+
+    /**
+     * 播放提示应和振动
+     *
+     * @param context
+     */
+    public static void playRingtoneAndVibrator(Context context) {
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone tone = RingtoneManager.getRingtone(context.getApplicationContext(), notification);
+        tone.play();
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[]{100, 400, 100, 400}, 10);
     }
 }

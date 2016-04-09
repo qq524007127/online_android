@@ -9,7 +9,6 @@ import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
 
-import org.jivesoftware.smack.Chat;
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 
@@ -19,7 +18,6 @@ import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.ui.fragment.ChatFragment;
 import cn.com.zhihetech.online.ui.fragment.UpgradeChatFragment;
 
 /**
@@ -34,7 +32,6 @@ public class ActivityChatRoomActivity extends BaseActivity {
 
     private String activityId;
 
-    //public static ActivityChatRoomActivity activityInstance;
     private UpgradeChatFragment chatFragment;
     private String toChatRoom;
 
@@ -42,7 +39,6 @@ public class ActivityChatRoomActivity extends BaseActivity {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         activityId = getIntent().getStringExtra(ACTIVITY_ID);
-        //activityInstance = this;
         initChatFragment();
     }
 
@@ -76,12 +72,6 @@ public class ActivityChatRoomActivity extends BaseActivity {
             }
         });
         getSupportFragmentManager().beginTransaction().add(R.id.chat_room_container_fl, chatFragment).commit();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //activityInstance = null;
     }
 
     @Override

@@ -1,13 +1,11 @@
 package cn.com.zhihetech.online.core.emchat.helpers;
 
-import com.easemob.chat.EMChatManager;
-
 /**
  * Created by ShenYunjie on 2016/4/6.
  */
 public class EMChatHelper {
 
-    public final static int EMCHAT_NEW_MESSAGE_NOTIFYID = 0X111;
+    public final static int EMCHAT_NEW_MESSAGE_NOTIFY_ID = 0X111;
 
     private static EMChatHelper instance;
 
@@ -17,16 +15,11 @@ public class EMChatHelper {
     private EMChatHelper() {
         this.connectionHandle = EMConnectionHandle.getInstance();
         this.eventHandle = EMEventHandle.getInstance();
-        this.initEMChatHandle();
-    }
-
-    protected void initEMChatHandle() {
-        EMChatManager.getInstance().addConnectionListener(this.connectionHandle);
-        EMChatManager.getInstance().registerEventListener(this.eventHandle);
     }
 
     public static EMChatHelper getInstance() {
         if (instance == null) {
+
             instance = new EMChatHelper();
         }
         return instance;
@@ -56,8 +49,7 @@ public class EMChatHelper {
      * @param eventListener
      */
     public void addEventListener(EMEventHandle.OnEMEventListener eventListener) {
-        //this.eventHandle.addConnectionListener(eventListener);
-        th//is.eventHandle.addConnectionListener(eventListener);
+        this.eventHandle.addConnectionListener(eventListener);
     }
 
     /**
@@ -66,7 +58,6 @@ public class EMChatHelper {
      * @param eventListener
      */
     public void removeEventListener(EMEventHandle.OnEMEventListener eventListener) {
-        //this.eventHandle.removeConnectionListener(eventListener);
-        th//is.eventHandle.removeConnectionListener(eventListener);
+       this.eventHandle.removeConnectionListener(eventListener);
     }
 }

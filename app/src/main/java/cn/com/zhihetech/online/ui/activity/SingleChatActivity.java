@@ -29,7 +29,7 @@ public class SingleChatActivity extends BaseActivity {
     public static String USER_NAME_KEY = "EMCHAT_USER_NAME";
 
     public static SingleChatActivity activityInstance;
-    private ChatFragment chatFragment;
+    private UpgradeChatFragment chatFragment;
     private String toChatUsername;
 
     @Override

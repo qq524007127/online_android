@@ -22,6 +22,8 @@ import cn.com.zhihetech.online.model.AppVersionModel;
 public class CheckUpdateService extends BaseService {
 
     private ResponseMessageCallback<AppVersion> callback = new ResponseMessageCallback<AppVersion>() {
+        boolean isError = false;
+
         @Override
         public void onResponseMessage(ResponseMessage<AppVersion> responseMessage) {
             if (responseMessage.getCode() == ResponseStateCode.SUCCESS) {
@@ -35,12 +37,15 @@ public class CheckUpdateService extends BaseService {
 
         @Override
         public void onError(Throwable ex, boolean isOnCallback) {
-            Toast.makeText(CheckUpdateService.this, "检查更新出错", Toast.LENGTH_LONG).show();
+            isError = true;
         }
 
         @Override
         public void onFinished() {
             super.onFinished();
+            if (isError) {
+                stopSelf();
+            }
         }
     };
 

@@ -5,6 +5,7 @@ import android.os.Message;
 
 import com.easemob.EMConnectionListener;
 import com.easemob.EMError;
+import com.easemob.chat.EMChatManager;
 import com.easemob.util.NetUtils;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class EMConnectionHandle implements EMConnectionListener {
     private static EMConnectionHandle instance;
 
     private EMConnectionHandle() {
-
+        EMChatManager.getInstance().addConnectionListener(this);
     }
 
     public static EMConnectionHandle getInstance() {
