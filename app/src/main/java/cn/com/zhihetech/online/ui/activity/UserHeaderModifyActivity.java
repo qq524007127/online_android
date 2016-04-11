@@ -68,7 +68,7 @@ public class UserHeaderModifyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = ZhiheApplication.getInstance().getUser();
+        user = ZhiheApplication.getInstance().getLogedUser();
         ImageLoader.disPlayImage(userHeaderImg, user.getPortrait());
         userHeaderImg.setOnClickListener(new View.OnClickListener() {
             @Override

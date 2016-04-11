@@ -34,10 +34,10 @@ public class EMChatEventService extends BaseService {
             EMUserInfo userinfo = EMUserInfo.createEMUserInfo(message);
             PendingIntent pendingIntent = null;
             if (message.getChatType() == EMMessage.ChatType.Chat) {
-                Intent intent = new Intent(self, SingleChatActivity.class);
                 String toUserName = message.getChatType() == EMMessage.ChatType.Chat ? message.getFrom() :
                         message.getTo();
-                intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
+                Intent intent = new Intent(self, SingleChatActivity.class)
+                        .putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
                 pendingIntent = PendingIntent.getActivity(self, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             }
             NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
@@ -57,9 +57,9 @@ public class EMChatEventService extends BaseService {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onCreate() {
+        super.onCreate();
         initEMChatEvent();
-        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -75,6 +75,6 @@ public class EMChatEventService extends BaseService {
 
     @Override
     public boolean isBackService() {
-        return true;
+        return super.isBackService();
     }
 }

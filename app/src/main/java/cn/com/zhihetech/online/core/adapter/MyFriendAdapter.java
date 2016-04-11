@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.easemob.easeui.EaseConstant;
+import com.easemob.easeui.widget.EaseImageView;
 
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ViewInject;
@@ -21,7 +22,6 @@ import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
@@ -98,7 +98,7 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
 
     public class MyFriendViewHolder extends ZhiheAdapter.BaseViewHolder {
         @ViewInject(R.id.friend_header_civ)
-        public CircleImageView headerCiv;
+        public EaseImageView headerCiv;
         @ViewInject(R.id.friend_name_tv)
         public TextView friendNameTv;
 

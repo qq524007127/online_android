@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import cn.com.zhihetech.online.bean.AppVersion;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
@@ -53,15 +52,22 @@ public class CheckUpdateService extends BaseService {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("有新版本了")
                 .setMessage(version.getVersionDisc())
-                .setNegativeButton("忽略", null)
+                .setNegativeButton("忽略", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        stopSelf();
+                    }
+                })
                 .setPositiveButton("更新", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent();
-                        intent.setAction("android.intent.action.VIEW");
+                        Intent intent = new Intent()
+                                .setAction("android.intent.action.VIEW")
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         Uri content_url = Uri.parse(version.getVersionUrl());
                         intent.setData(content_url);
                         startActivity(intent);
+                        stopSelf();
                     }
                 }).create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);

@@ -1,8 +1,6 @@
 package cn.com.zhihetech.online.core.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Message;
@@ -13,8 +11,6 @@ import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
-
-import cn.com.zhihetech.online.core.common.ActivityStack;
 
 /**
  * Created by ShenYunjie on 2016/3/17.
@@ -179,7 +175,7 @@ public class ZHWebChromeClient extends WebChromeClient {
      * @return boolean true:存活；false:已finish
      */
     private boolean contextIsActivity(View view) {
-        Context mContext = view.getContext();
+        /*Context mContext = view.getContext();
         if (mContext instanceof Activity) {
             for (Activity _tmp : ActivityStack.getInstance().getActivities()) {
                 if (_tmp == mContext) {
@@ -187,7 +183,7 @@ public class ZHWebChromeClient extends WebChromeClient {
                 }
                 return false;
             }
-        }
+        }*/
         return true;
     }
 }

@@ -30,10 +30,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingBottom="3dp"
             android:gravity="center_vertical"
-            android:paddingTop="3dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/goods_info_service_view"
@@ -50,9 +48,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="1dp"
                     android:text="@string/custom_service"
                     android:textColor="@color/textColor"
                     android:textSize="12sp" />
@@ -73,9 +71,9 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="1dp"
                     android:text="@string/shop"
                     android:textColor="@color/textColor"
                     android:textSize="12sp" />
@@ -97,9 +95,9 @@
                 <TextView
                     android:id="@+id/goods_info_focus_msg_tv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="2dp"
+                    android:padding="1dp"
                     android:text="@string/collection"
                     android:textColor="@color/textColor"
                     android:textSize="12sp" />

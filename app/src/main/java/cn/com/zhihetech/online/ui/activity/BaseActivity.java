@@ -2,7 +2,6 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -111,7 +110,7 @@ public class BaseActivity extends AppCompatActivity {
      * @return
      */
     protected String getUserId() {
-        return ZhiheApplication.getInstance().getUserId();
+        return ZhiheApplication.getInstance().getLogedUserId();
     }
 
     protected String getTag() {

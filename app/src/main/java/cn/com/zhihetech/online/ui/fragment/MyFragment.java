@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
+import com.easemob.easeui.widget.EaseImageView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -35,7 +36,6 @@ import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 import cn.com.zhihetech.online.ui.activity.UserHeaderModifyActivity;
 import cn.com.zhihetech.online.ui.activity.UserInfoChangeActivity;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -46,14 +46,14 @@ public class MyFragment extends BaseFragment {
     private final int REFUND_AND_SERVICE = 101; //退款和售后
 
     @ViewInject(R.id.my_header_img)
-    private CircleImageView headerImg;
+    private EaseImageView headerImg;
     @ViewInject(R.id.my_nick_name_tv)
     private TextView nickNameTv;
 
     private BroadcastReceiver userHeaderChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            User user = ZhiheApplication.getInstance().getUser();
+            User user = ZhiheApplication.getInstance().getLogedUser();
             switch (intent.getAction()) {
                 case UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION:
                     ImageLoader.disPlayImage(headerImg, user.getPortrait());
@@ -69,7 +69,7 @@ public class MyFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         nickNameTv.setText(getUser().getUserName());
-        User user = ZhiheApplication.getInstance().getUser();
+        User user = ZhiheApplication.getInstance().getLogedUser();
         ImageLoader.disPlayImage(headerImg, user.getPortrait());
         IntentFilter filter = new IntentFilter(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION);
         filter.addAction(UserInfoChangeActivity.USER_INFO_MODIFIED_ACTION);
@@ -177,9 +177,8 @@ public class MyFragment extends BaseFragment {
      * 退出当前登录账号
      */
     private void logoutAccount() {
-        SharedPreferenceUtils.getInstance(getContext()).clear();
+        ZhiheApplication.getInstance().onExitAccount();
         ActivityStack.getInstance().removeWithout(getActivity());
-        EMChatManager.getInstance().logout(null);
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();

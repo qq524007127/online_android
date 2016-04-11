@@ -9,14 +9,15 @@
         android:layout_width="70dp"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.easemob.easeui.widget.EaseImageView
             android:id="@+id/conversation_header_civ"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp" />
+            app:ease_border_color="@color/white"
+            app:ease_border_width="2dp"
+            app:ease_shape_type="round" />
 
         <TextView
             android:id="@+id/conversation_bagde_tv"

@@ -28,13 +28,14 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <com.easemob.easeui.widget.EaseImageView
                         android:id="@+id/merch_header_iv"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_margin="5dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/my_activity" />
+                        android:src="@drawable/my_activity"
+                        app:ease_shape_type="round" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package cn.com.zhihetech.online.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.emchat.ZhiheChatRowProvider;
-import cn.com.zhihetech.online.core.service.EMChatEventService;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SeckillGoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.GoodsListActivity;
@@ -108,7 +106,7 @@ public class ChatFragment extends EaseChatFragment {
     private void setMessageAttributes(EMMessage message) {
         switch (ZhiheApplication.getInstance().getUserType()) {
             case Constant.COMMON_USER:
-                User user = ZhiheApplication.getInstance().getUser();
+                User user = ZhiheApplication.getInstance().getLogedUser();
                 message.setAttribute(Constant.EXTEND_USER_NICK_NAME, user.getUserName());
                 message.setAttribute(Constant.EXTEND_USER_ID, user.getUserId());
                 ImgInfo headerImg = user.getPortrait();

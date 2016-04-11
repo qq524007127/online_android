@@ -108,7 +108,7 @@ public class UserInfoChangeActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(UserHeaderModifyActivity.MODIFY_USER_HEADER_SUCCESS_ACTION)) {
-                User user = ZhiheApplication.getInstance().getUser();
+                User user = ZhiheApplication.getInstance().getLogedUser();
                 ImageLoader.disPlayImage(userHeaderImg, user.getPortrait());
             }
         }
@@ -129,7 +129,7 @@ public class UserInfoChangeActivity extends BaseActivity {
     }
 
     private void loadViewAndData() {
-        bindViewData(ZhiheApplication.getInstance().getUser());
+        bindViewData(ZhiheApplication.getInstance().getLogedUser());
         loadAreas();
         this.occupationArray = getResources().getStringArray(R.array.occupation_list);
         this.incomeArray = getResources().getStringArray(R.array.income_list);
@@ -209,7 +209,7 @@ public class UserInfoChangeActivity extends BaseActivity {
         String income = userIncomeBtn.getText().toString();
         final ProgressDialog progress = ProgressDialog.show(this, "", getString(R.string.data_executing));
         progress.setCancelable(true);
-        final User user = ZhiheApplication.getInstance().getUser();
+        final User user = ZhiheApplication.getInstance().getLogedUser();
         final Callback.Cancelable cancelable = new UserModel().modifyBaseInfo(new ResponseMessageCallback<User>() {
             @Override
             public void onResponseMessage(ResponseMessage<User> responseMessage) {
@@ -219,7 +219,7 @@ public class UserInfoChangeActivity extends BaseActivity {
                 }
                 User _user = responseMessage.getData();
                 _user.getArea().setAreaName(userAreaBtn.getText().toString());
-                ZhiheApplication.getInstance().setUser(_user);
+                ZhiheApplication.getInstance().replaceUser(_user);
                 Intent intent = new Intent(USER_INFO_MODIFIED_ACTION);
                 sendBroadcast(intent);
                 showMsg("信息修改成功！");

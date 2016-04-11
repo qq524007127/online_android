@@ -1,9 +1,6 @@
 package cn.com.zhihetech.online.core.common;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -24,10 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.ZhiheApplication;
-import cn.com.zhihetech.online.ui.activity.MainActivity;
-import cn.com.zhihetech.online.ui.activity.StartActivity;
 
 /**
  * Created by ShenYunjie on 2016/3/31.
@@ -95,7 +89,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             }
 
             // 退出程序,注释下面的重启启动程序代码
-            ZhiheApplication.getInstance().appCrash();
+            ZhiheApplication.getInstance().onAppCrash();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
 

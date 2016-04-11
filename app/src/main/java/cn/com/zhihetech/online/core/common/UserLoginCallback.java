@@ -76,9 +76,9 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
     }
 
     protected void initApp(User user) {
-        ZhiheApplication application = ZhiheApplication.getInstance();
-        application.setUserType(ZhiheApplication.COMMON_USER_TYPE);
-        application.setUser(user);
+        ZhiheApplication application = ZhiheApplication.getInstance().onUserLoged(user);
+        /*application.setUserType(ZhiheApplication.COMMON_USER_TYPE);
+        application.setUser(user);*/
 
         preferenceUtils.setUserType(Constant.COMMON_USER);
         preferenceUtils.setUserToken(token.getToken());
@@ -141,7 +141,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      * 登录环信账号
      */
     private void loginEMChat(User user) {
-        EMChatManager.getInstance().login(user.getEMUserId(), user.getEMPwd(), emCallBack);
+        EMChatManager.getInstance().login(user.getEMUserId(), user.getEMUserPwd(), emCallBack);
     }
 
     @Override

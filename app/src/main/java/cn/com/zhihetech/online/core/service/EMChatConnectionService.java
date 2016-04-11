@@ -2,7 +2,6 @@ package cn.com.zhihetech.online.core.service;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.WindowManager;
@@ -11,6 +10,7 @@ import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
@@ -30,9 +30,9 @@ public class EMChatConnectionService extends BaseService {
     private boolean isRetryLogin = true;
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onCreate() {
+        super.onCreate();
         initEMChatConnectionListener();
-        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -163,8 +163,23 @@ public class EMChatConnectionService extends BaseService {
     }
 
     protected void reLoginEMchat() {
-        User user = ZhiheApplication.getInstance().getUser();
-        EMChatManager.getInstance().login(user.getEMUserId(), user.getEMPwd(), new EMCallBack() {
+        ZhiheApplication application  = ZhiheApplication.getInstance();
+        String userName;
+        String userPwd;
+        if(application.getUserType() == ZhiheApplication.COMMON_USER_TYPE){
+            User user = application.getLogedUser();
+            userName = user.getEMUserId();
+            userPwd = user.getEMUserPwd();
+        }else{
+            Merchant merchant = application.getLogedMerchant();
+            userName = merchant.getEMUserId();
+            userPwd = merchant.getEMUserPwd();
+        }
+        logEMChatByUserNameAndUserPwd(userName,userPwd);
+    }
+
+    protected void logEMChatByUserNameAndUserPwd(String userName,String userPwd) {
+        EMChatManager.getInstance().login(userName, userPwd, new EMCallBack() {
             Message msg = new Message();
 
             @Override
@@ -188,14 +203,14 @@ public class EMChatConnectionService extends BaseService {
 
     protected String getEMChatUserName() {
         if (getUserType() == ZhiheApplication.COMMON_USER_TYPE) {
-            return ZhiheApplication.getInstance().getUser().getEMUserId();
+            return ZhiheApplication.getInstance().getLogedUser().getEMUserId();
         }
         return ZhiheApplication.getInstance().getLogedMerchant().getEMUserId();
     }
 
     protected String getEMChatUserPwd() {
         if (getUserType() == ZhiheApplication.COMMON_USER_TYPE) {
-            return ZhiheApplication.getInstance().getUser().getEMPwd();
+            return ZhiheApplication.getInstance().getLogedUser().getEMUserPwd();
         }
         return ZhiheApplication.getInstance().getLogedMerchant().getEMUserPwd();
     }

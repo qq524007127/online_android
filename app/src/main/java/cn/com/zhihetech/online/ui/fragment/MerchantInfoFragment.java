@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.easemob.easeui.widget.EaseImageView;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -26,13 +28,11 @@ import cn.com.zhihetech.online.core.adapter.ShopShowAdapter;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
-import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.model.ShopShowModel;
 import cn.com.zhihetech.online.ui.activity.ShowBigImageActivity;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/1/20.
@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @ContentView(R.layout.content_merchant_info_fragment)
 public class MerchantInfoFragment extends BaseFragment {
     @ViewInject(R.id.merchant_info_header_civ)
-    private CircleImageView merchantHeaderImg;
+    private EaseImageView merchantHeaderImg;
     @ViewInject(R.id.merchant_info_name_tv)
     private TextView merchantNameTv;
     @ViewInject(R.id.merchant_info_score_rb)

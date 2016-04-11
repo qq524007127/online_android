@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.alibaba.fastjson.JSON;
 import com.easemob.easeui.EaseConstant;
 
 import org.xutils.ex.DbException;
@@ -89,7 +88,7 @@ public class MerchantHomeActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         addFriendBtn.setClickable(false);
-                        new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
+                        new MerchantModel().focusMerchant(addFriendCallback, ZhiheApplication.getInstance().getLogedUserId(), merchantId);
                     }
                 });
             } else {
@@ -148,7 +147,7 @@ public class MerchantHomeActivity extends BaseActivity {
     private void initMerchantInfo() {
         MerchantModel model = new MerchantModel();
         model.getMerchantById(merchantCallback, merchantId);
-        model.checkFucosState(checkFocusCallback, ZhiheApplication.getInstance().getUserId(), merchantId);
+        model.checkFucosState(checkFocusCallback, ZhiheApplication.getInstance().getLogedUserId(), merchantId);
     }
 
     @Event({R.id.merchant_home_contact_btn})

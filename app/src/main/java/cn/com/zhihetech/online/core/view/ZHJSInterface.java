@@ -136,7 +136,7 @@ public class ZHJSInterface implements WebViewUtils.JsInterface {
     @Override
     @JavascriptInterface
     public void getUserId() {
-        final String userId = ZhiheApplication.getInstance().getUserId();
+        final String userId = ZhiheApplication.getInstance().getLogedUserId();
         final String onBackUserIdTpl = "javascript:onBackUserId(\"{0}\")";
         target.post(new Runnable() {
             @Override

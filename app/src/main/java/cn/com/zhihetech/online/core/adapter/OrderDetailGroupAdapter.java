@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.easemob.easeui.widget.EaseImageView;
+
 import org.xutils.view.annotation.ViewInject;
 
 import java.text.MessageFormat;
@@ -18,7 +20,6 @@ import cn.com.zhihetech.online.bean.OrderDetail;
 import cn.com.zhihetech.online.bean.OrderDetailGroup;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.ListViewHeigthUtils;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/1/26.
@@ -137,7 +138,7 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
 
     public class OrderDetailGroupHolder extends ZhiheAdapter.BaseViewHolder {
         @ViewInject(R.id.order_detail_merchant_cover_civ)
-        public CircleImageView merchantCoverCiv;
+        public EaseImageView merchantCoverCiv;
         @ViewInject(R.id.order_confirm_item_merchant_name_tv)
         public TextView merchantNameTv;
         @ViewInject(R.id.order_detail_lv)

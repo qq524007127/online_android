@@ -5,7 +5,7 @@ import org.xutils.db.sqlite.WhereBuilder;
 import org.xutils.ex.DbException;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
-import cn.com.zhihetech.online.core.ZhiheApplication;
+import cn.com.zhihetech.online.core.util.XUtilHelper;
 
 /**
  * Created by ShenYunjie on 2016/2/15.
@@ -37,6 +37,6 @@ public class DBUtils {
     }
 
     protected DbManager getDbManager() {
-        return ZhiheApplication.getInstance().getDbManager();
+        return XUtilHelper.getInstance().getDbManager();
     }
 }

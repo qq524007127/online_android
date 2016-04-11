@@ -7,14 +7,15 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.easemob.easeui.widget.EaseImageView
         android:id="@+id/friend_header_civ"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:scaleType="centerCrop"
         android:src="@drawable/my_activity"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="2dp" />
+        app:ease_border_color="@color/white"
+        app:ease_border_width="2dp"
+        app:ease_shape_type="round" />
 
     <TextView
         android:id="@+id/friend_name_tv"

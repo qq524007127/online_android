@@ -1,5 +1,7 @@
 package cn.com.zhihetech.online.core.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import cn.com.zhihetech.online.core.service.BaseService;
@@ -22,11 +24,32 @@ public class ServiceStack {
         return instance;
     }
 
-    public void clearService() {
+    public Stack<BaseService> getServiceStack() {
+        return this.serviceStack;
+    }
+
+    /**
+     * 强制停止和清除Service
+     */
+    public void forceClearService() {
         for (BaseService service : serviceStack) {
             service.stopSelf();
         }
         serviceStack.clear();
+    }
+
+
+    public void clearService() {
+        List<BaseService> stopedServices = new ArrayList<>();
+        ActivityStack.getInstance().clearActivity();
+        for (BaseService service : serviceStack) {
+            if (!service.isBackService()) {
+                service.stopSelf();
+                stopedServices.add(service);
+            }
+        }
+        serviceStack.removeAll(stopedServices);
+        stopedServices.clear();
     }
 
     public void addService(BaseService service) {

@@ -94,7 +94,7 @@ public class OrderReceiptAddressView extends FrameLayout {
 
     private void loadDefaultAddress() {
         dialog.show();
-        new ReceiptAddressModel().getDefaultReceiptAdress(callback, ZhiheApplication.getInstance().getUserId());
+        new ReceiptAddressModel().getDefaultReceiptAdress(callback, ZhiheApplication.getInstance().getLogedUserId());
     }
 
     public void bindReceiptAddress(ReceivedGoodsAddress address) {

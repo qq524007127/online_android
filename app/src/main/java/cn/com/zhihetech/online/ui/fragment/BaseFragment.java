@@ -54,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected User getUser() {
-        return ZhiheApplication.getInstance().getUser();
+        return ZhiheApplication.getInstance().getLogedUser();
     }
 
     protected String getLogTag() {
@@ -85,16 +85,22 @@ public abstract class BaseFragment extends Fragment {
         Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
+    protected void showMsg(int resId) {
+        Toast.makeText(getContext(), resId, Toast.LENGTH_LONG).show();
+    }
+
     protected void showMsg(View view, String msg) {
-        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        /*Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
-        snackbar.show();
+        snackbar.show();*/
+        showMsg(msg);
     }
 
     protected void showMsg(View view, int resId) {
-        Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
+        /*Snackbar snackbar = Snackbar.make(view, resId, Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.normal_bg));
-        snackbar.show();
+        snackbar.show();*/
+        showMsg(resId);
     }
 
     /**

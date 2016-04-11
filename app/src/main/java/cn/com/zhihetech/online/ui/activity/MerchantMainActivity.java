@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -17,6 +18,8 @@ import org.xutils.view.annotation.ViewInject;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
+import cn.com.zhihetech.online.core.service.EMChatConnectionService;
+import cn.com.zhihetech.online.core.service.EMChatEventService;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityChatRoomsFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantSettingsFragment;
 import cn.com.zhihetech.online.ui.fragment.MyContactListFragment;
@@ -39,6 +42,14 @@ public class MerchantMainActivity extends MerchantBaseActivity {
         setToolbarHomeAsUp(false);
         super.onCreate(savedInstanceState);
         initViewAndData();
+        initEMChatConnectionAndEventService();
+    }
+
+    private void initEMChatConnectionAndEventService() {
+        Intent connectionIntent = new Intent(this, EMChatConnectionService.class);
+        startService(connectionIntent);
+        Intent eventIntent = new Intent(this, EMChatEventService.class);
+        startService(eventIntent);
     }
 
     private void initViewAndData() {

@@ -66,7 +66,7 @@ public class RedEnvelopChatRow extends BaseChatRow {
             default:
                 String txtMsg = ((TextMessageBody) message.getBody()).getMessage();
                 JSONObject jsonObject = JSONObject.parseObject(txtMsg);
-                gradEnvelop(ZhiheApplication.getInstance().getUserId(), jsonObject.getString("redEnvelopId"));
+                gradEnvelop(ZhiheApplication.getInstance().getLogedUserId(), jsonObject.getString("redEnvelopId"));
         }
     }
 

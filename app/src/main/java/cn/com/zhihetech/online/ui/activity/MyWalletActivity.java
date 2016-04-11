@@ -231,7 +231,7 @@ public class MyWalletActivity extends BaseActivity {
      * 获取验证码
      */
     private void getVerCode() {
-        String num = ZhiheApplication.getInstance().getUser().getUserPhone();
+        String num = ZhiheApplication.getInstance().getLogedUser().getUserPhone();
         final boolean success = false;    //验证码是否获取成功
         final ProgressDialog progress = ProgressDialog.show(this, "", "正在获取验证码");
         progress.setCancelable(true);

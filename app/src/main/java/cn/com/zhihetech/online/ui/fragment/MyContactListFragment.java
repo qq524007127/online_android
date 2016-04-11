@@ -3,7 +3,6 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.easemob.EMEventListener;
@@ -113,7 +112,8 @@ public class MyContactListFragment extends EaseConversationListFragment {
         if (isNotify) {
             notifyNewMessage(message);
         } else {
-            NotificationHelper.playRingtoneAndVibrator(getContext());//如果不显示通知栏则通过提示应提示
+            refresh();
+            NotificationHelper.playRingtoneAndVibrator(getContext());//如果不显示通知栏则通过提示音提示
         }
     }
 

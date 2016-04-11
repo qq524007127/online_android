@@ -28,7 +28,6 @@ import cn.com.zhihetech.online.bean.ChargeInfo;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Order;
 import cn.com.zhihetech.online.bean.ReceivedGoodsAddress;
-import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
@@ -145,7 +144,7 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
         String userMsg = this.orderUserMsg.getText().toString();
         Order order = new Order();
         order.setPayChannel(payType);
-        order.setUser(ZhiheApplication.getInstance().getUser());
+        order.setUser(ZhiheApplication.getInstance().getLogedUser());
         order.setReceiptAddress(address);
         order.setUserMsg(userMsg);
         order.setCarriage(goods.getCarriage());

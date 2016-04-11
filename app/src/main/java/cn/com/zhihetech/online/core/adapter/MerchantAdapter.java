@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.easemob.easeui.widget.EaseImageView;
+
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
@@ -17,7 +19,6 @@ import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/1/18.
@@ -62,7 +63,7 @@ public class MerchantAdapter extends ZhiheAdapter<Merchant, MerchantAdapter.Merc
 
     public class MerchantHolder extends ZhiheAdapter.BaseViewHolder {
         @ViewInject(R.id.merch_header_iv)
-        public CircleImageView merchHeader;
+        public EaseImageView merchHeader;
         @ViewInject(R.id.merchan_info_ll)
         public LinearLayout merchInfoLayout;
         @ViewInject(R.id.merch_activity_flag_iv)

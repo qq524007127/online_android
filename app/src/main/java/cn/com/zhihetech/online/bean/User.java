@@ -175,7 +175,7 @@ public class User extends BaseBean {
      *
      * @return
      */
-    public String getEMPwd() {
+    public String getEMUserPwd() {
         return getUserId();
     }
 }

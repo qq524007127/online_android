@@ -11,8 +11,10 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
+import cn.com.zhihetech.online.ui.activity.AboutUsActivity;
 import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
 import cn.com.zhihetech.online.ui.activity.LoginActivity;
 
@@ -22,7 +24,8 @@ import cn.com.zhihetech.online.ui.activity.LoginActivity;
 @ContentView(R.layout.content_merchant_settings)
 public class MerchantSettingsFragment extends BaseFragment {
 
-    @Event({R.id.merchant_change_password_btn, R.id.merchant_exit_app_btn})
+    @Event({R.id.merchant_change_password_btn, R.id.merchant_exit_app_btn,
+            R.id.merchant_settings_about_us_btn})
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.merchant_exit_app_btn:
@@ -42,6 +45,10 @@ public class MerchantSettingsFragment extends BaseFragment {
                 Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.merchant_settings_about_us_btn:
+                Intent aboutIntent = new Intent(getContext(), AboutUsActivity.class);
+                startActivity(aboutIntent);
+                break;
         }
     }
 
@@ -49,9 +56,8 @@ public class MerchantSettingsFragment extends BaseFragment {
      * 退出当前登录账号
      */
     private void logoutAccount() {
-        SharedPreferenceUtils.getInstance(getContext()).clear();
+        ZhiheApplication.getInstance().onExitAccount();
         ActivityStack.getInstance().removeWithout(getActivity());
-        EMChatManager.getInstance().logout(null);
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();

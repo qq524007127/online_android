@@ -22,10 +22,14 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.easemob.easeui.widget.EaseImageView
                     android:id="@+id/merchant_info_header_civ"
                     android:layout_width="60dp"
-                    android:layout_height="60dp" />
+                    android:layout_height="60dp"
+                    android:scaleType="centerCrop"
+                    app:ease_border_color="@color/white"
+                    app:ease_border_width="1dp"
+                    app:ease_shape_type="round"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

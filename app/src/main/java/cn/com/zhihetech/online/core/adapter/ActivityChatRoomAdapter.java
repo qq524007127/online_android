@@ -30,7 +30,7 @@ public class ActivityChatRoomAdapter extends ZhiheAdapter<Activity, ActivityChat
 
     @Override
     public void onBindViewHolder(ActivityChatRoomHolder holder, Activity data) {
-        ImageLoader.disPlayImage(holder.chatRoomCoverIv, data.getCoverImg());
+        ImageLoader.disPlayImage(holder.chatRoomCoverIv, data.getReceptionRoom().getCoverImg());
         holder.chatRoomNameTv.setText(data.getActivitName());
         String activityTime = DateUtils.formatDateByFormat(data.getBeginDate(), "HH点mm") + "-" + DateUtils.formatDateByFormat(data.getEndDate(), "HH点mm");
         holder.chatRoomTimeTv.setText("活动时间：" + activityTime);

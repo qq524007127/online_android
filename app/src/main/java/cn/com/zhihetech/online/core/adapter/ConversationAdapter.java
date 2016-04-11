@@ -9,6 +9,7 @@ import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.easeui.EaseConstant;
+import com.easemob.easeui.widget.EaseImageView;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -19,7 +20,6 @@ import cn.com.zhihetech.online.bean.Conversation;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by ShenYunjie on 2016/2/1.
@@ -109,7 +109,7 @@ public class ConversationAdapter extends ZhiheAdapter<Conversation, Conversation
 
     public class ConversationHolder extends ZhiheAdapter.BaseViewHolder {
         @ViewInject(R.id.conversation_header_civ)
-        public CircleImageView headerCiv;
+        public EaseImageView headerCiv;
         @ViewInject(R.id.conversation_user_name_tv)
         public TextView userNickTv;
         @ViewInject(R.id.conversation_content_tv)

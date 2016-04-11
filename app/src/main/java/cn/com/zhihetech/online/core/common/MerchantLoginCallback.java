@@ -13,7 +13,6 @@ import java.util.Set;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.MerchantToken;
-import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
@@ -92,10 +91,10 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
             onLoginFinish();
             return;
         }
-        ZhiheApplication application = ZhiheApplication.getInstance();
-        application.setMerchant(this.token.getMerchant());
+        ZhiheApplication application = ZhiheApplication.getInstance().onMerchantLoged(this.token.getMerchant());
+        /*application.setMerchant(this.token.getMerchant());
         application.setUserType(ZhiheApplication.MERCHANT_USER_TYPE);
-        application.setEmChatUserName(this.token.getMerchant().getMerchantId().replaceAll("-", ""));
+        application.setEmChatUserName(this.token.getMerchant().getMerchantId().replaceAll("-", ""));*/
         saveMerchantInfo2File(this.token);
         try {
             saveMerchantInfo2DB(this.token.getMerchant());
@@ -103,7 +102,7 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
             e.printStackTrace();
         }
         updateEMUserNick(this.token.getMerchant().getMerchName());
-        loginEMChat(application.getEmChatUserName(), application.getEMChatPassword());
+        loginEMChat(application.getChatUserId(), application.getChatPassword());
     }
 
     /**
