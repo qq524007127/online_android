@@ -8,13 +8,13 @@
     <include layout="@layout/toolbar_layout" />
 
     <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:src="@drawable/about_us_top_icon" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:src="@drawable/about_us_cbd_icon" />
+        android:src="@drawable/about_us_cbd_icon" />-->
 
     <TextView
         android:id="@+id/add_version_name_tv"
