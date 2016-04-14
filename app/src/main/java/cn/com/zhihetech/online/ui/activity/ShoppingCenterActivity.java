@@ -9,9 +9,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.bean.FeaturedBlock;
 import cn.com.zhihetech.online.bean.ShoppingCenter;
-import cn.com.zhihetech.online.core.adapter.FeaturedBlockAdapter;
 import cn.com.zhihetech.online.core.adapter.ShoppingCenterAdapter;
 import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
@@ -19,7 +17,6 @@ import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
-import cn.com.zhihetech.online.model.FeaturedBlockModel;
 import cn.com.zhihetech.online.model.ShoppingCenterModel;
 
 /**

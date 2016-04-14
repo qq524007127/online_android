@@ -12,10 +12,12 @@ import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Merchant;
+import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.Pager;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.core.view.CommonBanner;
 import cn.com.zhihetech.online.core.view.LoadMoreListView;
 import cn.com.zhihetech.online.core.view.OnLoadMoreListener;
 import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
@@ -32,7 +34,7 @@ public class MerchantListActivity extends BaseActivity {
     public final static String FEATURED_BLOCK_SHOP_TYPE = "FEATURED_BLOCK_SHOP_TYPE";   //特色街区店铺
     public final static String SHOPPING_CENTER_SHOP_TYPE = "SHOPPING_CENTER_SHOP_TYPE"; //购物中心店铺
 
-    private String defaultType = FEATURED_SHOP_TYPE;
+    private String currentType = FEATURED_SHOP_TYPE;
     private String typeId;
 
     @ViewInject(R.id.daily_new_srl)
@@ -88,9 +90,9 @@ public class MerchantListActivity extends BaseActivity {
         String type = getIntent().getStringExtra(MERCHANT_TYPE_KEY);
         typeId = getIntent().getStringExtra(TYPE_ID_KEY);
         if (!StringUtils.isEmpty(type)) {
-            defaultType = type;
+            currentType = type;
         }
-        if (!defaultType.equals(FEATURED_SHOP_TYPE) && StringUtils.isEmpty(typeId)) {
+        if (!currentType.equals(FEATURED_SHOP_TYPE) && StringUtils.isEmpty(typeId)) {
             showMsg("出错了！");
             finish();
             return;
@@ -131,7 +133,7 @@ public class MerchantListActivity extends BaseActivity {
         if (!refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(true);
         }
-        switch (defaultType) {
+        switch (currentType) {
             case FEATURED_BLOCK_SHOP_TYPE:
                 new MerchantModel().getMerchantsByTypeAndTypeId(refreshCallback, new Pager(), 2, typeId);
                 break;
@@ -147,7 +149,7 @@ public class MerchantListActivity extends BaseActivity {
      * 分页加载（加载更多）
      */
     private void loadMoreData() {
-        switch (defaultType) {
+        switch (currentType) {
             case FEATURED_BLOCK_SHOP_TYPE:
                 new MerchantModel().getMerchantsByTypeAndTypeId(loadMoreCallback, pageData.getNextPage(), 2, typeId);
                 break;
@@ -164,6 +166,18 @@ public class MerchantListActivity extends BaseActivity {
      */
     private void initHeader() {
         View headerView = LayoutInflater.from(this).inflate(R.layout.content_merchant_list_header, null);
+        CommonBanner banner = (CommonBanner) headerView.findViewById(R.id.merchant_list_header_banner);
+        switch (currentType) {
+            case MerchantListActivity.SHOPPING_CENTER_SHOP_TYPE:
+                banner.loadBannerData(Constant.BANNER_SHOPPING_CNETER);
+                break;
+            case MerchantListActivity.FEATURED_BLOCK_SHOP_TYPE:
+                banner.loadBannerData(Constant.BANNER_FEATURED_BLOCK);
+                break;
+            default:
+                banner.loadBannerData(Constant.BANNER_FEATURED_SHOP);   //默认加载优加店的轮播图
+                break;
+        }
         merchantLv.addHeaderView(headerView);
     }
 }

@@ -103,9 +103,9 @@ public class Constant implements Serializable, Cloneable {
      * 轮播图所处的位置
      */
     public final static int BANNER_MAIN = 1;  //主页面上的轮播图
-    public final static int BANNER_DAILY_NEW = 2;  //每日上新上的轮播图
-    public final static int BANNER_BIG_BRAND = 3;  //大品牌上的轮播图
-    public final static int BANNER_BUY_KUNMING = 4; //买昆明上的轮播图
+    public final static int BANNER_SHOPPING_CNETER = 2;  //购物中心
+    public final static int BANNER_FEATURED_BLOCK = 3;  //特色街区
+    public final static int BANNER_FEATURED_SHOP = 4; //优加店
     public final static int BANNER_BUY_PREFECTURES = 5; //购地州上的轮播图
     public final static int BANNER_TYPE_CATEGOR = 6;   //分类上的轮播图
     public final static int BANNER_TYPE_ACTIVITY_ZONE = 7; //活动专区上的轮播图
@@ -151,8 +151,8 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    //public static final String DOMAIN = "http://120.27.24.49/";
-    public static final String DOMAIN = "http://192.168.1.10:8080/";
+    public static final String DOMAIN = "http://120.27.24.49/";
+    //public static final String DOMAIN = "http://192.168.1.10:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议

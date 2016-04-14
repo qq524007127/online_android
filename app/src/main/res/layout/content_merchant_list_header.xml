@@ -8,13 +8,12 @@
     <cn.com.zhihetech.online.core.view.FixedWidthLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:aspect_ratio="0.4">
+        app:aspect_ratio="0.53">
 
         <cn.com.zhihetech.online.core.view.CommonBanner
             android:id="@+id/merchant_list_header_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:banner_type="type_main">
+            android:layout_height="match_parent">
 
         </cn.com.zhihetech.online.core.view.CommonBanner>
     </cn.com.zhihetech.online.core.view.FixedWidthLayout>

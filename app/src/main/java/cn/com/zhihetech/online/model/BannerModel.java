@@ -19,4 +19,13 @@ public class BannerModel extends BaseModel<Banner> {
     public Callback.Cancelable getBanners(ArrayCallback<Banner> callback) {
         return getArray(Constant.BANNERS_URL, null, callback);
     }
+
+    /**
+     * @param callback
+     * @param bannerType
+     * @return
+     */
+    public Callback.Cancelable getBannersByType(ArrayCallback<Banner> callback, int bannerType) {
+        return getArray(Constant.BANNERS_URL, new ModelParams().addParam("bannerType", String.valueOf(bannerType)), callback);
+    }
 }

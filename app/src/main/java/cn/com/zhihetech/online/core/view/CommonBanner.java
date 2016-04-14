@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
@@ -41,7 +40,7 @@ public class CommonBanner extends ZhiheBanner<Banner> {
     }
 
     public void loadBannerData(int type) {
-        new BannerModel().getBanners(new ArrayCallback<Banner>() {
+        new BannerModel().getBannersByType(new ArrayCallback<Banner>() {
             @Override
             public void onArray(List<Banner> banners) {
                 setPages(new CBViewHolderCreator<CommonBannerHolder>() {
@@ -51,12 +50,17 @@ public class CommonBanner extends ZhiheBanner<Banner> {
                     }
                 }, banners);
             }
-        });
+        }, type);
     }
 
     public class CommonBannerHolder implements Holder<Banner> {
 
         public ImageView bannerImg;
+        private OnBannerClickListener onBannerClickListener;
+
+        public OnBannerClickListener getOnBannerClickListener() {
+            return onBannerClickListener;
+        }
 
         @Override
         public View createView(Context context) {
@@ -66,22 +70,31 @@ public class CommonBanner extends ZhiheBanner<Banner> {
         }
 
         @Override
-        public void UpdateUI(final Context context, int position, final Banner data) {
+        public void UpdateUI(final Context context, final int position, final Banner data) {
             ImageLoader.disPlayImage(bannerImg, data.getImgInfo());
-            bannerImg.setOnClickListener(new BannerClickListener(data));
+            bannerImg.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBannerClick(position, data);
+                }
+            });
+        }
+
+        private void onBannerClick(int position, Banner banner) {
+            if (this.onBannerClickListener != null) {
+                onBannerClickListener.onBannerClick(banner, position);
+            }
         }
     }
 
-    public class BannerClickListener implements OnClickListener {
+    public interface OnBannerClickListener {
+        void onBannerClick(Banner banner, int position);
+    }
 
-        private Banner banner;
-
-        public BannerClickListener(Banner banner) {
-            this.banner = banner;
-        }
+    public class DefaultBannerClickHande implements OnBannerClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onBannerClick(Banner banner, int position) {
 
         }
     }

@@ -16,16 +16,20 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.GoodsBanner;
+import cn.com.zhihetech.online.bean.ImgInfo;
+import cn.com.zhihetech.online.bean.ShowImageInfo;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.GoodsBannerModel;
 import cn.com.zhihetech.online.ui.activity.GoodsCommentActivity;
+import cn.com.zhihetech.online.ui.activity.ShowBigImageActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/20.
@@ -52,11 +56,27 @@ public class GoodsInfoHeaderView extends FrameLayout {
 
     protected ArrayCallback<GoodsBanner> bannerCallback = new ArrayCallback<GoodsBanner>() {
         @Override
-        public void onArray(List<GoodsBanner> datas) {
+        public void onArray(final List<GoodsBanner> datas) {
             goodsBanner.setPages(new CBViewHolderCreator<GoodsBannerHolder>() {
                 @Override
                 public GoodsBannerHolder createHolder() {
-                    return new GoodsBannerHolder();
+                    GoodsBannerHolder bannerHolder = new GoodsBannerHolder(datas);
+                    bannerHolder.setGoodsBannerClickListener(new OnGoodsBannerClickListener() {
+                        @Override
+                        public void onBannerClick(List<GoodsBanner> goodsBanners, int position) {
+                            Intent intent = new Intent(getContext(), ShowBigImageActivity.class);
+                            intent.putExtra(ShowBigImageActivity.CURRENT_POSITION, position);
+                            ArrayList<ShowImageInfo> imgList = new ArrayList<>();
+                            for (GoodsBanner banner : datas) {
+                                ShowImageInfo showImageInfo = new ShowImageInfo(banner.getImgInfo().getUrl(), null);
+                                showImageInfo.setShowDesc(false);
+                                imgList.add(showImageInfo);
+                            }
+                            intent.putExtra(ShowBigImageActivity.IMAGE_LIST_KEY, imgList);
+                            getContext().startActivity(intent);
+                        }
+                    });
+                    return bannerHolder;
                 }
             }, datas);
         }
@@ -110,7 +130,13 @@ public class GoodsInfoHeaderView extends FrameLayout {
 
     public class GoodsBannerHolder implements Holder<GoodsBanner> {
 
+        private List<GoodsBanner> goodsBanners;
         private ImageView bannerImg;
+        private OnGoodsBannerClickListener goodsBannerClickListener;
+
+        public GoodsBannerHolder(List<GoodsBanner> goodsBanners) {
+            this.goodsBanners = goodsBanners;
+        }
 
         @Override
         public View createView(Context context) {
@@ -120,14 +146,24 @@ public class GoodsInfoHeaderView extends FrameLayout {
         }
 
         @Override
-        public void UpdateUI(Context context, int position, GoodsBanner data) {
+        public void UpdateUI(Context context, final int position, GoodsBanner data) {
             ImageLoader.disPlayImage(bannerImg, data.getImgInfo());
-            bannerImg.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+            if (goodsBannerClickListener != null) {
+                bannerImg.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        goodsBannerClickListener.onBannerClick(goodsBanners, position);
+                    }
+                });
+            }
         }
+
+        public void setGoodsBannerClickListener(OnGoodsBannerClickListener goodsBannerClickListener) {
+            this.goodsBannerClickListener = goodsBannerClickListener;
+        }
+    }
+
+    public interface OnGoodsBannerClickListener {
+        void onBannerClick(List<GoodsBanner> goodsBanners, int position);
     }
 }
