@@ -63,7 +63,7 @@ public class Constant implements Serializable, Cloneable {
     public final static int BANNER_VIEWTYPE_MERCHANT = 2;//跳转到商户页面
     public final static int BANNER_VIEWTYPE_GOODS = 3;//跳转到商品页面
     public final static int BANNER_VIEWTYPE_ACTIVITY = 4;//跳转到活动页面
-    public final static int BANNER_VIEWTYPE_PAGE = 5;//跳转到指定页面
+    public final static int BANNER_VIEWTYPE_WEB_PAGE = 5;//跳转到指定页面
     /**
      * APP端viewTarget相关
      */
@@ -151,8 +151,8 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static final String DOMAIN = "http://120.27.24.49/";
-    //public static final String DOMAIN = "http://192.168.1.10:8080/";
+    //public static final String DOMAIN = "http://120.27.24.49/";
+    public static final String DOMAIN = "http://192.168.1.10:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议

@@ -62,7 +62,7 @@ public class ConversationAdapter extends ZhiheAdapter<Conversation, Conversation
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SingleChatActivity.class);
-                intent.putExtra(SingleChatActivity.USER_NAME_KEY, data.getNickName());
+                intent.putExtra(SingleChatActivity.USER_NICK_NAME_KEY, data.getNickName());
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getEmConver().getUserName());
                 mContext.startActivity(intent);
                 new Thread(new Runnable() {

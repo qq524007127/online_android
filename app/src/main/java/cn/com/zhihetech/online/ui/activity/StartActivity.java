@@ -18,7 +18,7 @@ import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.common.UserLoginCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
-import cn.com.zhihetech.online.core.service.CheckUpdateService;
+import cn.com.zhihetech.online.service.CheckUpdateService;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -103,24 +103,28 @@ public class StartActivity extends BaseActivity {
         new MerchantModel().login(new MerchantLoginCallback(this, code, password) {
             @Override
             public void onLoginSuccess(Merchant merchant) {
-                runOnUiThread(new Runnable() {
+                /*runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getSelf(), MerchantMainActivity.class);
                         startActivity(intent);
                         finish();
                     }
-                });
+                });*/
+                Intent intent = new Intent(getSelf(), MerchantMainActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
             public void onLoginError(final Exception e) {
-                runOnUiThread(new Runnable() {
+                /*runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         navigationLoginView();
                     }
-                });
+                });*/
+                navigationLoginView();
             }
 
             @Override
@@ -184,6 +188,6 @@ public class StartActivity extends BaseActivity {
                     autoLogin();
                 }
             }
-        }, 3000/1000);
+        }, 3000);
     }
 }

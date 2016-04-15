@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -149,6 +150,9 @@ public class HomeHeaderView extends FrameLayout {
                 webIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 webIntent.putExtra(WebPageActivity.PAGE_URL, nav.getViewUrl());
                 getContext().startActivity(webIntent);
+                break;
+            default:
+                Toast.makeText(getContext(), "此模块还未开放，敬请期待...", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

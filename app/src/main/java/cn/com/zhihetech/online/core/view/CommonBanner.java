@@ -1,6 +1,7 @@
 package cn.com.zhihetech.online.core.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -13,9 +14,15 @@ import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Banner;
+import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.model.BannerModel;
+import cn.com.zhihetech.online.ui.activity.ActivityInfoActivity;
+import cn.com.zhihetech.online.ui.activity.BaseActivity;
+import cn.com.zhihetech.online.ui.activity.GoodsInfoActivity;
+import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
+import cn.com.zhihetech.online.ui.activity.WebPageActivity;
 
 /**
  * Created by ShenYunjie on 2016/3/10.
@@ -83,6 +90,8 @@ public class CommonBanner extends ZhiheBanner<Banner> {
         private void onBannerClick(int position, Banner banner) {
             if (this.onBannerClickListener != null) {
                 onBannerClickListener.onBannerClick(banner, position);
+            } else {
+                new DefaultBannerClickHandle().onBannerClick(banner, position);
             }
         }
     }
@@ -91,11 +100,39 @@ public class CommonBanner extends ZhiheBanner<Banner> {
         void onBannerClick(Banner banner, int position);
     }
 
-    public class DefaultBannerClickHande implements OnBannerClickListener {
+    public class DefaultBannerClickHandle implements OnBannerClickListener {
 
         @Override
         public void onBannerClick(Banner banner, int position) {
-
+            switch (banner.getViewType()) {
+                case Constant.BANNER_VIEWTYPE_MERCHANT:
+                    Intent merchIntent = new Intent(getContext(), MerchantHomeActivity.class);
+                    merchIntent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, banner.getViewTargert());
+                    merchIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, banner.getViewTargetTitle());
+                    getContext().startActivity(merchIntent);
+                    break;
+                case Constant.BANNER_VIEWTYPE_GOODS:
+                    Intent goodsIntent = new Intent(getContext(), GoodsInfoActivity.class);
+                    goodsIntent.putExtra(GoodsInfoActivity.GOODS_ID_KEY, banner.getViewTargert());
+                    goodsIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, banner.getViewTargetTitle());
+                    getContext().startActivity(goodsIntent);
+                    break;
+                case Constant.BANNER_VIEWTYPE_ACTIVITY:
+                    Intent activityIntent = new Intent(getContext(), ActivityInfoActivity.class);
+                    activityIntent.putExtra(ActivityInfoActivity.ACTIVITY_ID_KEY, banner.getViewTargert());
+                    activityIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, banner.getViewTargetTitle());
+                    getContext().startActivity(activityIntent);
+                    break;
+                case Constant.BANNER_VIEWTYPE_WEB_PAGE:
+                    Intent pageIntent = new Intent(getContext(), WebPageActivity.class);
+                    pageIntent.putExtra(WebPageActivity.ENABLE_REFRESH, true);
+                    pageIntent.putExtra(WebPageActivity.PAGE_URL, banner.getViewTargert());
+                    pageIntent.putExtra(BaseActivity.CUSTOM_TITLE_KEY, banner.getViewTargetTitle());
+                    getContext().startActivity(pageIntent);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

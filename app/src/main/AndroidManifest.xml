@@ -207,11 +207,11 @@
 
         <!--Services配置-->
 
-        <service android:name=".core.service.CheckUpdateService" />
+        <service android:name=".service.CheckUpdateService" />
         <!--后台检查更新-->
-        <service android:name=".core.service.EMChatConnectionService" />
+        <service android:name=".service.EMChatConnectionService" />
         <!--环信连接监听-->
-        <service android:name=".core.service.EMChatEventService" />
+        <service android:name=".service.EMChatEventService" />
         <!--环信信息监听-->
 
         <!--Services配置完成-->

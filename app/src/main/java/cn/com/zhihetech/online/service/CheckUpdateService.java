@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.service;
+package cn.com.zhihetech.online.service;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

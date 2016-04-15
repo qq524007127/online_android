@@ -130,7 +130,7 @@ public class MyContactListFragment extends EaseConversationListFragment {
                 intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
                 intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
             }*/
-        intent.putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
+        intent.putExtra(SingleChatActivity.USER_NICK_NAME_KEY, toUserName);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
                 userInfo.getUserNick() + "发来一条新信息",

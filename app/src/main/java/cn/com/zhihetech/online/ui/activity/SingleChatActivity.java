@@ -21,20 +21,21 @@ import cn.com.zhihetech.online.ui.fragment.ChatFragment;
 import cn.com.zhihetech.online.ui.fragment.UpgradeChatFragment;
 
 /**
+ * 单聊界面
  * Created by ShenYunjie on 2016/2/1.
  */
 @ContentView(R.layout.activity_chat)
 public class SingleChatActivity extends BaseActivity {
 
-    public static String USER_NAME_KEY = "EMCHAT_USER_NAME";
+    public static String USER_NICK_NAME_KEY = "EMCHAT_NICK_USER_NAME";
 
     public static SingleChatActivity activityInstance;
     private UpgradeChatFragment chatFragment;
     private String toChatUsername;
 
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         activityInstance = this;
         initChatFragment();
     }

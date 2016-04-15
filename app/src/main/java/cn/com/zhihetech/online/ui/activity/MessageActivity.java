@@ -10,7 +10,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.core.service.EMChatEventService;
+import cn.com.zhihetech.online.service.EMChatEventService;
 import cn.com.zhihetech.online.ui.fragment.MyContactListFragment;
 import cn.com.zhihetech.online.ui.fragment.MyFocusMercahntsFragment;
 

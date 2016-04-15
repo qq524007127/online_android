@@ -13,6 +13,7 @@ import java.util.Date;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.JPushNotification;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.ui.activity.MainActivity;
 import cn.com.zhihetech.online.ui.activity.MerchantHomeActivity;
 import cn.com.zhihetech.online.ui.activity.PushNotificationDetailActivity;
@@ -73,11 +74,16 @@ public class JPushReceiver extends BroadcastReceiver {
 
         JPushNotification notification = new JPushNotification(msgId, title, alert, extra, notificationId);
         bundle.putSerializable(JPushNotification.EXTRA_JPUSH_NOTIFICATION, notification);
-
         Intent targetIntent = new Intent(context, PushNotificationDetailActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setAction(JPUSH_NOTIFICATION_OPENED_ACTION).putExtras(bundle);
-        context.startActivity(targetIntent);
+        if (ActivityStack.getInstance().getActivities().isEmpty()) {
+            Intent startIntent = new Intent(context, StartActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivities(new Intent[]{startIntent, targetIntent});
+        } else {
+            context.startActivity(targetIntent);
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.core.service;
+package cn.com.zhihetech.online.service;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +13,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.ZhiheApplication;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
 import cn.com.zhihetech.online.core.emchat.helpers.EMConnectionHandle;
 
@@ -27,7 +28,7 @@ public class EMChatConnectionService extends BaseService {
     protected final int LOGED_CODE = 1;
     protected final int RE_LOGIN_CODE = 2;
 
-    private boolean isRetryLogin = true;
+    //private boolean isRetryLogin = true;
 
     @Override
     public void onCreate() {
@@ -55,7 +56,9 @@ public class EMChatConnectionService extends BaseService {
 
         @Override
         public boolean onUserRemoved() {
-            showMsg("当前用户已被删除，不能进行聊天对话！");
+            if (!ActivityStack.getInstance().getActivities().isEmpty()) {
+                showMsg("当前用户已被删除，不能进行聊天对话！");
+            }
             return true;
         }
 
@@ -64,7 +67,9 @@ public class EMChatConnectionService extends BaseService {
             if (hasNetwork) {
                 retryLogin();
             } else {
-                showMsg("当前网络不可用，请链接网络！");
+                if (!ActivityStack.getInstance().getActivities().isEmpty()) {
+                    showMsg("当前网络不可用，请链接网络！");
+                }
             }
             return true;
         }
@@ -85,9 +90,9 @@ public class EMChatConnectionService extends BaseService {
 
             @Override
             public void onError(int i, String s) {
-                if (!isRetryLogin) {
+               /* if (!isRetryLogin) {
                     return;
-                }
+                }*/
                 Message msg = new Message();
                 msg.what = RE_LOGIN_CODE;
                 loginHandler.sendMessage(msg);
@@ -105,7 +110,9 @@ public class EMChatConnectionService extends BaseService {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case LOGED_CODE:
-                    showMsg("登录成功！");
+                    if (!ActivityStack.getInstance().getActivities().isEmpty()) {
+                        showMsg("登录成功！");
+                    }
                     break;
                 case RE_LOGIN_CODE:
                     retryLogin();
@@ -118,13 +125,16 @@ public class EMChatConnectionService extends BaseService {
     };
 
     private void onLoginFail() {
+        if (ActivityStack.getInstance().getActivities().isEmpty()) {
+            return;
+        }
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
                 .setMessage("账号登录失败,将不能收发信息。是否重新登录？")
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        isRetryLogin = false;
+                        //isRetryLogin = false;
                     }
                 })
                 .setCancelable(false)
@@ -142,13 +152,16 @@ public class EMChatConnectionService extends BaseService {
      * 当前登录的环信账号已从其它设备登录
      */
     private void userLoginConflict() {
+        if (ActivityStack.getInstance().getActivities().isEmpty()) {
+            return;
+        }
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
                 .setMessage("当前账号已从其它设备登录，将不能收发信息。是否重新登录？")
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        isRetryLogin = false;
+                        //isRetryLogin = false;
                     }
                 })
                 .setCancelable(false)
@@ -163,22 +176,22 @@ public class EMChatConnectionService extends BaseService {
     }
 
     protected void reLoginEMchat() {
-        ZhiheApplication application  = ZhiheApplication.getInstance();
+        ZhiheApplication application = ZhiheApplication.getInstance();
         String userName;
         String userPwd;
-        if(application.getUserType() == ZhiheApplication.COMMON_USER_TYPE){
+        if (application.getUserType() == ZhiheApplication.COMMON_USER_TYPE) {
             User user = application.getLogedUser();
             userName = user.getEMUserId();
             userPwd = user.getEMUserPwd();
-        }else{
+        } else {
             Merchant merchant = application.getLogedMerchant();
             userName = merchant.getEMUserId();
             userPwd = merchant.getEMUserPwd();
         }
-        logEMChatByUserNameAndUserPwd(userName,userPwd);
+        logEMChatByUserNameAndUserPwd(userName, userPwd);
     }
 
-    protected void logEMChatByUserNameAndUserPwd(String userName,String userPwd) {
+    protected void logEMChatByUserNameAndUserPwd(String userName, String userPwd) {
         EMChatManager.getInstance().login(userName, userPwd, new EMCallBack() {
             Message msg = new Message();
 

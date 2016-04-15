@@ -9,7 +9,8 @@ public class Banner extends BaseBean {
     private String bannerId;
     private ImgInfo imgInfo;   //轮播图图片
     private int viewType;      //跳转的页面类型
-    private String viewTargert;  //跳转到哪里
+    private String viewTargert;  //跳转目标
+    private String viewTargetTitle; //跳转目标的标题
     private int bannerType = Constant.BANNER_MAIN;   //轮播图所处的位置
     private int bannerOrder;      //轮播图顺序
     private Date createDate;
@@ -46,6 +47,14 @@ public class Banner extends BaseBean {
 
     public void setViewTargert(String viewTargert) {
         this.viewTargert = viewTargert;
+    }
+
+    public String getViewTargetTitle() {
+        return viewTargetTitle;
+    }
+
+    public void setViewTargetTitle(String viewTargetTitle) {
+        this.viewTargetTitle = viewTargetTitle;
     }
 
     public int getBannerType() {

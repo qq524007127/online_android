@@ -13,6 +13,7 @@ import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
+import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 
 import java.text.MessageFormat;
@@ -176,13 +177,16 @@ public class EMChatHelper {
 
             @Override
             public Intent onNotificationClick(EMMessage message) {
-                Intent intent = new Intent(context, SingleChatActivity.class);
+                Intent intent = new Intent(context, SingleChatActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 EMMessage.ChatType chatType = message.getChatType();
+                String toUserName;
                 if (chatType == EMMessage.ChatType.Chat) { //单聊信息
-                    intent.putExtra(SingleChatActivity.USER_NAME_KEY, message.getFrom());
+                   toUserName =  message.getFrom();
                 } else { //群聊信息
-                    intent.putExtra(SingleChatActivity.USER_NAME_KEY, message.getTo());
+                    toUserName =   message.getTo();
                 }
+                intent.putExtra(EaseConstant.EXTRA_USER_ID,toUserName);
                 return intent;
             }
         });

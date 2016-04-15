@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import cn.com.zhihetech.online.core.service.BaseService;
+import cn.com.zhihetech.online.service.BaseService;
 
 /**
  * Created by ShenYunjie on 2016/4/7.
@@ -13,7 +13,7 @@ public class ServiceStack {
     private Stack<BaseService> serviceStack;
     private static ServiceStack instance;
 
-    public ServiceStack() {
+    private ServiceStack() {
         this.serviceStack = new Stack<>();
     }
 

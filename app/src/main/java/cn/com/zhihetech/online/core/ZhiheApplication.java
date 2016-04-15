@@ -229,7 +229,7 @@ public class ZhiheApplication extends Application {
         return this;
     }
 
-    public ZhiheApplication onLoged(){
+    public ZhiheApplication onLoged() {
         loged = true;
         if (JPushInterface.isPushStopped(this)) {
             JPushInterface.resumePush(this);

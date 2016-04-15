@@ -1,9 +1,10 @@
-package cn.com.zhihetech.online.core.service;
+package cn.com.zhihetech.online.service;
 
 import android.app.PendingIntent;
 import android.content.Intent;
 
 import com.easemob.chat.EMMessage;
+import com.easemob.easeui.EaseConstant;
 
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
@@ -18,12 +19,13 @@ import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
  */
 public class EMChatEventService extends BaseService {
 
+    public final static int LEVEL = 1;
     private static boolean stoped = false;
 
     private EMEventHandle.OnEMEventListener eventListener = new AbstractEventHandle() {
         @Override
         public int getLevel() {
-            return 1;
+            return LEVEL;
         }
 
         @Override
@@ -37,7 +39,8 @@ public class EMChatEventService extends BaseService {
                 String toUserName = message.getChatType() == EMMessage.ChatType.Chat ? message.getFrom() :
                         message.getTo();
                 Intent intent = new Intent(self, SingleChatActivity.class)
-                        .putExtra(SingleChatActivity.USER_NAME_KEY, toUserName);
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
                 pendingIntent = PendingIntent.getActivity(self, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             }
             NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
