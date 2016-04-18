@@ -83,6 +83,10 @@ public class RegisterVerCodeActivity extends BaseActivity {
         new SMSVerCodeModel().getRegistVerifyCode(new ResponseMessageCallback<Integer>() {
             @Override
             public void onResponseMessage(final ResponseMessage<Integer> responseMessage) {
+                if (responseMessage.getCode() != ResponseStateCode.SUCCESS) {
+                    showMsg(responseMessage.getMsg());
+                    return;
+                }
                 verCodeBtn.setClickable(false);
                 final String textTpl = getString(R.string.waiting_and_get_ver_code);
                 final int waitTime = responseMessage.getData() / 1000;
@@ -118,6 +122,7 @@ public class RegisterVerCodeActivity extends BaseActivity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 super.onError(ex, isOnCallback);
+                verCodeBtn.setClickable(true);
                 showMsg(verCodeBtn, "获取验证码失败");
             }
 
