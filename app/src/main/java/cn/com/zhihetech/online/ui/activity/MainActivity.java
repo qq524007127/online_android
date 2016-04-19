@@ -17,6 +17,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.service.EMChatConnectionService;
 import cn.com.zhihetech.online.service.EMChatEventService;
@@ -210,6 +211,6 @@ public class MainActivity extends BaseActivity {
     private void exitApp() {
         EMChatManager.getInstance().logout(null);
         finish();
-        ActivityStack.getInstance().clearActivity();
+        ZhiheApplication.getInstance().onExitApp();
     }
 }

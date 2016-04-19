@@ -69,4 +69,11 @@ public class SharedPreferenceUtils {
     public void clear() {
         getEditor().clear().commit();
     }
+
+    /**
+     * 清除登录token
+     */
+    public void clearToken() {
+        getEditor().remove(TOKEN_KEY).commit();
+    }
 }

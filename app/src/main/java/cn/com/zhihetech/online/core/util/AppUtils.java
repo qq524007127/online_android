@@ -3,6 +3,9 @@ package cn.com.zhihetech.online.core.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.telephony.TelephonyManager;
+
+import cn.com.zhihetech.online.core.ZhiheApplication;
 
 /**
  * Created by ShenYunjie on 2016/3/14.

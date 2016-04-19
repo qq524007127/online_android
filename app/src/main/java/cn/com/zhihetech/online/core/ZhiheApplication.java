@@ -174,6 +174,18 @@ public class ZhiheApplication extends Application {
         return this;
     }
 
+
+    /**
+     * 移除扩展消息
+     *
+     * @param key
+     * @return
+     */
+    public ZhiheApplication removeExtAttribute(String key) {
+        this.extAttribute.remove(key);
+        return this;
+    }
+
     /**
      * 获取扩展信息
      *
@@ -270,6 +282,7 @@ public class ZhiheApplication extends Application {
      */
     public ZhiheApplication onExitApp() {
         ActivityStack.getInstance().clearActivity();
+        SharedPreferenceUtils.getInstance(this).clearToken();
         return this;
     }
 }

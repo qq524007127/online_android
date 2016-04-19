@@ -1,12 +1,19 @@
 package cn.com.zhihetech.online.model;
 
+import android.app.AlertDialog;
+import android.app.Application;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import org.xutils.common.Callback;
+import org.xutils.ex.HttpException;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
@@ -14,17 +21,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.ZhiheApplication;
+import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ArrayCallback;
 import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.http.RequestCallback;
 import cn.com.zhihetech.online.core.http.SimpleCallback;
+import cn.com.zhihetech.online.core.util.AppUtils;
 import cn.com.zhihetech.online.core.util.GenericTypeUtils;
+import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.ui.activity.LoginActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/15.
@@ -193,6 +207,8 @@ public abstract class BaseModel<T> {
     protected RequestParams createRequestParams(@NonNull String url, ModelParams params) {
         RequestParams requestParams = new RequestParams(url);
         requestParams.setCharset(Constant.ENCODING);
+        settingRequestHeader(requestParams);
+
         //在此处初始化登录令牌（token)
         if (params == null || params.getParams().isEmpty()) {
             return requestParams;
@@ -205,6 +221,21 @@ public abstract class BaseModel<T> {
             requestParams.addBodyParameter(key, params.getParams().get(key));
         }
         return requestParams;
+    }
+
+    protected void settingRequestHeader(RequestParams params) {
+        Application application = ZhiheApplication.getInstance();
+        SharedPreferenceUtils sharedPreferenceUtils = SharedPreferenceUtils.getInstance(application);
+        String token = sharedPreferenceUtils.getUserToken();
+        params.addHeader("mobileName", Build.MODEL);    //手机型号
+        params.addHeader("osName", "Android");  //手机操作系统名称
+        params.addHeader("osVersion", Build.VERSION.RELEASE);    //操作系统版本
+        if (!StringUtils.isEmpty(token)) {
+            params.addHeader("token", token);    //用户token（只用登录成功之后才会有此项)
+            params.addHeader("userCode", sharedPreferenceUtils.getUserCode()); //当前发送请求的用户ID(登录陈宫之后才有此项）
+        }
+        params.addHeader("appVersionCode", String.valueOf(AppUtils.getVersionCode(application)));   //软件版本
+        params.addHeader("appVersionName", AppUtils.getVersionName(application));   //软件版本名称
     }
 
     protected Class<T> getParamTypeClass() {
@@ -227,9 +258,52 @@ public abstract class BaseModel<T> {
             if (!isOnCallback) {
                 Log.e("BaseModel", ex.getMessage());
             }
+            if (ex instanceof HttpException) {
+                HttpException exception = (HttpException) ex;
+                if (exception.getCode() == ResponseStateCode.UNAUTHORIZED) {
+                    onUnauthorized();
+                    return;
+                }
+            }
             if (callback != null) {
                 callback.onError(ex, isOnCallback);
             }
+        }
+
+        /**
+         * 当未登录(未授权)时统一在此处理
+         */
+        private void onUnauthorized() {
+            final String UNAUTHORIZED_DIALOG = "unauthorized_dialog";
+            final ZhiheApplication application = ZhiheApplication.getInstance();
+            if (ActivityStack.getInstance().getActivities().isEmpty()) {
+                return;
+            } else if (application.getExtAttribute(UNAUTHORIZED_DIALOG) != null) {
+                return;
+            }
+            AlertDialog alertDialog = new AlertDialog.Builder(application)
+                    .setTitle("警告")
+                    .setMessage("你还未登录或登录已过期，是否现在登录？")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            application.removeExtAttribute(UNAUTHORIZED_DIALOG);
+                            ActivityStack.getInstance().clearActivity();
+                            application.onExitAccount();
+                            application.startActivity(new Intent(application, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            application.removeExtAttribute(UNAUTHORIZED_DIALOG);
+                            application.onExitAccount();
+                            ActivityStack.getInstance().clearActivity();
+                        }
+                    }).create();
+            alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            alertDialog.show();
+            application.addExtAttribute(UNAUTHORIZED_DIALOG, alertDialog);
         }
 
         @Override

@@ -29,6 +29,7 @@ import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.model.MerchantBrowseModel;
 import cn.com.zhihetech.online.model.MerchantModel;
 import cn.com.zhihetech.online.ui.fragment.BaseFragment;
 import cn.com.zhihetech.online.ui.fragment.MerchantActivityFragment;
@@ -67,6 +68,7 @@ public class MerchantHomeActivity extends BaseActivity {
         public void onResponseMessage(ResponseMessage<Merchant> responseMessage) {
             if (responseMessage.getCode() != ResponseStateCode.SUCCESS) {
                 showMsg(responseMessage.getMsg());
+                finish();
                 return;
             }
             merchant = responseMessage.getData();
@@ -127,6 +129,11 @@ public class MerchantHomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         merchantId = getIntent().getStringExtra(MERCHANT_ID_KEY);
+        if (StringUtils.isEmpty(merchantId)) {
+            showMsg("出错了");
+            finish();
+            return;
+        }
         initViews();
     }
 
@@ -140,6 +147,8 @@ public class MerchantHomeActivity extends BaseActivity {
     }
 
     private void initViews() {
+        new MerchantBrowseModel().addMerchantBorwse(null, getUserId(), this.merchantId);  //添加商家浏览记录
+
         initMerchantInfo();
         initViewPager();
     }

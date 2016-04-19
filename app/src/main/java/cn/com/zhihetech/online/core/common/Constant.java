@@ -245,4 +245,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String MERCHANT_SECKILL_GOODSES_URL = HOST + "activity/activityGoods/list";  //指定活动和商家的活动商品
     public static final String ACTIVITY_GOODS_URL = HOST + "activityGoods/{0}"; //获取指定活动商品详情
     public static final String ADMIN_CHANGE_PASSWORD_URL = HOST + "admin/changePwd"; //更改商家登录密码
+
+    public static final String ADD_GOODS_BROWSE_URL = HOST + "goodsBrowse/add"; //添加商品浏览记录
+    public static final String ADD_MERCHANT_BROWSE_URL = HOST + "merchantBrowse/add"; //添加商家浏览记录
 }

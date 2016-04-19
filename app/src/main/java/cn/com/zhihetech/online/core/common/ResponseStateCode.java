@@ -10,6 +10,7 @@ public class ResponseStateCode implements Serializable, Cloneable {
     public final static int UN_FOCUS_GOODS = 715;   //未关注
     public final static int FOCUSED_GOODS = 710;    //已关注
     public static int NOT_FOUND = 404;  //未找到目标
+    public final static int UNAUTHORIZED = 401; //未登录（为授权）
     /**
      * 红包已经被抢光
      */

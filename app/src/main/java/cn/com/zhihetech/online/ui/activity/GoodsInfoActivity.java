@@ -36,6 +36,7 @@ import cn.com.zhihetech.online.core.view.GoodsInfoHeaderView;
 import cn.com.zhihetech.online.core.adapter.GoodsDetailAdapter;
 import cn.com.zhihetech.online.core.view.GoodsCartOrBuySheetBottomView;
 import cn.com.zhihetech.online.model.FocusGoodsModel;
+import cn.com.zhihetech.online.model.GoodsBrowseModel;
 import cn.com.zhihetech.online.model.GoodsDetailModel;
 import cn.com.zhihetech.online.model.GoodsModel;
 import cn.com.zhihetech.online.model.ShoppingCartModel;
@@ -97,8 +98,8 @@ public class GoodsInfoActivity extends BaseActivity {
                 goods = responseMessage.getData();
                 bindHeaderViewGoods();
             } else {
-                showMsg("次商品已下架或已删除");
-                bottomLayout.setVisibility(View.GONE);
+                showMsg(responseMessage.getMsg());
+                finish();
             }
         }
 
@@ -182,6 +183,11 @@ public class GoodsInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         goodsId = getIntent().getStringExtra(GOODS_ID_KEY);
+        if(StringUtils.isEmpty(goodsId)){
+            showMsg("出错了！");
+            finish();
+            return;
+        }
         initViews();
         initData();
     }
@@ -198,6 +204,8 @@ public class GoodsInfoActivity extends BaseActivity {
     private void initData() {
         new GoodsModel().getGoodsByGoodsId(goodsCallback, goodsId);
         new GoodsDetailModel().getGoodsDetailByGoodsId(detailCallback, goodsId);
+
+        new GoodsBrowseModel().addGoodsBrowse(null, getUserId(), this.goodsId);   //添加商品浏览记录
     }
 
     private void initViews() {

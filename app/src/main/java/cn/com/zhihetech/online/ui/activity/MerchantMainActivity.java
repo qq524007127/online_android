@@ -114,6 +114,6 @@ public class MerchantMainActivity extends MerchantBaseActivity {
     private void exitApp() {
         EMChatManager.getInstance().logout(null);
         finish();
-        ActivityStack.getInstance().clearActivity();
+        ZhiheApplication.getInstance().onExitApp();
     }
 }
