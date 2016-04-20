@@ -2,12 +2,17 @@ package cn.com.zhihetech.online.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMChatRoom;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
+import com.easemob.exceptions.EaseMobException;
 
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
@@ -39,12 +44,18 @@ public class ActivityChatRoomActivity extends BaseActivity {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         activityId = getIntent().getStringExtra(ACTIVITY_ID);
+        //聊天室ID
+        toChatRoom = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
+        if (StringUtils.isEmpty(activityId) || StringUtils.isEmpty(toChatRoom)) {
+            showMsg("出错了！");
+            finish();
+            return;
+        }
         initChatFragment();
     }
 
     private void initChatFragment() {
-        //聊天人或群id
-        toChatRoom = getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
+        initChatRoomMemberCount(toChatRoom);
         chatFragment = new UpgradeChatFragment();
         chatFragment.hideTitleBar();
         Bundle args = getIntent().getExtras();
@@ -72,6 +83,61 @@ public class ActivityChatRoomActivity extends BaseActivity {
             }
         });
         getSupportFragmentManager().beginTransaction().add(R.id.chat_room_container_fl, chatFragment).commit();
+        chatFragment.setOnChatRoomChangeListenr(new UpgradeChatFragment.OnChatRoomChangeListener() {
+            @Override
+            public void onMemberJoined(String roomId, String participant) {
+                initChatRoomMemberCount(roomId);
+            }
+
+            @Override
+            public void onMemberExited(String roomId, String roomName, String participant) {
+                initChatRoomMemberCount(roomId);
+            }
+        });
+    }
+
+    /**
+     * 聊天室人员数量统计Handler
+     */
+    private final int SUCCESS_CODE = 1;
+    final Handler chaRoomHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == SUCCESS_CODE) {
+                setToolbarSubTitle("当前人数：" + msg.obj);
+            }
+        }
+    };
+
+    /**
+     * 首次进入初始化聊天室人数
+     *
+     * @param toChatRoom
+     */
+    private void initChatRoomMemberCount(final String toChatRoom) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMChatRoom chatRoom = EMChatManager.getInstance().fetchChatRoomFromServer(toChatRoom);
+                    Message msg = new Message();
+                    msg.what = SUCCESS_CODE;
+                    msg.obj = chatRoom.getMembers().size();
+                    chaRoomHandler.sendMessage(msg);
+                } catch (EaseMobException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 设置Toolbar的副标题
+     *
+     * @param subTitle
+     */
+    protected void setToolbarSubTitle(String subTitle) {
+        this.toolbar.setSubtitle(subTitle);
     }
 
     @Override
@@ -106,10 +172,19 @@ public class ActivityChatRoomActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (ZhiheApplication.getInstance().getUserType() == ZhiheApplication.MERCHANT_USER_TYPE) {
+        if (isMerchant()) {
             getMenuInflater().inflate(R.menu.chat_room_options, menu);
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * 当前登录的用户是商家用户还是普通用户
+     *
+     * @return boolean
+     */
+    protected boolean isMerchant() {
+        return ZhiheApplication.getInstance().getUserType() == ZhiheApplication.MERCHANT_USER_TYPE;
     }
 
     @Override
