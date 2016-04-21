@@ -36,8 +36,10 @@ public class MyContactListFragment extends EaseConversationListFragment {
             switch (emNotifierEvent.getEvent()) {
                 case EventNewMessage:
                     EMMessage message = (EMMessage) emNotifierEvent.getData();
-                    onReceiveNewMessage(message);
-                    refresh();
+                    if (message.getChatType() != EMMessage.ChatType.ChatRoom) {
+                        onReceiveNewMessage(message);
+                        refresh();
+                    }
                     break;
             }
         }

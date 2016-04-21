@@ -42,10 +42,13 @@ public class EMChatEventService extends BaseService {
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
                 pendingIntent = PendingIntent.getActivity(self, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+                NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
+                        userinfo.getUserNick() + "发来一条新信息",
+                        EMMessageHelper.getMessageBody(message), pendingIntent);
+            } else if (message.getChatType() == EMMessage.ChatType.ChatRoom) {
+                return true;
             }
-            NotificationHelper.showNotification(self, EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
-                    userinfo.getUserNick() + "发来一条新信息",
-                    EMMessageHelper.getMessageBody(message), pendingIntent);
             return true;
         }
 
