@@ -30,7 +30,7 @@ import cn.com.zhihetech.online.model.NavigationModel;
 import cn.com.zhihetech.online.ui.activity.BaseActivity;
 import cn.com.zhihetech.online.ui.activity.CategoryActivity;
 import cn.com.zhihetech.online.ui.activity.ComplaintActivity;
-import cn.com.zhihetech.online.ui.activity.CoreCenterActivity;
+import cn.com.zhihetech.online.ui.activity.NewsReleaseMeetActivity;
 import cn.com.zhihetech.online.ui.activity.FeaturedBlocksActivity;
 import cn.com.zhihetech.online.ui.activity.MerchantListActivity;
 import cn.com.zhihetech.online.ui.activity.ShoppingCenterActivity;
@@ -124,8 +124,8 @@ public class HomeHeaderView extends FrameLayout {
                 intent2.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent2);
                 break;
-            case Constant.NAVIGATION_CORE_ACTIVITY:
-                Intent intent3 = new Intent(getContext(), CoreCenterActivity.class);
+            case Constant.NEWS_RELEASE_MEETING:
+                Intent intent3 = new Intent(getContext(), NewsReleaseMeetActivity.class);
                 intent3.putExtra(BaseActivity.CUSTOM_TITLE_KEY, nav.getNavigationName());
                 getContext().startActivity(intent3);
                 break;

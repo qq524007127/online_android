@@ -94,7 +94,7 @@
             android:name=".ui.activity.MerchantListActivity"
             android:label="@string/daily_new"></activity>
         <activity
-            android:name=".ui.activity.CoreCenterActivity"
+            android:name=".ui.activity.NewsReleaseMeetActivity"
             android:label="@string/core_activity" />
         <activity
             android:name=".ui.activity.ComplaintActivity"

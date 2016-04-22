@@ -61,8 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@color/white"
-                android:padding="10dp"
-                android:text="@string/shop_address" />
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/merchant_info_tell_tv"
@@ -70,8 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:background="@color/white"
-                android:padding="10dp"
-                android:text="@string/contact_num" />
+                android:padding="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

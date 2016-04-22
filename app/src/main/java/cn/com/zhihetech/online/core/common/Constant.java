@@ -69,7 +69,7 @@ public class Constant implements Serializable, Cloneable {
      */
     public final static String NAVIGATION_COMPLAINT = "1";//投诉维权
     public final static String NAVIGATION_SHOPPING_CENTER = "2";//购物中心
-    public final static String NAVIGATION_CORE_ACTIVITY = "3";//活动专区
+    public final static String NEWS_RELEASE_MEETING = "3";//新闻发布会
     public final static String NAVIGATION_FEATURED_BLOCK = "4";//特色街区
     public final static String NAVIGATION_FEATURED_SHOP = "5";//特色店
     public final static String NAVIGATION_CATEGORY = "6";//分类
@@ -157,7 +157,7 @@ public class Constant implements Serializable, Cloneable {
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议
     public static final String COMPLAINT_AND_RIGHTS_PAGE_URL = DOMAIN + "web/complaintAndRightProtect";    //维权投诉
-    public static final String ACTIVITY_CENTER_PAGE_URL = DOMAIN + "web/activityCenter";    //活动专区
+    public static final String NEWS_RELEASE_MEET_PAGE_URL = DOMAIN + "web/realsemeet";    //活动专区
     public static final String QINIU_UPLOAD_TOKEN_URL = DOMAIN + "qiniu/api/image/uptoken"; //获取七牛上传token
     public static final String APP_NEW_VERSION_URL = HOST + "app/lastVersion";  //获取App最新版本
     public static final String APP_START_IMG_URL = HOST + "app/startImg";   //获取启动界面图片

@@ -13,7 +13,7 @@ import cn.com.zhihetech.online.ui.fragment.WebViewFragment;
  * Created by ShenYunjie on 2016/3/17.
  */
 @ContentView(R.layout.activity_coore_center)
-public class CoreCenterActivity extends BaseActivity {
+public class NewsReleaseMeetActivity extends BaseActivity {
     private final String FRAGMENT_KEY = "_current_fragment";
 
     WebViewFragment fragment;
@@ -24,7 +24,7 @@ public class CoreCenterActivity extends BaseActivity {
         fragment = getSupportFragmentManager().findFragmentByTag(FRAGMENT_KEY) == null ? new WebViewFragment()
                 : (WebViewFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_KEY);
         Bundle bundle = new Bundle();
-        bundle.putString(WebViewFragment.LOAD_URL, Constant.ACTIVITY_CENTER_PAGE_URL);
+        bundle.putString(WebViewFragment.LOAD_URL, Constant.NEWS_RELEASE_MEET_PAGE_URL);
         bundle.putBoolean(WebViewFragment.ENABLE_REFRESH, false);
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment_layout, fragment, FRAGMENT_KEY).commit();
