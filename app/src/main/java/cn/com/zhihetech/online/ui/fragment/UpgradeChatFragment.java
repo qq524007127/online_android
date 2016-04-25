@@ -141,7 +141,7 @@ public class UpgradeChatFragment extends ChatFragment {
     }
 
     @Override
-    protected void addChatRoomChangeListenr() {
+    protected void addChatRoomChangeListener() {
         chatRoomChangeListener = new EMChatRoomChangeListener() {
 
             @Override

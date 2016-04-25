@@ -2,6 +2,7 @@ package cn.com.zhihetech.online.service;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.WindowManager;
@@ -16,6 +17,7 @@ import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.emchat.helpers.EMChatHelper;
 import cn.com.zhihetech.online.core.emchat.helpers.EMConnectionHandle;
+import cn.com.zhihetech.online.ui.activity.LoginActivity;
 
 /**
  * Created by ShenYunjie on 2016/4/7.
@@ -27,8 +29,6 @@ public class EMChatConnectionService extends BaseService {
     protected final int LOGIN_FAIL_CODE = -1;
     protected final int LOGED_CODE = 1;
     protected final int RE_LOGIN_CODE = 2;
-
-    //private boolean isRetryLogin = true;
 
     @Override
     public void onCreate() {
@@ -130,11 +130,11 @@ public class EMChatConnectionService extends BaseService {
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
-                .setMessage("账号登录失败,将不能收发信息。是否重新登录？")
+                .setMessage("账号登录失败，是否重新登录？")
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //isRetryLogin = false;
+                        exitAppNavigationLogin();
                     }
                 })
                 .setCancelable(false)
@@ -161,7 +161,7 @@ public class EMChatConnectionService extends BaseService {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //isRetryLogin = false;
+                        exitAppNavigationLogin();
                     }
                 })
                 .setCancelable(false)
@@ -173,6 +173,13 @@ public class EMChatConnectionService extends BaseService {
                 }).create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
+    }
+
+    protected void exitAppNavigationLogin() {
+        ActivityStack.getInstance().clearActivity();
+        ZhiheApplication application = ZhiheApplication.getInstance().onExitApp();
+        Intent loginIntent = new Intent(application, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        application.startActivity(loginIntent);
     }
 
     protected void reLoginEMchat() {

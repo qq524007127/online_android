@@ -230,7 +230,7 @@ public abstract class BaseModel<T> {
         params.addHeader("mobileName", Build.MODEL);    //手机型号
         params.addHeader("osName", "Android");  //手机操作系统名称
         params.addHeader("osVersion", Build.VERSION.RELEASE);    //操作系统版本
-        if (!StringUtils.isEmpty(token)) {
+       if (!StringUtils.isEmpty(token)) {
             params.addHeader("token", token);    //用户token（只用登录成功之后才会有此项)
             params.addHeader("userCode", sharedPreferenceUtils.getUserCode()); //当前发送请求的用户ID(登录陈宫之后才有此项）
         }

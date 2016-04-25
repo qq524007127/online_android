@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/black_deep">
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/big_image_pv"
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/big_photo_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter" />
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/big_image_desc_tv"

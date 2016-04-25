@@ -30,16 +30,23 @@ import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
  */
 public class MyContactListFragment extends EaseConversationListFragment {
 
+    public enum PromptNotifyType {
+        promptNotifiy,    //提示并显示通知
+        onlyNotify, //仅通知不提示
+        onlyPrompt, //仅提示，不显示通知
+        none    //不提示并且不通知
+    }
+
     private EMEventListener eventListener = new EMEventListener() {
         @Override
         public void onEvent(EMNotifierEvent emNotifierEvent) {
             switch (emNotifierEvent.getEvent()) {
                 case EventNewMessage:
                     EMMessage message = (EMMessage) emNotifierEvent.getData();
-                    if (message.getChatType() != EMMessage.ChatType.ChatRoom) {
-                        onReceiveNewMessage(message);
+                    if (prompt == PromptNotifyType.onlyPrompt) {
                         refresh();
                     }
+                    onReceiveNewMessage(message);
                     break;
             }
         }
@@ -47,7 +54,7 @@ public class MyContactListFragment extends EaseConversationListFragment {
 
     private boolean isRegisterEventListener = false;    //是否已注册事件监听
 
-    private boolean isNotify = true;
+    private PromptNotifyType prompt = PromptNotifyType.promptNotifiy;   //默认显示通知提示
 
     @Override
     protected void initView() {
@@ -86,20 +93,15 @@ public class MyContactListFragment extends EaseConversationListFragment {
     }
 
     @Override
-    protected void setUpView() {
-        super.setUpView();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
-        isNotify = true;
+        prompt = PromptNotifyType.promptNotifiy;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        isNotify = false;
+        prompt = PromptNotifyType.onlyPrompt;
         refresh();
     }
 
@@ -111,10 +113,12 @@ public class MyContactListFragment extends EaseConversationListFragment {
     private void onReceiveNewMessage(EMMessage message) {
         EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
         saveUserInfo(userInfo);
-        if (isNotify) {
+        if (message.getChatType() == EMMessage.ChatType.ChatRoom) {
+            return;
+        }
+        if (prompt == PromptNotifyType.promptNotifiy) {
             notifyNewMessage(message);
-        } else {
-            refresh();
+        } else if (prompt == PromptNotifyType.onlyPrompt) {
             NotificationHelper.playRingtoneAndVibrator(getContext());//如果不显示通知栏则通过提示音提示
         }
     }
@@ -123,20 +127,13 @@ public class MyContactListFragment extends EaseConversationListFragment {
         String toUserName = message.getChatType() == EMMessage.ChatType.Chat ? message.getFrom() :
                 message.getTo();
         EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
-        Intent intent = new Intent(getContext(), SingleChatActivity.class);
-            /*EMMessage.ChatType chatType = message.getChatType();
-            if (chatType == EMMessage.ChatType.ChatRoom) {
-                intent = new Intent(getContext(), ActivityChatRoomActivity.class);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
-                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
-                intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
-                intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
-            }*/
-        intent.putExtra(SingleChatActivity.USER_NICK_NAME_KEY, toUserName);
+        Intent intent = new Intent(getContext(), SingleChatActivity.class)
+                //.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
                 userInfo.getUserNick() + "发来一条新信息",
-                EMMessageHelper.getMessageBody(message), null);
+                EMMessageHelper.getMessageBody(message), pendingIntent);
     }
 
     protected void saveUserInfo(final EMUserInfo userInfo) {
@@ -157,7 +154,7 @@ public class MyContactListFragment extends EaseConversationListFragment {
                 Intent intent = new Intent(getActivity(), SingleChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName());
                 getActivity().startActivity(intent);
-                isNotify = false;
+                prompt = PromptNotifyType.none;
             }
         });
     }

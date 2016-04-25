@@ -282,7 +282,7 @@ public class ZhiheApplication extends Application {
      */
     public ZhiheApplication onExitApp() {
         ActivityStack.getInstance().clearActivity();
-        SharedPreferenceUtils.getInstance(this).clearToken();
+        //SharedPreferenceUtils.getInstance(this).clearToken();
         return this;
     }
 }

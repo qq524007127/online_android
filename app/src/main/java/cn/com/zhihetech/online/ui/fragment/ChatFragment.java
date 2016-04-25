@@ -2,6 +2,9 @@ package cn.com.zhihetech.online.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +15,7 @@ import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.com.zhihetech.online.R;
@@ -73,7 +77,7 @@ public class ChatFragment extends EaseChatFragment {
 
             @Override
             public void onAvatarClick(String username) {
-                Toast.makeText(getContext(), username, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), username, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -290,5 +294,53 @@ public class ChatFragment extends EaseChatFragment {
             }
             super.onClick(itemId, view);
         }
+    }
+
+    /**
+     * 重写下拉加载更多聊天记录
+     */
+    @Override
+    protected void setRefreshLayoutListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (listView.getFirstVisiblePosition() == 0 && !isloading && haveMoreData) {
+                            List<EMMessage> messages;
+                            try {
+                                if (chatType == EaseConstant.CHATTYPE_SINGLE) {
+                                    messages = conversation.loadMoreMsgFromDB(messageList.getItem(0).getMsgId(),
+                                            pagesize);
+                                } else {
+                                    messages = conversation.loadMoreGroupMsgFromDB(messageList.getItem(0).getMsgId(),
+                                            pagesize);
+                                }
+                            } catch (Exception e1) {
+                                swipeRefreshLayout.setRefreshing(false);
+                                return;
+                            }
+                            if (messages.size() > 0) {
+                                messageList.refreshSeekTo(messages.size() - 1);
+                                if (messages.size() != pagesize) {
+                                    haveMoreData = false;
+                                }
+                            } else {
+                                haveMoreData = false;
+                            }
+
+                            isloading = false;
+
+                        } else {
+                            Toast.makeText(getActivity(), getResources().getString(com.easemob.easeui.R.string.no_more_messages),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 600);
+            }
+        });
     }
 }
