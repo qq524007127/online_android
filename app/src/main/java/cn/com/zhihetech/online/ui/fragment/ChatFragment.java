@@ -361,7 +361,7 @@ public class ChatFragment extends EaseChatFragment {
     /**
      * 预加载聊天记录
      */
-    /*private void preLoadChatMessages() {
+    private void preLoadChatMessages() {
         EMMessage message = messageList.getItem(0);
         long timestamp = message.getMsgTime();
         String from = chatType == EaseConstant.CHATTYPE_SINGLE ? ZhiheApplication.getInstance().getChatUserId() : null;
@@ -382,8 +382,8 @@ public class ChatFragment extends EaseChatFragment {
             public void onError(Throwable ex, boolean isOnCallback) {
                 super.onError(ex, isOnCallback);
             }
-        }, timestamp, toChatUsername, from);
-    }*/
+        }, null, toChatUsername, from);
+    }
 
     /**
      * 从服务器加载指定消息之前更多的消息
@@ -401,14 +401,7 @@ public class ChatFragment extends EaseChatFragment {
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-                final List<EMMessage> messages = new ArrayList<>(rows.size());
-                for (ChatMessage msg : rows) {
-                    messages.add(msg.createEMMessage());
-                }
-                EMChatManager.getInstance().importMessages(messages);
-                conversation.loadMoreGroupMsgFromDB(messageList.getItem(0).getMsgId(),
-                        pagesize);
-                messageList.refreshSeekTo(messages.size() - 1);
+                onLoadMessageSuccess(rows);
                 if (!result.hasNextPage()) {
                     haveMoreData = false;
                 }
@@ -425,5 +418,29 @@ public class ChatFragment extends EaseChatFragment {
                 isloading = false;
             }
         }, msgId, toChatUsername, from);
+    }
+
+    /**
+     * 从服务器加载更多消息成功后回调
+     *
+     * @param chatMessages
+     */
+    protected void onLoadMessageSuccess(List<ChatMessage> chatMessages) {
+        final List<EMMessage> messages = new ArrayList<>(chatMessages.size());
+        for (ChatMessage msg : chatMessages) {
+            messages.add(msg.createEMMessage());
+        }
+        EMChatManager.getInstance().importMessages(messages);
+        int messageSize = 0;
+        if (chatType == EaseConstant.CHATTYPE_SINGLE) {
+            messageSize = conversation.loadMoreMsgFromDB(messageList.getItem(0).getMsgId(),
+                    pagesize).size();
+        } else {
+            messageSize = conversation.loadMoreGroupMsgFromDB(messageList.getItem(0).getMsgId(),
+                    pagesize).size();
+        }
+        if (messageSize > 0) {
+            messageList.refreshSeekTo(messages.size() - 1);
+        }
     }
 }
