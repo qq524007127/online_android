@@ -17,7 +17,10 @@ import com.easemob.easeui.ui.EaseConversationListFragment;
 
 import org.xutils.ex.DbException;
 
+import java.util.List;
+
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.bean.Conversation;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
@@ -61,23 +64,6 @@ public class MyContactListFragment extends EaseConversationListFragment {
         super.initView();
         getView().findViewById(R.id.conversation_list_search_bar).setVisibility(View.GONE);
         initConversationListItemClickListener();
-        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
-            @Override
-            public EaseUser getUser(String username) {
-                EaseUser easeUser = new EaseUser(username);
-                EMUserInfo userInfo = null;
-                try {
-                    userInfo = new DBUtils().getUserInfoByUserName(username);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-                if (userInfo != null) {
-                    easeUser.setNick(userInfo.getUserNick());
-                    easeUser.setAvatar(userInfo.getAvatarUrl());
-                }
-                return easeUser;
-            }
-        });
     }
 
     @Override

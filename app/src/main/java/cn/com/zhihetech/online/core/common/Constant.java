@@ -151,8 +151,8 @@ public class Constant implements Serializable, Cloneable {
     /**
      * 请求接口地址
      */
-    public static final String DOMAIN = "http://120.27.24.49/";
-    //public static final String DOMAIN = "http://192.168.1.11:8080/";
+    //public static final String DOMAIN = "http://120.27.24.49/";
+    public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议
@@ -248,4 +248,7 @@ public class Constant implements Serializable, Cloneable {
 
     public static final String ADD_GOODS_BROWSE_URL = HOST + "goodsBrowse/add"; //添加商品浏览记录
     public static final String ADD_MERCHANT_BROWSE_URL = HOST + "merchantBrowse/add"; //添加商家浏览记录
+
+
+    public static final String CHAT_MESSAGES_URL = HOST + "chatmessages"; //获取聊天记录
 }

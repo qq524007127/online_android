@@ -10,11 +10,15 @@ import android.util.Log;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
+import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
+import com.easemob.easeui.domain.EaseUser;
+
+import org.xutils.ex.DbException;
 
 import java.text.MessageFormat;
 import java.util.Iterator;
@@ -24,6 +28,7 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.ui.activity.SingleChatActivity;
 
 /**
@@ -108,7 +113,50 @@ public class EMChatHelper {
         EMChat.getInstance().setDebugMode(Constant.DEBUG);
         EMChat.getInstance().setAutoLogin(false);
         settingEMChatOptions(application);
+        initUserProfileProvider();
         EaseUI.getInstance().init(application);
+    }
+
+    private void initUserProfileProvider() {
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                EaseUser easeUser = new EaseUser(username);
+                EMUserInfo userInfo = null;
+                try {
+                    userInfo = new DBUtils().getUserInfoByUserName(username);
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                } else {
+                    EMConversation conversation = EMChatManager.getInstance().getConversation(username);
+                    List<EMMessage> messages = conversation.getAllMessages();
+                    if (messages != null && !messages.isEmpty()) {
+                        for (EMMessage message : messages) {
+                            if (message.direct == EMMessage.Direct.RECEIVE) {
+                                EMUserInfo tmp = EMUserInfo.createEMUserInfo(message);
+                                easeUser.setNick(tmp.getUserNick());
+                                easeUser.setAvatar(tmp.getAvatarUrl());
+                                saveUserInfo(tmp);
+                                //break;
+                            }
+                        }
+                    }
+                }
+                return easeUser;
+            }
+        });
+    }
+
+    protected void saveUserInfo(final EMUserInfo userInfo) {
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getAppName(Application application, int pID) {
@@ -182,11 +230,11 @@ public class EMChatHelper {
                 EMMessage.ChatType chatType = message.getChatType();
                 String toUserName;
                 if (chatType == EMMessage.ChatType.Chat) { //单聊信息
-                   toUserName =  message.getFrom();
+                    toUserName = message.getFrom();
                 } else { //群聊信息
-                    toUserName =   message.getTo();
+                    toUserName = message.getTo();
                 }
-                intent.putExtra(EaseConstant.EXTRA_USER_ID,toUserName);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
                 return intent;
             }
         });

@@ -49,11 +49,10 @@ public class ZhiheApplication extends Application {
      * 初始化App框架
      */
     private void initAppFragment() {
+        initCrashHandler();
         XUtilHelper.getInstance().init(this, Constant.DEBUG);
-        EMChatHelper helper = EMChatHelper.getInstance();
         EMChatHelper.getInstance().initEMChat(this);
         initJPush();
-        initCrashHandler();
     }
 
     /**

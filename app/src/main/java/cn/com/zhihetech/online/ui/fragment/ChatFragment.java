@@ -3,23 +3,25 @@ package cn.com.zhihetech.online.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ActivityGoods;
+import cn.com.zhihetech.online.bean.ChatMessage;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.Merchant;
@@ -27,8 +29,11 @@ import cn.com.zhihetech.online.bean.RedEnvelop;
 import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
+import cn.com.zhihetech.online.core.common.PageData;
 import cn.com.zhihetech.online.core.emchat.ZhiheChatRowProvider;
+import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
+import cn.com.zhihetech.online.model.ChatMessageModel;
 import cn.com.zhihetech.online.ui.activity.SeckillGoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.GoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.RedEnvelopeListActivity;
@@ -296,6 +301,8 @@ public class ChatFragment extends EaseChatFragment {
         }
     }
 
+    /*====================处理加载更多消息，在原有加载本地聊天记录的基础上添加从服务器加载========================*/
+
     /**
      * 重写下拉加载更多聊天记录
      */
@@ -309,6 +316,10 @@ public class ChatFragment extends EaseChatFragment {
                     @Override
                     public void run() {
                         if (listView.getFirstVisiblePosition() == 0 && !isloading && haveMoreData) {
+                            if (listView.getCount() == 0) {
+                                loadMoreMessagesFromServer(null);
+                                return;
+                            }
                             List<EMMessage> messages;
                             try {
                                 if (chatType == EaseConstant.CHATTYPE_SINGLE) {
@@ -324,11 +335,14 @@ public class ChatFragment extends EaseChatFragment {
                             }
                             if (messages.size() > 0) {
                                 messageList.refreshSeekTo(messages.size() - 1);
-                                if (messages.size() != pagesize) {
-                                    haveMoreData = false;
+                                if (messages.size() < pagesize) {
+                                    //haveMoreData = false;
+                                    //preLoadChatMessages();
                                 }
                             } else {
-                                haveMoreData = false;
+                                //haveMoreData = false;
+                                loadMoreMessagesFromServer(messageList.getItem(0).getMsgId());
+                                return;
                             }
 
                             isloading = false;
@@ -342,5 +356,74 @@ public class ChatFragment extends EaseChatFragment {
                 }, 600);
             }
         });
+    }
+
+    /**
+     * 预加载聊天记录
+     */
+    /*private void preLoadChatMessages() {
+        EMMessage message = messageList.getItem(0);
+        long timestamp = message.getMsgTime();
+        String from = chatType == EaseConstant.CHATTYPE_SINGLE ? ZhiheApplication.getInstance().getChatUserId() : null;
+        new ChatMessageModel().getChatMessages(new PageDataCallback<ChatMessage>() {
+            @Override
+            public void onPageData(PageData<ChatMessage> result, List<ChatMessage> rows) {
+                if (rows == null || rows.isEmpty()) {
+                    haveMoreData = false;
+                }
+                final List<EMMessage> messages = new ArrayList<>(rows.size());
+                for (ChatMessage msg : rows) {
+                    messages.add(msg.createEMMessage());
+                }
+                EMChatManager.getInstance().importMessages(messages);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                super.onError(ex, isOnCallback);
+            }
+        }, timestamp, toChatUsername, from);
+    }*/
+
+    /**
+     * 从服务器加载指定消息之前更多的消息
+     *
+     * @param msgId 指定消息ID
+     */
+    private void loadMoreMessagesFromServer(String msgId) {
+        String from = chatType == EaseConstant.CHATTYPE_SINGLE ? ZhiheApplication.getInstance().getChatUserId() : null;
+        new ChatMessageModel().getChatMessages(new PageDataCallback<ChatMessage>() {
+            @Override
+            public void onPageData(PageData<ChatMessage> result, List<ChatMessage> rows) {
+                if (rows == null || rows.isEmpty()) {
+                    haveMoreData = false;
+                    Toast.makeText(getActivity(), getResources().getString(com.easemob.easeui.R.string.no_more_messages),
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final List<EMMessage> messages = new ArrayList<>(rows.size());
+                for (ChatMessage msg : rows) {
+                    messages.add(msg.createEMMessage());
+                }
+                EMChatManager.getInstance().importMessages(messages);
+                conversation.loadMoreGroupMsgFromDB(messageList.getItem(0).getMsgId(),
+                        pagesize);
+                messageList.refreshSeekTo(messages.size() - 1);
+                if (!result.hasNextPage()) {
+                    haveMoreData = false;
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                super.onError(ex, isOnCallback);
+            }
+
+            @Override
+            public void onFinished() {
+                swipeRefreshLayout.setRefreshing(false);
+                isloading = false;
+            }
+        }, msgId, toChatUsername, from);
     }
 }
