@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -92,7 +93,7 @@ public class ChatFragment extends EaseChatFragment {
 
             @Override
             public void onMessageBubbleLongClick(EMMessage message) {
-
+                Log.d("ChatFragment", message.toString());
             }
 
             @Override
@@ -316,8 +317,8 @@ public class ChatFragment extends EaseChatFragment {
                     @Override
                     public void run() {
                         if (listView.getFirstVisiblePosition() == 0 && !isloading && haveMoreData) {
-                            if (listView.getCount() == 0) {
-                                loadMoreMessagesFromServer(null);
+                            if (messageList.getItem(0) == null) {
+                                //loadMoreMessagesFromServer(null);
                                 return;
                             }
                             List<EMMessage> messages;
@@ -335,14 +336,18 @@ public class ChatFragment extends EaseChatFragment {
                             }
                             if (messages.size() > 0) {
                                 messageList.refreshSeekTo(messages.size() - 1);
+                                //TODO:预加载更多消息（暂时不支持,下个版本提供此功能）
                                 if (messages.size() < pagesize) {
                                     //haveMoreData = false;
                                     //preLoadChatMessages();
                                 }
                             } else {
-                                //haveMoreData = false;
-                                loadMoreMessagesFromServer(messageList.getItem(0).getMsgId());
-                                return;
+                                //TODO:如果是群聊（包括聊天室）则远程加载数据;暂时不支持单聊查看离线消息(单聊导入聊天记录会出现两个会话；环信的bug）
+                                if (chatType != EaseConstant.CHATTYPE_SINGLE) {
+                                    loadMoreMessagesFromServer(messageList.getItem(0).getMsgId());
+                                    return;
+                                }
+                                haveMoreData = false;
                             }
 
                             isloading = false;
@@ -372,8 +377,9 @@ public class ChatFragment extends EaseChatFragment {
                     haveMoreData = false;
                 }
                 final List<EMMessage> messages = new ArrayList<>(rows.size());
+                String userId = ZhiheApplication.getInstance().getChatUserId();
                 for (ChatMessage msg : rows) {
-                    messages.add(msg.createEMMessage());
+                    messages.add(msg.createEMMessage(userId));
                 }
                 EMChatManager.getInstance().importMessages(messages);
             }
@@ -427,8 +433,9 @@ public class ChatFragment extends EaseChatFragment {
      */
     protected void onLoadMessageSuccess(List<ChatMessage> chatMessages) {
         final List<EMMessage> messages = new ArrayList<>(chatMessages.size());
+        String userId = ZhiheApplication.getInstance().getChatUserId();
         for (ChatMessage msg : chatMessages) {
-            messages.add(msg.createEMMessage());
+            messages.add(msg.createEMMessage(userId));
         }
         EMChatManager.getInstance().importMessages(messages);
         int messageSize = 0;

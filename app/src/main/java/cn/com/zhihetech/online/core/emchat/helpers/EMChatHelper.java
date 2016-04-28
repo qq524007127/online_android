@@ -135,13 +135,14 @@ public class EMChatHelper {
                     EMConversation conversation = EMChatManager.getInstance().getConversation(username);
                     List<EMMessage> messages = conversation.getAllMessages();
                     if (messages != null && !messages.isEmpty()) {
-                        for (EMMessage message : messages) {
-                            if (message.direct == EMMessage.Direct.RECEIVE) {
+                        for (int i = messages.size() - 1; i < 0; i--) {
+                            EMMessage message = messages.get(i);
+                            if (message.getFrom().equals(username)) {
                                 EMUserInfo tmp = EMUserInfo.createEMUserInfo(message);
                                 easeUser.setNick(tmp.getUserNick());
                                 easeUser.setAvatar(tmp.getAvatarUrl());
                                 saveUserInfo(tmp);
-                                //break;
+                                break;
                             }
                         }
                     }

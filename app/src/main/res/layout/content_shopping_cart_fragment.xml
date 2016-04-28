@@ -5,40 +5,6 @@
     android:orientation="vertical">
 
     <!--<include layout="@layout/toolbar_layout" />-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <CheckBox
-            android:id="@+id/shopping_cart_all_checked_cb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/all_checked" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tmp_total_price_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:textColor="@color/colorPrimary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="不含运费" />
-        </LinearLayout>
-    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -81,10 +47,50 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/shopping_cart_all_checked_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="@string/all_checked"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tmp_total_price_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="合计：￥100.00"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="(不含运费)"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/shopping_cart_delete_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#ff9000"
                 android:gravity="center"
                 android:minHeight="50dp"
                 android:orientation="vertical">
@@ -99,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
                     android:text="@string/delete"
+                    android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
 

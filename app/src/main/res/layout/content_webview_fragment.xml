@@ -34,7 +34,8 @@
             <WebView
                 android:id="@+id/web_view_container_wv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
             </WebView>
         </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>

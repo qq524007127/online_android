@@ -53,18 +53,6 @@ public class ShoppingCartAdapter extends ZhiheAdapter<ShoppingCart, ShoppingCart
         holder.numberBtn.setClickable(false);
         holder.priceTv.setText(MessageFormat.format(mContext.getString(R.string.goods_price), data.getGoods().getPrice()));
 
-        /*List<ShoppingCart> _tmp = new ArrayList<>();
-        for (ShoppingCart cart : checkedCarts) {
-            for (ShoppingCart _cart : mDatas) {
-                if (cart.getShoppingCartId().equals(_cart.getShoppingCartId())) {
-                    _tmp.add(_cart);
-                    break;
-                }
-            }
-        }
-        checkedCarts.clear();
-        checkedCarts.addAll(_tmp);*/
-
         if (checkedCarts.contains(data)) {
             holder.checkBox.setChecked(true);
         } else {

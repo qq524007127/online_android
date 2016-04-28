@@ -9,6 +9,8 @@ import com.easemob.chat.VoiceMessageBody;
 import java.util.Date;
 import java.util.Map;
 
+import cn.com.zhihetech.online.core.common.Constant;
+
 /**
  * Created by ShenYunjie on 2016/4/25.
  */
@@ -105,14 +107,14 @@ public class ChatMessage extends BaseBean {
         this.payload = payload;
     }
 
-    public EMMessage createEMMessage() {
+    public EMMessage createEMMessage(String currentUser) {
         EMMessage message = null;
         if (this.payload.getBodies() != null) {
             for (MessageBody msgBody : this.payload.getBodies()) {
                 ChatMessage.MessageType messageType = msgBody.getType();
                 switch (messageType) {
                     case img:
-                        message = EMMessage.createSendMessage(EMMessage.Type.IMAGE);
+                        message = createSendOrReceiveMessage(currentUser, EMMessage.Type.IMAGE);
                         ImageMessageBody body = new ImageMessageBody();
                         body.setRemoteUrl(msgBody.getUrl());
                         body.setFileName(msgBody.getFilename());
@@ -124,12 +126,12 @@ public class ChatMessage extends BaseBean {
                         message.addBody(body);
                         break;
                     case loc:
-                        message = EMMessage.createSendMessage(EMMessage.Type.LOCATION);
+                        message = createSendOrReceiveMessage(currentUser, EMMessage.Type.LOCATION);
                         LocationMessageBody locBody = new LocationMessageBody(msgBody.getAddr(), msgBody.getLat(), msgBody.getLng());
                         message.addBody(locBody);
                         break;
                     case audio:
-                        message = EMMessage.createSendMessage(EMMessage.Type.VOICE);
+                        message = createSendOrReceiveMessage(currentUser, EMMessage.Type.VOICE);
                         VoiceMessageBody voiceBody = new VoiceMessageBody(null, (int) msgBody.getLength());
                         voiceBody.setSecret(msgBody.getSecret());
                         voiceBody.setFileName(msgBody.getFilename());
@@ -137,7 +139,7 @@ public class ChatMessage extends BaseBean {
                         message.addBody(voiceBody);
                         break;
                     default:
-                        message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+                        message = createSendOrReceiveMessage(currentUser, EMMessage.Type.TXT);
                         //设置消息body
                         TextMessageBody txtBody = new TextMessageBody(msgBody.getMsg());
                         message.addBody(txtBody);
@@ -145,17 +147,51 @@ public class ChatMessage extends BaseBean {
             }
         }
 
+        return message;
+    }
+
+    /**
+     * 根据当前用户创建一个发送或接收的消息
+     *
+     * @param currentUser
+     * @param messageType
+     * @return
+     */
+    protected EMMessage createSendOrReceiveMessage(String currentUser, EMMessage.Type messageType) {
+        EMMessage message = currentUser.equals(this.from) ? EMMessage.createSendMessage(messageType)
+                : EMMessage.createReceiveMessage(messageType);
+
         Map<String, String> ext = this.payload.getExt();
         if (ext != null && !ext.isEmpty()) {
             for (String key : ext.keySet()) {
+                if (key.equals(Constant.EXTEND_USER_TYPE)) {
+                    int userType = Constant.COMMON_USER;
+                    try {
+                        userType = Integer.parseInt(ext.get(key));
+                    } catch (Exception e) {
+                    }
+                    message.setAttribute(key, userType);
+                    continue;
+                }
                 message.setAttribute(key, ext.get(key));
             }
         }
-        message.setChatType(this.chat_type == ChatType.chat ? EMMessage.ChatType.Chat : EMMessage.ChatType.ChatRoom);
-        message.setReceipt(this.to);
-        message.setFrom(this.from);
+        if (chat_type == ChatType.chat) {
+            message.setChatType(EMMessage.ChatType.Chat);
+            message.setFrom(currentUser.equals(this.from) ? from : to);
+            //message.setReceipt(currentUser.equals(this.from) ? to : from);
+            message.setTo(currentUser.equals(this.from) ? to : from);
+            message.direct = currentUser.equals(this.from) ? EMMessage.Direct.SEND : EMMessage.Direct.RECEIVE;
+        } else {
+            message.setChatType(EMMessage.ChatType.ChatRoom);
+            message.setReceipt(to);
+            //message.setTo(to);
+            message.setFrom(from);
+            message.direct = currentUser.equals(this.from) ? EMMessage.Direct.SEND : EMMessage.Direct.RECEIVE;
+        }
         message.setMsgId(this.msg_id);
         message.setMsgTime(this.timestamp);
+        message.status = EMMessage.Status.SUCCESS;
         return message;
     }
 }

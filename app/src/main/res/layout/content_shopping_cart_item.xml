@@ -50,7 +50,7 @@
             <Button
                 android:id="@+id/shopping_cart_number_et"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/gray_input_bg"
                 android:clickable="false"
