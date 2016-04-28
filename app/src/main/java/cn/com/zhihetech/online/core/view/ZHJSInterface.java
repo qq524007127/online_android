@@ -167,6 +167,7 @@ public class ZHJSInterface implements WebViewUtils.JsInterface {
     @JavascriptInterface
     public void initJsRuntime() {
         getUserId();
+        getUserCode();
         getUserToken();
     }
 
