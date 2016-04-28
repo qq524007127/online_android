@@ -183,10 +183,16 @@ public class WebViewUtils {
         void getUserToken();
 
         /**
-         * 获取当前登录用户的ID
+         * 获取当前登录用户的账号名称
          */
         @JavascriptInterface
         void getUserId();
+
+        /**
+         * 获取当前登录用户的账号名称
+         */
+        @JavascriptInterface
+        void getUserCode();
 
         /**
          * 初始化当前JS运行环境
