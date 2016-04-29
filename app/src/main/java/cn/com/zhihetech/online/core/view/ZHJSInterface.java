@@ -131,18 +131,17 @@ public class ZHJSInterface implements WebViewUtils.JsInterface {
     }
 
     /**
-     * 获取当前登录用户账号
+     * 获取当前登录用户（商家）ID
      */
-    @Deprecated
     @Override
     @JavascriptInterface
     public void getUserId() {
-        final String userCode = SharedPreferenceUtils.getInstance(mContext).getUserCode();
+        final String userId = ZhiheApplication.getInstance().getLogedUserId();
         final String onBackUserIdTpl = "javascript:onBackUserId(\"{0}\")";
         target.post(new Runnable() {
             @Override
             public void run() {
-                target.loadUrl(MessageFormat.format(onBackUserIdTpl, userCode));
+                target.loadUrl(MessageFormat.format(onBackUserIdTpl, userId));
             }
         });
     }
