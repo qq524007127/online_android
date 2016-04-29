@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.fragment;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -38,6 +39,16 @@ public class WebViewFragment extends BaseFragment {
     @ViewInject(R.id.web_view_container_wv)
     private WebView webView;
 
+    private WebViewEventHandle webViewEventHandle;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof WebViewEventHandle) {
+            webViewEventHandle = (WebViewEventHandle) context;
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -68,17 +79,33 @@ public class WebViewFragment extends BaseFragment {
                 if (!refreshLayout.isRefreshing()) {
                     refreshLayout.setRefreshing(true);
                 }
+                if (webViewEventHandle != null) {
+                    webViewEventHandle.onPageStarted(view, url, favicon);
+                }
             }
 
             @Override
             public void onPageError(WebView view, WebResourceRequest request, WebResourceError error) {
                 //errorLayout.setVisibility(View.VISIBLE);
                 containerLayout.setVisibility(View.GONE);
+                if (webViewEventHandle != null) {
+                    webViewEventHandle.onPageError(view);
+                }
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 refreshLayout.setRefreshing(false);
+                if (webViewEventHandle != null) {
+                    webViewEventHandle.onPageFinished(view, url);
+                }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                if (webViewEventHandle != null) {
+                    webViewEventHandle.onReceivedTitle(view, title);
+                }
             }
         });
         utils.setUpSettigs();
@@ -108,5 +135,15 @@ public class WebViewFragment extends BaseFragment {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public interface WebViewEventHandle {
+        void onPageStarted(WebView view, String url, Bitmap favicon);
+
+        void onPageError(WebView view);
+
+        void onPageFinished(WebView view, String url);
+
+        void onReceivedTitle(WebView webView, String title);
     }
 }

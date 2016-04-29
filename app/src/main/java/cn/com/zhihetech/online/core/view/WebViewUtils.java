@@ -6,9 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -81,9 +81,20 @@ public class WebViewUtils {
                 return true;
             }
         });
-        this.webView.setWebChromeClient(new ZHWebChromeClient());
+        setupWebChromeClient();
         setJsInterface(new ZHJSInterface(mContext, webView));
         initSettings();
+    }
+
+    private void setupWebChromeClient() {
+        this.webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                if (webViewEventListener != null) {
+                    webViewEventListener.onReceivedTitle(view, title);
+                }
+            }
+        });
     }
 
     private void initSettings() {
@@ -138,6 +149,14 @@ public class WebViewUtils {
          * @param url
          */
         void onPageFinished(WebView view, String url);
+
+        /**
+         * 页面接收到页面标题是调用
+         *
+         * @param view
+         * @param title
+         */
+        void onReceivedTitle(WebView view, String title);
     }
 
     public interface JsInterface {

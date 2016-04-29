@@ -2,18 +2,11 @@ package cn.com.zhihetech.online.ui.activity;
 
 
 import android.graphics.Bitmap;
-import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.common.Constant;
@@ -23,7 +16,7 @@ import cn.com.zhihetech.online.ui.fragment.WebViewFragment;
  * Created by ShenYunjie on 2016/3/17.
  */
 @ContentView(R.layout.activity_complaint)
-public class ComplaintActivity extends BaseActivity {
+public class ComplaintActivity extends BaseActivity implements WebViewFragment.WebViewEventHandle {
 
     private final String FRAGMENT_KEY = "_current_fragment";
 
@@ -48,5 +41,25 @@ public class ComplaintActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+    }
+
+    @Override
+    public void onPageError(WebView view) {
+
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+
+    }
+
+    @Override
+    public void onReceivedTitle(WebView webView, String title) {
+        this.toolbar.setTitle(title);
     }
 }

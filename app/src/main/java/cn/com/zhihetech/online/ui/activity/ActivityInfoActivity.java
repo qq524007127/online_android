@@ -201,6 +201,11 @@ public class ActivityInfoActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 containerRefreshLayout.setRefreshing(false);
             }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                setActivityName(title);
+            }
         });
         utils.setUpSettigs();
         webView.setWebChromeClient(new WebChromeClient() {
