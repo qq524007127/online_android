@@ -10,6 +10,7 @@ import org.xutils.view.annotation.ContentView;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.core.common.Constant;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.ui.fragment.WebViewFragment;
 
 /**
@@ -60,6 +61,8 @@ public class ComplaintActivity extends BaseActivity implements WebViewFragment.W
 
     @Override
     public void onReceivedTitle(WebView webView, String title) {
-        this.toolbar.setTitle(title);
+        if (!StringUtils.isEmpty(title)) {
+            this.toolbar.setTitle(title);
+        }
     }
 }

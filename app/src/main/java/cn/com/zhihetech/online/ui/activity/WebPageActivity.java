@@ -68,6 +68,8 @@ public class WebPageActivity extends BaseActivity implements WebViewFragment.Web
 
     @Override
     public void onReceivedTitle(WebView webView, String title) {
-        this.toolbar.setTitle(title);
+        if (!StringUtils.isEmpty(title)) {
+            this.toolbar.setTitle(title);
+        }
     }
 }
