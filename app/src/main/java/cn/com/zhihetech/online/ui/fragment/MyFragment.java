@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.easemob.chat.EMChatManager;
 import com.easemob.easeui.widget.EaseImageView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+
+import java.text.MessageFormat;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.User;
@@ -23,7 +24,6 @@ import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ActivityStack;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.ui.activity.AboutUsActivity;
 import cn.com.zhihetech.online.ui.activity.BaseActivity;
 import cn.com.zhihetech.online.ui.activity.ChangePasswordActivity;
@@ -36,6 +36,7 @@ import cn.com.zhihetech.online.ui.activity.OrderActivity;
 import cn.com.zhihetech.online.ui.activity.ReceiptAddressActivity;
 import cn.com.zhihetech.online.ui.activity.UserHeaderModifyActivity;
 import cn.com.zhihetech.online.ui.activity.UserInfoChangeActivity;
+import cn.com.zhihetech.online.ui.activity.WebPageActivity;
 
 /**
  * Created by ShenYunjie on 2016/1/22.
@@ -83,7 +84,7 @@ public class MyFragment extends BaseFragment {
     }
 
     @Event({R.id.my_waiting_pay_view, R.id.my_no_dispatch, R.id.my_already_dispatch_view,
-            R.id.my_waiting_evalute_view, R.id.about_us_view, R.id.my_header_img,
+            R.id.my_waiting_evalute_view, R.id.about_us_view, R.id.my_header_img, R.id.my_prize_view,
             R.id.my_refund_and_service_view, R.id.my_coupon_view, R.id.my_red_envelop_view,
             R.id.my_friends_view, R.id.my_favorites_view, R.id.my_info_change_view, R.id.my_pwd_change_view,
             R.id.my_receiver_address_view, R.id.exit_app_btn, R.id.my_all_order_view, R.id.my_wallet})
@@ -121,6 +122,13 @@ public class MyFragment extends BaseFragment {
             case R.id.my_coupon_view:
                 Intent couponIntent = new Intent(getContext(), MyCouponItemActivity.class);
                 startActivity(couponIntent);
+                break;
+            case R.id.my_prize_view:
+                String url = MessageFormat.format(Constant.MY_PRIZE_PAGE_URL, getLoginUserId());
+                Intent prizeIntent = new Intent(getContext(), WebPageActivity.class)
+                        .putExtra(BaseActivity.CUSTOM_TITLE_KEY, "我的奖品")
+                        .putExtra(WebPageActivity.PAGE_URL, url);
+                startActivity(prizeIntent);
                 break;
             case R.id.my_red_envelop_view:
                 Intent redEnvelopItemIntent = new Intent(getContext(), MyRedEnvelopItemListActivity.class);

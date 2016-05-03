@@ -255,6 +255,29 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_prize_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@drawable/my_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/volum" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="@string/my_prize" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/my_red_envelop_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

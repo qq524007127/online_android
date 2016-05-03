@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:subtitleTextColor="@color/normal_bg"
             app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
@@ -39,8 +38,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/message_content_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
     </android.support.v4.view.ViewPager>
 </android.support.design.widget.CoordinatorLayout>
