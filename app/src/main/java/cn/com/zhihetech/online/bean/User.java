@@ -26,6 +26,9 @@ public class User extends BaseBean {
     private int userType = Constant.COMMON_USER;    //默认为普通用户
     private ImgInfo portrait;  //用户头像
 
+    private String chatUserName;  //对应的环信用户账号
+    private String chatPassword;    //对应的环信密码
+
     public User() {
     }
 
@@ -161,13 +164,29 @@ public class User extends BaseBean {
         this.portrait = portrait;
     }
 
+    public String getChatUserName() {
+        return chatUserName;
+    }
+
+    public void setChatUserName(String chatUserName) {
+        this.chatUserName = chatUserName;
+    }
+
+    public String getChatPassword() {
+        return chatPassword;
+    }
+
+    public void setChatPassword(String chatPassword) {
+        this.chatPassword = chatPassword;
+    }
+
     /**
      * 获取用户对应的环信账号的信息
      *
      * @return
      */
     public String getEMUserId() {
-        return getUserId().replaceAll("-", "");
+        return getChatUserName();
     }
 
     /**
@@ -176,7 +195,8 @@ public class User extends BaseBean {
      * @return
      */
     public String getEMUserPwd() {
-        return getUserId();
+        return getChatPassword();
     }
+
 }
 

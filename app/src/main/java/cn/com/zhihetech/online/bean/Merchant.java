@@ -61,6 +61,8 @@ public class Merchant extends BaseBean {
 
     private float score = 5f;
 
+    private ChatUserInfo chatUserInfo;
+
 
     public String getMerchantId() {
         return merchantId;
@@ -370,16 +372,24 @@ public class Merchant extends BaseBean {
         this.score = score;
     }
 
+    public ChatUserInfo getChatUserInfo() {
+        return chatUserInfo;
+    }
+
+    public void setChatUserInfo(ChatUserInfo chatUserInfo) {
+        this.chatUserInfo = chatUserInfo;
+    }
+
     /**
      * 获取对应环信用户ID
      *
      * @return
      */
     public String getEMUserId() {
-        return getMerchantId().replaceAll("-", "");
+        return chatUserInfo == null ? getMerchantId().replaceAll("-", "") : chatUserInfo.getUserName();
     }
 
     public String getEMUserPwd() {
-        return getMerchantId();
+        return chatUserInfo == null ? getMerchantId() : chatUserInfo.getUserPwd();
     }
 }

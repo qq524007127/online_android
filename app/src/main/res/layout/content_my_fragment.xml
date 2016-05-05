@@ -23,7 +23,8 @@
                 android:id="@+id/my_header_img"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/home"
+                android:scaleType="centerInside"
+                android:src="@drawable/default_portrait"
                 app:ease_border_color="@color/white"
                 app:ease_border_width="2dp"
                 app:ease_shape_type="round" />

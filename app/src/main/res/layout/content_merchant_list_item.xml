@@ -34,7 +34,7 @@
                         android:layout_height="70dp"
                         android:layout_margin="5dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/my_activity"
+                        android:src="@drawable/default_portrait"
                         app:ease_shape_type="round" />
 
                     <LinearLayout

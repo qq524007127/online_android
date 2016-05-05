@@ -58,7 +58,9 @@ public class ImageLoader {
     public static ImageOptions createImageOptions() {
         ImageOptions options = new ImageOptions.Builder()
                 .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
-                .setFailureDrawableId(R.mipmap.ic_launcher).build();
+                .setFailureDrawableId(R.drawable.load_error)
+                .setLoadingDrawableId(R.drawable.loading)
+                .build();
         return options;
     }
 

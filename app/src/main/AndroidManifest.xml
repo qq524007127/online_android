@@ -248,7 +248,8 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="0871zhkj#zhihedianshang" />
+            android:value="zhihetechvip#zhiheonlie" />
+            <!--android:value="0871zhkj#zhihedianshang" />-->
         <!-- 声明环信sdk所需的service SDK核心功能-->
         <service android:name="com.easemob.chat.EMChatService" />
 
@@ -376,7 +377,7 @@
         <!-- 值来⾃自开发者平台取得的AppKey-->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="52f157b4b71c12e466d4d2ec" />
+            android:value="16a3f46a7f0e2ae575c2bce2" />
     </application>
 
 </manifest>

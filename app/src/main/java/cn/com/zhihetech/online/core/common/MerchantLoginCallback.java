@@ -1,6 +1,8 @@
 package cn.com.zhihetech.online.core.common;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
@@ -8,6 +10,7 @@ import com.easemob.chat.EMGroupManager;
 
 import org.xutils.ex.DbException;
 
+import cn.com.zhihetech.online.bean.ChatUserInfo;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Merchant;
 import cn.com.zhihetech.online.bean.MerchantToken;
@@ -29,19 +32,40 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
     private String adminPwd;
 
     SharedPreferenceUtils preferenceUtils;
+    private final int LOGIN_SUCCESS_CODE = 1;
+    private final int LOGIN_ERROR_CODE = 2;
 
+    Handler emLoginHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case LOGIN_SUCCESS_CODE:
+                    onEMLoginSuccess(token.getMerchant().getMerchName());
+                    onLoginSuccess(token.getMerchant());
+                    onLoginFinish();
+                    break;
+                case LOGIN_ERROR_CODE:
+                    String s = String.valueOf(msg.obj);
+                    onLoginError(new RuntimeException(s));
+                    onLoginFinish();
+                    break;
+            }
+        }
+    };
     private EMCallBack emCallback = new EMCallBack() {
         @Override
         public void onSuccess() {
-            onEMLoginSuccess(token.getMerchant().getMerchName());
-            onLoginSuccess(token.getMerchant());
-            onLoginFinish();
+            Message msg = new Message();
+            msg.what = LOGIN_SUCCESS_CODE;
+            emLoginHandler.sendMessage(msg);
         }
 
         @Override
         public void onError(int i, String s) {
-            onLoginError(new RuntimeException(s));
-            onLoginFinish();
+            Message msg = new Message();
+            msg.what = LOGIN_ERROR_CODE;
+            msg.obj = s;
+            emLoginHandler.sendMessage(msg);
         }
 
         @Override
@@ -95,10 +119,13 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
             onLoginFinish();
             return;
         }
-        ZhiheApplication application = ZhiheApplication.getInstance().onMerchantLoged(this.token.getMerchant());
+        ZhiheApplication application = ZhiheApplication.getInstance();
+        Merchant merchant = this.token.getMerchant();
+        merchant.setChatUserInfo(this.token.getChatUser());
+        application.onMerchantLoged(merchant);
         saveMerchantInfo2File(this.token);
         try {
-            saveMerchantInfo2DB(this.token.getMerchant());
+            saveMerchantInfo2DB(merchant);
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -121,11 +148,15 @@ public abstract class MerchantLoginCallback extends ResponseMessageCallback<Merc
      * 保存当前登录商家的环信用户信息到本地数据库
      */
     protected void saveMerchantInfo2DB(Merchant merchant) throws DbException {
-        String header = null;
-        if (merchant.getCoverImg() != null) {
-            header = merchant.getCoverImg().getUrl();
+        ChatUserInfo chatUserInfo = merchant.getChatUserInfo();
+        if (chatUserInfo == null) {
+            return;
         }
-        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(), header, merchant.getEMUserId(), Constant.EXTEND_MERCHANT_USER);
+        String header = null;
+        if (!StringUtils.isEmpty(chatUserInfo.getPortraitUrl())) {
+            header = chatUserInfo.getPortraitUrl();
+        }
+        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), chatUserInfo.getNickName(), header, chatUserInfo.getAppUserId(), Constant.EXTEND_MERCHANT_USER);
         new DBUtils().saveUserInfo(userInfo);
     }
 

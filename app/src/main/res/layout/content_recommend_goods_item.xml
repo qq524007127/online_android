@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/home"
+        android:src="@drawable/please_wait"
         app:width_height_ratio="1" />
 
     <TextView

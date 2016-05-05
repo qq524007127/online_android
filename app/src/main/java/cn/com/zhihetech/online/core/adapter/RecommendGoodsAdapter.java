@@ -61,7 +61,7 @@ public class RecommendGoodsAdapter extends ZhiheAdapter<Goods, RecommendGoodsAda
     }
 
     private void bindEmpty(RecommendGoodsHolder holder) {
-        holder.recommendGoodsCoverImg.setImageDrawable(mContext.getResources().getDrawable(R.drawable.home_activity));
+        holder.recommendGoodsCoverImg.setImageDrawable(mContext.getResources().getDrawable(R.drawable.please_wait));
         holder.recommendGoodsPriceTv.setVisibility(View.GONE);
         holder.itemView.setOnClickListener(null);
     }

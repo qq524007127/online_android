@@ -1,6 +1,8 @@
 package cn.com.zhihetech.online.core.common;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 
 import com.easemob.EMCallBack;
@@ -41,6 +43,27 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
         this.preferenceUtils = SharedPreferenceUtils.getInstance(this.mContext);
     }
 
+    private final int LOGIN_SUCCESS_CODE = 1;
+    private final int LOGIN_ERROR_CODE = 2;
+
+    Handler emLoginHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case LOGIN_SUCCESS_CODE:
+                    onEMLoginSuccess(token.getUser().getUserName());
+                    onLoginSuccess(token);
+                    onLoginFinished();
+                    break;
+                case LOGIN_ERROR_CODE:
+                    String s = String.valueOf(msg.obj);
+                    onLoginFail(new RuntimeException(s));
+                    onLoginFinished();
+                    break;
+            }
+        }
+    };
+
     /**
      * 环信登录回调
      */
@@ -48,15 +71,17 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
         @Override
         public void onSuccess() {
-            onEMLoginSuccess(token.getUser().getUserName());
-            onLoginSuccess(token);
-            onLoginFinished();
+            Message msg = new Message();
+            msg.what = LOGIN_SUCCESS_CODE;
+            emLoginHandler.sendMessage(msg);
         }
 
         @Override
         public void onError(int i, String s) {
-            onLoginFail(new RuntimeException(s));
-            onLoginFinished();
+            Message msg = new Message();
+            msg.what = LOGIN_ERROR_CODE;
+            msg.obj = s;
+            emLoginHandler.sendMessage(msg);
         }
 
         @Override
@@ -104,7 +129,8 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
 
             @Override
             public void gotResult(int i, String s, Set<String> set) {
-
+                System.out.println(i);
+                System.out.println(s);
             }
         });
     }
@@ -139,6 +165,8 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
      * 登录环信账号
      */
     private void loginEMChat(User user) {
+        String emUserId = user.getEMUserId();
+        String emUserPwd = user.getEMUserPwd();
         EMChatManager.getInstance().login(user.getEMUserId(), user.getEMUserPwd(), emCallBack);
     }
 

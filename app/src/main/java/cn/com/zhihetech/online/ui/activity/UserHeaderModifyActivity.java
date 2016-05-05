@@ -73,6 +73,9 @@ public class UserHeaderModifyActivity extends BaseActivity {
         userHeaderImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (user.getPortrait() == null || StringUtils.isEmpty(user.getPortrait().getUrl())) {
+                    return;
+                }
                 ArrayList<ShowImageInfo> imageInfos = new ArrayList<>();
                 ShowImageInfo imageInfo = new ShowImageInfo(user.getPortrait().getUrl(), "");
                 imageInfo.setShowDesc(false);

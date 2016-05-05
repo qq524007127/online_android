@@ -15,6 +15,8 @@ import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
+import org.xutils.ex.DbException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,8 @@ import java.util.Map;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ActivityGoods;
 import cn.com.zhihetech.online.bean.ChatMessage;
+import cn.com.zhihetech.online.bean.ChatUserInfo;
+import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.bean.Goods;
 import cn.com.zhihetech.online.bean.ImgInfo;
 import cn.com.zhihetech.online.bean.Merchant;
@@ -31,6 +35,7 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.PageData;
+import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.emchat.ZhiheChatRowProvider;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
@@ -126,12 +131,11 @@ public class ChatFragment extends EaseChatFragment {
                 message.setAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_NORMAL_USER);
                 break;
             case Constant.MERCHANT_USER:
-                Merchant merchant = ZhiheApplication.getInstance().getLogedMerchant();
-                message.setAttribute(Constant.EXTEND_USER_NICK_NAME, merchant.getMerchName());
-                message.setAttribute(Constant.EXTEND_USER_ID, merchant.getMerchantId());
-                ImgInfo coverImg = merchant.getCoverImg();
-                if (coverImg != null && !StringUtils.isEmpty(coverImg.getUrl())) {
-                    message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, coverImg.getUrl());
+                ChatUserInfo userInfo = ZhiheApplication.getInstance().getLogedMerchant().getChatUserInfo();
+                message.setAttribute(Constant.EXTEND_USER_NICK_NAME, userInfo.getNickName());
+                message.setAttribute(Constant.EXTEND_USER_ID, userInfo.getAppUserId());
+                if (!StringUtils.isEmpty(userInfo.getPortraitUrl())) {
+                    message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, userInfo.getPortraitUrl());
                 }
                 message.setAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_MERCHANT_USER);
                 break;
@@ -435,10 +439,12 @@ public class ChatFragment extends EaseChatFragment {
         final List<EMMessage> messages = new ArrayList<>(chatMessages.size());
         String userId = ZhiheApplication.getInstance().getChatUserId();
         for (ChatMessage msg : chatMessages) {
-            messages.add(msg.createEMMessage(userId));
+            EMMessage message = msg.createEMMessage(userId);
+            saveMessageExt2DB(message);
+            messages.add(message);
         }
         EMChatManager.getInstance().importMessages(messages);
-        int messageSize = 0;
+        int messageSize;
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             messageSize = conversation.loadMoreMsgFromDB(messageList.getItem(0).getMsgId(),
                     pagesize).size();
@@ -448,6 +454,15 @@ public class ChatFragment extends EaseChatFragment {
         }
         if (messageSize > 0) {
             messageList.refreshSeekTo(messages.size() - 1);
+        }
+    }
+
+    protected void saveMessageExt2DB(EMMessage message) {
+        EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        try {
+            new DBUtils().saveUserInfo(userInfo);
+        } catch (DbException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -6,6 +6,7 @@ package cn.com.zhihetech.online.bean;
 public class MerchantToken extends BaseBean {
     private Merchant merchant;
     private String token;
+    private ChatUserInfo chatUser;
 
     public MerchantToken() {
     }
@@ -13,6 +14,20 @@ public class MerchantToken extends BaseBean {
     public MerchantToken(Merchant merchant, String token) {
         this.merchant = merchant;
         this.token = token;
+    }
+
+    public MerchantToken(Merchant merchant, String token, ChatUserInfo chatUserInfo) {
+        this.merchant = merchant;
+        this.token = token;
+        this.chatUser = chatUserInfo;
+    }
+
+    public ChatUserInfo getChatUser() {
+        return chatUser;
+    }
+
+    public void setChatUser(ChatUserInfo chatUser) {
+        this.chatUser = chatUser;
     }
 
     public Merchant getMerchant() {

@@ -14,6 +14,7 @@
             android:id="@+id/home_banner_cb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/banner_bg"
             app:banner_type="type_main">
 
         </cn.com.zhihetech.online.core.view.CommonBanner>

@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.activity;
+package cn.com.zhihetech.online.model;
 
 
 import android.support.annotation.NonNull;

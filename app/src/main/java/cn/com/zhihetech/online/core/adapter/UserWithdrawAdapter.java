@@ -1,4 +1,4 @@
-package cn.com.zhihetech.online.ui.activity;
+package cn.com.zhihetech.online.core.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,7 +8,6 @@ import org.xutils.view.annotation.ViewInject;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.UserWithdraw;
-import cn.com.zhihetech.online.core.adapter.ZhiheAdapter;
 import cn.com.zhihetech.online.core.util.DateUtils;
 
 /**
