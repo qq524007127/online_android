@@ -101,7 +101,7 @@ public abstract class UserLoginCallback extends ResponseMessageCallback<Token> {
     }
 
     protected void initApp(User user) {
-        ZhiheApplication application = ZhiheApplication.getInstance().onUserLoged(user);
+        ZhiheApplication.getInstance().onUserLoged(user);
 
         preferenceUtils.setUserType(Constant.COMMON_USER);
         preferenceUtils.setUserToken(token.getToken());
