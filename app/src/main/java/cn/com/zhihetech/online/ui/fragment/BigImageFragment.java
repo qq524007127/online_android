@@ -1,5 +1,6 @@
 package cn.com.zhihetech.online.ui.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -45,9 +46,10 @@ public class BigImageFragment extends BaseFragment {
         if (args.getString(IMAGE_URL) != null) {
             ImageLoader.disPlayImage(bigPhotoView, args.getString(IMAGE_URL), new ImageLoader.OnBindImageCallback() {
                 @Override
-                public void onBinded() {
+                public void onBinded(Drawable result) {
                     mAttacher = new PhotoViewAttacher(bigPhotoView);
                     mAttacher.update();
+                    result.setCallback(null);
                 }
 
                 @Override

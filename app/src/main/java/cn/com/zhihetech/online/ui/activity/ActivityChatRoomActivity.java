@@ -9,6 +9,8 @@ import android.view.MenuItem;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatRoom;
+import com.easemob.chat.EMConversation;
+import com.easemob.chat.EMMessage;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
@@ -17,6 +19,8 @@ import com.easemob.exceptions.EaseMobException;
 import org.xutils.ex.DbException;
 import org.xutils.view.annotation.ContentView;
 
+
+import java.util.List;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.EMUserInfo;
@@ -65,23 +69,7 @@ public class ActivityChatRoomActivity extends BaseActivity {
 
         //传入参数
         chatFragment.setArguments(args);
-        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
-            @Override
-            public EaseUser getUser(String username) {
-                EaseUser easeUser = new EaseUser(username);
-                EMUserInfo userInfo = null;
-                try {
-                    userInfo = new DBUtils().getUserInfoByUserName(username);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-                if (userInfo != null) {
-                    easeUser.setNick(userInfo.getUserNick());
-                    easeUser.setAvatar(userInfo.getAvatarUrl());
-                }
-                return easeUser;
-            }
-        });
+
         getSupportFragmentManager().beginTransaction().add(R.id.chat_room_container_fl, chatFragment).commit();
         chatFragment.setOnChatRoomChangeListenr(new UpgradeChatFragment.OnChatRoomChangeListener() {
             @Override

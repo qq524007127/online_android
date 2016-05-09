@@ -12,7 +12,7 @@ import org.xutils.view.annotation.ViewInject;
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.service.EMChatEventService;
 import cn.com.zhihetech.online.ui.fragment.MyContactListFragment;
-import cn.com.zhihetech.online.ui.fragment.MyFocusMercahntsFragment;
+import cn.com.zhihetech.online.ui.fragment.MyFocusMerchantsFragment;
 
 /**
  * Created by ShenYunjie on 2016/4/6.
@@ -41,7 +41,7 @@ public class MessageActivity extends BaseActivity {
     }
 
     private void initViews() {
-        final Fragment[] fragments = {new MyContactListFragment(), new MyFocusMercahntsFragment()};
+        final Fragment[] fragments = {new MyContactListFragment(), new MyFocusMerchantsFragment()};
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {

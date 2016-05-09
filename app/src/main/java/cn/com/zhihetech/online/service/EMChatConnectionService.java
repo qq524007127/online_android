@@ -90,9 +90,6 @@ public class EMChatConnectionService extends BaseService {
 
             @Override
             public void onError(int i, String s) {
-               /* if (!isRetryLogin) {
-                    return;
-                }*/
                 Message msg = new Message();
                 msg.what = RE_LOGIN_CODE;
                 loginHandler.sendMessage(msg);

@@ -5,9 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Message;
 import android.util.Log;
 
 import com.easemob.chat.EMChat;
+import com.easemob.chat.EMChatDB;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMConversation;
@@ -128,24 +130,25 @@ public class EMChatHelper {
                 } catch (DbException e) {
                     e.printStackTrace();
                 }
-                if (userInfo != null) {
-                    easeUser.setNick(userInfo.getUserNick());
-                    easeUser.setAvatar(userInfo.getAvatarUrl());
-                } else {
+                if (userInfo == null) {
                     EMConversation conversation = EMChatManager.getInstance().getConversation(username);
                     List<EMMessage> messages = conversation.getAllMessages();
                     if (messages != null && !messages.isEmpty()) {
-                        for (int i = messages.size() - 1; i < 0; i--) {
+                        for (int i = messages.size() - 1; i >= 0; i--) {
                             EMMessage message = messages.get(i);
-                            if (message.getFrom().equals(username)) {
-                                EMUserInfo tmp = EMUserInfo.createEMUserInfo(message);
-                                easeUser.setNick(tmp.getUserNick());
-                                easeUser.setAvatar(tmp.getAvatarUrl());
-                                saveUserInfo(tmp);
+                            //String target = message.getChatType() == EMMessage.ChatType.Chat ? message.getTo() : message.getFrom();
+                            String target = message.getFrom();
+                            if (target.equals(username)) {
+                                userInfo = EMUserInfo.createEMUserInfo(message);
                                 break;
                             }
                         }
                     }
+                }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                    saveUserInfo(userInfo);
                 }
                 return easeUser;
             }

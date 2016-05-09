@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <cn.com.zhihetech.online.core.view.BigImageViewPager
         android:id="@+id/big_image_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </cn.com.zhihetech.online.core.view.BigImageViewPager>
 
     <TextView
         android:id="@+id/show_bit_img_mark_tv"

@@ -10,8 +10,11 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.easeui.EaseConstant;
+import com.easemob.easeui.controller.EaseUI;
+import com.easemob.easeui.domain.EaseUser;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
 
@@ -109,6 +112,45 @@ public class ChatFragment extends EaseChatFragment {
             @Override
             public EaseCustomChatRowProvider onSetCustomChatRowProvider() {
                 return new ZhiheChatRowProvider(getContext());
+            }
+        });
+    }
+
+    @Override
+    protected void setUpView() {
+        super.setUpView();
+        /**
+         * 自定义用户别名和用户头像
+         */
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                EaseUser easeUser = new EaseUser(username);
+                EMUserInfo userInfo = null;
+                try {
+                    userInfo = new DBUtils().getUserInfoByUserName(username);
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+                if (userInfo == null) {
+                    List<EMMessage> messages = conversation.getAllMessages();
+                    if (messages != null && !messages.isEmpty()) {
+                        for (int i = messages.size() - 1; i >= 0; i--) {
+                            EMMessage message = messages.get(i);
+                            String target = message.getFrom();
+                            if (target.equals(username)) {
+                                userInfo = EMUserInfo.createEMUserInfo(message);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                    saveUserInfo(userInfo);
+                }
+                return easeUser;
             }
         });
     }
@@ -435,9 +477,9 @@ public class ChatFragment extends EaseChatFragment {
      *
      * @param chatMessages
      */
-    protected void onLoadMessageSuccess(List<ChatMessage> chatMessages) {
-        final List<EMMessage> messages = new ArrayList<>(chatMessages.size());
-        String userId = ZhiheApplication.getInstance().getChatUserId();
+    protected void onLoadMessageSuccess(final List<ChatMessage> chatMessages) {
+        final String userId = ZhiheApplication.getInstance().getChatUserId();
+        List<EMMessage> messages = new ArrayList<>(chatMessages.size());
         for (ChatMessage msg : chatMessages) {
             EMMessage message = msg.createEMMessage(userId);
             saveMessageExt2DB(message);
@@ -459,6 +501,10 @@ public class ChatFragment extends EaseChatFragment {
 
     protected void saveMessageExt2DB(EMMessage message) {
         EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+        saveUserInfo(userInfo);
+    }
+
+    protected void saveUserInfo(EMUserInfo userInfo) {
         try {
             new DBUtils().saveUserInfo(userInfo);
         } catch (DbException e) {

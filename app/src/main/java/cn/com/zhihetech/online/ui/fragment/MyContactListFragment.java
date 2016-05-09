@@ -11,16 +11,14 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.easeui.EaseConstant;
-import com.easemob.easeui.controller.EaseUI;
-import com.easemob.easeui.domain.EaseUser;
 import com.easemob.easeui.ui.EaseConversationListFragment;
 
 import org.xutils.ex.DbException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.zhihetech.online.R;
-import cn.com.zhihetech.online.bean.Conversation;
 import cn.com.zhihetech.online.bean.EMUserInfo;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.emchat.EMMessageHelper;
@@ -114,7 +112,6 @@ public class MyContactListFragment extends EaseConversationListFragment {
                 message.getTo();
         EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
         Intent intent = new Intent(getContext(), SingleChatActivity.class)
-                //.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
@@ -157,5 +154,27 @@ public class MyContactListFragment extends EaseConversationListFragment {
             EMChatManager.getInstance().unregisterEventListener(eventListener);
             isRegisterEventListener = false;
         }
+    }
+
+    @Override
+    public void refresh() {
+        conversationList.clear();
+        conversationList.addAll(getFilterConversations());
+        conversationListView.refresh();
+    }
+
+    /**
+     * 不显示聊天室数据(过滤掉聊天对花类型为聊天室的会话）
+     *
+     * @return
+     */
+    protected List<EMConversation> getFilterConversations() {
+        List<EMConversation> converList = new ArrayList<>();
+        for (EMConversation conversation : loadConversationList()) {
+            if (conversation.getType() != EMConversation.EMConversationType.ChatRoom) {
+                converList.add(conversation);
+            }
+        }
+        return converList;
     }
 }

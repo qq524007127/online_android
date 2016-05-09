@@ -47,12 +47,12 @@ public class UpgradeChatFragment extends ChatFragment {
 
                 @Override
                 public boolean onNewMessage(EMMessage message) {
-                    EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
+                    /*EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
                     saveUserInfo(userInfo);
                     if (message.getFrom().equals(toChatUsername)) {
                         return true;
                     }
-                    onReceiveNewMessage(message);
+                    onReceiveNewMessage(message);*/
                     return true;
                 }
             };
@@ -78,14 +78,6 @@ public class UpgradeChatFragment extends ChatFragment {
         // 如果消息不是和当前聊天ID的消息
         Intent intent = new Intent(getContext(), SingleChatActivity.class)
                 .putExtra(EaseConstant.EXTRA_USER_ID, toUserName);
-            /*EMMessage.ChatType chatType = message.getChatType();
-            if (chatType == EMMessage.ChatType.ChatRoom) {
-                intent = new Intent(getContext(), ActivityChatRoomActivity.class);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, this.activity.getChatRoomId());
-                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_CHATROOM);
-                intent.putExtra(ActivityChatRoomActivity.CHAT_ROOM_NAME, activity.getActivitName());
-                intent.putExtra(ActivityChatRoomActivity.ACTIVITY_ID, activity.getActivitId());
-            }*/
         intent.putExtra(SingleChatActivity.USER_NICK_NAME_KEY, toUserName);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationHelper.showNotification(getContext(), EMChatHelper.EMCHAT_NEW_MESSAGE_NOTIFY_ID,
@@ -103,15 +95,15 @@ public class UpgradeChatFragment extends ChatFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         EMChatHelper.getInstance().addEventListener(eventListener);
     }
 
     @Override
-    public void onDestroy() {
+    public void onPause() {
+        super.onPause();
         EMChatHelper.getInstance().removeEventListener(eventListener);
-        super.onDestroy();
     }
 
     /**
@@ -147,7 +139,7 @@ public class UpgradeChatFragment extends ChatFragment {
             @Override
             public void onChatRoomDestroyed(String roomId, String roomName) {
                 if (roomId.equals(toChatUsername)) {
-                    showChatroomToast(" room : " + roomId + " with room name : " + roomName + " was destroyed");
+                    showChatroomToast(roomName + "活动已结束！");
                     getActivity().finish();
                 }
             }

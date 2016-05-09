@@ -42,7 +42,7 @@ public class ShopLinkChatRow extends BaseChatRow {
                 JSONObject jsonObject = JSONObject.parseObject(txtMsg);
                 Intent intent = new Intent(getContext(), MerchantHomeActivity.class);
                 intent.putExtra(MerchantHomeActivity.MERCHANT_ID_KEY, jsonObject.getString("merchantId"));
-                intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, jsonObject.getString("merchantName"));
+                intent.putExtra(MerchantHomeActivity.MERCHANT_NAME_KEY, jsonObject.getString("merchName"));
                 getContext().startActivity(intent);
         }
     }

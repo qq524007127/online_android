@@ -47,23 +47,6 @@ public class SingleChatActivity extends BaseActivity {
         chatFragment.hideTitleBar();
         //传入参数
         chatFragment.setArguments(getIntent().getExtras());
-        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
-            @Override
-            public EaseUser getUser(String username) {
-                EaseUser easeUser = new EaseUser(username);
-                EMUserInfo userInfo = null;
-                try {
-                    userInfo = new DBUtils().getUserInfoByUserName(username);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-                if (userInfo != null) {
-                    easeUser.setNick(userInfo.getUserNick());
-                    easeUser.setAvatar(userInfo.getAvatarUrl());
-                }
-                return easeUser;
-            }
-        });
         getSupportFragmentManager().beginTransaction().add(R.id.chat_container_fl, chatFragment).commit();
     }
 

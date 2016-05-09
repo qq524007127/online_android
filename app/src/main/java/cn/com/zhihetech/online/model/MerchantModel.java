@@ -83,6 +83,19 @@ public class MerchantModel extends BaseModel<Merchant> {
     }
 
     /**
+     * 取消关注商家
+     *
+     * @param callback   回调
+     * @param userId     用户 ID
+     * @param merchantId 商家 ID
+     * @return
+     */
+    public Callback.Cancelable cancelFocusMerchant(ObjectCallback<ResponseMessage> callback, @NonNull String userId, @NonNull String merchantId) {
+        ModelParams params = new ModelParams().addParam(MERCHANT_ID_KEY, merchantId).addParam("userId", userId);
+        return  new SimpleModel(ResponseMessage.class).postObject(Constant.CANCEL_FOCUS_MERCHANT_URL,params,callback);
+    }
+
+    /**
      * 根据商品类别获取商家
      *
      * @param callback

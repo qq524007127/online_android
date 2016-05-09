@@ -32,7 +32,7 @@ public class ImageLoader {
             @Override
             public void onSuccess(Drawable result) {
                 if (callback != null) {
-                    callback.onBinded();
+                    callback.onBinded(result);
                 }
             }
 
@@ -65,7 +65,7 @@ public class ImageLoader {
     }
 
     public interface OnBindImageCallback {
-        void onBinded();
+        void onBinded(Drawable result);
 
         void onError();
     }

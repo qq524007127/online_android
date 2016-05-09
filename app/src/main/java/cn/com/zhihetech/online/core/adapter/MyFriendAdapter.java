@@ -41,59 +41,6 @@ public class MyFriendAdapter extends ZhiheAdapter<Merchant, MyFriendAdapter.MyFr
     public void onBindViewHolder(final MyFriendViewHolder holder, final Merchant data) {
         ImageLoader.disPlayImage(holder.headerCiv, data.getCoverImg());
         holder.friendNameTv.setText(data.getMerchName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, SingleChatActivity.class);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, data.getEMUserId());
-                try {
-                    saveMerchantInfo(data);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                    Snackbar.make(v, "出错了！", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                mContext.startActivity(intent);
-            }
-        });
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                new AlertDialog.Builder(mContext)
-                        .setTitle(R.string.tip)
-                        .setMessage("确定要取消与此商家的好友关系吗？")
-                        .setPositiveButton(R.string.cancel, null)
-                        .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                cancelFocus(data);
-                            }
-                        }).show();
-                return true;
-            }
-        });
-    }
-
-    /**
-     * 取消关注商家
-     *
-     * @param merchant
-     */
-    private void cancelFocus(Merchant merchant) {
-        notifyDataSetChanged();
-    }
-
-    /**
-     * 将商家的环信用户基本信息保存到本地数据库
-     *
-     * @param merchant
-     * @throws DbException
-     */
-    private void saveMerchantInfo(Merchant merchant) throws DbException {
-        EMUserInfo userInfo = new EMUserInfo(merchant.getEMUserId(), merchant.getMerchName(),
-                merchant.getCoverImg().getUrl(), merchant.getMerchantId(), Constant.EXTEND_MERCHANT_USER);
-        new DBUtils().saveUserInfo(userInfo);
     }
 
     public class MyFriendViewHolder extends ZhiheAdapter.BaseViewHolder {
