@@ -130,25 +130,34 @@ public class EMChatHelper {
                 } catch (DbException e) {
                     e.printStackTrace();
                 }
-                if (userInfo == null) {
-                    EMConversation conversation = EMChatManager.getInstance().getConversation(username);
-                    List<EMMessage> messages = conversation.getAllMessages();
-                    if (messages != null && !messages.isEmpty()) {
-                        for (int i = messages.size() - 1; i >= 0; i--) {
-                            EMMessage message = messages.get(i);
-                            //String target = message.getChatType() == EMMessage.ChatType.Chat ? message.getTo() : message.getFrom();
-                            String target = message.getFrom();
-                            if (target.equals(username)) {
-                                userInfo = EMUserInfo.createEMUserInfo(message);
-                                break;
-                            }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                    return easeUser;
+                }
+                EMConversation conversation = EMChatManager.getInstance().getConversation(username);
+                List<EMMessage> messages = conversation.getAllMessages();
+                if (messages != null && !messages.isEmpty()) {
+                    for (int i = messages.size() - 1; i >= 0; i--) {
+                        EMMessage message = messages.get(i);
+                        //String target = message.getChatType() == EMMessage.ChatType.Chat ? message.getTo() : message.getFrom();
+                        String target = message.getFrom();
+                        if (target.equals(username)) {
+                            userInfo = EMUserInfo.createEMUserInfo(message);
+                            break;
                         }
                     }
                 }
                 if (userInfo != null) {
                     easeUser.setNick(userInfo.getUserNick());
                     easeUser.setAvatar(userInfo.getAvatarUrl());
-                    saveUserInfo(userInfo);
+                    final EMUserInfo finalUserInfo = userInfo;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            saveUserInfo(finalUserInfo);
+                        }
+                    }).start();
                 }
                 return easeUser;
             }

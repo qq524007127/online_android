@@ -59,7 +59,7 @@ public class UpgradeChatFragment extends ChatFragment {
 
     private void onReceiveNewCMDMessage(EMMessage message) {
         EMUserInfo userInfo = EMUserInfo.createEMUserInfo(message);
-        saveUserInfo(userInfo);
+        //saveUserInfo(userInfo);
     }
 
     private void onReceiveNewMessage(EMMessage message) {

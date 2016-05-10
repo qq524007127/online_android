@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.ImgInfo;
@@ -62,10 +64,21 @@ public class StartActivity extends BaseActivity {
             @Override
             public void onResponseMessage(ResponseMessage<ImgInfo> responseMessage) {
                 if (responseMessage.getCode() == ResponseStateCode.SUCCESS) {
-                    ImageLoader.disPlayImage(startImg, responseMessage.getData());
+                    displayStartImage(responseMessage.getData());
                 }
             }
         });
+    }
+
+    protected void displayStartImage(ImgInfo image) {
+        if (image != null && !StringUtils.isEmpty(image.getUrl())) {
+            ImageOptions options = new ImageOptions.Builder()
+                    .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
+                    .setFailureDrawableId(R.drawable.start_img)
+                    .setLoadingDrawableId(R.drawable.start_img)
+                    .build();
+            x.image().bind(startImg, image.getUrl(), options);
+        }
     }
 
     @Override

@@ -41,7 +41,8 @@ public class CouponItemAdapter extends ZhiheAdapter<CouponItem, CouponItemAdapte
                 coupon.getFaceValue() + "折" : "￥" + coupon.getFaceValue());
         holder.couponTypeTv.setText(coupon.getCouponType() == Constant.COUPON_DISCOUNT_TYPE ? "打折券" : "代金券");
         holder.couponDetaiTv.setText(data.getCoupon().getCouponMsg());
-        holder.couponValidityDateTv.setText("有效期至:" + DateUtils.formatDate(data.getReceivedDate()));
+        holder.couponValidityDateTv.setText("有效期:" + DateUtils.formatDate(coupon.getStartValidity())
+                + "至" + DateUtils.formatDate(coupon.getEndValidity()));
         holder.couponStateTv.setText(data.isUseState() ? "已使用" : "未使用");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -90,13 +90,6 @@ public class RedEnvelopChatRow extends BaseChatRow {
                             .setNegativeButton("知道了", null)
                             .show();
                     break;
-                case ResponseStateCode.RED_ENVELOP_FINISHED:
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("提示")
-                            .setMessage("红包已抢完！")
-                            .setPositiveButton("知道了", null)
-                            .show();
-                    break;
                 case ResponseStateCode.RED_ENVELOP_ALREADY_RECEIVED:
                     viewRedEnvelopItemDetail(responseMessage.getData().getEnvelopItemId());
                     break;
@@ -111,7 +104,7 @@ public class RedEnvelopChatRow extends BaseChatRow {
 
         @Override
         public void onError(Throwable ex, boolean isOnCallback) {
-            Toast.makeText(getContext(), "抢红包失败，请重试", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "领取红包失败，请重试", Toast.LENGTH_SHORT).show();
         }
 
         @Override

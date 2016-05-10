@@ -1,6 +1,8 @@
 package cn.com.zhihetech.online.ui.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,14 +11,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.TextMessageBody;
 import com.easemob.easeui.EaseConstant;
 import com.easemob.easeui.controller.EaseUI;
 import com.easemob.easeui.domain.EaseUser;
 import com.easemob.easeui.ui.EaseChatFragment;
 import com.easemob.easeui.widget.chatrow.EaseCustomChatRowProvider;
+import com.easemob.exceptions.EaseMobException;
 
 import org.xutils.ex.DbException;
 
@@ -38,11 +42,15 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.PageData;
+import cn.com.zhihetech.online.core.common.ResponseMessage;
+import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.db.DBUtils;
 import cn.com.zhihetech.online.core.emchat.ZhiheChatRowProvider;
+import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.PageDataCallback;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.ChatMessageModel;
+import cn.com.zhihetech.online.model.RedEnvelopModel;
 import cn.com.zhihetech.online.ui.activity.SeckillGoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.GoodsListActivity;
 import cn.com.zhihetech.online.ui.activity.RedEnvelopeListActivity;
@@ -132,23 +140,35 @@ public class ChatFragment extends EaseChatFragment {
                 } catch (DbException e) {
                     e.printStackTrace();
                 }
-                if (userInfo == null) {
-                    List<EMMessage> messages = conversation.getAllMessages();
-                    if (messages != null && !messages.isEmpty()) {
-                        for (int i = messages.size() - 1; i >= 0; i--) {
-                            EMMessage message = messages.get(i);
-                            String target = message.getFrom();
-                            if (target.equals(username)) {
-                                userInfo = EMUserInfo.createEMUserInfo(message);
-                                break;
-                            }
+                if (userInfo != null) {
+                    easeUser.setNick(userInfo.getUserNick());
+                    easeUser.setAvatar(userInfo.getAvatarUrl());
+                    return easeUser;
+                }
+                List<EMMessage> messages = conversation.getAllMessages();
+                if (messages != null && !messages.isEmpty()) {
+                    for (int i = messages.size() - 1; i >= 0; i--) {
+                        EMMessage message = messages.get(i);
+                        String target = message.getFrom();
+                        if (target.equals(username)) {
+                            userInfo = EMUserInfo.createEMUserInfo(message);
+                            break;
                         }
                     }
                 }
                 if (userInfo != null) {
                     easeUser.setNick(userInfo.getUserNick());
                     easeUser.setAvatar(userInfo.getAvatarUrl());
-                    saveUserInfo(userInfo);
+                    final EMUserInfo finalUserInfo = userInfo;
+                    /**
+                     * 另起一个线程来保存用户信息，避免引起卡顿
+                     */
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            saveUserInfo(finalUserInfo);
+                        }
+                    }).start();
                 }
                 return easeUser;
             }
@@ -170,7 +190,7 @@ public class ChatFragment extends EaseChatFragment {
                 if (headerImg != null && !StringUtils.isEmpty(headerImg.getUrl())) {
                     message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, headerImg.getUrl());
                 }
-                message.setAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_NORMAL_USER);
+                message.setAttribute(Constant.EXTEND_USER_TYPE, String.valueOf(Constant.EXTEND_NORMAL_USER));
                 break;
             case Constant.MERCHANT_USER:
                 ChatUserInfo userInfo = ZhiheApplication.getInstance().getLogedMerchant().getChatUserInfo();
@@ -179,7 +199,7 @@ public class ChatFragment extends EaseChatFragment {
                 if (!StringUtils.isEmpty(userInfo.getPortraitUrl())) {
                     message.setAttribute(Constant.EXTEND_USER_HEAD_IMG, userInfo.getPortraitUrl());
                 }
-                message.setAttribute(Constant.EXTEND_USER_TYPE, Constant.EXTEND_MERCHANT_USER);
+                message.setAttribute(Constant.EXTEND_USER_TYPE, String.valueOf(Constant.EXTEND_MERCHANT_USER));
                 break;
         }
     }
@@ -510,5 +530,129 @@ public class ChatFragment extends EaseChatFragment {
         } catch (DbException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 发送消息
+     *
+     * @param message
+     */
+    @Override
+    protected void sendMessage(EMMessage message) {
+        if (chatFragmentListener != null) {
+            //设置扩展属性
+            chatFragmentListener.onSetMessageAttributes(message);
+        }
+        // 如果是群聊，设置chattype,默认是单聊
+        if (chatType == EaseConstant.CHATTYPE_GROUP) {
+            message.setChatType(EMMessage.ChatType.GroupChat);
+        } else if (chatType == EaseConstant.CHATTYPE_CHATROOM) {
+            message.setChatType(EMMessage.ChatType.ChatRoom);
+        }
+        //发送消息
+        EMChatManager.getInstance().sendMessage(message, new SendMessageCallBack(message));
+        //刷新ui
+        messageList.refreshSelectLast();
+    }
+
+    /**
+     * 信息发送失败后重发消息
+     *
+     * @param message
+     */
+    @Override
+    public void resendMessage(EMMessage message) {
+        message.status = EMMessage.Status.CREATE;
+        EMChatManager.getInstance().sendMessage(message, new SendMessageCallBack(message));
+        messageList.refresh();
+    }
+
+    /**
+     * 发送消息回调
+     */
+    class SendMessageCallBack implements EMCallBack {
+        private EMMessage message;
+        private boolean isReEnvelop = false;
+        private String redEnvelopId;
+
+        public SendMessageCallBack(EMMessage message) {
+            this.message = message;
+            try {
+                String messageType = message.getStringAttribute(Constant.EXTEND_MESSAGE_TYPE);
+                if (StringUtils.isEmpty(messageType)) {
+                    return;
+                }
+                isReEnvelop = messageType.equals(String.valueOf(Constant.EXTEND_MESSAGE_RED_ENVELOP));
+                if (isReEnvelop) {
+                    TextMessageBody textMessageBody = (TextMessageBody) message.getBody();
+                    JSONObject jsonObject = JSONObject.parseObject(textMessageBody.getMessage());
+                    redEnvelopId = jsonObject.getString("redEnvelopId");
+                    isReEnvelop = StringUtils.isEmpty(redEnvelopId) ? false : true;
+                }
+            } catch (EaseMobException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onSuccess() {
+            if (isReEnvelop) {
+                onRedEnvelopSended(redEnvelopId, message);
+            }
+        }
+
+        @Override
+        public void onError(int i, String s) {
+            if (isReEnvelop) {
+                onRedEnvelopSendFailed(redEnvelopId, message);
+            }
+        }
+
+        @Override
+        public void onProgress(int i, String s) {
+
+        }
+    }
+
+    /**
+     * 红包信息发送成功回调
+     *
+     * @param redEnvelopId
+     * @param message
+     */
+    protected void onRedEnvelopSended(String redEnvelopId, EMMessage message) {
+        new RedEnvelopModel().updateSendState(new ObjectCallback<ResponseMessage>() {
+            @Override
+            public void onObject(ResponseMessage data) {
+                if (data.getCode() == ResponseStateCode.SUCCESS) {
+                    Toast.makeText(getContext(), "红包发送成功！", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), data.getMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getContext(), "有一个红包发送失败，用户无法领取，请重发！", Toast.LENGTH_SHORT).show();
+            }
+        }, redEnvelopId);
+    }
+
+    /**
+     * 红包信息发送失败
+     *
+     * @param redEnvelopId
+     * @param message
+     */
+    protected void onRedEnvelopSendFailed(String redEnvelopId, final EMMessage message) {
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.tip)
+                .setMessage("红包发送失败，是否重发？")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resendMessage(message);
+                    }
+                }).setNegativeButton(R.string.cancel, null).show();
     }
 }

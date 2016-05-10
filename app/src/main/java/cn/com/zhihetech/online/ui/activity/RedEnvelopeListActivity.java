@@ -131,7 +131,7 @@ public class RedEnvelopeListActivity extends MerchantBaseActivity {
         loadMoreListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                progressDialog = ProgressDialog.show(getSelf(), "", "正在派发红包...");
+                /*progressDialog = ProgressDialog.show(getSelf(), "", "正在派发红包...");
                 new RedEnvelopModel().updateSendState(new ObjectCallback<ResponseMessage>() {
                     @Override
                     public void onObject(ResponseMessage data) {
@@ -155,7 +155,11 @@ public class RedEnvelopeListActivity extends MerchantBaseActivity {
                         super.onFinished();
                         progressDialog.dismiss();
                     }
-                }, adapter.getItem(position).getEnvelopId());
+                }, adapter.getItem(position).getEnvelopId());*/
+                Intent intent = new Intent();
+                intent.putExtra(RESULT_RED_ENVELOP_KEY, adapter.getItem(position));
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

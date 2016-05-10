@@ -22,6 +22,9 @@ public class Coupon extends BaseBean {
     private int couponType = Constant.COUPON_DISCOUNT_TYPE; //默认为打折卷
     private boolean deleted = false;    //是否已删除
 
+    private Date startValidity; //有效起始时间
+    private Date endValidity;   //有效期结束时间
+
     public String getCouponId() {
         return couponId;
     }
@@ -116,5 +119,21 @@ public class Coupon extends BaseBean {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Date getStartValidity() {
+        return startValidity;
+    }
+
+    public void setStartValidity(Date startValidity) {
+        this.startValidity = startValidity;
+    }
+
+    public Date getEndValidity() {
+        return endValidity;
+    }
+
+    public void setEndValidity(Date endValidity) {
+        this.endValidity = endValidity;
     }
 }

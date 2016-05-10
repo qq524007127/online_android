@@ -20,6 +20,7 @@ import cn.com.zhihetech.online.core.common.Constant;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
+import cn.com.zhihetech.online.core.util.DateUtils;
 import cn.com.zhihetech.online.core.util.ImageLoader;
 import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.model.CouponItemModel;
@@ -107,6 +108,8 @@ public class CouponItemInfoActivity extends BaseActivity {
                 coupon.getFaceValue() + "折" : "￥" + coupon.getFaceValue());
         couponTypeTv.setText(coupon.getCouponType() == Constant.COUPON_DISCOUNT_TYPE ?
                 "打折券" : "优惠券");
+        viladityTv.setText("有效期:" + DateUtils.formatDate(coupon.getStartValidity())
+                + "至" + DateUtils.formatDate(coupon.getEndValidity()));
         couponCodeTv.setText("券码:" + data.getCode());
         couponStateTv.setText(data.isUseState() ? "已使用" : "未使用");
         couponDetailTv.setText(coupon.getCouponMsg());
