@@ -64,7 +64,7 @@
     <string name="order_confirm">订单确认</string>
     <string name="total">合计:</string>
     <string name="user_msg">买家留言</string>
-    <string name="order_detail_group_goods_count">共{0}件商品   小计：</string>
+    <string name="order_detail_group_goods_count">共{0}件商品    小计:</string>
     <string name="tip">提示</string>
     <string name="pay">支付</string>
     <string name="apply_refund">申请退款</string>

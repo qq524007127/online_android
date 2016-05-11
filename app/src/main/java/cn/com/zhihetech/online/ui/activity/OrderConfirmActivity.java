@@ -19,6 +19,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ import cn.com.zhihetech.online.core.adapter.OrderDetailGroupAdapter;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
+import cn.com.zhihetech.online.core.util.NumberUtils;
 import cn.com.zhihetech.online.core.view.OrderReceiptAddressView;
 import cn.com.zhihetech.online.model.OrderModel;
 import cn.com.zhihetech.online.ui.fragment.ShoppingCartFragment;
@@ -69,6 +71,8 @@ public class OrderConfirmActivity extends BaseActivity {
     private List<String> shoppingCartIds;
 
     private float orderTotalPrice = 0f;
+
+    private String chargeInfo = null;   //从服务器获取的charge信息
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,7 @@ public class OrderConfirmActivity extends BaseActivity {
         for (int i = 0; i < adapter.getCount(); i++) {
             orderTotalPrice += adapter.getTotalPrice(i);
         }
+        orderTotalPrice = NumberUtils.floatScale(2, orderTotalPrice);
     }
 
     /**
@@ -257,6 +262,7 @@ public class OrderConfirmActivity extends BaseActivity {
         intent.setComponent(componentName);
         intent.putExtra(PaymentActivity.EXTRA_CHARGE, chargeInfo);
         startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        this.chargeInfo = chargeInfo;
     }
 
     @Override
@@ -290,16 +296,25 @@ public class OrderConfirmActivity extends BaseActivity {
     /**
      * 支付成功回调
      */
+    //TODO 支付成功后回调通知服务器客服端已支付成功
     private void onPaySuccess() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.tip)
-                .setMessage("购买成功")
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .show();
+        if (chargeInfo != null) {
+            notifyServerClientPaidSuccess(this.chargeInfo);
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.tip)
+                    .setMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    private void notifyServerClientPaidSuccess(String chargeInfo) {
+        new OrderModel().notifyServerPaid();
     }
 }

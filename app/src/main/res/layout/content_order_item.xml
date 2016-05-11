@@ -74,6 +74,15 @@
 
 
         <TextView
+            android:id="@+id/order_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/order_item_margin"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:textColor="@color/textColor" />
+
+        <TextView
             android:id="@+id/order_item_code_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

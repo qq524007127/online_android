@@ -42,6 +42,9 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
 
     @Override
     public void onBindViewHolder(OrderViewHolder holder, final Order data) {
+        String orderName = data.getOrderName();
+        orderName = orderName.length() > 100 ? orderName.substring(0, 100) + "..." : orderName;
+        holder.orderName.setText(orderName);
         holder.orderCodeTv.setText("订单号：" + data.getOrderCode());
         holder.orderCarriage.setText("邮费：" + data.getCarriage());
         holder.totalPriceTv.setText("总价：" + data.getOrderTotal() + "元");
@@ -210,6 +213,8 @@ public class OrderAdapter extends ZhiheAdapter<Order, OrderAdapter.OrderViewHold
         public TextView orderMerchantNameTv;
         @ViewInject(R.id.order_detail_view)
         public TextView orderDetail;
+        @ViewInject(R.id.order_name_tv)
+        public TextView orderName;
         @ViewInject(R.id.order_item_code_tv)
         public TextView orderCodeTv;
         @ViewInject(R.id.order_carriage_tv)

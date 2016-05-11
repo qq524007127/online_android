@@ -502,7 +502,7 @@ public class ChatFragment extends EaseChatFragment {
         List<EMMessage> messages = new ArrayList<>(chatMessages.size());
         for (ChatMessage msg : chatMessages) {
             EMMessage message = msg.createEMMessage(userId);
-            saveMessageExt2DB(message);
+            //saveMessageExt2DB(message);
             messages.add(message);
         }
         EMChatManager.getInstance().importMessages(messages);

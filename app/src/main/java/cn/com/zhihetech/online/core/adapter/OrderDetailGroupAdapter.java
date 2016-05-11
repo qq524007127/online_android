@@ -12,6 +12,7 @@ import com.easemob.easeui.widget.EaseImageView;
 
 import org.xutils.view.annotation.ViewInject;
 
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -19,7 +20,8 @@ import cn.com.zhihetech.online.R;
 import cn.com.zhihetech.online.bean.OrderDetail;
 import cn.com.zhihetech.online.bean.OrderDetailGroup;
 import cn.com.zhihetech.online.core.util.ImageLoader;
-import cn.com.zhihetech.online.core.util.ListViewHeigthUtils;
+import cn.com.zhihetech.online.core.util.ListViewHeightUtils;
+import cn.com.zhihetech.online.core.util.NumberUtils;
 
 /**
  * Created by ShenYunjie on 2016/1/26.
@@ -43,9 +45,9 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
     public void onBindViewHolder(final OrderDetailGroupHolder holder, final OrderDetailGroup data) {
         ImageLoader.disPlayImage(holder.merchantCoverCiv, data.getMerchant().getCoverImg());
         holder.merchantNameTv.setText(data.getMerchant().getMerchName());
-        float totalPrice = 0f;
-        float goodsTotal = 0f;
-        float totalCarrige = 0f;
+        double totalPrice = 0d;
+        double goodsTotal = 0d;
+        double totalCarrige = 0d;
         for (OrderDetail orderDetail : data.getOrderDetails()) {
             if (orderDetail.getGoods().getCarriage() > totalCarrige) {
                 totalCarrige = orderDetail.getGoods().getCarriage();
@@ -56,10 +58,12 @@ public class OrderDetailGroupAdapter extends ZhiheAdapter<OrderDetailGroup, Orde
             goodsTotal += orderDetail.getCount();
         }
         holder.orderCarriageTv.setText("运费:" + totalCarrige);
-        holder.orderItemTotalTv.setText("￥" + (totalPrice + totalCarrige));
+        double orderItemTotal = totalPrice + totalCarrige;
+        orderItemTotal = NumberUtils.doubleScale(2, orderItemTotal);
+        holder.orderItemTotalTv.setText("￥" + orderItemTotal);
         holder.goodsCount.setText(MessageFormat.format(mContext.getString(R.string.order_detail_group_goods_count), goodsTotal));
         holder.orderDetailLv.setAdapter(new OrderDetailAdapter(mContext, R.layout.content_order_detail_item, data.getOrderDetails()));
-        ListViewHeigthUtils.setListViewHeightBasedOnChildren(holder.orderDetailLv);
+        ListViewHeightUtils.setListViewHeightBasedOnChildren(holder.orderDetailLv);
         holder.userMsgEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

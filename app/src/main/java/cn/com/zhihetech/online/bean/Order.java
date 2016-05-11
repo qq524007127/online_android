@@ -229,6 +229,8 @@ public class Order extends BaseBean {
                 return "订单未提交";
             case Constant.ORDER_STATE_NO_PAYMENT:
                 return "待支付";
+            case Constant.ORDER_STATE_PAYDING:
+                return "支付中...";
             case Constant.ORDER_STATE_NO_DISPATCHER:
                 return "待发货";
             case Constant.ORDER_STATE_ALREADY_DISPATCHER:

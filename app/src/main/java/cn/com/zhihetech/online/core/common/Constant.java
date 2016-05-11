@@ -122,6 +122,7 @@ public class Constant implements Serializable, Cloneable {
     public static final int ORDER_STATE_WAIT_REFUND = 7;  //订单等待退款
     public static final int ORDER_STATE_ALREADY_REFUND = 8; //订单退款成功
     public static final int ORDER_STATE_ALREADY_EVALUATE = 9;  //已评价
+    public static final int ORDER_STATE_PAYDING = 20;   //用户已支付成成功，等待第三方支付回调
 
     /**
      * 消息扩展属性名称
