@@ -300,21 +300,20 @@ public class OrderConfirmActivity extends BaseActivity {
     private void onPaySuccess() {
         if (chargeInfo != null) {
             notifyServerClientPaidSuccess(this.chargeInfo);
-        } else {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.tip)
-                    .setMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .show();
         }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .show();
     }
 
     private void notifyServerClientPaidSuccess(String chargeInfo) {
-        new OrderModel().notifyServerPaid();
+        //new OrderModel().notifyServerPaid();
     }
 }

@@ -227,10 +227,11 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
     /**
      * 支付成功回调
      */
+    //TODO  需要在此通知服务器客服端支付成功
     private void onPaySuccess() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
-                .setMessage("秒杀成功！")
+                .setMessage("秒杀成功，第三方支付会有延迟，请耐心等待不要重复支付！")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
