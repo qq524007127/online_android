@@ -142,4 +142,16 @@ public class OrderModel extends BaseModel<Order> {
                 .addParam("receiverAdd", order.getReceiverAdd()).addParam("orderDetailInfo", order.getOrderDetailInfo());
         return params;
     }
+
+    /**
+     * 当客服端支付控件返回支付成功之后回调此接口
+     *
+     * @param callback      回调
+     * @param chargeOrderNo 提交订单是返回的charge中对应的order_no属性
+     * @return
+     */
+    public Callback.Cancelable executeClientPaid(ObjectCallback<ResponseMessage> callback, @NonNull String chargeOrderNo) {
+        String url = MessageFormat.format(Constant.ORDER_CLIENT_PAID_URL, chargeOrderNo);
+        return new SimpleModel(ResponseMessage.class).postObject(url, null, callback);
+    }
 }

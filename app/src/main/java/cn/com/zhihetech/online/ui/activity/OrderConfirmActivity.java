@@ -13,13 +13,13 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pingplusplus.android.PaymentActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +33,10 @@ import cn.com.zhihetech.online.bean.User;
 import cn.com.zhihetech.online.core.adapter.OrderDetailGroupAdapter;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.NumberUtils;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.OrderReceiptAddressView;
 import cn.com.zhihetech.online.model.OrderModel;
 import cn.com.zhihetech.online.ui.fragment.ShoppingCartFragment;
@@ -282,13 +284,12 @@ public class OrderConfirmActivity extends BaseActivity {
                         showMsg(submitBtn, "已取消支付");
                         break;
                     case "invalid":
-                        showMsg(submitBtn, "未检测到支付控件");
+                        showMsg(submitBtn, "未检测到支付控件,如果是微信支付请先安装最新版本的微信！");
                         break;
                 }
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
-                String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
             } else {
-                showMsg(submitBtn, "未知错误！");
+                showMsg("支付失败，未知错误！");
             }
         }
     }
@@ -296,14 +297,45 @@ public class OrderConfirmActivity extends BaseActivity {
     /**
      * 支付成功回调
      */
-    //TODO 支付成功后回调通知服务器客服端已支付成功
     private void onPaySuccess() {
-        if (chargeInfo != null) {
-            notifyServerClientPaidSuccess(this.chargeInfo);
+        JSONObject charge = JSONObject.parseObject(chargeInfo);
+        String orderNo = charge.getString("orderNo");
+        if (!StringUtils.isEmpty(orderNo)) {
+            notifyServerClientPaidSuccess(orderNo);
+        } else {
+            showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！");
         }
+    }
+
+    private void notifyServerClientPaidSuccess(String orderNo) {
+        final ProgressDialog progress = ProgressDialog.show(this, "", "正在处理中...");
+        new OrderModel().executeClientPaid(new ObjectCallback<ResponseMessage>() {
+            @Override
+            public void onObject(ResponseMessage data) {
+                showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待！");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！");
+            }
+
+            @Override
+            public void onFinished() {
+                progress.dismiss();
+            }
+        }, orderNo);
+    }
+
+    /**
+     * 显示支付信息
+     *
+     * @param msg
+     */
+    private void showPayMessage(String msg) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
-                .setMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！")
+                .setMessage(msg)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -311,9 +343,5 @@ public class OrderConfirmActivity extends BaseActivity {
                     }
                 })
                 .show();
-    }
-
-    private void notifyServerClientPaidSuccess(String chargeInfo) {
-        //new OrderModel().notifyServerPaid();
     }
 }

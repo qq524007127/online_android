@@ -153,7 +153,7 @@ public class Constant implements Serializable, Cloneable {
      * 请求接口地址
      */
     //public static final String DOMAIN = "http://120.27.24.49/";
-    public static final String DOMAIN = "http://192.168.1.10:8080/";
+    public static final String DOMAIN = "http://192.168.1.11:8080/";
     public static final String HOST = DOMAIN + "api/";
 
     public static final String USER_PROTOCOL_PAGE_URL = DOMAIN + "common/user_protocol.html";    //用户协议
@@ -226,6 +226,7 @@ public class Constant implements Serializable, Cloneable {
     public static final String ACTIVITY_GOODS_ORDER_ADD_URL = HOST + "activityGoodsOrder/add";    //提交活动商品订单
     public static final String USER_ORDERS_URL = HOST + "order/list"; //用户订单
     public static final String ORDER_PAY_URL = HOST + "order/{0}/pay"; //支付指定订单
+    public static final String ORDER_CLIENT_PAID_URL = HOST + "order/{0}/clientPaid"; //支付控件支付成功回调
     public static final String ORDER_CANCEL_URL = HOST + "order/{0}/cancel"; //取消指定订单
     public static final String ORDER_DELETE_URL = HOST + "order/{0}/delete"; //删除指定订单
     public static final String ORDER_REFUND_URL = HOST + "order/{0}/refund"; //申请退款

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pingplusplus.android.PaymentActivity;
 
 import org.xutils.common.Callback;
@@ -31,8 +32,10 @@ import cn.com.zhihetech.online.bean.ReceivedGoodsAddress;
 import cn.com.zhihetech.online.core.ZhiheApplication;
 import cn.com.zhihetech.online.core.common.ResponseMessage;
 import cn.com.zhihetech.online.core.common.ResponseStateCode;
+import cn.com.zhihetech.online.core.http.ObjectCallback;
 import cn.com.zhihetech.online.core.http.ResponseMessageCallback;
 import cn.com.zhihetech.online.core.util.ImageLoader;
+import cn.com.zhihetech.online.core.util.StringUtils;
 import cn.com.zhihetech.online.core.view.OrderReceiptAddressView;
 import cn.com.zhihetech.online.model.OrderModel;
 import de.greenrobot.event.EventBus;
@@ -66,6 +69,8 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
     private RadioGroup payTypeRg;
 
     private ActivityGoods activityGoods;
+
+    private String chargeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +140,7 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
         Goods goods = activityGoods.getGoods();
         ChargeInfo.PayChannel payType;
         switch (payTypeRg.getCheckedRadioButtonId()) {
-            case R.id.wxpay_rb:
+            case R.id.wx_pay_rb:
                 payType = ChargeInfo.PayChannel.WXPAY;
                 break;
             default:
@@ -194,6 +199,7 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
         intent.setComponent(componentName);
         intent.putExtra(PaymentActivity.EXTRA_CHARGE, chargeInfo);
         startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+        this.chargeInfo = chargeInfo;
     }
 
     @Override
@@ -213,13 +219,12 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
                         showMsg("已取消支付");
                         break;
                     case "invalid":
-                        showMsg("未检测到支付控件");
+                        showMsg("未检测到支付控件,如果是微信支付请先安装最新版本的微信！");
                         break;
                 }
-                String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
             } else {
-                showMsg("未知错误！");
+                showMsg("支付失败，未知错误！");
             }
         }
     }
@@ -227,11 +232,45 @@ public class ActivityGoodsOrderActivity extends BaseActivity {
     /**
      * 支付成功回调
      */
-    //TODO  需要在此通知服务器客服端支付成功
     private void onPaySuccess() {
+        JSONObject charge = JSONObject.parseObject(chargeInfo);
+        String orderNo = charge.getString("orderNo");
+        if (!StringUtils.isEmpty(orderNo)) {
+            notifyServerClientPaidSuccess(orderNo);
+        } else {
+            showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！");
+        }
+    }
+
+    private void notifyServerClientPaidSuccess(String orderNo) {
+        final ProgressDialog progress = ProgressDialog.show(this, "", "正在处理中...");
+        new OrderModel().executeClientPaid(new ObjectCallback<ResponseMessage>() {
+            @Override
+            public void onObject(ResponseMessage data) {
+                showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待！");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                showPayMessage("支付成功,第三方支付可能会有延迟，请耐心等待不要重复支付！");
+            }
+
+            @Override
+            public void onFinished() {
+                progress.dismiss();
+            }
+        }, orderNo);
+    }
+
+    /**
+     * 显示支付信息
+     *
+     * @param msg
+     */
+    private void showPayMessage(String msg) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
-                .setMessage("秒杀成功，第三方支付会有延迟，请耐心等待不要重复支付！")
+                .setMessage(msg)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

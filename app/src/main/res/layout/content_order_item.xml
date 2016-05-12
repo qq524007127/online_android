@@ -80,6 +80,7 @@
             android:layout_marginTop="@dimen/order_item_margin"
             android:background="@color/white"
             android:padding="10dp"
+            android:maxLines="4"
             android:textColor="@color/textColor" />
 
         <TextView
