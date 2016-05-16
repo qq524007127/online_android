@@ -40,7 +40,7 @@ public class ActivityModel extends BaseModel<Activity> {
     }
 
     /**
-     * 根据指定ID商家的已开始和即将开始的活动
+     * 根据指定ID商家的已开始的活动
      *
      * @param callback
      * @param pager

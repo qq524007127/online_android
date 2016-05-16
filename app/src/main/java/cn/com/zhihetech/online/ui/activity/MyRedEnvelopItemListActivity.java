@@ -133,7 +133,7 @@ public class MyRedEnvelopItemListActivity extends BaseActivity {
      * 分页加载数据
      */
     private void loadMoreData() {
-        new RedEnvelopItemModel().getEnvelopItemsByUserId(null, pageData.getNextPage(), getUserId());
+        new RedEnvelopItemModel().getEnvelopItemsByUserId(loadMoreCallback, pageData.getNextPage(), getUserId());
     }
 
     @Override

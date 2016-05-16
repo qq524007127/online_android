@@ -151,7 +151,7 @@ public class UserModel extends BaseModel<User> {
         params.addParam("userBirthday", DateUtils.formatDate(user.getBirthday()));
         if (user.getArea() != null)
             params.addParam("area.areaId", user.getArea().getAreaId());
-        if (StringUtils.isEmpty(user.getInvitCode())) {
+        if (!StringUtils.isEmpty(user.getInvitCode())) {
             params.addParam("invitCode", user.getInvitCode());
         }
         return params;

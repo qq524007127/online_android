@@ -166,6 +166,10 @@ public class SeckillGoodsInfoActivity extends MerchantBaseActivity {
         this.buySeckillGoodsTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(activityGoods.getCount()<=0){
+                    showMsg("商品库存不足！");
+                    return;
+                }
                 Intent intent = new Intent(getSelf(), ActivityGoodsOrderActivity.class);
                 intent.putExtra(ActivityGoodsOrderActivity.ACTIVITY_GOODS_KEY,activityGoods);
                 startActivity(intent);

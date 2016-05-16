@@ -8,8 +8,7 @@
     <ImageView
         android:id="@+id/nav_icon_iv"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/default_bg"/>
+        android:layout_height="60dp"/>
 
     <TextView
         android:id="@+id/nav_title_tv"

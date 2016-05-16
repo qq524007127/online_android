@@ -126,9 +126,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
 
         // 收集设备参数信息
-        collectDeviceInfo(mContext);
+        //collectDeviceInfo(mContext);
         // 保存日志文件
-        saveCrashInfo2File(ex);
+        //saveCrashInfo2File(ex);
         return true;
     }
 

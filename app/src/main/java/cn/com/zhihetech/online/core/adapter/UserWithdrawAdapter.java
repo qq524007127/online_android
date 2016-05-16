@@ -26,12 +26,12 @@ public class UserWithdrawAdapter extends ZhiheAdapter<UserWithdraw, UserWithdraw
 
     @Override
     public void onBindViewHolder(UserWithDrawHolder holder, UserWithdraw data) {
-        holder.reallyMoneyTv.setText("实际到账金额：" + data.getRealMoney());
+        holder.reallyMoneyTv.setText("实际到账金额:" + data.getRealMoney());
         holder.stateTv.setText(data.getDisplayState());
-        holder.withDrawMoneyTv.setText("申请提现金额：" + data.getMoney());
-        holder.proceMoneyTv.setText("手续费：" + data.getPoundage());
-        holder.alipayCodeTv.setText("提现支付宝账号：" + data.getAliCode());
-        holder.withDrawDateTv.setText("申请时间：" + DateUtils.formatDateTime(data.getApplyDate()));
+        holder.withDrawMoneyTv.setText("申请金额:" + data.getMoney());
+        holder.proceMoneyTv.setText("手续费:" + data.getPoundage());
+        holder.alipayCodeTv.setText("提现支付宝账号:" + data.getAliCode());
+        holder.withDrawDateTv.setText("申请时间:" + DateUtils.formatDateTime(data.getApplyDate()));
         if (data.getWithdrawState() == UserWithdraw.WITHDRAW_ERR) {
             holder.failReasonTv.setVisibility(View.VISIBLE);
             holder.failReasonTv.setText(data.getReason());

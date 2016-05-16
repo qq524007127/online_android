@@ -183,7 +183,7 @@ public class GoodsInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         goodsId = getIntent().getStringExtra(GOODS_ID_KEY);
-        if(StringUtils.isEmpty(goodsId)){
+        if (StringUtils.isEmpty(goodsId)) {
             showMsg("出错了！");
             finish();
             return;
@@ -311,6 +311,10 @@ public class GoodsInfoActivity extends BaseActivity {
                 goodsSheetBottomView.setOnOkListener(new GoodsCartOrBuySheetBottomView.OnOkListener() {
                     @Override
                     public void onOk(Goods goods, int amount) {
+                        if (goods.getCurrentStock() <= 0 || goods.getCurrentStock() < amount) {
+                            showMsg("商品库存不足！");
+                            return;
+                        }
                         Intent intent = new Intent(getSelf(), OrderConfirmActivity.class);
                         ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
                         details.add(new OrderDetail(goods, amount));

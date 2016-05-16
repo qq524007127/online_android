@@ -21,6 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -28,8 +29,9 @@
                 android:id="@+id/sheet_goods_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="商品名称" />
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:padding="6dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,16 +42,15 @@
                     android:id="@+id/sheet_goods_price_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="￥：1939"
+                    android:padding="6dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/sheet_goods_stock_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="6dp"
                     android:textSize="12sp" />
 
             </LinearLayout>

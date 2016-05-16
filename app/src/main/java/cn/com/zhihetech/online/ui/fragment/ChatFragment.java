@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
@@ -502,8 +503,10 @@ public class ChatFragment extends EaseChatFragment {
         List<EMMessage> messages = new ArrayList<>(chatMessages.size());
         for (ChatMessage msg : chatMessages) {
             EMMessage message = msg.createEMMessage(userId);
+            if (message != null) {
+                messages.add(message);
+            }
             //saveMessageExt2DB(message);
-            messages.add(message);
         }
         EMChatManager.getInstance().importMessages(messages);
         int messageSize;

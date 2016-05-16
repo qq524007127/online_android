@@ -14,10 +14,14 @@ import android.widget.LinearLayout;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cn.com.zhihetech.online.R;
+import cn.com.zhihetech.online.core.util.SharedPreferenceUtils;
 import cn.com.zhihetech.online.core.util.StringUtils;
-import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 import cn.com.zhihetech.online.core.view.WebViewUtils;
+import cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout;
 
 /**
  * Created by ShenYunjie on 2016/3/17.
@@ -67,8 +71,19 @@ public class WebViewFragment extends BaseFragment {
 
     private void initAndLoadPageByUrl(String url) {
         initViews();
-        webView.loadUrl(url);
+        webView.loadUrl(url, createRequestHeaders());
         webView.requestFocus();
+    }
+
+    protected Map<String, String> createRequestHeaders() {
+        SharedPreferenceUtils preferenceUtils = SharedPreferenceUtils.getInstance(getContext());
+        Map<String, String> headers = new HashMap<>();
+        String userToken = preferenceUtils.getUserToken();
+        if (!StringUtils.isEmpty(userToken)) {
+            headers.put("userCode", preferenceUtils.getUserCode());
+            headers.put("token", userToken);
+        }
+        return headers;
     }
 
     private void initViews() {

@@ -41,7 +41,7 @@ public class MessageBody extends BaseBean {
     }
 
     public void setType(ChatMessage.MessageType type) {
-        this.type = this.type;
+        this.type = type;
     }
 
     public String getMsg() {

@@ -5,7 +5,10 @@ import com.easemob.chat.ImageMessageBody;
 import com.easemob.chat.LocationMessageBody;
 import com.easemob.chat.TextMessageBody;
 import com.easemob.chat.VoiceMessageBody;
+import com.easemob.easeui.model.EaseVoiceRecorder;
+import com.easemob.util.PathUtil;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
@@ -121,6 +124,7 @@ public class ChatMessage extends BaseBean {
                         body.setSecret(msgBody.getSecret());
                         body.setThumbnailSecret(msgBody.getThumb_secret());
                         body.setThumbnailUrl(msgBody.getThumb());
+                        body.setLocalUrl(msgBody.getFilename());
                         // 默认超过100k的图片会压缩后发给对方，可以设置成发送原图
                         //body.setSendOriginalImage(true);
                         message.addBody(body);
@@ -132,10 +136,14 @@ public class ChatMessage extends BaseBean {
                         break;
                     case audio:
                         message = createSendOrReceiveMessage(currentUser, EMMessage.Type.VOICE);
-                        VoiceMessageBody voiceBody = new VoiceMessageBody(null, (int) msgBody.getLength());
+                        String voiceName = msgBody.getUrl().substring(msgBody.getUrl().lastIndexOf("/") + 1, msgBody.getUrl().length());
+                        String path = PathUtil.getInstance().getVoicePath() + "/" + voiceName;
+                        File file = new File(path);
+                        VoiceMessageBody voiceBody = new VoiceMessageBody(file, (int) msgBody.getLength());
                         voiceBody.setSecret(msgBody.getSecret());
                         voiceBody.setFileName(msgBody.getFilename());
                         voiceBody.setRemoteUrl(msgBody.getUrl());
+                        voiceBody.setLocalUrl(null);
                         message.addBody(voiceBody);
                         break;
                     default:

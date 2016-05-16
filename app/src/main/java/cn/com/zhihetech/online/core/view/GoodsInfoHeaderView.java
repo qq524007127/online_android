@@ -114,7 +114,7 @@ public class GoodsInfoHeaderView extends FrameLayout {
         volumeTv.setText(text);
         text = MessageFormat.format(getContext().getString(R.string.goods_desc), "暂无简介");
         if (!StringUtils.isEmpty(goods.getGoodsDesc())) {
-            text = MessageFormat.format(getContext().getString(R.string.goods_desc), goods.getGoodsDesc());
+            text = MessageFormat.format(getContext().getString(R.string.goods_desc), goods.getGoodsDesc().trim());
         }
         goodsDescTv.setText(text);
 

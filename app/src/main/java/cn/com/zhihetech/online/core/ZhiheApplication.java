@@ -202,7 +202,7 @@ public class ZhiheApplication extends Application {
      * @param user
      */
     public void replaceUser(User user) {
-        addExtAttribute(LOGIN_MERCHANT_EXT_KEY, user);
+        addExtAttribute(LOGIN_USER_EXT_KEY, user);
     }
 
     /**

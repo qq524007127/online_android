@@ -261,10 +261,14 @@ public class RegisterUserInfoActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 开始执行用户注册
+     */
     private void userRegister() {
         if (!checkUserInfo()) {
             return;
         }
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在注册，请稍等...");
         new UserModel().register(new ObjectCallback<ResponseMessage>() {
             @Override
             public void onObject(ResponseMessage data) {
@@ -286,6 +290,11 @@ public class RegisterUserInfoActivity extends BaseActivity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 showMsg(submitButton, ex.getMessage());
+            }
+
+            @Override
+            public void onFinished() {
+                progressDialog.dismiss();
             }
         }, user);
     }
