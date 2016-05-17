@@ -82,22 +82,21 @@
 
             <TextView
                 android:id="@+id/coupon_item_validity_tv"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="有效期：2016-12-10"
+                android:layout_weight="1"
                 android:textColor="@color/coupon_info_color"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/coupon_item_state_tv"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:gravity="center"
                 android:text="未使用"
                 android:textColor="@color/coupon_face_value_color"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
