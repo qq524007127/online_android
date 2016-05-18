@@ -252,7 +252,7 @@ public class UserInfoChangeActivity extends BaseActivity {
     private void initBirthdayPicker() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime((Date) userBirthdayBtn.getTag());
-        birthDayPickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        birthDayPickerDialog = new DatePickerDialog(this, R.style.AppDatePickerDialogStyle, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Date birthDay = DateUtils.parseDate(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth, "yyyy-MM-dd");

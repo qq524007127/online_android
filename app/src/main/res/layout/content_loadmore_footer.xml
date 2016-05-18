@@ -6,9 +6,9 @@
     android:orientation="horizontal">
 
     <ProgressBar
-        style="@android:style/Widget.ProgressBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Large"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:minHeight="30dp"
         android:minWidth="30dp" />
 

@@ -33,6 +33,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <!--添加可以向外拨打电话的权限  -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -332,7 +333,7 @@
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
-                <!--Required 显 ⽰示通知栏 -->
+                <!--Required 显示通知栏 -->
                 <category android:name="${applicationId}" />
             </intent-filter>
             <intent-filter>

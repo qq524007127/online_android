@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="BaseTheme">
+        <item name="android:alertDialogTheme">@style/AppAlertDialogStyle</item>
+    </style>
+
+    <!--自定义系统弹出框样式-->
+    <style name="AppAlertDialogStyle" parent="AlertDialog.AppCompat.Light">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="titleTextColor">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:textColorAlertDialogListItem">@color/textColor</item>
+        <item name="android:textAppearance">@style/AlertTextAppearance</item>
+    </style>
+</resources>
