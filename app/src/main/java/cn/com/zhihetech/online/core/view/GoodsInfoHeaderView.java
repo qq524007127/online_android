@@ -141,7 +141,7 @@ public class GoodsInfoHeaderView extends FrameLayout {
         @Override
         public View createView(Context context) {
             bannerImg = new ImageView(context);
-            bannerImg.setScaleType(ImageView.ScaleType.FIT_XY);
+            bannerImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
             return bannerImg;
         }
 
