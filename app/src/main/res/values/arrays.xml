@@ -16,5 +16,6 @@
         <item>工人</item>
         <item>军人</item>
         <item>学生</item>
+        <item>其他</item>
     </string-array>
 </resources>
