@@ -126,6 +126,13 @@ public class MyWalletActivity extends BaseActivity {
                 resetMoneyBtn(view);
                 break;
             case R.id.wallet_get_vercode_btn:
+                if (takeAmountOfMoney <= 0) {
+                    showMsg("请选择提现金额！");
+                    return;
+                } else if (takeAmountOfMoney > walletTotalMoney) {
+                    showMsg("提现金额不能大于钱包总金额！");
+                    return;
+                }
                 view.setClickable(false);
                 getVerCode();
                 break;
@@ -174,7 +181,7 @@ public class MyWalletActivity extends BaseActivity {
                     showMsg(takeMoneyBtn, res.getMsg());
                     return;
                 }
-                showMsg(takeMoneyBtn, "申请提现成功，2个工作日内到账！");
+                showMsg(takeMoneyBtn, res.getMsg());
                 initWalletTotalMoney();
             }
 
