@@ -108,23 +108,25 @@ public class MerchantInfoFragment extends BaseFragment {
         addressTv.setText(text);
         text = MessageFormat.format(getString(R.string.contact_num), merchant.getContactMobileNO());
         tellTv.setText(text);
-        ImageLoader.disPlayImage(bussPhotoIv, merchant.getBusLicePhoto());
         merchantDescTv.setText(merchant.getMerchantDetails());
 
-        bussPhotoIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (merchant.getBusLicePhoto() != null) {
+            ImageLoader.disPlayImage(bussPhotoIv, merchant.getBusLicePhoto());
+            bussPhotoIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                ArrayList<ShowImageInfo> imageInfos = new ArrayList<>();
-                ShowImageInfo imageInfo = new ShowImageInfo(merchant.getBusLicePhoto().getUrl(), "");
-                imageInfo.setShowDesc(false);
-                imageInfos.add(imageInfo);
+                    ArrayList<ShowImageInfo> imageInfos = new ArrayList<>();
+                    ShowImageInfo imageInfo = new ShowImageInfo(merchant.getBusLicePhoto().getUrl(), "");
+                    imageInfo.setShowDesc(false);
+                    imageInfos.add(imageInfo);
 
-                Intent intent = new Intent(v.getContext(), ShowBigImageActivity.class);
-                intent.putExtra(ShowBigImageActivity.IMAGE_LIST_KEY, imageInfos);
-                v.getContext().startActivity(intent);
-            }
-        });
+                    Intent intent = new Intent(v.getContext(), ShowBigImageActivity.class);
+                    intent.putExtra(ShowBigImageActivity.IMAGE_LIST_KEY, imageInfos);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        }
 
     }
 
