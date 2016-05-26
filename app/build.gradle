@@ -49,6 +49,7 @@ dependencies {
     compile 'com.github.iwgang:familiarrecyclerview:1.2.3'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.qiniu:qiniu-android-sdk:7.1.0'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile(name: 'subsampling-scale-image-view-3.4.1', ext: 'aar')

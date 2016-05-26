@@ -188,6 +188,9 @@
             android:name=".ui.activity.WebPageActivity"
             android:windowSoftInputMode="adjustResize" />
 
+        <!--图片剪切界面-->
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
 
         <!--商家版-->
         <activity
@@ -250,7 +253,7 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="zhihetechvip#zhiheonlie" />
-            <!--android:value="0871zhkj#zhihedianshang" />-->
+        <!--android:value="0871zhkj#zhihedianshang" />-->
         <!-- 声明环信sdk所需的service SDK核心功能-->
         <service android:name="com.easemob.chat.EMChatService" />
 

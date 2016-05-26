@@ -19,6 +19,7 @@ import com.easemob.util.PathUtil;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
+import com.soundcloud.android.crop.Crop;
 
 import org.xutils.common.util.FileUtil;
 import org.xutils.ex.DbException;
@@ -91,18 +92,15 @@ public class UserHeaderModifyActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_CODE_CAMERA) { // 发送照片
-                if (cameraFile != null && cameraFile.exists()) {
-                    uploadImgByPath(cameraFile.getAbsolutePath());
-                }
-            } else if (requestCode == REQUEST_CODE_LOCAL_IMAGE) { // 发送本地图片
-                if (data != null) {
-                    Uri selectedImage = data.getData();
-                    if (selectedImage != null) {
-                        uploadImgByPath(getPicPathByURI(selectedImage));
-                    }
-                }
+        if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+            beginCrop(data.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, data);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CAMERA) { // 调用系统相机拍照并发送
+            if (cameraFile != null && cameraFile.exists()) {
+                Uri source =  Uri.fromFile(cameraFile);
+                beginCrop(source);
             }
         }
     }
@@ -194,7 +192,8 @@ public class UserHeaderModifyActivity extends BaseActivity {
     private void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.pick_image_view:
-                selectPicFromLocal();  // 图库选择图片
+                //selectPicFromLocal();  // 图库选择图片
+                Crop.pickImage(this);
                 break;
             case R.id.pick_camera_view:
                 selectPicFromCamera(); // 拍照
@@ -266,5 +265,29 @@ public class UserHeaderModifyActivity extends BaseActivity {
             intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
         startActivityForResult(intent, REQUEST_CODE_LOCAL_IMAGE);
+    }
+
+    /**
+     * 开始剪切图片
+     *
+     * @param source
+     */
+    private void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped.png"));
+        Crop.of(source, destination).asSquare().start(this);    //正方形剪切
+    }
+
+    /**
+     * 图片剪切返回之后回调
+     *
+     * @param resultCode
+     * @param data
+     */
+    private void handleCrop(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            uploadImgByPath(getPicPathByURI(Crop.getOutput(data)));
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            showMsg("剪切图片失败！");
+        }
     }
 }
