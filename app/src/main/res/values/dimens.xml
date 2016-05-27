@@ -30,4 +30,9 @@
     <dimen name="button_corners_size">4dp</dimen>
     <dimen name="order_item_margin">6dp</dimen>
 
+    <!--CardView尺寸定义-->
+    <dimen name="card_view_corner_radius">2dp</dimen><!--Android 5.0以下不用设置圆角，设置圆角后会有白边-->
+    <dimen name="card_view_margin">0dp</dimen>
+    <dimen name="card_view_elevation">6dp</dimen>
+
 </resources>

@@ -97,4 +97,14 @@
         <item name="android:padding">4dp</item>
     </style>
 
+    <!--系统中CardView统一样式定义-->
+    <style name="CardViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/card_view_margin</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">@dimen/card_view_corner_radius</item>
+        <item name="cardElevation">@dimen/card_view_elevation</item>
+    </style>
+
 </resources>

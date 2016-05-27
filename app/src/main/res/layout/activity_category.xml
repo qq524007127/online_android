@@ -16,10 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/normal_bg"
-            android:horizontalSpacing="5dp"
-            android:numColumns="2"
-            android:padding="3dp"
-            android:verticalSpacing="5dp">
+            android:numColumns="2">
 
         </cn.com.zhihetech.online.core.view.LoadMoreGridView>
     </cn.com.zhihetech.online.core.view.ZhiheSwipeRefreshLayout>
