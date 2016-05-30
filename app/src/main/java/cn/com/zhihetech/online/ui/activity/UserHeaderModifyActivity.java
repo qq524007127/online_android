@@ -19,6 +19,7 @@ import com.easemob.util.PathUtil;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 import com.soundcloud.android.crop.Crop;
 
 import org.xutils.common.util.FileUtil;
@@ -29,6 +30,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import cn.com.zhihetech.online.R;
@@ -99,7 +101,7 @@ public class UserHeaderModifyActivity extends BaseActivity {
         }
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CAMERA) { // 调用系统相机拍照并发送
             if (cameraFile != null && cameraFile.exists()) {
-                Uri source =  Uri.fromFile(cameraFile);
+                Uri source = Uri.fromFile(cameraFile);
                 beginCrop(source);
             }
         }
@@ -142,13 +144,16 @@ public class UserHeaderModifyActivity extends BaseActivity {
             String suffix = filePath.substring(filePath.lastIndexOf("."), filePath.length());
             fileName += suffix;
         }
+        HashMap<String, String> params = new HashMap<>();
+        params.put("x:owner", getUserId());
+        UploadOptions options = new UploadOptions(params, null, false, null, null);
         uploadManager.put(filePath, fileName, upToken, new UpCompletionHandler() {
             @Override
             public void complete(String key, ResponseInfo info, org.json.JSONObject response) {
                 ImgInfo imgInfo = JSONObject.parseObject(response.toString(), ImgInfo.class);
                 changHeader(user.getUserId(), imgInfo);
             }
-        }, null);
+        }, options);
     }
 
     private void changHeader(String userId, final ImgInfo imgInfo) {
